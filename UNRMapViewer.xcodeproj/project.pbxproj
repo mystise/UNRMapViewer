@@ -1,0 +1,486 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		498E6105137A30CD00EA243B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E6104137A30CD00EA243B /* UIKit.framework */; };
+		498E6107137A30CD00EA243B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E6106137A30CD00EA243B /* Foundation.framework */; };
+		498E6109137A30CD00EA243B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E6108137A30CD00EA243B /* CoreGraphics.framework */; };
+		498E610B137A30CD00EA243B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E610A137A30CD00EA243B /* QuartzCore.framework */; };
+		498E610D137A30CD00EA243B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E610C137A30CD00EA243B /* OpenGLES.framework */; };
+		498E6113137A30CD00EA243B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 498E6111137A30CD00EA243B /* InfoPlist.strings */; };
+		498E6116137A30CD00EA243B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E6115137A30CD00EA243B /* main.m */; };
+		498E6119137A30CD00EA243B /* UNRMapViewerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E6118137A30CD00EA243B /* UNRMapViewerAppDelegate.m */; };
+		498E611C137A30CD00EA243B /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498E611A137A30CD00EA243B /* MainWindow.xib */; };
+		498E611E137A30CD00EA243B /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 498E611D137A30CD00EA243B /* Shader.fsh */; };
+		498E6120137A30CD00EA243B /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 498E611F137A30CD00EA243B /* Shader.vsh */; };
+		498E6123137A30CD00EA243B /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E6122137A30CD00EA243B /* EAGLView.m */; };
+		498E6126137A30CD00EA243B /* UNRMapViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E6125137A30CD00EA243B /* UNRMapViewerViewController.m */; };
+		498E6129137A30CD00EA243B /* UNRMapViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498E6127137A30CD00EA243B /* UNRMapViewerViewController.xib */; };
+		498E6130137A30CD00EA243B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E6104137A30CD00EA243B /* UIKit.framework */; };
+		498E6131137A30CD00EA243B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E6106137A30CD00EA243B /* Foundation.framework */; };
+		498E6132137A30CD00EA243B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E6108137A30CD00EA243B /* CoreGraphics.framework */; };
+		498E613A137A30CD00EA243B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 498E6138137A30CD00EA243B /* InfoPlist.strings */; };
+		498E613D137A30CD00EA243B /* UNRMapViewerTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 498E613C137A30CD00EA243B /* UNRMapViewerTests.h */; };
+		498E613F137A30CD00EA243B /* UNRMapViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E613E137A30CD00EA243B /* UNRMapViewerTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		498E6133137A30CD00EA243B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 498E60F7137A30CC00EA243B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 498E60FF137A30CD00EA243B;
+			remoteInfo = UNRMapViewer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		498E6100137A30CD00EA243B /* UNRMapViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UNRMapViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		498E6104137A30CD00EA243B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		498E6106137A30CD00EA243B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		498E6108137A30CD00EA243B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		498E610A137A30CD00EA243B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		498E610C137A30CD00EA243B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		498E6110137A30CD00EA243B /* UNRMapViewer-Info.plist */ = {isa = PBXFileReference; path = "UNRMapViewer-Info.plist"; sourceTree = "<group>"; };
+		498E6112137A30CD00EA243B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		498E6114137A30CD00EA243B /* UNRMapViewer-Prefix.pch */ = {isa = PBXFileReference; path = "UNRMapViewer-Prefix.pch"; sourceTree = "<group>"; };
+		498E6115137A30CD00EA243B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		498E6117137A30CD00EA243B /* UNRMapViewerAppDelegate.h */ = {isa = PBXFileReference; path = UNRMapViewerAppDelegate.h; sourceTree = "<group>"; };
+		498E6118137A30CD00EA243B /* UNRMapViewerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UNRMapViewerAppDelegate.m; sourceTree = "<group>"; };
+		498E611B137A30CD00EA243B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		498E611D137A30CD00EA243B /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		498E611F137A30CD00EA243B /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		498E6121137A30CD00EA243B /* EAGLView.h */ = {isa = PBXFileReference; path = EAGLView.h; sourceTree = "<group>"; };
+		498E6122137A30CD00EA243B /* EAGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
+		498E6124137A30CD00EA243B /* UNRMapViewerViewController.h */ = {isa = PBXFileReference; path = UNRMapViewerViewController.h; sourceTree = "<group>"; };
+		498E6125137A30CD00EA243B /* UNRMapViewerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UNRMapViewerViewController.m; sourceTree = "<group>"; };
+		498E6128137A30CD00EA243B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/UNRMapViewerViewController.xib; sourceTree = "<group>"; };
+		498E612F137A30CD00EA243B /* UNRMapViewerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UNRMapViewerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		498E6137137A30CD00EA243B /* UNRMapViewerTests-Info.plist */ = {isa = PBXFileReference; path = "UNRMapViewerTests-Info.plist"; sourceTree = "<group>"; };
+		498E6139137A30CD00EA243B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		498E613B137A30CD00EA243B /* UNRMapViewerTests-Prefix.pch */ = {isa = PBXFileReference; path = "UNRMapViewerTests-Prefix.pch"; sourceTree = "<group>"; };
+		498E613C137A30CD00EA243B /* UNRMapViewerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UNRMapViewerTests.h; sourceTree = "<group>"; };
+		498E613E137A30CD00EA243B /* UNRMapViewerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UNRMapViewerTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		498E60FD137A30CD00EA243B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				498E6105137A30CD00EA243B /* UIKit.framework in Frameworks */,
+				498E6107137A30CD00EA243B /* Foundation.framework in Frameworks */,
+				498E6109137A30CD00EA243B /* CoreGraphics.framework in Frameworks */,
+				498E610B137A30CD00EA243B /* QuartzCore.framework in Frameworks */,
+				498E610D137A30CD00EA243B /* OpenGLES.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		498E612B137A30CD00EA243B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				498E6130137A30CD00EA243B /* UIKit.framework in Frameworks */,
+				498E6131137A30CD00EA243B /* Foundation.framework in Frameworks */,
+				498E6132137A30CD00EA243B /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		498E60F5137A30CC00EA243B = {
+			isa = PBXGroup;
+			children = (
+				498E610E137A30CD00EA243B /* UNRMapViewer */,
+				498E6135137A30CD00EA243B /* UNRMapViewerTests */,
+				498E6103137A30CD00EA243B /* Frameworks */,
+				498E6101137A30CD00EA243B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		498E6101137A30CD00EA243B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				498E6100137A30CD00EA243B /* UNRMapViewer.app */,
+				498E612F137A30CD00EA243B /* UNRMapViewerTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		498E6103137A30CD00EA243B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				498E6104137A30CD00EA243B /* UIKit.framework */,
+				498E6106137A30CD00EA243B /* Foundation.framework */,
+				498E6108137A30CD00EA243B /* CoreGraphics.framework */,
+				498E610A137A30CD00EA243B /* QuartzCore.framework */,
+				498E610C137A30CD00EA243B /* OpenGLES.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		498E610E137A30CD00EA243B /* UNRMapViewer */ = {
+			isa = PBXGroup;
+			children = (
+				498E6117137A30CD00EA243B /* UNRMapViewerAppDelegate.h */,
+				498E6118137A30CD00EA243B /* UNRMapViewerAppDelegate.m */,
+				498E611A137A30CD00EA243B /* MainWindow.xib */,
+				498E611D137A30CD00EA243B /* Shader.fsh */,
+				498E611F137A30CD00EA243B /* Shader.vsh */,
+				498E6121137A30CD00EA243B /* EAGLView.h */,
+				498E6122137A30CD00EA243B /* EAGLView.m */,
+				498E6124137A30CD00EA243B /* UNRMapViewerViewController.h */,
+				498E6125137A30CD00EA243B /* UNRMapViewerViewController.m */,
+				498E6127137A30CD00EA243B /* UNRMapViewerViewController.xib */,
+				498E610F137A30CD00EA243B /* Supporting Files */,
+			);
+			path = UNRMapViewer;
+			sourceTree = "<group>";
+		};
+		498E610F137A30CD00EA243B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				498E6110137A30CD00EA243B /* UNRMapViewer-Info.plist */,
+				498E6111137A30CD00EA243B /* InfoPlist.strings */,
+				498E6114137A30CD00EA243B /* UNRMapViewer-Prefix.pch */,
+				498E6115137A30CD00EA243B /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		498E6135137A30CD00EA243B /* UNRMapViewerTests */ = {
+			isa = PBXGroup;
+			children = (
+				498E613C137A30CD00EA243B /* UNRMapViewerTests.h */,
+				498E613E137A30CD00EA243B /* UNRMapViewerTests.m */,
+				498E6136137A30CD00EA243B /* Supporting Files */,
+			);
+			path = UNRMapViewerTests;
+			sourceTree = "<group>";
+		};
+		498E6136137A30CD00EA243B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				498E6137137A30CD00EA243B /* UNRMapViewerTests-Info.plist */,
+				498E6138137A30CD00EA243B /* InfoPlist.strings */,
+				498E613B137A30CD00EA243B /* UNRMapViewerTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		498E60FF137A30CD00EA243B /* UNRMapViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 498E6142137A30CD00EA243B /* Build configuration list for PBXNativeTarget "UNRMapViewer" */;
+			buildPhases = (
+				498E60FC137A30CD00EA243B /* Sources */,
+				498E60FD137A30CD00EA243B /* Frameworks */,
+				498E60FE137A30CD00EA243B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UNRMapViewer;
+			productName = UNRMapViewer;
+			productReference = 498E6100137A30CD00EA243B /* UNRMapViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		498E612E137A30CD00EA243B /* UNRMapViewerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 498E6145137A30CD00EA243B /* Build configuration list for PBXNativeTarget "UNRMapViewerTests" */;
+			buildPhases = (
+				498E612A137A30CD00EA243B /* Sources */,
+				498E612B137A30CD00EA243B /* Frameworks */,
+				498E612C137A30CD00EA243B /* Resources */,
+				498E612D137A30CD00EA243B /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				498E6134137A30CD00EA243B /* PBXTargetDependency */,
+			);
+			name = UNRMapViewerTests;
+			productName = UNRMapViewerTests;
+			productReference = 498E612F137A30CD00EA243B /* UNRMapViewerTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		498E60F7137A30CC00EA243B /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 498E60FA137A30CC00EA243B /* Build configuration list for PBXProject "UNRMapViewer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 498E60F5137A30CC00EA243B;
+			productRefGroup = 498E6101137A30CD00EA243B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				498E60FF137A30CD00EA243B /* UNRMapViewer */,
+				498E612E137A30CD00EA243B /* UNRMapViewerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		498E60FE137A30CD00EA243B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				498E6113137A30CD00EA243B /* InfoPlist.strings in Resources */,
+				498E611C137A30CD00EA243B /* MainWindow.xib in Resources */,
+				498E611E137A30CD00EA243B /* Shader.fsh in Resources */,
+				498E6120137A30CD00EA243B /* Shader.vsh in Resources */,
+				498E6129137A30CD00EA243B /* UNRMapViewerViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		498E612C137A30CD00EA243B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				498E613A137A30CD00EA243B /* InfoPlist.strings in Resources */,
+				498E613D137A30CD00EA243B /* UNRMapViewerTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		498E612D137A30CD00EA243B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		498E60FC137A30CD00EA243B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				498E6116137A30CD00EA243B /* main.m in Sources */,
+				498E6119137A30CD00EA243B /* UNRMapViewerAppDelegate.m in Sources */,
+				498E6123137A30CD00EA243B /* EAGLView.m in Sources */,
+				498E6126137A30CD00EA243B /* UNRMapViewerViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		498E612A137A30CD00EA243B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				498E613F137A30CD00EA243B /* UNRMapViewerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		498E6134137A30CD00EA243B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 498E60FF137A30CD00EA243B /* UNRMapViewer */;
+			targetProxy = 498E6133137A30CD00EA243B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		498E6111137A30CD00EA243B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				498E6112137A30CD00EA243B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		498E611A137A30CD00EA243B /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				498E611B137A30CD00EA243B /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		498E6127137A30CD00EA243B /* UNRMapViewerViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				498E6128137A30CD00EA243B /* en */,
+			);
+			name = UNRMapViewerViewController.xib;
+			sourceTree = "<group>";
+		};
+		498E6138137A30CD00EA243B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				498E6139137A30CD00EA243B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		498E6140137A30CD00EA243B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		498E6141137A30CD00EA243B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		498E6143137A30CD00EA243B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UNRMapViewer/UNRMapViewer-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "UNRMapViewer/UNRMapViewer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		498E6144137A30CD00EA243B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UNRMapViewer/UNRMapViewer-Prefix.pch";
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = "UNRMapViewer/UNRMapViewer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		498E6146137A30CD00EA243B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/UNRMapViewer.app/UNRMapViewer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UNRMapViewerTests/UNRMapViewerTests-Prefix.pch";
+				INFOPLIST_FILE = "UNRMapViewerTests/UNRMapViewerTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		498E6147137A30CD00EA243B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/UNRMapViewer.app/UNRMapViewer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UNRMapViewerTests/UNRMapViewerTests-Prefix.pch";
+				INFOPLIST_FILE = "UNRMapViewerTests/UNRMapViewerTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		498E60FA137A30CC00EA243B /* Build configuration list for PBXProject "UNRMapViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				498E6140137A30CD00EA243B /* Debug */,
+				498E6141137A30CD00EA243B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		498E6142137A30CD00EA243B /* Build configuration list for PBXNativeTarget "UNRMapViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				498E6143137A30CD00EA243B /* Debug */,
+				498E6144137A30CD00EA243B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		498E6145137A30CD00EA243B /* Build configuration list for PBXNativeTarget "UNRMapViewerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				498E6146137A30CD00EA243B /* Debug */,
+				498E6147137A30CD00EA243B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 498E60F7137A30CC00EA243B /* Project object */;
+}

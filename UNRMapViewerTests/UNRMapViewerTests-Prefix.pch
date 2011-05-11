@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'UNRMapViewerTests' target in the 'UNRMapViewerTests' project
+//
+
+#ifdef __OBJC__
+	#import <UIKit/UIKit.h>
+#endif

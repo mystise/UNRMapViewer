@@ -15,14 +15,14 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-@interface UNRMapViewerViewController : UIViewController {
+@interface UNRMapViewerViewController : UIViewController{
 @private
-    EAGLContext *context;
-    GLuint program;
-    
-    BOOL animating;
-    NSInteger animationFrameInterval;
-    CADisplayLink *displayLink;
+	EAGLContext *context;
+	GLuint program;
+	
+	BOOL animating;
+	NSInteger animationFrameInterval;
+	CADisplayLink *displayLink;
 }
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
@@ -30,5 +30,7 @@
 
 - (void)startAnimation;
 - (void)stopAnimation;
+
+- (void)loadMap:(NSString *)mapPath;
 
 @end

@@ -9,9 +9,9 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 
-@interface UNRMapViewerTests : SenTestCase {
+@interface UNRMapViewerTests : SenTestCase{
 @private
-    
+	
 }
 
 @end

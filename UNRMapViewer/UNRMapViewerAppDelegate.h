@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class UNRMapViewerViewController;
+@class UNRMapViewerViewController, UNRMapSelectionViewController;
 
-@interface UNRMapViewerAppDelegate : NSObject <UIApplicationDelegate> {
+@interface UNRMapViewerAppDelegate : NSObject <UIApplicationDelegate>{
 
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-
 @property (nonatomic, retain) IBOutlet UNRMapViewerViewController *viewController;
+@property (nonatomic, retain) IBOutlet UNRMapSelectionViewController *listController;
 
 @end

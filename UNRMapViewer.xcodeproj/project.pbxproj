@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		493AE5D31388324200591592 /* UNRTextureExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5B71388324200591592 /* UNRTextureExporter.m */; };
+		493AE5D41388324200591592 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5BA1388324200591592 /* DataManager.m */; };
+		493AE5D51388324200591592 /* UNRBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5BC1388324200591592 /* UNRBase.m */; };
+		493AE5D61388324200591592 /* UNRExport.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5BF1388324200591592 /* UNRExport.m */; };
+		493AE5D71388324200591592 /* UNRFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5C11388324200591592 /* UNRFile.m */; };
+		493AE5D81388324200591592 /* UNRGeneration.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5C31388324200591592 /* UNRGeneration.m */; };
+		493AE5D91388324200591592 /* UNRGuid.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5C51388324200591592 /* UNRGuid.m */; };
+		493AE5DA1388324200591592 /* UNRImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5C71388324200591592 /* UNRImport.m */; };
+		493AE5DB1388324200591592 /* UNRName.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5C91388324200591592 /* UNRName.m */; };
+		493AE5DC1388324200591592 /* UNRDataPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5CC1388324200591592 /* UNRDataPluginLoader.m */; };
+		493AE5DD1388324200591592 /* UNRObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5CE1388324200591592 /* UNRObject.m */; };
+		493AE5DE1388324200591592 /* UNRProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5D01388324200591592 /* UNRProperty.m */; };
+		493AE5DF1388324200591592 /* UNRUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5D21388324200591592 /* UNRUtilities.m */; };
 		498E6105137A30CD00EA243B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E6104137A30CD00EA243B /* UIKit.framework */; };
 		498E6107137A30CD00EA243B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E6106137A30CD00EA243B /* Foundation.framework */; };
 		498E6109137A30CD00EA243B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E6108137A30CD00EA243B /* CoreGraphics.framework */; };
@@ -27,6 +40,8 @@
 		498E613A137A30CD00EA243B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 498E6138137A30CD00EA243B /* InfoPlist.strings */; };
 		498E613D137A30CD00EA243B /* UNRMapViewerTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 498E613C137A30CD00EA243B /* UNRMapViewerTests.h */; };
 		498E613F137A30CD00EA243B /* UNRMapViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E613E137A30CD00EA243B /* UNRMapViewerTests.m */; };
+		4993CC281384D1D900B6CBD2 /* UNRMapSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4993CC271384D1D900B6CBD2 /* UNRMapSelectionViewController.m */; };
+		4993CC2D1385F20200B6CBD2 /* Maps in Resources */ = {isa = PBXBuildFile; fileRef = 4993CC2C1385F20200B6CBD2 /* Maps */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,32 +55,62 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		493AE5B61388324200591592 /* UNRTextureExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRTextureExporter.h; sourceTree = "<group>"; };
+		493AE5B71388324200591592 /* UNRTextureExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRTextureExporter.m; sourceTree = "<group>"; };
+		493AE5B91388324200591592 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		493AE5BA1388324200591592 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		493AE5BB1388324200591592 /* UNRBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRBase.h; sourceTree = "<group>"; };
+		493AE5BC1388324200591592 /* UNRBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRBase.m; sourceTree = "<group>"; };
+		493AE5BD1388324200591592 /* Unreal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unreal.h; sourceTree = "<group>"; };
+		493AE5BE1388324200591592 /* UNRExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRExport.h; sourceTree = "<group>"; };
+		493AE5BF1388324200591592 /* UNRExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRExport.m; sourceTree = "<group>"; };
+		493AE5C01388324200591592 /* UNRFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRFile.h; sourceTree = "<group>"; };
+		493AE5C11388324200591592 /* UNRFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRFile.m; sourceTree = "<group>"; };
+		493AE5C21388324200591592 /* UNRGeneration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRGeneration.h; sourceTree = "<group>"; };
+		493AE5C31388324200591592 /* UNRGeneration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRGeneration.m; sourceTree = "<group>"; };
+		493AE5C41388324200591592 /* UNRGuid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRGuid.h; sourceTree = "<group>"; };
+		493AE5C51388324200591592 /* UNRGuid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRGuid.m; sourceTree = "<group>"; };
+		493AE5C61388324200591592 /* UNRImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRImport.h; sourceTree = "<group>"; };
+		493AE5C71388324200591592 /* UNRImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRImport.m; sourceTree = "<group>"; };
+		493AE5C81388324200591592 /* UNRName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRName.h; sourceTree = "<group>"; };
+		493AE5C91388324200591592 /* UNRName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRName.m; sourceTree = "<group>"; };
+		493AE5CB1388324200591592 /* UNRDataPluginLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRDataPluginLoader.h; sourceTree = "<group>"; };
+		493AE5CC1388324200591592 /* UNRDataPluginLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRDataPluginLoader.m; sourceTree = "<group>"; };
+		493AE5CD1388324200591592 /* UNRObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRObject.h; sourceTree = "<group>"; };
+		493AE5CE1388324200591592 /* UNRObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRObject.m; sourceTree = "<group>"; };
+		493AE5CF1388324200591592 /* UNRProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRProperty.h; sourceTree = "<group>"; };
+		493AE5D01388324200591592 /* UNRProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRProperty.m; sourceTree = "<group>"; };
+		493AE5D11388324200591592 /* UNRUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRUtilities.h; sourceTree = "<group>"; };
+		493AE5D21388324200591592 /* UNRUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRUtilities.m; sourceTree = "<group>"; };
 		498E6100137A30CD00EA243B /* UNRMapViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UNRMapViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		498E6104137A30CD00EA243B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		498E6106137A30CD00EA243B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		498E6108137A30CD00EA243B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		498E610A137A30CD00EA243B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		498E610C137A30CD00EA243B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		498E6110137A30CD00EA243B /* UNRMapViewer-Info.plist */ = {isa = PBXFileReference; path = "UNRMapViewer-Info.plist"; sourceTree = "<group>"; };
+		498E6110137A30CD00EA243B /* UNRMapViewer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UNRMapViewer-Info.plist"; sourceTree = "<group>"; };
 		498E6112137A30CD00EA243B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		498E6114137A30CD00EA243B /* UNRMapViewer-Prefix.pch */ = {isa = PBXFileReference; path = "UNRMapViewer-Prefix.pch"; sourceTree = "<group>"; };
+		498E6114137A30CD00EA243B /* UNRMapViewer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UNRMapViewer-Prefix.pch"; sourceTree = "<group>"; };
 		498E6115137A30CD00EA243B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		498E6117137A30CD00EA243B /* UNRMapViewerAppDelegate.h */ = {isa = PBXFileReference; path = UNRMapViewerAppDelegate.h; sourceTree = "<group>"; };
+		498E6117137A30CD00EA243B /* UNRMapViewerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UNRMapViewerAppDelegate.h; sourceTree = "<group>"; };
 		498E6118137A30CD00EA243B /* UNRMapViewerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UNRMapViewerAppDelegate.m; sourceTree = "<group>"; };
 		498E611B137A30CD00EA243B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		498E611D137A30CD00EA243B /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
 		498E611F137A30CD00EA243B /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
-		498E6121137A30CD00EA243B /* EAGLView.h */ = {isa = PBXFileReference; path = EAGLView.h; sourceTree = "<group>"; };
+		498E6121137A30CD00EA243B /* EAGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		498E6122137A30CD00EA243B /* EAGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
-		498E6124137A30CD00EA243B /* UNRMapViewerViewController.h */ = {isa = PBXFileReference; path = UNRMapViewerViewController.h; sourceTree = "<group>"; };
+		498E6124137A30CD00EA243B /* UNRMapViewerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UNRMapViewerViewController.h; sourceTree = "<group>"; };
 		498E6125137A30CD00EA243B /* UNRMapViewerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UNRMapViewerViewController.m; sourceTree = "<group>"; };
 		498E6128137A30CD00EA243B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/UNRMapViewerViewController.xib; sourceTree = "<group>"; };
 		498E612F137A30CD00EA243B /* UNRMapViewerTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UNRMapViewerTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		498E6137137A30CD00EA243B /* UNRMapViewerTests-Info.plist */ = {isa = PBXFileReference; path = "UNRMapViewerTests-Info.plist"; sourceTree = "<group>"; };
+		498E6137137A30CD00EA243B /* UNRMapViewerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UNRMapViewerTests-Info.plist"; sourceTree = "<group>"; };
 		498E6139137A30CD00EA243B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		498E613B137A30CD00EA243B /* UNRMapViewerTests-Prefix.pch */ = {isa = PBXFileReference; path = "UNRMapViewerTests-Prefix.pch"; sourceTree = "<group>"; };
+		498E613B137A30CD00EA243B /* UNRMapViewerTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UNRMapViewerTests-Prefix.pch"; sourceTree = "<group>"; };
 		498E613C137A30CD00EA243B /* UNRMapViewerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UNRMapViewerTests.h; sourceTree = "<group>"; };
 		498E613E137A30CD00EA243B /* UNRMapViewerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UNRMapViewerTests.m; sourceTree = "<group>"; };
+		4993CC261384D1D900B6CBD2 /* UNRMapSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNRMapSelectionViewController.h; path = Menu/UNRMapSelectionViewController.h; sourceTree = "<group>"; };
+		4993CC271384D1D900B6CBD2 /* UNRMapSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNRMapSelectionViewController.m; path = Menu/UNRMapSelectionViewController.m; sourceTree = "<group>"; };
+		4993CC2C1385F20200B6CBD2 /* Maps */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Maps; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +139,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		493AE5B51388324200591592 /* Texture Loader */ = {
+			isa = PBXGroup;
+			children = (
+				493AE5B61388324200591592 /* UNRTextureExporter.h */,
+				493AE5B71388324200591592 /* UNRTextureExporter.m */,
+			);
+			path = "Texture Loader";
+			sourceTree = "<group>";
+		};
+		493AE5B81388324200591592 /* UnrealPackage */ = {
+			isa = PBXGroup;
+			children = (
+				493AE5B91388324200591592 /* DataManager.h */,
+				493AE5BA1388324200591592 /* DataManager.m */,
+				493AE5BB1388324200591592 /* UNRBase.h */,
+				493AE5BC1388324200591592 /* UNRBase.m */,
+				493AE5BD1388324200591592 /* Unreal.h */,
+				493AE5BE1388324200591592 /* UNRExport.h */,
+				493AE5BF1388324200591592 /* UNRExport.m */,
+				493AE5C01388324200591592 /* UNRFile.h */,
+				493AE5C11388324200591592 /* UNRFile.m */,
+				493AE5C21388324200591592 /* UNRGeneration.h */,
+				493AE5C31388324200591592 /* UNRGeneration.m */,
+				493AE5C41388324200591592 /* UNRGuid.h */,
+				493AE5C51388324200591592 /* UNRGuid.m */,
+				493AE5C61388324200591592 /* UNRImport.h */,
+				493AE5C71388324200591592 /* UNRImport.m */,
+				493AE5D11388324200591592 /* UNRUtilities.h */,
+				493AE5D21388324200591592 /* UNRUtilities.m */,
+				493AE5C81388324200591592 /* UNRName.h */,
+				493AE5C91388324200591592 /* UNRName.m */,
+				493AE5CA1388324200591592 /* UNRPluginObject */,
+			);
+			path = UnrealPackage;
+			sourceTree = "<group>";
+		};
+		493AE5CA1388324200591592 /* UNRPluginObject */ = {
+			isa = PBXGroup;
+			children = (
+				493AE5CB1388324200591592 /* UNRDataPluginLoader.h */,
+				493AE5CC1388324200591592 /* UNRDataPluginLoader.m */,
+				493AE5CD1388324200591592 /* UNRObject.h */,
+				493AE5CE1388324200591592 /* UNRObject.m */,
+				493AE5CF1388324200591592 /* UNRProperty.h */,
+				493AE5D01388324200591592 /* UNRProperty.m */,
+			);
+			path = UNRPluginObject;
+			sourceTree = "<group>";
+		};
 		498E60F5137A30CC00EA243B = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +222,9 @@
 		498E610E137A30CD00EA243B /* UNRMapViewer */ = {
 			isa = PBXGroup;
 			children = (
+				493AE5B51388324200591592 /* Texture Loader */,
+				493AE5B81388324200591592 /* UnrealPackage */,
+				4993CC241384D1AB00B6CBD2 /* Menu */,
 				498E6117137A30CD00EA243B /* UNRMapViewerAppDelegate.h */,
 				498E6118137A30CD00EA243B /* UNRMapViewerAppDelegate.m */,
 				498E611A137A30CD00EA243B /* MainWindow.xib */,
@@ -146,6 +243,7 @@
 		498E610F137A30CD00EA243B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4993CC2C1385F20200B6CBD2 /* Maps */,
 				498E6110137A30CD00EA243B /* UNRMapViewer-Info.plist */,
 				498E6111137A30CD00EA243B /* InfoPlist.strings */,
 				498E6114137A30CD00EA243B /* UNRMapViewer-Prefix.pch */,
@@ -172,6 +270,15 @@
 				498E613B137A30CD00EA243B /* UNRMapViewerTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4993CC241384D1AB00B6CBD2 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				4993CC261384D1D900B6CBD2 /* UNRMapSelectionViewController.h */,
+				4993CC271384D1D900B6CBD2 /* UNRMapSelectionViewController.m */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +353,7 @@
 				498E611E137A30CD00EA243B /* Shader.fsh in Resources */,
 				498E6120137A30CD00EA243B /* Shader.vsh in Resources */,
 				498E6129137A30CD00EA243B /* UNRMapViewerViewController.xib in Resources */,
+				4993CC2D1385F20200B6CBD2 /* Maps in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +393,20 @@
 				498E6119137A30CD00EA243B /* UNRMapViewerAppDelegate.m in Sources */,
 				498E6123137A30CD00EA243B /* EAGLView.m in Sources */,
 				498E6126137A30CD00EA243B /* UNRMapViewerViewController.m in Sources */,
+				4993CC281384D1D900B6CBD2 /* UNRMapSelectionViewController.m in Sources */,
+				493AE5D31388324200591592 /* UNRTextureExporter.m in Sources */,
+				493AE5D41388324200591592 /* DataManager.m in Sources */,
+				493AE5D51388324200591592 /* UNRBase.m in Sources */,
+				493AE5D61388324200591592 /* UNRExport.m in Sources */,
+				493AE5D71388324200591592 /* UNRFile.m in Sources */,
+				493AE5D81388324200591592 /* UNRGeneration.m in Sources */,
+				493AE5D91388324200591592 /* UNRGuid.m in Sources */,
+				493AE5DA1388324200591592 /* UNRImport.m in Sources */,
+				493AE5DB1388324200591592 /* UNRName.m in Sources */,
+				493AE5DC1388324200591592 /* UNRDataPluginLoader.m in Sources */,
+				493AE5DD1388324200591592 /* UNRObject.m in Sources */,
+				493AE5DE1388324200591592 /* UNRProperty.m in Sources */,
+				493AE5DF1388324200591592 /* UNRUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +593,7 @@
 				498E6144137A30CD00EA243B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		498E6145137A30CD00EA243B /* Build configuration list for PBXNativeTarget "UNRMapViewerTests" */ = {
 			isa = XCConfigurationList;
@@ -479,6 +602,7 @@
 				498E6147137A30CD00EA243B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

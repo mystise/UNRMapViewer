@@ -1,0 +1,10 @@
+<plugin class="field" group="official" game="UT99" super="object">
+	<info>
+		<objectReference name="superField"/>
+		<objectReference name="nextField"/>
+	</info>
+	<controls>
+		<stringControl label="Super Field:" input="superField.name.string" editable="no"/>
+		<stringControl label="Next Field:" input="nextField.name.string" editable="no"/>
+	</controls>
+</plugin>

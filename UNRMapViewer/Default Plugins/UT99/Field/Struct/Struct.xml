@@ -1,0 +1,16 @@
+<plugin class="struct" group="official" game="UT99" super="field">
+	<info>
+		<objectReference name="scriptText"/>
+		<objectReference name="firstChild"/>
+		<nameReference name="friendlyName"/>
+		<int name="line"/>
+		<int name="textPos"/>
+		<int name="scriptSize"/>
+		<!-- script data -->
+	</info>
+	<controls>
+		<stringControl label="Script:" input="scriptText.name.string" editable="no"/>
+		<stringControl label="First Child:" input="firstChild.name.string" editable="no"/>
+		<stringControl label="Friendly Name:" input="friendlyName.string" editable="no"/>
+	</controls>
+</plugin>

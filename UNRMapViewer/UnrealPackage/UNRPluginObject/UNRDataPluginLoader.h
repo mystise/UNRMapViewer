@@ -21,9 +21,6 @@
 - (void)loadPlugin:(UNRExport *)object file:(UNRFile *)file;
 
 @property(nonatomic, retain) NSMutableDictionary *plugins;
-@property(nonatomic, assign) BOOL addData;
-@property(nonatomic, retain) UNRObject *obj;
-@property(nonatomic, retain) NSDictionary *dataTypes, *dataEndTypes;
 @property(nonatomic, retain) NSURL *url;
 
 @end

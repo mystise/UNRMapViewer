@@ -1,0 +1,11 @@
+<plugin class="music" group="official" game="UT99">
+	<info>
+		<short name="chunkCount"/>
+		<int name="unk"/>
+		<compactIndex name="chunkSize"/>
+		<data name="chunk" size="chunkSize"/>
+	</info>
+	<controls>
+		
+	</controls>
+</plugin>

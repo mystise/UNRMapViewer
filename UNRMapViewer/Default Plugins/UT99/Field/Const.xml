@@ -1,0 +1,9 @@
+<plugin class="const" group="official" game="UT99" super="field">
+	<info>
+		<compactIndex name="textLength"/>
+		<string name="text" length="textLength"/>
+	</info>
+	<controls>
+		<stringControl label="Text:" input="text" editable="no"/>
+	</controls>
+</plugin>

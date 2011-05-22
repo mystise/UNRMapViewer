@@ -1,0 +1,23 @@
+<plugin class="texture" group="official" game="UT99" super="object">
+	<info>
+		<byte name="mipMapCount"/>
+		<array name="mipMapLevels" count="mipMapCount">
+			<if objectValue="file.version" comparator="greater" compareValue="62">
+				<int name="widthOffset"/>
+			</if>
+			<compactIndex name="mipMapSize"/>
+			<data name="mipMap" size="mipMapSize"/>
+			<int name="width"/>
+			<int name="height"/>
+			<byte name="power2Width"/>
+			<byte name="power2Height"/>
+		</array>
+	</info>
+	<controls>
+		<numberControl label="Mip Map Count:" input="mipMapCount" editable="no"/>
+		<intPopUpControl label="Mip Level:" from="0" to="mipMapCount" bind="mipMapLevels"/>
+		<numberControl label="Width:" input="mipMapLevels.width" editable="no"/>
+		<numberControl label="Height:" input="mipMapLevels.height" editable="no"/>
+		<textControl label="Image Data:" input="mipMapLevels.mipMap.description" size="medium"/>
+	</controls>
+</plugin>

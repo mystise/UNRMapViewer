@@ -15,6 +15,8 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
+@class UNRFile;
+
 @interface UNRMapViewerViewController : UIViewController{
 @private
 	EAGLContext *context;
@@ -27,6 +29,8 @@
 
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;
+@property(nonatomic, retain) UNRFile *file;
+@property(nonatomic, retain) NSMutableDictionary *level;
 
 - (void)startAnimation;
 - (void)stopAnimation;

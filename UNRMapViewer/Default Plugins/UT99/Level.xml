@@ -1,0 +1,51 @@
+<plugin class="level" group="official" game="UT99" super="object">
+	<info>
+		<!-- actor array -->
+		<int name="minActors"/>
+		<int name="maxActors"/>
+		<array name="actors" count="maxActors">
+			<objectReference name="actor"/>
+		</array>
+		
+		<!-- URL -->
+		<compactIndex name="protLength"/>
+		<string name="protocol" length="protLength"/>
+		<compactIndex name="hostLength"/>
+		<string name="host" length="hostLength"/>
+		<if objectValue="hostLength" comparator="!=" compareValue="0">
+			<int name="port"/>
+		</if>
+		<compactIndex name="mapLength"/>
+		<string name="mapName" length="mapLength"/>
+		<compactIndex name="opCount"/>
+		<array name="options" count="opCount">
+			<compactIndex name="opLength"/>
+			<string name="option" length="opLength"/>
+		</array>
+		<compactIndex name="portalLength"/>
+		<string name="portal" length="portalLength"/>
+		
+		<long name="unk1"/>
+		
+		<objectReference name="bspModel"/>
+		
+		<!-- reachSpecs -->
+		<compactIndex name="reachCount"/>
+		<array name="reachSpecs" count="reachCount">
+			<int name="distance"/>
+			<objectReference name="startActor"/>
+			<objectReference name="endActor"/>
+			<int name="collRadius"/>
+			<int name="collHeight"/>
+			<int name="reachFlags"/>
+			<byte name="pruned"/>
+		</array>
+		
+		<!-- textBlocks and unknown -->
+	</info>
+	<controls>
+		<intPopUpControl label="Actor Index:" bind="actors" from="0" to="maxActors"/>
+		<stringControl label="Actor:" input="actors.actor.name.string" editable="no"/>
+		<stringControl label="BSP Model:" input="bspModel.name.string" editable="no"/>
+	</controls>
+</plugin>

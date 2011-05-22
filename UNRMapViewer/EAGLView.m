@@ -98,6 +98,11 @@
 			glDeleteRenderbuffers(1, &colorRenderbuffer);
 			colorRenderbuffer = 0;
 		}
+		
+		if(depthRenderBuffer){
+			glDeleteRenderbuffers(1, &depthRenderBuffer);
+			depthRenderBuffer = 0;
+		}
 	}
 }
 

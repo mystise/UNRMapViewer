@@ -1,0 +1,10 @@
+<plugin class="mapproperty" group="official" game="UT99" super="property">
+	<info>
+		<compactIndex name="key"/>
+		<compactIndex name="value"/>
+	</info>
+	<controls>
+		<numberControl label="Key:" input="key" editable="no"/>
+		<numberControl label="Value:" input="value" editable="no"/>
+	</controls>
+</plugin>

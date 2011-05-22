@@ -1,0 +1,6 @@
+<plugin class="strproperty" group="official" game="UT99" super="property">
+	<info>
+	</info>
+	<controls>
+	</controls>
+</plugin>

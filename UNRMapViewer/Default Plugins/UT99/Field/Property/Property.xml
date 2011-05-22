@@ -1,0 +1,18 @@
+<plugin class="property" group="official" game="UT99" super="field">
+	<info>
+		<short name="arrayDimension"/>
+		<short name="elementSize"/>
+		<int name="propertyFlags"/>
+		<nameReference name="category"/>
+		<if objectValue="propertyFlags" comparator="and" compareValue="32">
+			<short name="replicationOffset"/>
+		</if>
+	</info>
+	<controls>
+		<numberControl label="Array Dimension:" input="arrayDimension" editable="no"/>
+		<numberControl label="Element Size:" input="elementSize" editable="no"/>
+		<numberControl label="Property Flags:" input="propertyFlags" editable="no"/>
+		<stringControl label="Category:" input="category.string" editable="no"/>
+		<numberControl label="Replication Offset:" input="replicationOffset" editable="no"/>
+	</controls>
+</plugin>

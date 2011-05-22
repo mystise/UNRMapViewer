@@ -1,0 +1,131 @@
+<plugin class="model" group="official" game="UT99" super="primitive">
+	<info>
+		<compactIndex name="vecCount"/>
+		<array name="vectors" count="vecCount">
+			<vector name="vector"/>
+		</array>
+		
+		<compactIndex name="pointCount"/>
+		<array name="points" count="pointCount">
+			<vector name="point"/>
+		</array>
+		
+		<compactIndex name="nodeCount"/>
+		<array name="nodes" count="nodeCount">
+			<plane name="plane"/>
+			<long name="zoneMask"/>
+			<byte name="nodeFlags"/>
+			<compactIndex name="iVertPool"/>
+			<compactIndex name="iSurf"/>
+			<compactIndex name="iBack"/>
+			<compactIndex name="iFront"/>
+			<compactIndex name="iPlane"/>
+			<compactIndex name="iCollBound"/>
+			<compactIndex name="iRenderBound"/>
+			<short name="iZone"/>
+			<compactIndex name="vertCount"/>
+			<int name="iLeaf1"/>
+			<int name="iLeaf2"/>
+		</array>
+		
+		<compactIndex name="surfCount"/>
+		<array name="surfs" count="surfCount">
+			<compactIndex name="texture"/> <!-- Object reference -->
+			<int name="polyFlags"/>
+			<compactIndex name="pBase"/>
+			<compactIndex name="vNormal"/>
+			<compactIndex name="vTextureU"/>
+			<compactIndex name="vTextureV"/>
+			<compactIndex name="iLightMap"/>
+			<compactIndex name="iBrushPoly"/>
+			<short name="panU"/>
+			<short name="panV"/>
+			<compactIndex name="actor"/> <!-- Object reference -->
+		</array>
+		
+		<compactIndex name="vertCount"/>
+		<array name="verts" count="vertCount">
+			<compactIndex name="pVertex"/>
+			<compactIndex name="iSide"/>
+		</array>
+		
+		<!--<compactIndex name="numSharedSides"/>
+		<compactIndex name="moverLink"/>
+		<compactIndex name="linked"/>
+		<compactIndex name="rootOutside"/> -->
+		<int name="unk"/>
+		
+		<int name="zonePropertiesCount"/>
+		<array name="zoneProperties" count="zonePropertiesCount">
+			<compactIndex name="zoneActor"/> <!-- Object reference -->
+			<long name="connectivity"/>
+			<long name="visibility"/>
+		</array>
+		
+		<objectReference name="polys"/>
+		
+		<compactIndex name="lightMapCount"/>
+		<array name="lightMaps" count="lightMapCount">
+			<int name="dataOffset"/>
+			<vector name="pan"/>
+			<compactIndex name="uClamp"/>
+			<compactIndex name="vClamp"/>
+			<float name="uScale"/>
+			<float name="vScale"/>
+			<int name="iLightActors"/>
+		</array>
+		
+		<compactIndex name="lightBitSize"/>
+		<data name="LightBits" size="lightBitSize"/>
+		
+		<compactIndex name="boundCount"/>
+		<array name="bounds" count="boundCount">
+			<box name="bound"/>
+		</array>
+		
+		<compactIndex name="leafHullCount"/>
+		<array name="leafHulls" count="leafHullCount">
+			<int name="leafHull"/>
+		</array>
+		
+		<compactIndex name="leafCount"/>
+		<array name="leaves" count="leafCount">
+			<compactIndex name="iZone"/>
+			<compactIndex name="iPermeating"/>
+			<compactIndex name="iVolumetric"/>
+			<long name="visibleZones"/>
+		</array>
+		
+		<compactIndex name="lightCount"/>
+		<array name="lights" count="lightCount">
+			<compactIndex name="light"/> <!-- Object reference -->
+		</array>
+		
+		<int name="unk1"/>
+		<int name="unk2"/>
+	</info>
+	<controls>
+		<!-- <intPopUpControl label="Point Index:" bind="points" from="0" to="pointCount"/>
+		<numberControl label="Point.x" input="points.point.x" editable="no"/>
+		<numberControl label="Point.y" input="points.point.y" editable="no"/>
+		<numberControl label="Point.z" input="points.point.z" editable="no"/>
+		<intPopUpControl label="Vector Index:" bind="vectors" from="0" to="vecCount"/>
+		<numberControl label="Vector.x" input="vectors.vector.x" editable="no"/>
+		<numberControl label="Vector.y" input="vectors.vector.y" editable="no"/>
+		<numberControl label="Vector.z" input="vectors.vector.z" editable="no"/>
+		<intPopUpControl label="Vert Index:" bind="verts" from="0" to="vertCount"/>
+		<numberControl label="Vert.pVertex" input="verts.pVertex" editable="no"/>
+		<numberControl label="Vert.iSide" input="verts.iSide" editable="no"/> -->
+		<numberControl label="VecCount:" input="vecCount" editable="no"/>
+		<numberControl label="PointCount:" input="pointCount" editable="no"/>
+		<numberControl label="NodeCount:" input="nodeCount" editable="no"/>
+		<numberControl label="SurfCount:" input="surfCount" editable="no"/>
+		<numberControl label="VertCount:" input="vertCount" editable="no"/>
+		<numberControl label="ZonePropCount:" input="zonePropertiesCount" editable="no"/>
+		<numberControl label="LightMapCount:" input="lightMapCount" editable="no"/>
+		<numberControl label="BoundCount:" input="boundCount" editable="no"/>
+		<numberControl label="LeafHullCount:" input="leafHullCount" editable="no"/>
+		<numberControl label="leafCount:" input="leafCount" editable="no"/>
+		<numberControl label="LightCount:" input="lightCount" editable="no"/>
+	</controls>
+</plugin>

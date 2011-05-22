@@ -1,0 +1,8 @@
+<plugin class="structproperty" group="official" game="UT99" super="property">
+	<info>
+		<objectReference name="structType"/>
+	</info>
+	<controls>
+		<stringControl label="Struct Type:" input="structType.name.string" editable="no"/>
+	</controls>
+</plugin>

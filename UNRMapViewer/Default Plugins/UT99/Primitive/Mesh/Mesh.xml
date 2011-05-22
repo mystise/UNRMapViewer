@@ -1,0 +1,99 @@
+<plugin class="mesh" group="official" game="UT99" super="primitive">
+	<info>
+		<if objectValue="file.version" comparator="greater" compareValue="61">
+			<int name="vertsJump"/>
+		</if>
+		<compactIndex name="vertCount"/>
+		<array name="verts" count="vertCount">
+			<intVector name="vert"/>
+		</array>
+		
+		<if objectValue="file.version" comparator="greater" compareValue="61">
+			<int name="trisJump"/>
+		</if>
+		<compactIndex name="triCount"/>
+		<array name="tris" count="triCount">
+			<short name="vIndex1"/>
+			<short name="vIndex2"/>
+			<short name="vIndex3"/>
+			<byte name="v1U"/>
+			<byte name="v1V"/>
+			<byte name="v2U"/>
+			<byte name="v2V"/>
+			<byte name="v3U"/>
+			<byte name="v3V"/>
+			<int name="flags"/>
+			<int name="texIndex"/>
+		</array>
+		
+		<compactIndex name="animSeqCount"/>
+		<array name="animSequences" count="animSeqCount">
+			<compactIndex name="name"/>
+			<compactIndex name="group"/>
+			<int name="startFrame"/>
+			<int name="numFrames"/>
+			<compactIndex name="funcCount"/>
+			<array name="functions" count="funcCount">
+				<int name="time"/>
+				<compactIndex name="function"/> <!-- objectReference -->
+			</array>
+			<float name="frameRate"/>
+		</array>
+		
+		<if objectValue="file.version" comparator="greater" compareValue="61">
+			<int name="connectsJump"/>
+		</if>
+		<int name="connectCount"/>
+		<array name="connects" count="connectCount">
+			<int name="numVertTriangles"/>
+			<int name="triListOffset"/>
+		</array>
+		
+		<box name="meshBoundingBox"/>
+		<sphere name="meshBoundingSphere"/>
+		
+		<if objectValue="file.version" comparator="greater" compareValue="61">
+			<int name="vertLinkJump"/>
+		</if>
+		<compactIndex name="vertLinkCount"/>
+		<array name="vertLinks" count="vertLinkCount">
+			<int name="vertLink"/>
+		</array>
+		
+		<compactIndex name="textureCount"/>
+		<array name="textures" count="textureCount">
+			<objectReference name="texture"/>
+		</array>
+		
+		<compactIndex name="boundingBoxCount"/>
+		<array name="boundingBoxes" count="boundingBoxCount">
+			<box name="boundingBox"/>
+		</array>
+		
+		<compactIndex name="boundingSphereCount"/>
+		<array name="boundingBoxes" count="boundingSphereCount">
+			<sphere name="boundingSphere"/>
+		</array>
+		
+		<int name="vertsPerFrame"/>
+		<int name="frameCount"/>
+		<int name="andFlags"/>
+		<int name="orFlags"/>
+		<vector name="scale"/>
+		<vector name="origin"/>
+		<rotator name="originRot"/>
+		<int name="curPoly"/>
+		<int name="curVertex"/>
+		<if objectValue="file.version" comparator="=" compareValue="65">
+			<float name="texLod1"/>
+		</if>
+		<if objectValue="file.version" comparator="greater" compareValue="65">
+			<compactIndex name="texLodCount"/>
+			<array name="texLods" count="texLodCount">
+				<float name="texLod"/>
+			</array>
+		</if>
+	</info>
+	<controls>
+	</controls>
+</plugin>

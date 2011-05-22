@@ -1,0 +1,16 @@
+<plugin class="sound" group="official" game="UT99" super="object">
+	<info>
+		<compactIndex name="soundFormat"/>
+		<if objectValue="file.version" comparator="greater" compareValue="70">
+			<int name="unk"/>
+		</if>
+		<if objectValue="file.version" comparator="greater" compareValue="62">
+			<int name="offsetNext"/>
+		</if>
+		<compactIndex name="soundSize"/>
+		<data name="soundData" size="soundSize"/>
+	</info>
+	<controls>
+		<soundControl label="Sound:" input="soundData"/>
+	</controls>
+</plugin>

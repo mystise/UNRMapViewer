@@ -1,0 +1,12 @@
+<plugin class="enum" group="official" game="UT99" super="field">
+	<info>
+		<compactIndex name="elementCount"/>
+		<array name="elements" count="elementCount">
+			<nameReference name="elementName"/>
+		</array>
+	</info>
+	<controls>
+		<intPopUpControl label="Element:" bind="elements" from="0" to="elementCount"/>
+		<stringControl label="Element Name:" input="elements.elementName.string" editable="no"/>
+	</controls>
+</plugin>

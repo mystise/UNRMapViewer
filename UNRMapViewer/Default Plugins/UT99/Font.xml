@@ -1,0 +1,25 @@
+<plugin class="font" group="official" game="UT99" super="object">
+	<info>
+		<byte name="textureCount"/>
+		<array name="textures" count="textureCount">
+		<!-- deal with file.ver == 61 -->
+			<compactIndex name="textureRef"/> <!-- objectReference -->
+			<compactIndex name="charCount"/>
+			<array name="characters" count="charCount">
+				<int name="x"/>
+				<int name="y"/>
+				<int name="width"/>
+				<int name="height"/>
+			</array>
+		</array>
+	</info>
+	<controls>
+		<intPopUpControl label="Font:" from="0" to="textureCount" bind="textures"/>
+		<!-- <stringControl label="Texture:" input="textures.textureRef.name.string" editable="no"/> -->
+		<intPopUpControl label="Character:" from="0" to="textures.charCount" bind="textures.characters"/>
+		<numberControl label="Char X:" input="textures.characters.x" editable="no"/>
+		<numberControl label="Char Y:" input="textures.characters.y" editable="no"/>
+		<numberControl label="Char Width:" input="textures.characters.width" editable="no"/>
+		<numberControl label="Char Height:" input="textures.characters.height" editable="no"/>
+	</controls>
+</plugin>

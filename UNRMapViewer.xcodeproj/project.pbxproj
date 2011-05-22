@@ -8,18 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		493AE5D31388324200591592 /* UNRTextureExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5B71388324200591592 /* UNRTextureExporter.m */; };
-		493AE5D41388324200591592 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5BA1388324200591592 /* DataManager.m */; };
-		493AE5D51388324200591592 /* UNRBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5BC1388324200591592 /* UNRBase.m */; };
-		493AE5D61388324200591592 /* UNRExport.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5BF1388324200591592 /* UNRExport.m */; };
-		493AE5D71388324200591592 /* UNRFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5C11388324200591592 /* UNRFile.m */; };
-		493AE5D81388324200591592 /* UNRGeneration.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5C31388324200591592 /* UNRGeneration.m */; };
-		493AE5D91388324200591592 /* UNRGuid.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5C51388324200591592 /* UNRGuid.m */; };
-		493AE5DA1388324200591592 /* UNRImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5C71388324200591592 /* UNRImport.m */; };
-		493AE5DB1388324200591592 /* UNRName.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5C91388324200591592 /* UNRName.m */; };
-		493AE5DC1388324200591592 /* UNRDataPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5CC1388324200591592 /* UNRDataPluginLoader.m */; };
-		493AE5DD1388324200591592 /* UNRObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5CE1388324200591592 /* UNRObject.m */; };
-		493AE5DE1388324200591592 /* UNRProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5D01388324200591592 /* UNRProperty.m */; };
-		493AE5DF1388324200591592 /* UNRUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5D21388324200591592 /* UNRUtilities.m */; };
+		49836DED13884817003193CD /* Default Plugins in Resources */ = {isa = PBXBuildFile; fileRef = 49836DEC13884817003193CD /* Default Plugins */; };
+		49836E221388BB7F003193CD /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E071388BB7F003193CD /* DataManager.m */; };
+		49836E231388BB7F003193CD /* UNRBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E091388BB7F003193CD /* UNRBase.m */; };
+		49836E241388BB7F003193CD /* UNRExport.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E0C1388BB7F003193CD /* UNRExport.m */; };
+		49836E251388BB7F003193CD /* UNRFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E0E1388BB7F003193CD /* UNRFile.m */; };
+		49836E261388BB7F003193CD /* UNRGeneration.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E101388BB7F003193CD /* UNRGeneration.m */; };
+		49836E271388BB7F003193CD /* UNRGuid.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E121388BB7F003193CD /* UNRGuid.m */; };
+		49836E281388BB7F003193CD /* UNRImport.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E141388BB7F003193CD /* UNRImport.m */; };
+		49836E291388BB7F003193CD /* UNRName.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E161388BB7F003193CD /* UNRName.m */; };
+		49836E2A1388BB7F003193CD /* UNRDataPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E191388BB7F003193CD /* UNRDataPluginLoader.m */; };
+		49836E2B1388BB7F003193CD /* UNRDataPluginReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E1B1388BB7F003193CD /* UNRDataPluginReader.m */; };
+		49836E2C1388BB7F003193CD /* UNRObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E1D1388BB7F003193CD /* UNRObject.m */; };
+		49836E2D1388BB7F003193CD /* UNRProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E1F1388BB7F003193CD /* UNRProperty.m */; };
+		49836E2E1388BB7F003193CD /* UNRUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E211388BB7F003193CD /* UNRUtilities.m */; };
 		498E6105137A30CD00EA243B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E6104137A30CD00EA243B /* UIKit.framework */; };
 		498E6107137A30CD00EA243B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E6106137A30CD00EA243B /* Foundation.framework */; };
 		498E6109137A30CD00EA243B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E6108137A30CD00EA243B /* CoreGraphics.framework */; };
@@ -57,31 +59,34 @@
 /* Begin PBXFileReference section */
 		493AE5B61388324200591592 /* UNRTextureExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRTextureExporter.h; sourceTree = "<group>"; };
 		493AE5B71388324200591592 /* UNRTextureExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRTextureExporter.m; sourceTree = "<group>"; };
-		493AE5B91388324200591592 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
-		493AE5BA1388324200591592 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
-		493AE5BB1388324200591592 /* UNRBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRBase.h; sourceTree = "<group>"; };
-		493AE5BC1388324200591592 /* UNRBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRBase.m; sourceTree = "<group>"; };
-		493AE5BD1388324200591592 /* Unreal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unreal.h; sourceTree = "<group>"; };
-		493AE5BE1388324200591592 /* UNRExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRExport.h; sourceTree = "<group>"; };
-		493AE5BF1388324200591592 /* UNRExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRExport.m; sourceTree = "<group>"; };
-		493AE5C01388324200591592 /* UNRFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRFile.h; sourceTree = "<group>"; };
-		493AE5C11388324200591592 /* UNRFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRFile.m; sourceTree = "<group>"; };
-		493AE5C21388324200591592 /* UNRGeneration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRGeneration.h; sourceTree = "<group>"; };
-		493AE5C31388324200591592 /* UNRGeneration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRGeneration.m; sourceTree = "<group>"; };
-		493AE5C41388324200591592 /* UNRGuid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRGuid.h; sourceTree = "<group>"; };
-		493AE5C51388324200591592 /* UNRGuid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRGuid.m; sourceTree = "<group>"; };
-		493AE5C61388324200591592 /* UNRImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRImport.h; sourceTree = "<group>"; };
-		493AE5C71388324200591592 /* UNRImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRImport.m; sourceTree = "<group>"; };
-		493AE5C81388324200591592 /* UNRName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRName.h; sourceTree = "<group>"; };
-		493AE5C91388324200591592 /* UNRName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRName.m; sourceTree = "<group>"; };
-		493AE5CB1388324200591592 /* UNRDataPluginLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRDataPluginLoader.h; sourceTree = "<group>"; };
-		493AE5CC1388324200591592 /* UNRDataPluginLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRDataPluginLoader.m; sourceTree = "<group>"; };
-		493AE5CD1388324200591592 /* UNRObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRObject.h; sourceTree = "<group>"; };
-		493AE5CE1388324200591592 /* UNRObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRObject.m; sourceTree = "<group>"; };
-		493AE5CF1388324200591592 /* UNRProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRProperty.h; sourceTree = "<group>"; };
-		493AE5D01388324200591592 /* UNRProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRProperty.m; sourceTree = "<group>"; };
-		493AE5D11388324200591592 /* UNRUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRUtilities.h; sourceTree = "<group>"; };
-		493AE5D21388324200591592 /* UNRUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRUtilities.m; sourceTree = "<group>"; };
+		49836DEC13884817003193CD /* Default Plugins */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Default Plugins"; sourceTree = "<group>"; };
+		49836E061388BB7F003193CD /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		49836E071388BB7F003193CD /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		49836E081388BB7F003193CD /* UNRBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRBase.h; sourceTree = "<group>"; };
+		49836E091388BB7F003193CD /* UNRBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRBase.m; sourceTree = "<group>"; };
+		49836E0A1388BB7F003193CD /* Unreal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unreal.h; sourceTree = "<group>"; };
+		49836E0B1388BB7F003193CD /* UNRExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRExport.h; sourceTree = "<group>"; };
+		49836E0C1388BB7F003193CD /* UNRExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRExport.m; sourceTree = "<group>"; };
+		49836E0D1388BB7F003193CD /* UNRFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRFile.h; sourceTree = "<group>"; };
+		49836E0E1388BB7F003193CD /* UNRFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRFile.m; sourceTree = "<group>"; };
+		49836E0F1388BB7F003193CD /* UNRGeneration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRGeneration.h; sourceTree = "<group>"; };
+		49836E101388BB7F003193CD /* UNRGeneration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRGeneration.m; sourceTree = "<group>"; };
+		49836E111388BB7F003193CD /* UNRGuid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRGuid.h; sourceTree = "<group>"; };
+		49836E121388BB7F003193CD /* UNRGuid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRGuid.m; sourceTree = "<group>"; };
+		49836E131388BB7F003193CD /* UNRImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRImport.h; sourceTree = "<group>"; };
+		49836E141388BB7F003193CD /* UNRImport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRImport.m; sourceTree = "<group>"; };
+		49836E151388BB7F003193CD /* UNRName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRName.h; sourceTree = "<group>"; };
+		49836E161388BB7F003193CD /* UNRName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRName.m; sourceTree = "<group>"; };
+		49836E181388BB7F003193CD /* UNRDataPluginLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRDataPluginLoader.h; sourceTree = "<group>"; };
+		49836E191388BB7F003193CD /* UNRDataPluginLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRDataPluginLoader.m; sourceTree = "<group>"; };
+		49836E1A1388BB7F003193CD /* UNRDataPluginReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRDataPluginReader.h; sourceTree = "<group>"; };
+		49836E1B1388BB7F003193CD /* UNRDataPluginReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRDataPluginReader.m; sourceTree = "<group>"; };
+		49836E1C1388BB7F003193CD /* UNRObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRObject.h; sourceTree = "<group>"; };
+		49836E1D1388BB7F003193CD /* UNRObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRObject.m; sourceTree = "<group>"; };
+		49836E1E1388BB7F003193CD /* UNRProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRProperty.h; sourceTree = "<group>"; };
+		49836E1F1388BB7F003193CD /* UNRProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRProperty.m; sourceTree = "<group>"; };
+		49836E201388BB7F003193CD /* UNRUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRUtilities.h; sourceTree = "<group>"; };
+		49836E211388BB7F003193CD /* UNRUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRUtilities.m; sourceTree = "<group>"; };
 		498E6100137A30CD00EA243B /* UNRMapViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UNRMapViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		498E6104137A30CD00EA243B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		498E6106137A30CD00EA243B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -148,42 +153,44 @@
 			path = "Texture Loader";
 			sourceTree = "<group>";
 		};
-		493AE5B81388324200591592 /* UnrealPackage */ = {
+		49836E051388BB7F003193CD /* UnrealPackage */ = {
 			isa = PBXGroup;
 			children = (
-				493AE5B91388324200591592 /* DataManager.h */,
-				493AE5BA1388324200591592 /* DataManager.m */,
-				493AE5BB1388324200591592 /* UNRBase.h */,
-				493AE5BC1388324200591592 /* UNRBase.m */,
-				493AE5BD1388324200591592 /* Unreal.h */,
-				493AE5BE1388324200591592 /* UNRExport.h */,
-				493AE5BF1388324200591592 /* UNRExport.m */,
-				493AE5C01388324200591592 /* UNRFile.h */,
-				493AE5C11388324200591592 /* UNRFile.m */,
-				493AE5C21388324200591592 /* UNRGeneration.h */,
-				493AE5C31388324200591592 /* UNRGeneration.m */,
-				493AE5C41388324200591592 /* UNRGuid.h */,
-				493AE5C51388324200591592 /* UNRGuid.m */,
-				493AE5C61388324200591592 /* UNRImport.h */,
-				493AE5C71388324200591592 /* UNRImport.m */,
-				493AE5D11388324200591592 /* UNRUtilities.h */,
-				493AE5D21388324200591592 /* UNRUtilities.m */,
-				493AE5C81388324200591592 /* UNRName.h */,
-				493AE5C91388324200591592 /* UNRName.m */,
-				493AE5CA1388324200591592 /* UNRPluginObject */,
+				49836E061388BB7F003193CD /* DataManager.h */,
+				49836E071388BB7F003193CD /* DataManager.m */,
+				49836E081388BB7F003193CD /* UNRBase.h */,
+				49836E091388BB7F003193CD /* UNRBase.m */,
+				49836E0A1388BB7F003193CD /* Unreal.h */,
+				49836E0B1388BB7F003193CD /* UNRExport.h */,
+				49836E0C1388BB7F003193CD /* UNRExport.m */,
+				49836E0D1388BB7F003193CD /* UNRFile.h */,
+				49836E0E1388BB7F003193CD /* UNRFile.m */,
+				49836E0F1388BB7F003193CD /* UNRGeneration.h */,
+				49836E101388BB7F003193CD /* UNRGeneration.m */,
+				49836E111388BB7F003193CD /* UNRGuid.h */,
+				49836E121388BB7F003193CD /* UNRGuid.m */,
+				49836E131388BB7F003193CD /* UNRImport.h */,
+				49836E141388BB7F003193CD /* UNRImport.m */,
+				49836E151388BB7F003193CD /* UNRName.h */,
+				49836E161388BB7F003193CD /* UNRName.m */,
+				49836E171388BB7F003193CD /* UNRPluginObject */,
+				49836E201388BB7F003193CD /* UNRUtilities.h */,
+				49836E211388BB7F003193CD /* UNRUtilities.m */,
 			);
 			path = UnrealPackage;
 			sourceTree = "<group>";
 		};
-		493AE5CA1388324200591592 /* UNRPluginObject */ = {
+		49836E171388BB7F003193CD /* UNRPluginObject */ = {
 			isa = PBXGroup;
 			children = (
-				493AE5CB1388324200591592 /* UNRDataPluginLoader.h */,
-				493AE5CC1388324200591592 /* UNRDataPluginLoader.m */,
-				493AE5CD1388324200591592 /* UNRObject.h */,
-				493AE5CE1388324200591592 /* UNRObject.m */,
-				493AE5CF1388324200591592 /* UNRProperty.h */,
-				493AE5D01388324200591592 /* UNRProperty.m */,
+				49836E181388BB7F003193CD /* UNRDataPluginLoader.h */,
+				49836E191388BB7F003193CD /* UNRDataPluginLoader.m */,
+				49836E1A1388BB7F003193CD /* UNRDataPluginReader.h */,
+				49836E1B1388BB7F003193CD /* UNRDataPluginReader.m */,
+				49836E1C1388BB7F003193CD /* UNRObject.h */,
+				49836E1D1388BB7F003193CD /* UNRObject.m */,
+				49836E1E1388BB7F003193CD /* UNRProperty.h */,
+				49836E1F1388BB7F003193CD /* UNRProperty.m */,
 			);
 			path = UNRPluginObject;
 			sourceTree = "<group>";
@@ -222,8 +229,8 @@
 		498E610E137A30CD00EA243B /* UNRMapViewer */ = {
 			isa = PBXGroup;
 			children = (
+				49836E051388BB7F003193CD /* UnrealPackage */,
 				493AE5B51388324200591592 /* Texture Loader */,
-				493AE5B81388324200591592 /* UnrealPackage */,
 				4993CC241384D1AB00B6CBD2 /* Menu */,
 				498E6117137A30CD00EA243B /* UNRMapViewerAppDelegate.h */,
 				498E6118137A30CD00EA243B /* UNRMapViewerAppDelegate.m */,
@@ -243,6 +250,7 @@
 		498E610F137A30CD00EA243B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				49836DEC13884817003193CD /* Default Plugins */,
 				4993CC2C1385F20200B6CBD2 /* Maps */,
 				498E6110137A30CD00EA243B /* UNRMapViewer-Info.plist */,
 				498E6111137A30CD00EA243B /* InfoPlist.strings */,
@@ -354,6 +362,7 @@
 				498E6120137A30CD00EA243B /* Shader.vsh in Resources */,
 				498E6129137A30CD00EA243B /* UNRMapViewerViewController.xib in Resources */,
 				4993CC2D1385F20200B6CBD2 /* Maps in Resources */,
+				49836DED13884817003193CD /* Default Plugins in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,18 +404,19 @@
 				498E6126137A30CD00EA243B /* UNRMapViewerViewController.m in Sources */,
 				4993CC281384D1D900B6CBD2 /* UNRMapSelectionViewController.m in Sources */,
 				493AE5D31388324200591592 /* UNRTextureExporter.m in Sources */,
-				493AE5D41388324200591592 /* DataManager.m in Sources */,
-				493AE5D51388324200591592 /* UNRBase.m in Sources */,
-				493AE5D61388324200591592 /* UNRExport.m in Sources */,
-				493AE5D71388324200591592 /* UNRFile.m in Sources */,
-				493AE5D81388324200591592 /* UNRGeneration.m in Sources */,
-				493AE5D91388324200591592 /* UNRGuid.m in Sources */,
-				493AE5DA1388324200591592 /* UNRImport.m in Sources */,
-				493AE5DB1388324200591592 /* UNRName.m in Sources */,
-				493AE5DC1388324200591592 /* UNRDataPluginLoader.m in Sources */,
-				493AE5DD1388324200591592 /* UNRObject.m in Sources */,
-				493AE5DE1388324200591592 /* UNRProperty.m in Sources */,
-				493AE5DF1388324200591592 /* UNRUtilities.m in Sources */,
+				49836E221388BB7F003193CD /* DataManager.m in Sources */,
+				49836E231388BB7F003193CD /* UNRBase.m in Sources */,
+				49836E241388BB7F003193CD /* UNRExport.m in Sources */,
+				49836E251388BB7F003193CD /* UNRFile.m in Sources */,
+				49836E261388BB7F003193CD /* UNRGeneration.m in Sources */,
+				49836E271388BB7F003193CD /* UNRGuid.m in Sources */,
+				49836E281388BB7F003193CD /* UNRImport.m in Sources */,
+				49836E291388BB7F003193CD /* UNRName.m in Sources */,
+				49836E2A1388BB7F003193CD /* UNRDataPluginLoader.m in Sources */,
+				49836E2B1388BB7F003193CD /* UNRDataPluginReader.m in Sources */,
+				49836E2C1388BB7F003193CD /* UNRObject.m in Sources */,
+				49836E2D1388BB7F003193CD /* UNRProperty.m in Sources */,
+				49836E2E1388BB7F003193CD /* UNRUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

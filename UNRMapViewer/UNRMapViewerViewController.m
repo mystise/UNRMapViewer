@@ -11,6 +11,8 @@
 #import "UNRMapViewerViewController.h"
 #import "EAGLView.h"
 
+#import "Unreal.h"
+
 // Uniform index.
 enum{
 	UNIFORM_TRANSLATE,
@@ -36,13 +38,14 @@ enum{
 
 @implementation UNRMapViewerViewController
 
-@synthesize animating, context, displayLink;
+@synthesize animating, context, displayLink, file = file_, level = level_;
 
 - (void)awakeFromNib{
 	EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
 	
 	if(!aContext){
-		aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+		NSLog(@"Unsupported platform!!!");
+		return;
 	}
 	
 	if(!aContext)
@@ -56,8 +59,7 @@ enum{
 	[(EAGLView *)self.view setContext:context];
 	[(EAGLView *)self.view setFramebuffer];
 	
-	if([context API] == kEAGLRenderingAPIOpenGLES2)
-		[self loadShaders];
+	[self loadShaders];
 	
 	animating = FALSE;
 	animationFrameInterval = 1;
@@ -76,18 +78,23 @@ enum{
 	
 	[context release];
 	
+	[file_ release];
+	file_ = nil;
+	[level_ release];
+	level_ = nil;
+	
 	[super dealloc];
 }
 
 - (void)didReceiveMemoryWarning{
-	// Releases the view ifit doesn't have a superview.
+	// Releases the view if it doesn't have a superview.
 	[super didReceiveMemoryWarning];
 	
 	// Release any cached data, images, etc. that aren't in use.
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-	[self startAnimation];
+	//[self startAnimation];
 	
 	[super viewWillAppear:animated];
 }
@@ -343,7 +350,25 @@ enum{
 }
 
 - (void)loadMap:(NSString *)mapPath{
-	
+	self.file = [[UNRFile alloc] initWithFileData:[NSData dataWithContentsOfFile:mapPath] pluginsDirectory:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Default Plugins"]];
+	for(UNRExport *obj in self.file.objects){
+		if([obj.classObj.name.string isEqualToString:@"Level"]){
+			[obj loadPlugin:self.file];
+			self.level = [[obj.objectData valueForKey:@"bspModel"] objectData];
+		}
+	}
+	if(self.level){
+		NSMutableArray *points = [self.level valueForKey:@"points"];
+		for(NSMutableDictionary *point in points){
+			printf("v %f %f %f\n", [[point valueForKey:@"x"] floatValue], [[point valueForKey:@"y"] floatValue], [[point valueForKey:@"z"] floatValue]);
+		}
+		//export to obj:
+		//print the point list
+		//for each face:
+		//get each vertex index, use the vertex list to redirect to a point
+		//print each point index
+		//end for
+	}
 }
 
 @end

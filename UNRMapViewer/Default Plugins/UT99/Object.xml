@@ -1,0 +1,17 @@
+<plugin class="object" group="official" game="UT99">
+	<info>
+		<if objectValue="obj.flags" comparator="and" compareValue="OF_HasStack">
+			<compactIndex name="StateFrame.Node"/>
+			<compactIndex name="StateFrame.StateNode"/>
+			<long name="StateFrame.ProbeMask"/>
+			<int name="StateFrame.LatentAction"/>
+			<if objectValue="StateFrame.Node" comparator="!=" compareValue="0">
+				<compactIndex name="Offset"/>
+			</if>
+		</if>
+		<properties name="props"/>
+	</info>
+	<controls>
+		<listControl label="Properties:" input="props.description" size="medium"/>
+	</controls>
+</plugin>

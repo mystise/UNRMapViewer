@@ -1,0 +1,18 @@
+<plugin class="palette" group="official" game="UT99" super="object">
+	<info>
+		<compactIndex name="paletteSize"/>
+		<array count="paletteSize" name="palette">
+			<byte name="red"/>
+			<byte name="green"/>
+			<byte name="blue"/>
+			<byte name="alpha"/>
+		</array>
+	</info>
+	<controls>
+		<intPopUpControl label="Color Index:" from="0" to="paletteSize" bind="palette"/>
+		<numberControl label="Red:" input="palette.red" editable="no"/>
+		<numberControl label="Green:" input="palette.green" editable="no"/>
+		<numberControl label="Blue:" input="palette.blue" editable="no"/>
+		<numberControl label="Alpha:" input="palette.alpha" editable="no"/>
+	</controls>
+</plugin>

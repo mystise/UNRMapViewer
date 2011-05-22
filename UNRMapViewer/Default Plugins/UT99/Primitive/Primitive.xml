@@ -1,0 +1,12 @@
+<plugin class="primitive" group="official" game="UT99" super="object">
+	<info>
+		<box name="boundingBox"/>
+		<sphere name="boundingSphere"/>
+	</info>
+	<controls>
+		<numberControl label="Sphere.X:" input="boundingSphere.x" editable="no"/>
+		<numberControl label="Sphere.Y:" input="boundingSphere.y" editable="no"/>
+		<numberControl label="Sphere.Z:" input="boundingSphere.z" editable="no"/>
+		<numberControl label="Sphere.W:" input="boundingSphere.w" editable="no"/>
+	</controls>
+</plugin>

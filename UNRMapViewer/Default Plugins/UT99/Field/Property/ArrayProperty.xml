@@ -1,0 +1,8 @@
+<plugin class="arrayproperty" group="official" game="UT99" super="property">
+	<info>
+		<objectReference name="inner"/>
+	</info>
+	<controls>
+		<stringControl label="Inner Element:" inpur="inner.name.string" editable="no"/>
+	</controls>
+</plugin>

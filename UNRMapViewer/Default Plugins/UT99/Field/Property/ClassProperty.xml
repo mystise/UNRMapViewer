@@ -1,0 +1,8 @@
+<plugin class="classproperty" group="official" game="UT99" super="objectproperty">
+	<info>
+		<objectReference name="class"/>
+	</info>
+	<controls>
+		<stringControl label="Class:" input="class.name.string" editable="no"/>
+	</controls>
+</plugin>

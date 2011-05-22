@@ -126,7 +126,7 @@
 	//push the UNRMapView view controller, and give it the map name
 	[self.mapViewController loadMap:[self.maps objectAtIndex:indexPath.row]];
 	[self presentModalViewController:self.mapViewController animated:YES];
-	[self.mapViewController startAnimation];
+	//[self.mapViewController startAnimation];
 }
 
 @end

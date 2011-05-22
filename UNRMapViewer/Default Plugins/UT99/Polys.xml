@@ -1,0 +1,41 @@
+<plugin class="polys" group="official" game="UT99" super="object">
+	<info>
+		<int name="faceCount"/>
+		<int name="faceMax"/>
+		<array name="faces" count="faceCount">
+			<compactIndex name="vertexCount"/>
+			<vector name="faceOrigin"/>
+			<vector name="faceNormal"/>
+			<vector name="faceTexUAxis"/>
+			<vector name="faceTexVAxis"/>
+			<array name="verticies" count="vertexCount">
+				<vector name="vertex"/>
+			</array>
+			<int name="polyFlags"/>
+			<objectReference name="actor"/>
+			<objectReference name="texture"/>
+			<compactIndex name="itemName"/>
+			<compactIndex name="iLink"/>
+			<compactIndex name="iBrushPoly"/>
+			<short name="panU"/>
+			<short name="panV"/>
+		</array>
+	</info>
+	<controls>
+		<intPopUpControl label="Face:" bind="faces" from="0" to="faceCount"/>
+		
+		<numberControl label="Face Origin.x:" input="faces.faceOrigin.x" editable="no"/>
+		<numberControl label="Face Origin.y:" input="faces.faceOrigin.y" editable="no"/>
+		<numberControl label="Face Origin.z:" input="faces.faceOrigin.z" editable="no"/>
+		<numberControl label="Poly Flags:" input="faces.polyFlags" editable="no"/>
+		
+		<stringControl label="Texture:" input="faces.texture.name.string" editable="no"/>
+		<stringControl label="Actor:" input="faces.actor.name.string" editable="no"/>
+		
+		<numberControl label="Vertex Count:" input="faces.vertexCount" editable="no"/>
+		<intPopUpControl label="Vertex:" bind="faces.verticies" from="0" to="faces.vertexCount"/>
+		<numberControl label="Vertex.x:" input="faces.verticies.vertex.x" editable="no"/>
+		<numberControl label="Vertex.y:" input="faces.verticies.vertex.y" editable="no"/>
+		<numberControl label="Vertex.z:" input="faces.verticies.vertex.z" editable="no"/>
+	</controls>
+</plugin>

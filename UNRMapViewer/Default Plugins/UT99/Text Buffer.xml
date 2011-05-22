@@ -1,0 +1,12 @@
+<plugin class="textbuffer" group="official" game="UT99" super="object">
+	<info>
+		<int name="pos"/>
+		<int name="top"/>
+		<compactIndex name="length"/>
+		<string length="length" name="text"/>
+		<byte name="null"/>
+	</info>
+	<controls>
+		<textControl label="Text:" input="text" size="large"/>
+	</controls>
+</plugin>

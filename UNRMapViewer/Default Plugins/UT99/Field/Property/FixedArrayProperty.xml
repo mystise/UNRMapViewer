@@ -1,0 +1,8 @@
+<plugin class="fixedarrayproperty" group="official" game="UT99" super="arrayproperty">
+	<info>
+		<compactIndex name="count"/>
+	</info>
+	<controls>
+		<numberControl label="Array Count:" input="count" editable="no"/>
+	</controls>
+</plugin>

@@ -14,7 +14,8 @@
 @synthesize name = name_, structName = structName_, special = special_, type = type_, index = index_, data = data_, file = file_;
 
 - (id)initWithManager:(DataManager *)manager file:(UNRFile *)newFile{
-	if(self = [super init]){
+	self = [super init];
+	if(self){
 		self.file = newFile;
 		int backup = manager.curPos;
 		int nameRef = [UNRFile readCompactIndex:manager];

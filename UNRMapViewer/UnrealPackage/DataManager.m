@@ -15,7 +15,7 @@
 
 - (id)initWithFileData:(NSData *)data{
 	self = [super init];
-	if(self != nil){
+	if(self){
 		fileData = [data retain];
 		self.curPos = 0;
 	}

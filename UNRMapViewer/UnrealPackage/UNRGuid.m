@@ -14,7 +14,8 @@
 @synthesize guid=guid_;
 
 - (id)init{
-	if(self = [super init]){
+	self = [super init];
+	if(self){
 		self.guid = malloc(sizeof(Byte)*16);
 	}
 	return self;

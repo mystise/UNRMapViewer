@@ -16,7 +16,8 @@
 #pragma mark Init Methods
 
 - (id)initWithFile:(UNRFile *)newFile object:(UNRExport *)newObj{
-	if(self = [super init]){
+	self = [super init];
+	if(self){
 		self.currentData = [NSMutableArray arrayWithObject:[NSMutableDictionary dictionary]];
 		self.currentArray = [NSMutableArray array];
 		self.currentCommands = [NSMutableArray array];

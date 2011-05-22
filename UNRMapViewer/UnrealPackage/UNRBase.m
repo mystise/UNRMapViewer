@@ -17,7 +17,7 @@
 
 - (id)init{
 	self = [super init];
-	if(self != nil){
+	if(self){
 		self.subObjects = [NSMutableArray array];
 	}
 	return self;

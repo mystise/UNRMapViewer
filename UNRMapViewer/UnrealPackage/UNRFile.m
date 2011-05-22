@@ -20,7 +20,8 @@
 @synthesize objects = objects_, names = names_, references = references_, version = version_, licensee = licensee_, flags = flags_, generations = generations_, pluginLoader = pluginLoader_;
 
 - (id)init{
-	if(self = [super init]){
+	self = [super init];
+	if(self){
 		self.objects = [NSMutableArray array];
 		self.names = [NSMutableArray array];
 		self.references = [NSMutableArray array];
@@ -33,7 +34,8 @@
 }
 
 - (id)initWithFileData:(NSData *)fileData pluginsDirectory:(NSString *)path{
-	if(self = [super init]){
+	self = [super init];
+	if(self){
 		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 		id loader = [[UNRDataPluginLoader alloc] initWithDirectory:path];
 		self.pluginLoader = loader;
@@ -135,9 +137,9 @@
 - (id)resolveObjectReference:(int)ref{
 	if(ref > 0){
 		UNRExport *retVal = [self.objects objectAtIndex:ref-1];
-		//if(retVal.objectData == nil){
-		//	[retVal loadPlugin:self];
-		//}
+		if(retVal.objectData == nil){
+			[retVal loadPlugin:self];
+		}
 		return retVal;
 	}else if(ref < 0){
 		return [self.references objectAtIndex:-ref-1];

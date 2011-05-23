@@ -11,8 +11,6 @@
 #import "UNRMapViewerViewController.h"
 #import "EAGLView.h"
 
-#import "Unreal.h"
-
 // Uniform index.
 enum{
 	UNIFORM_TRANSLATE,
@@ -359,8 +357,68 @@ enum{
 	}
 	if(self.level){
 		NSMutableArray *points = [self.level valueForKey:@"points"];
+		NSMutableArray *vectors = [self.level valueForKey:@"vectors"];
+		NSMutableArray *nodes = [self.level valueForKey:@"nodes"];
+		NSMutableArray *surfs = [self.level valueForKey:@"surfs"];
+		NSMutableArray *verts = [self.level valueForKey:@"verts"];
+		
 		for(NSMutableDictionary *point in points){
-			printf("v %f %f %f\n", [[point valueForKey:@"x"] floatValue], [[point valueForKey:@"y"] floatValue], [[point valueForKey:@"z"] floatValue]);
+			printf("v %f %f %f\n", [[point valueForKeyPath:@"point.x"] floatValue], [[point valueForKeyPath:@"point.y"] floatValue], [[point valueForKeyPath:@"point.z"] floatValue]);
+		}
+		int currentCoord = 0;
+		for(NSMutableDictionary *node in nodes){
+			NSMutableDictionary *surf = [surfs objectAtIndex:[[node valueForKey:@"iSurf"] intValue]];
+			NSMutableDictionary *coordU = [vectors objectAtIndex:[[surf valueForKey:@"vTextureU"] intValue]];
+			NSMutableDictionary *coordV = [vectors objectAtIndex:[[surf valueForKey:@"vTextureV"] intValue]];
+			int panU = [[surf valueForKey:@"panU"] intValue];
+			int panV = [[surf valueForKey:@"panV"] intValue];
+			int pBase = [[surf valueForKey:@"pBase"] intValue];
+			int iVertPool = [[node valueForKey:@"iVertPool"] intValue];
+			int vertCount = [[node valueForKey:@"vertCount"] intValue];
+			
+			//triangle fans
+			if(vertCount != 0){
+				//for each vertex, find its displacement from pBase, then dot-product with U and V to get the coords
+				//add panU and panV to get the final tex Coord
+				int ind1, ind2, ind3;
+				ind1 = [[[verts objectAtIndex:0+iVertPool] valueForKey:@"pVertex"] intValue]+1;
+				ind2 = [[[verts objectAtIndex:1+iVertPool] valueForKey:@"pVertex"] intValue]+1;
+				ind3 = [[[verts objectAtIndex:2+iVertPool] valueForKey:@"pVertex"] intValue]+1;
+				
+				NSMutableDictionary *vert1 = [points objectAtIndex:ind1];
+				NSMutableDictionary *vert2 = [points objectAtIndex:ind2];
+				NSMutableDictionary *vert3 = [points objectAtIndex:ind3];
+				
+				printf("f %i/%i %i/%i %i/%i\n", ind1, currentCoord++, ind2, currentCoord++, ind3, currentCoord++);
+				for(int i = 3; i < vertCount; i++){
+					ind2 = ind3;
+					ind3 = [[[verts objectAtIndex:i+iVertPool] valueForKey:@"pVertex"] intValue]+1;
+					printf("f %i/%i %i/%i %i/%i\n", ind1, currentCoord++, ind2, currentCoord++, ind3, currentCoord++);
+				}
+			}
+			/*//triangle strip
+			 if(vertCount != 0){
+			 int ind1, ind2, ind3;
+			 ind1 = [[[verts objectAtIndex:0+iVertPool] valueForKey:@"pVertex"] intValue]+1;
+			 ind2 = [[[verts objectAtIndex:1+iVertPool] valueForKey:@"pVertex"] intValue]+1;
+			 ind3 = [[[verts objectAtIndex:2+iVertPool] valueForKey:@"pVertex"] intValue]+1;
+			 printf("f %i %i %i\n", ind1, ind2, ind3);
+			 for(int i = 3; i < vertCount; i++){
+			 ind1 = ind2;
+			 ind2 = ind3;
+			 ind3 = [[[verts objectAtIndex:i+iVertPool] valueForKey:@"pVertex"] intValue]+1;
+			 printf("f %i %i %i\n", ind1, ind2, ind3);
+			 }
+			 }*/
+			/*//n-gons
+			 if(vertCount != 0){
+			 printf("f");
+			 for(int i = iVertPool; i < iVertPool+vertCount; i++){
+			 int pointIndex = [[[verts objectAtIndex:i] valueForKey:@"pVertex"] intValue];
+			 printf(" %i", pointIndex+1);
+			 }
+			 printf("\n");
+			 }*/
 		}
 		//export to obj:
 		//print the point list

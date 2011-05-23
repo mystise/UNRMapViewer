@@ -22,6 +22,7 @@
 		49836E5E1388BD64003193CD /* UNRObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E4F1388BD64003193CD /* UNRObject.m */; };
 		49836E5F1388BD64003193CD /* UNRProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E511388BD64003193CD /* UNRProperty.m */; };
 		49836E601388BD64003193CD /* UNRUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E531388BD64003193CD /* UNRUtilities.m */; };
+		49836E631389EA53003193CD /* Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 49836E611389EA53003193CD /* Utilities.c */; };
 		498E6105137A30CD00EA243B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E6104137A30CD00EA243B /* UIKit.framework */; };
 		498E6107137A30CD00EA243B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E6106137A30CD00EA243B /* Foundation.framework */; };
 		498E6109137A30CD00EA243B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498E6108137A30CD00EA243B /* CoreGraphics.framework */; };
@@ -87,6 +88,8 @@
 		49836E511388BD64003193CD /* UNRProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRProperty.m; sourceTree = "<group>"; };
 		49836E521388BD64003193CD /* UNRUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRUtilities.h; sourceTree = "<group>"; };
 		49836E531388BD64003193CD /* UNRUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRUtilities.m; sourceTree = "<group>"; };
+		49836E611389EA53003193CD /* Utilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Utilities.c; sourceTree = "<group>"; };
+		49836E621389EA53003193CD /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		498E6100137A30CD00EA243B /* UNRMapViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UNRMapViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		498E6104137A30CD00EA243B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		498E6106137A30CD00EA243B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -156,11 +159,11 @@
 		49836E371388BD64003193CD /* UnrealPackage */ = {
 			isa = PBXGroup;
 			children = (
+				49836E3C1388BD64003193CD /* Unreal.h */,
 				49836E381388BD64003193CD /* DataManager.h */,
 				49836E391388BD64003193CD /* DataManager.m */,
 				49836E3A1388BD64003193CD /* UNRBase.h */,
 				49836E3B1388BD64003193CD /* UNRBase.m */,
-				49836E3C1388BD64003193CD /* Unreal.h */,
 				49836E3D1388BD64003193CD /* UNRExport.h */,
 				49836E3E1388BD64003193CD /* UNRExport.m */,
 				49836E3F1388BD64003193CD /* UNRFile.h */,
@@ -173,9 +176,9 @@
 				49836E461388BD64003193CD /* UNRImport.m */,
 				49836E471388BD64003193CD /* UNRName.h */,
 				49836E481388BD64003193CD /* UNRName.m */,
-				49836E491388BD64003193CD /* UNRPluginObject */,
 				49836E521388BD64003193CD /* UNRUtilities.h */,
 				49836E531388BD64003193CD /* UNRUtilities.m */,
+				49836E491388BD64003193CD /* UNRPluginObject */,
 			);
 			path = UnrealPackage;
 			sourceTree = "<group>";
@@ -237,6 +240,8 @@
 				498E611A137A30CD00EA243B /* MainWindow.xib */,
 				498E611D137A30CD00EA243B /* Shader.fsh */,
 				498E611F137A30CD00EA243B /* Shader.vsh */,
+				49836E611389EA53003193CD /* Utilities.c */,
+				49836E621389EA53003193CD /* Utilities.h */,
 				498E6121137A30CD00EA243B /* EAGLView.h */,
 				498E6122137A30CD00EA243B /* EAGLView.m */,
 				498E6124137A30CD00EA243B /* UNRMapViewerViewController.h */,
@@ -417,6 +422,7 @@
 				49836E5E1388BD64003193CD /* UNRObject.m in Sources */,
 				49836E5F1388BD64003193CD /* UNRProperty.m in Sources */,
 				49836E601388BD64003193CD /* UNRUtilities.m in Sources */,
+				49836E631389EA53003193CD /* Utilities.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

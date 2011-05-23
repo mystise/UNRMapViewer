@@ -15,7 +15,7 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-@class UNRFile;
+#import "Unreal.h"
 
 @interface UNRMapViewerViewController : UIViewController{
 @private

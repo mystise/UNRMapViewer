@@ -363,16 +363,16 @@ enum{
 		NSMutableArray *verts = [self.level valueForKey:@"verts"];
 		
 		for(NSMutableDictionary *point in points){
-			printf("v %f %f %f\n", [[point valueForKeyPath:@"point.x"] floatValue], [[point valueForKeyPath:@"point.y"] floatValue], [[point valueForKeyPath:@"point.z"] floatValue]);
+			printf("v %f %f %f\n", [[point valueForKeyPath:@"point.x"] floatValue]/256.0f, [[point valueForKeyPath:@"point.y"] floatValue]/256.0f, [[point valueForKeyPath:@"point.z"] floatValue]/256.0f);
 		}
-		int currentCoord = 0;
+		int currentCoord = 1;
 		for(NSMutableDictionary *node in nodes){
 			NSMutableDictionary *surf = [surfs objectAtIndex:[[node valueForKey:@"iSurf"] intValue]];
-			NSMutableDictionary *coordU = [vectors objectAtIndex:[[surf valueForKey:@"vTextureU"] intValue]];
-			NSMutableDictionary *coordV = [vectors objectAtIndex:[[surf valueForKey:@"vTextureV"] intValue]];
+			vector coordU = [[vectors objectAtIndex:[[surf valueForKey:@"vTextureU"] intValue]] valueForKey:@"vector"];
+			vector coordV = [[vectors objectAtIndex:[[surf valueForKey:@"vTextureV"] intValue]] valueForKey:@"vector"];
 			int panU = [[surf valueForKey:@"panU"] intValue];
 			int panV = [[surf valueForKey:@"panV"] intValue];
-			int pBase = [[surf valueForKey:@"pBase"] intValue];
+			vector pBase = [[points objectAtIndex:[[surf valueForKey:@"pBase"] intValue]] valueForKey:@"point"];
 			int iVertPool = [[node valueForKey:@"iVertPool"] intValue];
 			int vertCount = [[node valueForKey:@"vertCount"] intValue];
 			
@@ -385,15 +385,43 @@ enum{
 				ind2 = [[[verts objectAtIndex:1+iVertPool] valueForKey:@"pVertex"] intValue]+1;
 				ind3 = [[[verts objectAtIndex:2+iVertPool] valueForKey:@"pVertex"] intValue]+1;
 				
-				NSMutableDictionary *vert1 = [points objectAtIndex:ind1];
-				NSMutableDictionary *vert2 = [points objectAtIndex:ind2];
-				NSMutableDictionary *vert3 = [points objectAtIndex:ind3];
+				vector dv1 = [vecSub([[points objectAtIndex:ind1-1] valueForKey:@"point"], pBase) retain];
+				vector dv2 = vecSub([[points objectAtIndex:ind2-1] valueForKey:@"point"], pBase);
+				vector dv3 = vecSub([[points objectAtIndex:ind3-1] valueForKey:@"point"], pBase);
 				
-				printf("f %i/%i %i/%i %i/%i\n", ind1, currentCoord++, ind2, currentCoord++, ind3, currentCoord++);
+				float v1U = vecDot(dv1, coordU)+panU;
+				float v1V = vecDot(dv1, coordV)+panV;
+				printf("vt %f %f\n", v1U, v1V);
+				
+				float v2U = vecDot(dv2, coordU)+panU;
+				float v2V = vecDot(dv2, coordV)+panV;
+				printf("vt %f %f\n", v2U, v2V);
+				
+				float v3U = vecDot(dv3, coordU)+panU;
+				float v3V = vecDot(dv3, coordV)+panV;
+				printf("vt %f %f\n", v3U, v3V);
+				
+				printf("f %i/%i %i/%i %i/%i\n", ind1, currentCoord, ind2, currentCoord+1, ind3, currentCoord+2);
+				currentCoord += 3;
 				for(int i = 3; i < vertCount; i++){
 					ind2 = ind3;
 					ind3 = [[[verts objectAtIndex:i+iVertPool] valueForKey:@"pVertex"] intValue]+1;
-					printf("f %i/%i %i/%i %i/%i\n", ind1, currentCoord++, ind2, currentCoord++, ind3, currentCoord++);
+					
+					dv2 = vecSub([[points objectAtIndex:ind2-1] valueForKey:@"point"], pBase);
+					dv3 = vecSub([[points objectAtIndex:ind3-1] valueForKey:@"point"], pBase);
+					
+					printf("vt %f %f\n", v1U, v1V);
+					
+					v2U = vecDot(dv2, coordU)+panU;
+					v2V = vecDot(dv2, coordV)+panV;
+					printf("vt %f %f\n", v2U, v2V);
+					
+					v3U = vecDot(dv3, coordU)+panU;
+					v3V = vecDot(dv3, coordV)+panV;
+					printf("vt %f %f\n", v3U, v3V);
+					
+					printf("f %i/%i %i/%i %i/%i\n", ind1, currentCoord, ind2, currentCoord+1, ind3, currentCoord+2);
+					currentCoord += 3;
 				}
 			}
 			/*//triangle strip

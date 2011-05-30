@@ -30,7 +30,7 @@
 		
 		<compactIndex name="surfCount"/>
 		<array name="surfs" count="surfCount">
-			<compactIndex name="texture"/> <!-- Object reference -->
+			<objectReference name="texture"/>
 			<int name="polyFlags"/>
 			<compactIndex name="pBase"/>
 			<compactIndex name="vNormal"/>
@@ -40,7 +40,7 @@
 			<compactIndex name="iBrushPoly"/>
 			<short name="panU"/>
 			<short name="panV"/>
-			<compactIndex name="actor"/> <!-- Object reference -->
+			<objectReference name="actor"/>
 		</array>
 		
 		<compactIndex name="vertCount"/>
@@ -57,7 +57,7 @@
 		
 		<int name="zonePropertiesCount"/>
 		<array name="zoneProperties" count="zonePropertiesCount">
-			<compactIndex name="zoneActor"/> <!-- Object reference -->
+			<objectReference name="zoneActor"/>
 			<long name="connectivity"/>
 			<long name="visibility"/>
 		</array>
@@ -98,7 +98,7 @@
 		
 		<compactIndex name="lightCount"/>
 		<array name="lights" count="lightCount">
-			<compactIndex name="light"/> <!-- Object reference -->
+			<objectReference name="light"/>
 		</array>
 		
 		<int name="unk1"/>
@@ -123,6 +123,7 @@
 		<numberControl label="VertCount:" input="vertCount" editable="no"/>
 		<numberControl label="ZonePropCount:" input="zonePropertiesCount" editable="no"/>
 		<numberControl label="LightMapCount:" input="lightMapCount" editable="no"/>
+        <numberControl label="LightBitSize:" input="lightBitSize" editable="no"/>
 		<numberControl label="BoundCount:" input="boundCount" editable="no"/>
 		<numberControl label="LeafHullCount:" input="leafHullCount" editable="no"/>
 		<numberControl label="leafCount:" input="leafCount" editable="no"/>

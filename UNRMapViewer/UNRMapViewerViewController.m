@@ -349,6 +349,7 @@ enum{
 
 - (void)loadMap:(NSString *)mapPath{
 	self.file = [[UNRFile alloc] initWithFileData:[NSData dataWithContentsOfFile:mapPath] pluginsDirectory:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Default Plugins"]];
+	[self.file resolveImportReferences:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Maps/Depend"]];
 	for(UNRExport *obj in self.file.objects){
 		if([obj.classObj.name.string isEqualToString:@"Level"]){
 			[obj loadPlugin:self.file];
@@ -363,18 +364,40 @@ enum{
 		NSMutableArray *verts = [self.level valueForKey:@"verts"];
 		
 		for(NSMutableDictionary *point in points){
-			printf("v %f %f %f\n", [[point valueForKeyPath:@"point.x"] floatValue]/256.0f, [[point valueForKeyPath:@"point.y"] floatValue]/256.0f, [[point valueForKeyPath:@"point.z"] floatValue]/256.0f);
+			printf("v %f %f %f\n", [[point valueForKeyPath:@"point.x"] floatValue], [[point valueForKeyPath:@"point.y"] floatValue], [[point valueForKeyPath:@"point.z"] floatValue]);
 		}
 		int currentCoord = 1;
 		for(NSMutableDictionary *node in nodes){
 			NSMutableDictionary *surf = [surfs objectAtIndex:[[node valueForKey:@"iSurf"] intValue]];
 			vector coordU = [[vectors objectAtIndex:[[surf valueForKey:@"vTextureU"] intValue]] valueForKey:@"vector"];
+			float Uscale = vecMag(coordU);
 			vector coordV = [[vectors objectAtIndex:[[surf valueForKey:@"vTextureV"] intValue]] valueForKey:@"vector"];
+			float Vscale = vecMag(coordV);
 			int panU = [[surf valueForKey:@"panU"] intValue];
 			int panV = [[surf valueForKey:@"panV"] intValue];
 			vector pBase = [[points objectAtIndex:[[surf valueForKey:@"pBase"] intValue]] valueForKey:@"point"];
 			int iVertPool = [[node valueForKey:@"iVertPool"] intValue];
 			int vertCount = [[node valueForKey:@"vertCount"] intValue];
+			
+			id texture = [self.file resolveObjectReference:[[surf valueForKey:@"texture"] intValue]];
+			if([texture isKindOfClass:[UNRImport class]]){
+				UNRImport *import = texture;
+				texture = import.obj;
+			}
+			
+			UNRExport *export = texture;
+			texture = export.objectData;
+			
+			NSMutableDictionary *mipMap = [[texture valueForKey:@"mipMapLevels"] objectAtIndex:0];
+			
+			float texWidth = [[mipMap valueForKey:@"width"] floatValue];
+			float texHeight = [[mipMap valueForKey:@"height"] floatValue];
+			if(texWidth <= 0.0f){
+				texWidth = 1.0f;
+			}
+			if(texHeight <= 0.0f){
+				texHeight = 1.0f;
+			}
 			
 			//triangle fans
 			if(vertCount != 0){
@@ -389,17 +412,17 @@ enum{
 				vector dv2 = vecSub([[points objectAtIndex:ind2-1] valueForKey:@"point"], pBase);
 				vector dv3 = vecSub([[points objectAtIndex:ind3-1] valueForKey:@"point"], pBase);
 				
-				float v1U = vecDot(dv1, coordU)+panU;
-				float v1V = vecDot(dv1, coordV)+panV;
-				printf("vt %f %f\n", v1U, v1V);
+				float v1U = vecDot(dv1, coordU)-panU*Uscale;
+				float v1V = vecDot(dv1, coordV)-panV*Vscale;
+				printf("vt %f %f\n", v1U/texWidth, v1V/texHeight);
 				
-				float v2U = vecDot(dv2, coordU)+panU;
-				float v2V = vecDot(dv2, coordV)+panV;
-				printf("vt %f %f\n", v2U, v2V);
+				float v2U = vecDot(dv2, coordU)-panU*Uscale;
+				float v2V = vecDot(dv2, coordV)-panV*Vscale;
+				printf("vt %f %f\n", v2U/texWidth, v2V/texHeight);
 				
-				float v3U = vecDot(dv3, coordU)+panU;
-				float v3V = vecDot(dv3, coordV)+panV;
-				printf("vt %f %f\n", v3U, v3V);
+				float v3U = vecDot(dv3, coordU)-panU*Uscale;
+				float v3V = vecDot(dv3, coordV)-panV*Vscale;
+				printf("vt %f %f\n", v3U/texWidth, v3V/texHeight);
 				
 				printf("f %i/%i %i/%i %i/%i\n", ind1, currentCoord, ind2, currentCoord+1, ind3, currentCoord+2);
 				currentCoord += 3;
@@ -410,15 +433,15 @@ enum{
 					dv2 = vecSub([[points objectAtIndex:ind2-1] valueForKey:@"point"], pBase);
 					dv3 = vecSub([[points objectAtIndex:ind3-1] valueForKey:@"point"], pBase);
 					
-					printf("vt %f %f\n", v1U, v1V);
+					printf("vt %f %f\n", v1U/texWidth, v1V/texHeight);
 					
-					v2U = vecDot(dv2, coordU)+panU;
-					v2V = vecDot(dv2, coordV)+panV;
-					printf("vt %f %f\n", v2U, v2V);
+					v2U = vecDot(dv2, coordU)-panU*Uscale;
+					v2V = vecDot(dv2, coordV)-panV*Vscale;
+					printf("vt %f %f\n", v2U/texWidth, v2V/texHeight);
 					
-					v3U = vecDot(dv3, coordU)+panU;
-					v3V = vecDot(dv3, coordV)+panV;
-					printf("vt %f %f\n", v3U, v3V);
+					v3U = vecDot(dv3, coordU)-panU*Uscale;
+					v3V = vecDot(dv3, coordV)-panV*Vscale;
+					printf("vt %f %f\n", v3U/texWidth, v3V/texHeight);
 					
 					printf("f %i/%i %i/%i %i/%i\n", ind1, currentCoord, ind2, currentCoord+1, ind3, currentCoord+2);
 					currentCoord += 3;

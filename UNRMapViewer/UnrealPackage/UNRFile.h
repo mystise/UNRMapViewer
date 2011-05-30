@@ -28,6 +28,8 @@
 - (NSUInteger)objectCount;
 - (NSUInteger)referenceCount;
 
+- (void)resolveImportReferences:(NSString *)path;
+
 @property(nonatomic, copy) NSNumber *version, *licensee, *flags;
 @property(nonatomic, retain) NSMutableArray *objects, *names, *references;
 @property(nonatomic, retain) NSMutableArray *generations;

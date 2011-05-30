@@ -72,6 +72,7 @@
 	
 	object.objectData = [reader.obj.currentData objectAtIndex:0];
 	reader.obj = nil;
+	[reader release];
 	[pool drain];
 }
 

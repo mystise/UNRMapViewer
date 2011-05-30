@@ -9,11 +9,12 @@
 #import "UNRImport.h"
 
 #import "UNRFile.h"
+#import "UNRExport.h"
 #import "UNRName.h"
 
 @implementation UNRImport
 
-@synthesize classPackage = classPackage_, className = className_, classPackageRef = classPackageRef_, classNameRef = classNameRef_;
+@synthesize classPackage = classPackage_, className = className_, classPackageRef = classPackageRef_, classNameRef = classNameRef_, obj = obj_;
 
 + (id)importWithManager:(DataManager *)manager{
 	UNRImport *import = [[[self alloc] init] autorelease];
@@ -37,6 +38,8 @@
 }
 
 - (void)dealloc{
+	[obj_ release];
+	obj_ = nil;
 	[classPackage_ release];
 	classPackage_ = nil;
 	[className_ release];

@@ -124,8 +124,8 @@
 		}
 		
 		/*for(UNRExport *obj in self.objects){
-			[obj loadPlugin:self];
-		}*/
+		 [obj loadPlugin:self];
+		 }*/
 		
 		[manager release];
 		//self.pluginLoader = nil;
@@ -175,6 +175,58 @@
 		}
 	}
 	return (negative)?final*-1:final;
+}
+
+- (void)resolveImportReferences:(NSString *)path{
+	NSFileManager *resManager = [[NSFileManager alloc] init];
+	NSMutableDictionary *openFiles = [NSMutableDictionary dictionary];
+	for(UNRImport *import in self.references){
+		if([import.className.string isEqualToString:@"Package"] && import.package == nil){
+			NSDirectoryEnumerator *directEnum = [resManager enumeratorAtPath:path];
+			NSString *filePath;
+			while((filePath = [directEnum nextObject]) != nil){
+				NSString *fileName = [[filePath lastPathComponent] stringByDeletingPathExtension];
+				if([[fileName lowercaseString] isEqualToString:[import.name.string lowercaseString]]){
+					NSData *dat = [NSData dataWithContentsOfFile:[path stringByAppendingPathComponent:filePath]];
+					UNRFile *file = [[UNRFile alloc] initWithFileData:dat pluginsDirectory:nil];
+					file.pluginLoader = self.pluginLoader;
+					if(file != nil){
+						[openFiles setObject:file forKey:import.name.string];
+					}
+					[file release];
+				}
+			}
+		}
+	}
+	for(UNRImport *import in self.references){
+		if(![import.className.string isEqualToString:@"Package"]){
+			//load the object from the file
+			UNRBase *package = import.package;
+			while(package.package != nil){
+				package = package.package;
+			}
+			UNRFile *file = [openFiles objectForKey:package.name.string];
+			NSArray *objNames = [[file.objects valueForKeyPath:@"name.string"] retain];
+			NSArray *classNames = [[file.objects valueForKeyPath:@"classObj.name.string"] retain];
+			int index = 0;// = [objNames indexOfObject:import.name.string];
+			for(int i = 0; i < [objNames count]; i++){
+				NSString *name = [objNames objectAtIndex:i];
+				NSString *className = [classNames objectAtIndex:i];
+				if(name != (NSString *)[NSNull null] && className != (NSString *)[NSNull null]){
+					if([[name lowercaseString] isEqualToString:[import.name.string lowercaseString]] && [[className 	lowercaseString] isEqualToString:[import.className.string lowercaseString]]){
+						index = i;
+						break;
+					}
+				}
+			}
+			[objNames release];
+			[classNames release];
+			import.obj = [file.objects objectAtIndex:index];
+			[import.obj loadPlugin:file];
+		}
+	}
+	[openFiles release];
+	[resManager release];
 }
 
 /*- (NSData *)dataFromFile{

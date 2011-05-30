@@ -16,7 +16,7 @@
 	DataManager *manager = [[DataManager alloc] initWithFileData:[[[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:0] valueForKey:@"mipMap"]];
 	int width = [[[[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:0] valueForKey:@"width"] intValue];
 	int height = [[[[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:0] valueForKey:@"height"] intValue];
-	NSArray *palette;
+	NSArray *palette = nil;
 	
 	for(UNRProperty *prop in [obj.objectData valueForKey:@"props"]){
 		DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
@@ -47,6 +47,7 @@
 	}else{
 		printf("Un-paletted textures are currently unsupported.\n");
 	}
+	[manager release];
 	return cData;
 }
 

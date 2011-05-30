@@ -10,6 +10,7 @@
 #import "UNRBase.h"
 
 #import "DataManager.h"
+@class UNRExport;
 
 @interface UNRImport : UNRBase {
 	
@@ -19,5 +20,6 @@
 
 @property(nonatomic, retain) UNRName *classPackage, *className;
 @property(nonatomic, assign) int classPackageRef, classNameRef;
+@property(nonatomic, retain) UNRExport *obj;
 
 @end

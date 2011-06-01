@@ -11,63 +11,71 @@
 
 @implementation UNRTexture
 
-@synthesize tex = tex_, width = width_, height = height_;
+@synthesize width = width_, height = height_, glTex = glTex_;
 
-+ (id)textureWithObject:(UNRExport *)obj withFile:(UNRFile *)file{
-	UNRTexture *tex = [[[self alloc] init] autorelease];
++ (id)textureWithObject:(UNRExport *)obj{
+	UNRTexture *tex = [[self alloc] init];
 	if(tex){
-		int format = 0;
-		DataManager *manager = [[DataManager alloc] initWithFileData:[[[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:0] valueForKey:@"mipMap"]];
-		tex.width = [[[[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:0] valueForKey:@"width"] intValue];
-		tex.height = [[[[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:0] valueForKey:@"height"] intValue];
 		NSArray *palette = nil;
-		
+		int format = 0;
 		for(UNRProperty *prop in [obj.objectData valueForKey:@"props"]){
 			DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
 			if([[prop.name.string lowercaseString] isEqualToString:@"format"]){
 				format = [manager loadByte];
 			}else if([[prop.name.string lowercaseString] isEqualToString:@"palette"]){
-				UNRExport *obj = [file resolveObjectReference:[UNRFile readCompactIndex:manager]];
+				UNRExport *obj = (UNRExport *)prop.object;
 				palette = [obj.objectData valueForKey:@"palette"];
 			}
 			[manager release];
 		}
 		
-		tex.tex = calloc(tex.width*tex.height, sizeof(color));
-		//stored width first
+		GLuint glTex = 0;
+		glGenTextures(1, &glTex);
+		tex.glTex = glTex;
+		glBindTexture(GL_TEXTURE_2D, tex.glTex);
 		
-		if(format == 0){
-			//paletted
-			for(int i = 0; i < tex.width; i++){
-				for(int j = 0; j < tex.height; j++){
-					Byte index = [manager loadByte];
-					NSNumber *colorR = [[palette objectAtIndex:index] valueForKey:@"red"];
-					NSNumber *colorG = [[palette objectAtIndex:index] valueForKey:@"green"];
-					NSNumber *colorB = [[palette objectAtIndex:index] valueForKey:@"blue"];
-					NSNumber *colorA = [[palette objectAtIndex:index] valueForKey:@"alpha"];
-					tex.tex[j*tex.width + i] = (color){[colorR intValue], [colorG intValue], [colorB intValue], [colorA intValue]};
+		tex.width = [[[[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:0] valueForKey:@"width"] intValue];
+		tex.height = [[[[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:0] valueForKey:@"height"] intValue];
+		
+		for(int i = 0; i < [[obj.objectData valueForKey:@"mipMapCount"] intValue]; i++){
+			NSMutableDictionary *texLevel = [[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:i];
+			DataManager *manager = [[DataManager alloc] initWithFileData:[texLevel valueForKey:@"mipMap"]];
+			
+			int levelWidth = [[texLevel valueForKey:@"width"] intValue];
+			int levelHeight = [[texLevel valueForKey:@"height"] intValue];
+			
+			color *glTexData = calloc(levelWidth*levelHeight, sizeof(color));
+			//stored width first
+			
+			if(format == 0){
+				//paletted
+				for(int i = 0; i < levelWidth; i++){
+					for(int j = 0; j < levelHeight; j++){
+						Byte index = [manager loadByte];
+						NSNumber *colorR = [[palette objectAtIndex:index] valueForKey:@"red"];
+						NSNumber *colorG = [[palette objectAtIndex:index] valueForKey:@"green"];
+						NSNumber *colorB = [[palette objectAtIndex:index] valueForKey:@"blue"];
+						NSNumber *colorA = [[palette objectAtIndex:index] valueForKey:@"alpha"];
+						glTexData[j*levelWidth + i] = (color){[colorR unsignedCharValue], [colorG unsignedCharValue], [colorB unsignedCharValue], [colorA unsignedCharValue]};
+					}
 				}
+			}else{
+				NSLog(@"Un-paletted textures are currently unsupported: %@\n", obj.name.string);
 			}
-		}else{
-			NSLog(@"Un-paletted textures are currently unsupported: %@\n", obj.name.string);
+			[manager release];
+			
+			glTexImage2D(GL_TEXTURE_2D, i, GL_RGBA, levelWidth, levelHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, glTexData);
+			
+			free(glTexData);
 		}
-		[manager release];
 	}
-	return tex;
-}
-
-- (void)setTex:(color *)tex{
-	if(tex_){
-		free(tex_);
-		tex_ = NULL;
-	}
-	tex_ = tex;
+	return [tex autorelease];
 }
 
 - (void)dealloc{
-	if(tex_){
-		free(tex_);
-		tex_ = NULL;
+	if(glTex_){
+		glDeleteTextures(1, &glTex_);
+		glTex_ = 0;
 	}
 	[super dealloc];
 }

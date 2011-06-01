@@ -25,5 +25,6 @@
 @property(nonatomic, copy) NSNumber *flags;
 @property(nonatomic, retain) UNRBase *classObj, *superObj;
 @property(nonatomic, assign) int classObjRef, superObjRef;
+@property(nonatomic, assign) BOOL loading;
 
 @end

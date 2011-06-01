@@ -40,7 +40,7 @@
 			<compactIndex name="iBrushPoly"/>
 			<short name="panU"/>
 			<short name="panV"/>
-			<objectReference name="actor"/>
+			<compactIndex name="actor"/> <!-- objectReference -->
 		</array>
 		
 		<compactIndex name="vertCount"/>
@@ -57,12 +57,12 @@
 		
 		<int name="zonePropertiesCount"/>
 		<array name="zoneProperties" count="zonePropertiesCount">
-			<objectReference name="zoneActor"/>
+			<compactIndex name="zoneActor"/> <!-- objectReference -->
 			<long name="connectivity"/>
 			<long name="visibility"/>
 		</array>
 		
-		<objectReference name="polys"/>
+		<compactIndex name="polys"/> <!-- objectReference -->
 		
 		<compactIndex name="lightMapCount"/>
 		<array name="lightMaps" count="lightMapCount">
@@ -98,7 +98,7 @@
 		
 		<compactIndex name="lightCount"/>
 		<array name="lights" count="lightCount">
-			<objectReference name="light"/>
+			<compactIndex name="light"/> <!-- objectReference -->
 		</array>
 		
 		<int name="unk1"/>

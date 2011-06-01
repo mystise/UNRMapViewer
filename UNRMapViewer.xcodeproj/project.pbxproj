@@ -34,8 +34,8 @@
 		498E6116137A30CD00EA243B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E6115137A30CD00EA243B /* main.m */; };
 		498E6119137A30CD00EA243B /* UNRMapViewerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E6118137A30CD00EA243B /* UNRMapViewerAppDelegate.m */; };
 		498E611C137A30CD00EA243B /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498E611A137A30CD00EA243B /* MainWindow.xib */; };
-		498E611E137A30CD00EA243B /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 498E611D137A30CD00EA243B /* Shader.fsh */; };
-		498E6120137A30CD00EA243B /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 498E611F137A30CD00EA243B /* Shader.vsh */; };
+		498E611E137A30CD00EA243B /* Texture.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 498E611D137A30CD00EA243B /* Texture.fsh */; };
+		498E6120137A30CD00EA243B /* Texture.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 498E611F137A30CD00EA243B /* Texture.vsh */; };
 		498E6123137A30CD00EA243B /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E6122137A30CD00EA243B /* EAGLView.m */; };
 		498E6126137A30CD00EA243B /* UNRMapViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 498E6125137A30CD00EA243B /* UNRMapViewerViewController.m */; };
 		498E6129137A30CD00EA243B /* UNRMapViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498E6127137A30CD00EA243B /* UNRMapViewerViewController.xib */; };
@@ -110,8 +110,8 @@
 		498E6117137A30CD00EA243B /* UNRMapViewerAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UNRMapViewerAppDelegate.h; sourceTree = "<group>"; };
 		498E6118137A30CD00EA243B /* UNRMapViewerAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UNRMapViewerAppDelegate.m; sourceTree = "<group>"; };
 		498E611B137A30CD00EA243B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		498E611D137A30CD00EA243B /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
-		498E611F137A30CD00EA243B /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		498E611D137A30CD00EA243B /* Texture.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Texture.fsh; path = Shaders/Texture.fsh; sourceTree = "<group>"; };
+		498E611F137A30CD00EA243B /* Texture.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Texture.vsh; path = Shaders/Texture.vsh; sourceTree = "<group>"; };
 		498E6121137A30CD00EA243B /* EAGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
 		498E6122137A30CD00EA243B /* EAGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
 		498E6124137A30CD00EA243B /* UNRMapViewerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UNRMapViewerViewController.h; sourceTree = "<group>"; };
@@ -254,8 +254,8 @@
 				498E6117137A30CD00EA243B /* UNRMapViewerAppDelegate.h */,
 				498E6118137A30CD00EA243B /* UNRMapViewerAppDelegate.m */,
 				498E611A137A30CD00EA243B /* MainWindow.xib */,
-				498E611D137A30CD00EA243B /* Shader.fsh */,
-				498E611F137A30CD00EA243B /* Shader.vsh */,
+				498E611D137A30CD00EA243B /* Texture.fsh */,
+				498E611F137A30CD00EA243B /* Texture.vsh */,
 				493320AE13932B6B007B08F0 /* UNRMap */,
 				498E6121137A30CD00EA243B /* EAGLView.h */,
 				498E6122137A30CD00EA243B /* EAGLView.m */,
@@ -378,8 +378,8 @@
 			files = (
 				498E6113137A30CD00EA243B /* InfoPlist.strings in Resources */,
 				498E611C137A30CD00EA243B /* MainWindow.xib in Resources */,
-				498E611E137A30CD00EA243B /* Shader.fsh in Resources */,
-				498E6120137A30CD00EA243B /* Shader.vsh in Resources */,
+				498E611E137A30CD00EA243B /* Texture.fsh in Resources */,
+				498E6120137A30CD00EA243B /* Texture.vsh in Resources */,
 				498E6129137A30CD00EA243B /* UNRMapViewerViewController.xib in Resources */,
 				4993CC2D1385F20200B6CBD2 /* Maps in Resources */,
 				49836DED13884817003193CD /* Default Plugins in Resources */,

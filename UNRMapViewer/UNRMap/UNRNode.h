@@ -52,7 +52,7 @@ enum EPolyFlags{
 	PF_BigWavy 			= 0x00001000,	// Poly has a big wavy pattern in it.
 	PF_SmallWavy		= 0x00002000,	// Small wavy pattern (for water/enviro reflection).
 	PF_Flat				= 0x00004000,	// Flat surface.
-	PF_LowShadowDetail	= 0x00008000,	// Low detaul shadows.
+	PF_LowShadowDetail	= 0x00008000,	// Low detail shadows.
 	PF_NoMerge			= 0x00010000,	// Don't merge poly's nodes before lighting when rendering.
 	PF_CloudWavy		= 0x00020000,	// Polygon appears wavy like clouds.
 	PF_DirtyShadows		= 0x00040000,	// Dirty shadows.

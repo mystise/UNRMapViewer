@@ -9,8 +9,10 @@
 #import "UNRNode.h"
 #import "UNRFile.h"
 #import "UNRImport.h"
+#import "UNRExport.h"
 #import "UNRTexture.h"
 #import "UNRShader.h"
+#import "UNRMap.h"
 
 @implementation UNRNode
 
@@ -33,59 +35,80 @@
 		NSMutableDictionary *node = [[model valueForKey:@"nodes"] objectAtIndex:nodeNum];
 		NSMutableDictionary *surf = [[model valueForKey:@"surfs"] objectAtIndex:[[node valueForKey:@"iSurf"] intValue]];
 		
-		id texture = [file resolveObjectReference:[[surf valueForKey:@"texture"] intValue]];
+		id texture = [surf valueForKey:@"texture"];
 		if([texture isKindOfClass:[UNRImport class]]){
 			UNRImport *tex = texture;
 			texture = tex.obj;
 		}
-		self.tex = [UNRTexture textureWithObject:texture withFile:file];
+		UNRExport *exp = texture;
+		if([map.textures valueForKey:exp.name.string]){
+			self.tex = [map.textures valueForKey:exp.name.string];
+		}else{
+			UNRTexture *tex = [UNRTexture textureWithObject:texture];
+			self.tex = tex;
+			[map.textures setValue:tex forKey:exp.name.string];
+		}
 		
 		self.plane = [node valueForKey:@"plane"];
 		
 		self.surfFlags = [[surf valueForKey:@"polyFlags"] intValue];
-		
-		vec3 pBase = vec3Create([points objectAtIndex:[[node valueForKey:@"pBase"] intValue]]);
-		self.normal = vec3Create([vectors objectAtIndex:[[node valueForKey:@"vNormal"] intValue]]);
-		vec3 vTextureU = vec3Create([points objectAtIndex:[[node valueForKey:@"vTextureU"] intValue]]);
-		vec3 vTextureV = vec3Create([points objectAtIndex:[[node valueForKey:@"vTextureV"] intValue]]);
-		float scaleU = vec3Mag(vTextureU);
-		float scaleV = vec3Mag(vTextureV);
-		short panU = [[node valueForKey:@"panU"] shortValue];
-		short panV = [[node	valueForKey:@"panV"] shortValue];
-		
-		int iVertPool = [[node valueForKey:@"iVertPool"] intValue];
-		self.vertCount = [[node valueForKey:@"vertCount"] intValue];
-		self.verts = calloc(self.vertCount, sizeof(vec3));
-		self.texCoords = calloc(self.vertCount, sizeof(vec2));
-		for(int i = iVertPool; i < self.vertCount+iVertPool; i++){
-			vec3 coord = vec3Create([points objectAtIndex:[[[verticies objectAtIndex:i] valueForKey:@"pVertex"] intValue]]);
-			self.verts[i-iVertPool] = coord;
-			vec3 disp = vec3Sub(coord, pBase);
-			vec2 texCoord = {0.0f, 0.0f};
-			texCoord.x = (vec3Dot(disp, vTextureU) - panU*scaleU)/self.tex.width;
-			texCoord.y = (vec3Dot(disp, vTextureV) - panV*scaleV)/self.tex.height;
+		if((self.surfFlags | PF_FakeBackdrop) == PF_FakeBackdrop){
+			
+		}else if((self.surfFlags | PF_Invisible) == PF_Invisible){
+			
+		}else{
+			if([map.shaders valueForKey:@"Texture"]){
+				self.shader = [map.shaders valueForKey:@"Texture"];
+			}else{
+				UNRShader *shad = [[UNRShader alloc] initWithShader:@"Texture"];
+				self.shader = shad;
+				[map.shaders setValue:shad forKey:@"Texture"];
+				[shad release];
+				[self.shader addUniform:@""];
+			}
 		}
 		
+		if(!(self.surfFlags | PF_Invisible)){
+			vec3 pBase = vec3Create([points objectAtIndex:[[node valueForKey:@"pBase"] intValue]]);
+			self.normal = vec3Create([vectors objectAtIndex:[[node valueForKey:@"vNormal"] intValue]]);
+			vec3 vTextureU = vec3Create([points objectAtIndex:[[node valueForKey:@"vTextureU"] intValue]]);
+			vec3 vTextureV = vec3Create([points objectAtIndex:[[node valueForKey:@"vTextureV"] intValue]]);
+			float scaleU = vec3Mag(vTextureU);
+			float scaleV = vec3Mag(vTextureV);
+			short panU = [[node valueForKey:@"panU"] shortValue];
+			short panV = [[node	valueForKey:@"panV"] shortValue];
+			
+			int iVertPool = [[node valueForKey:@"iVertPool"] intValue];
+			self.vertCount = [[node valueForKey:@"vertCount"] intValue];
+			self.verts = calloc(self.vertCount, sizeof(vec3));
+			self.texCoords = calloc(self.vertCount, sizeof(vec2));
+			for(int i = iVertPool; i < self.vertCount+iVertPool; i++){
+				vec3 coord = vec3Create([points objectAtIndex:[[[verticies objectAtIndex:i] valueForKey:@"pVertex"] intValue]]);
+				self.verts[i-iVertPool] = coord;
+				vec3 disp = vec3Sub(coord, pBase);
+				vec2 texCoord = {0.0f, 0.0f};
+				texCoord.x = (vec3Dot(disp, vTextureU) - panU*scaleU)/self.tex.width;
+				texCoord.y = (vec3Dot(disp, vTextureV) - panV*scaleV)/self.tex.height;
+			}
+		}
 		int frontInd = [[node valueForKey:@"iFront"] intValue];
 		int backInd = [[node valueForKey:@"iBack"] intValue];
 		int planeInd = [[node valueForKey:@"iPlane"] intValue];
 		if(frontInd != -1){
-			UNRNode *front = [[UNRNode alloc] initWithModel:model nodeNumber:frontInd file:file];
+			UNRNode *front = [[UNRNode alloc] initWithModel:model nodeNumber:frontInd file:file map:map];
 			self.front = front;
 			[front release];
 		}
 		if(backInd != -1){
-			UNRNode *back = [[UNRNode alloc] initWithModel:model nodeNumber:backInd file:file];
+			UNRNode *back = [[UNRNode alloc] initWithModel:model nodeNumber:backInd file:file map:map];
 			self.back = back;
 			[back release];
 		}
 		if(planeInd != -1){
-			UNRNode *plane = [[UNRNode alloc] initWithModel:model nodeNumber:planeInd file:file];
+			UNRNode *plane = [[UNRNode alloc] initWithModel:model nodeNumber:planeInd file:file map:map];
 			self.coPlanar = plane;
 			[plane release];
 		}
-		
-		//setup gl-texture
 	}
 	return self;
 }

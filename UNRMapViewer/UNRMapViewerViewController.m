@@ -42,14 +42,10 @@
 	animating = FALSE;
 	animationFrameInterval = 2;
 	self.displayLink = nil;
+	glEnable(GL_DEPTH_TEST);
 }
 
 - (void)dealloc{
-	if(program){
-		glDeleteProgram(program);
-		program = 0;
-	}
-	
 	// Tear down context.
 	if([EAGLContext currentContext] == context)
 		[EAGLContext setCurrentContext:nil];
@@ -85,12 +81,8 @@
 
 - (void)viewDidUnload{
 	[super viewDidUnload];
-	
-	if(program){
-		glDeleteProgram(program);
-		program = 0;
-	}
-	
+	[self.map release];
+	[self.file release];
 	// Tear down context.
 	if([EAGLContext currentContext] == context)
 		[EAGLContext setCurrentContext:nil];
@@ -163,6 +155,7 @@
 		self.map = theMap;
 		[theMap release];
 	}
+	self.file = nil;
 	/*self.file = [[UNRFile alloc] initWithFileData:[NSData dataWithContentsOfFile:mapPath] pluginsDirectory:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Default Plugins"]];
 	[self.file resolveImportReferences:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Maps/Depend"]];
 	for(UNRExport *obj in self.file.objects){

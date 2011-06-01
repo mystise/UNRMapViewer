@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "Unreal.h"
 
+#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES2/glext.h>
+
 typedef struct{
 	Byte r, g, b, a;
 }color;
@@ -17,9 +20,9 @@ typedef struct{
 	
 }
 
-+ (id)textureWithObject:(UNRExport *)obj withFile:(UNRFile *)file;
++ (id)textureWithObject:(UNRExport *)obj;
 
-@property(nonatomic, assign) color *tex;
 @property(nonatomic, assign) int width, height;
+@property(nonatomic, assign) GLuint glTex;
 
 @end

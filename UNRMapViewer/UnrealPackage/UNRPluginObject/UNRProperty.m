@@ -11,12 +11,11 @@
 
 @implementation UNRProperty
 
-@synthesize name = name_, structName = structName_, special = special_, type = type_, index = index_, data = data_, file = file_;
+@synthesize name = name_, structName = structName_, special = special_, type = type_, index = index_, data = data_, object = object_;
 
 - (id)initWithManager:(DataManager *)manager file:(UNRFile *)newFile{
 	self = [super init];
 	if(self){
-		self.file = newFile;
 		int backup = manager.curPos;
 		int nameRef = [UNRFile readCompactIndex:manager];
 		if(nameRef < 0){
@@ -26,7 +25,7 @@
 			self = nil;
 			return self;
 		}
-		self.name = [self.file.names objectAtIndex:nameRef];
+		self.name = [newFile.names objectAtIndex:nameRef];
 		if([[self.name.string lowercaseString] isEqualToString:@"none"]){
 			[self release];
 			self = nil;
@@ -38,7 +37,7 @@
 		self.special = (info >> 7) & 0x01;
 		switch(self.type){
 			case 0x0A:
-				self.structName = [self.file.names objectAtIndex:[UNRFile readCompactIndex:manager]];
+				self.structName = [newFile.names objectAtIndex:[UNRFile readCompactIndex:manager]];
 				break;
 			default:
 				break;
@@ -78,12 +77,17 @@
 		if(self.type != 0x03){
 			self.data = [manager.fileData subdataWithRange:NSMakeRange(manager.curPos, realSize)];
 			manager.curPos += realSize;
+			if(self.type == 0x05){
+				DataManager *manager = [[DataManager alloc] initWithFileData:self.data];
+				self.object = [newFile resolveObjectReference:[UNRFile readCompactIndex:manager]];
+				[manager release];
+			}
 		}
 	}
 	return self;
 }
 
-- (NSString *)shortDescription{
+/*- (NSString *)shortDescription{
 	NSMutableString *propString = [NSMutableString string];
 	switch(self.type){
 		case 0x01:
@@ -186,7 +190,7 @@
 			break;
 	}
 	return [[propString copy] autorelease];
-}
+}*/
 
 + (int)readIndex:(DataManager *)manager{
 	Byte indexByte1 = [manager loadByte];
@@ -213,8 +217,8 @@
 	structName_ = nil;
 	[data_ release];
 	data_ = nil;
-	//[file_ release];
-	//file_ = nil;
+	[object_ release];
+	object_ = nil;
 	[super dealloc];
 }
 

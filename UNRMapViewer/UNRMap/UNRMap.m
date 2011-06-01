@@ -15,12 +15,14 @@
 
 @implementation UNRMap
 
-@synthesize rootNode = rootNode_;
+@synthesize rootNode = rootNode_, textures = textures_, shaders = shaders_;
 
 - (id)initWithModel:(NSMutableDictionary *)model andFile:(UNRFile *)file{
 	self = [super init];
 	if(self != nil){
-		UNRNode *node = [[UNRNode alloc] initWithModel:model nodeNumber:0 file:file];
+		self.textures = [NSMutableDictionary dictionary];
+		self.shaders = [NSMutableDictionary dictionary];
+		UNRNode *node = [[UNRNode alloc] initWithModel:model nodeNumber:0 file:file map:self];
 		self.rootNode = node;
 		[node release];
 	}

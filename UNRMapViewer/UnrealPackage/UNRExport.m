@@ -14,7 +14,7 @@
 
 @implementation UNRExport
 
-@synthesize classObj = classObj_, superObj = superObj_, flags = flags_, data = data_, objectData = objectData_, classObjRef = classObjRef_, superObjRef = superObjRef_;
+@synthesize classObj = classObj_, superObj = superObj_, flags = flags_, data = data_, objectData = objectData_, classObjRef = classObjRef_, superObjRef = superObjRef_, loading = loading_;
 
 + (id)exportWithManager:(DataManager *)manager{
 	UNRExport *export = [[[self alloc] init] autorelease];
@@ -47,6 +47,7 @@
 
 - (void)loadPlugin:(UNRFile *)file{
 	if(self.data && !self.objectData){
+		self.loading = YES;
 		[file.pluginLoader loadPlugin:self file:file];
 	}
 }

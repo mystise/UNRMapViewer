@@ -19,13 +19,14 @@
 
 + (int)readIndex:(DataManager *)manager;
 
-- (NSString *)shortDescription;
+//- (NSString *)shortDescription;
 
 @property(nonatomic, retain) UNRName *name, *structName;
 @property(nonatomic, assign) BOOL special;
 @property(nonatomic, assign) Byte type;
 @property(nonatomic, assign) int index;
 @property(nonatomic, retain) NSData *data;
-@property(nonatomic, assign) UNRFile *file;
+@property(nonatomic, retain) UNRBase *object;
+//@property(nonatomic, assign) UNRFile *file;
 
 @end

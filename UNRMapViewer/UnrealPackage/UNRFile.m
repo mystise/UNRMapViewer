@@ -29,6 +29,7 @@
 		self.version = [NSNumber numberWithInt:0];
 		self.licensee = [NSNumber numberWithInt:0];
 		self.flags = [NSNumber numberWithInt:0];
+		//self.subFiles = [NSMutableDictionary dictionary];
 	}
 	return self;
 }
@@ -48,6 +49,7 @@
 		self.version = [NSNumber numberWithInt:0];
 		self.licensee = [NSNumber numberWithInt:0];
 		self.flags = [NSNumber numberWithInt:0];
+		//self.subFiles = [NSMutableDictionary dictionary];
 		
 		DataManager *manager = [[DataManager alloc] initWithFileData:fileData];
 		
@@ -137,7 +139,7 @@
 - (id)resolveObjectReference:(int)ref{
 	if(ref > 0){
 		UNRExport *retVal = [self.objects objectAtIndex:ref-1];
-		if(retVal.objectData == nil){
+		if(retVal.objectData == nil && retVal.loading != YES){
 			[retVal loadPlugin:self];
 		}
 		return retVal;
@@ -178,8 +180,8 @@
 }
 
 - (void)resolveImportReferences:(NSString *)path{
+	NSMutableDictionary *subFiles = [[NSMutableDictionary alloc] init];
 	NSFileManager *resManager = [[NSFileManager alloc] init];
-	NSMutableDictionary *openFiles = [[NSMutableDictionary alloc] init];
 	for(UNRImport *import in self.references){
 		if([import.className.string isEqualToString:@"Package"] && import.package == nil){
 			NSDirectoryEnumerator *directEnum = [resManager enumeratorAtPath:path];
@@ -191,7 +193,7 @@
 					UNRFile *file = [[UNRFile alloc] initWithFileData:dat pluginsDirectory:nil];
 					file.pluginLoader = self.pluginLoader;
 					if(file != nil){
-						[openFiles setObject:file forKey:import.name.string];
+						[subFiles setObject:file forKey:import.name.string];
 					}
 					[file release];
 				}
@@ -205,7 +207,7 @@
 			while(package.package != nil){
 				package = package.package;
 			}
-			UNRFile *file = [openFiles objectForKey:package.name.string];
+			UNRFile *file = [subFiles objectForKey:package.name.string];
 			NSArray *objNames = [[file.objects valueForKeyPath:@"name.string"] retain];
 			NSArray *classNames = [[file.objects valueForKeyPath:@"classObj.name.string"] retain];
 			int index = 0;// = [objNames indexOfObject:import.name.string];
@@ -225,8 +227,8 @@
 			[import.obj loadPlugin:file];
 		}
 	}
-	[openFiles release];
 	[resManager release];
+	[subFiles release];
 }
 
 /*- (NSData *)dataFromFile{

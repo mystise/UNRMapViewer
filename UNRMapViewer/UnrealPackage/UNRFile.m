@@ -179,7 +179,7 @@
 
 - (void)resolveImportReferences:(NSString *)path{
 	NSFileManager *resManager = [[NSFileManager alloc] init];
-	NSMutableDictionary *openFiles = [NSMutableDictionary dictionary];
+	NSMutableDictionary *openFiles = [[NSMutableDictionary alloc] init];
 	for(UNRImport *import in self.references){
 		if([import.className.string isEqualToString:@"Package"] && import.package == nil){
 			NSDirectoryEnumerator *directEnum = [resManager enumeratorAtPath:path];

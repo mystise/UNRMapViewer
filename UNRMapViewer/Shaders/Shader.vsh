@@ -5,17 +5,14 @@
 //  Created by Adalynn Dudney on 5/10/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
+uniform mat4 modelViewProjection;
 
 attribute vec4 position;
-attribute vec4 color;
+attribute vec2 inTexCoord;
 
-varying lowp vec4 colorVarying;
-
-uniform float translate;
+varying highp vec2 texCoord;
 
 void main(){
-	gl_Position = position;
-	gl_Position.y += sin(translate) / 2.0;
-
-	colorVarying = color;
+	gl_Position = position*modelViewProjection;
+	texCoord = inTexCoord;
 }

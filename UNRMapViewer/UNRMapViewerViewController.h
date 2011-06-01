@@ -16,6 +16,7 @@
 #import <OpenGLES/ES2/glext.h>
 
 #import "Unreal.h"
+#import "UNRMap.h"
 #import "Utilities.h"
 
 @interface UNRMapViewerViewController : UIViewController{
@@ -31,7 +32,7 @@
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;
 @property(nonatomic, retain) UNRFile *file;
-@property(nonatomic, retain) NSMutableDictionary *level;
+@property(nonatomic, retain) UNRMap *map;
 
 - (void)startAnimation;
 - (void)stopAnimation;

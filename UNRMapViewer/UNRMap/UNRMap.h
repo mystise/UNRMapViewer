@@ -8,14 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@class UNRFile;
+@class UNRFile, UNRNode;
 
 @interface UNRMap : NSObject {
-    //node list
-	//surface list
-	//texture list
+	
 }
 
 - (id)initWithModel:(NSMutableDictionary *)model andFile:(UNRFile *)file;
+- (void)draw;
+
+@property(nonatomic, retain) UNRNode *rootNode;
+@property(nonatomic, retain) NSMutableDictionary *textures;
+@property(nonatomic, retain) NSMutableDictionary *shaders;
 
 @end

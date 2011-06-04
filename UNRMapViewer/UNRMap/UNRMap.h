@@ -15,7 +15,7 @@
 }
 
 - (id)initWithModel:(NSMutableDictionary *)model andFile:(UNRFile *)file;
-- (void)draw;
+- (void)draw:(float)aspect;
 
 @property(nonatomic, retain) UNRNode *rootNode;
 @property(nonatomic, retain) NSMutableDictionary *textures;

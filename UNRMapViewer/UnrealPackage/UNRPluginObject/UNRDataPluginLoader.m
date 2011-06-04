@@ -65,10 +65,10 @@
 	[parser parse];
 	[parser release];
 	
-	int leftOverData = [reader.obj.manager.fileData length]-reader.obj.manager.curPos;
+	/*int leftOverData = [reader.obj.manager.fileData length]-reader.obj.manager.curPos;
 	if(leftOverData > 0){
 		[[reader.obj.currentData objectAtIndex:0] setValue:[reader.obj.manager.fileData subdataWithRange:NSMakeRange(reader.obj.manager.curPos, leftOverData)] forKey:@"leftoverData"];
-	}
+	}*/
 	
 	object.objectData = [reader.obj.currentData objectAtIndex:0];
 	reader.obj = nil;

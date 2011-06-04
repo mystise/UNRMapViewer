@@ -17,7 +17,7 @@
 
 @implementation EAGLView
 
-@synthesize context;
+@synthesize context, framebufferWidth = framebufferWidth_, framebufferHeight = framebufferHeight_;
 
 // You must implement this method
 + (Class)layerClass{
@@ -70,8 +70,12 @@
 		glGenRenderbuffers(1, &colorRenderbuffer);
 		glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
 		[context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer *)self.layer];
+		GLint framebufferWidth = 0;
+		GLint framebufferHeight = 0;
 		glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &framebufferWidth);
 		glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &framebufferHeight);
+		self.framebufferWidth = framebufferWidth;
+		self.framebufferHeight = framebufferHeight;
 		
 		glGenRenderbuffers(1, &depthRenderBuffer);
 		glBindRenderbuffer(GL_RENDERBUFFER, depthRenderBuffer);
@@ -115,7 +119,7 @@
 		
 		glBindFramebuffer(GL_FRAMEBUFFER, defaultFramebuffer);
 		
-		glViewport(0, 0, framebufferWidth, framebufferHeight);
+		glViewport(0, 0, self.framebufferWidth, self.framebufferHeight);
 	}
 }
 

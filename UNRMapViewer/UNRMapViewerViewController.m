@@ -18,7 +18,7 @@
 
 @implementation UNRMapViewerViewController
 
-@synthesize animating, context, displayLink, file = file_, map = map_;
+@synthesize animating, context, displayLink, file = file_, map = map_, aspect = aspect_;
 
 - (void)awakeFromNib{
 	EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
@@ -36,8 +36,9 @@
 	self.context = aContext;
 	[aContext release];
 	
-	[(EAGLView *)self.view setContext:context];
-	[(EAGLView *)self.view setFramebuffer];
+	EAGLView *view = (EAGLView *)self.view;
+	[view setContext:context];
+	[view setFramebuffer];
 	
 	animating = FALSE;
 	animationFrameInterval = 2;
@@ -116,6 +117,11 @@
 		self.displayLink = aDisplayLink;
 		
 		animating = TRUE;
+		EAGLView *view = (EAGLView *)self.view;
+		float width = view.framebufferWidth;
+		float height = view.framebufferHeight;
+		float aspect = width/height;
+		self.aspect = aspect;
 	}
 }
 
@@ -130,16 +136,16 @@
 - (void)drawFrame{
 	[(EAGLView *)self.view setFramebuffer];
 	
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+	glClearColor(0.1f, 0.5f, 0.5f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	
-	[self.map draw];
+	[self.map draw:self.aspect];
 	
 	[(EAGLView *)self.view presentFramebuffer];
 }
 
 - (void)loadMap:(NSString *)mapPath{
-	UNRFile *file = [[UNRFile alloc] initWithFileData:[NSData dataWithContentsOfFile:mapPath] pluginsDirectory:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Default Plugins"]];
+	UNRFile *file = [[UNRFile alloc] initWithFileData:[NSData dataWithContentsOfMappedFile:mapPath] pluginsDirectory:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Default Plugins"]];
 	self.file = file;
 	[file release];
 	[self.file resolveImportReferences:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Maps/Depend"]];

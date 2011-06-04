@@ -32,12 +32,13 @@
 		GLuint glTex = 0;
 		glGenTextures(1, &glTex);
 		tex.glTex = glTex;
+		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, tex.glTex);
 		
 		tex.width = [[[[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:0] valueForKey:@"width"] intValue];
 		tex.height = [[[[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:0] valueForKey:@"height"] intValue];
-		
-		for(int i = 0; i < [[obj.objectData valueForKey:@"mipMapCount"] intValue]; i++){
+		int i = 0;
+		//for(int i = 0; i < [[obj.objectData valueForKey:@"mipMapCount"] intValue]; i++){
 			NSMutableDictionary *texLevel = [[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:i];
 			DataManager *manager = [[DataManager alloc] initWithFileData:[texLevel valueForKey:@"mipMap"]];
 			
@@ -65,11 +66,18 @@
 			[manager release];
 			
 			glTexImage2D(GL_TEXTURE_2D, i, GL_RGBA, levelWidth, levelHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, glTexData);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			
 			free(glTexData);
-		}
+		//}
 	}
 	return [tex autorelease];
+}
+
+- (void)bind:(int)index{
+	glActiveTexture(GL_TEXTURE0+index);
+	glBindTexture(GL_TEXTURE_2D, self.glTex);
 }
 
 - (void)dealloc{

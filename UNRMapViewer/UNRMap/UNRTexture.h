@@ -21,6 +21,7 @@ typedef struct{
 }
 
 + (id)textureWithObject:(UNRExport *)obj;
+- (void)bind:(int)index;
 
 @property(nonatomic, assign) int width, height;
 @property(nonatomic, assign) GLuint glTex;

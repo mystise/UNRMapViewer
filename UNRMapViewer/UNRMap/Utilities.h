@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef NSMutableDictionary *vector;
 
 typedef struct{
@@ -37,3 +41,7 @@ vec2 vec2Norm(vec2 v1);
 
 float vec2Mag(vec2 v1);
 float vec2Dot(vec2 v1, vec2 v2);
+
+#ifdef __cplusplus
+}
+#endif

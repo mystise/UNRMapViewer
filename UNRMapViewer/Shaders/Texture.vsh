@@ -13,6 +13,6 @@ attribute vec2 inTexCoord;
 varying highp vec2 texCoord;
 
 void main(){
-	gl_Position = position*modelViewProjection;
+	gl_Position = modelViewProjection*position;
 	texCoord = inTexCoord;
 }

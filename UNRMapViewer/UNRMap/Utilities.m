@@ -9,9 +9,11 @@
 #include "Utilities.h"
 
 vec3 vec3Create(vector vec){
-	return (vec3){[[vec valueForKey:@"x"] floatValue],
-		[[vec valueForKey:@"y"] floatValue],
-		[[vec valueForKey:@"z"] floatValue]};
+	vec3 retVec = {0.0f};
+	retVec.x = [[vec valueForKey:@"x"] floatValue];
+	retVec.y = [[vec valueForKey:@"y"] floatValue];
+	retVec.z = [[vec valueForKey:@"z"] floatValue];
+	return retVec;
 }
 
 vec3 vec3Add(vec3 v1, vec3 v2){

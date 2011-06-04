@@ -29,6 +29,7 @@
 @property (nonatomic) NSInteger animationFrameInterval;
 @property(nonatomic, retain) UNRFile *file;
 @property(nonatomic, retain) UNRMap *map;
+@property(nonatomic, assign) float aspect;
 
 - (void)startAnimation;
 - (void)stopAnimation;

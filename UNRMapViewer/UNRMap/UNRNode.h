@@ -10,6 +10,12 @@
 
 #import "Utilities.h"
 
+#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES2/glext.h>
+
+#import "Matrix3D.h"
+using Matrix::Matrix3D;
+
 @class UNRFile, UNRTexture, UNRShader, UNRMap;
 
 @interface UNRNode : NSObject {
@@ -18,7 +24,7 @@
 
 - (id)initWithModel:(NSMutableDictionary *)model nodeNumber:(int)nodeNum file:(UNRFile *)file map:(UNRMap *)map;
 
-- (void)draw;
+- (void)draw:(float)aspect matrix:(Matrix3D &)mat;
 
 @property(nonatomic, assign) vec3 *verts;
 @property(nonatomic, assign) int vertCount;

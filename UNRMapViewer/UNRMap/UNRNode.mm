@@ -94,8 +94,9 @@
 				self.verts[i-iVertPool] = coord;
 				vec3 disp = vec3Sub(coord, pBase);
 				vec2 texCoord = {0.0f, 0.0f};
-				texCoord.x = (vec3Dot(disp, vTextureU) - panU*scaleU)/self.tex.width;
-				texCoord.y = (vec3Dot(disp, vTextureV) - panV*scaleV)/self.tex.height;
+				texCoord.x = (vec3Dot(disp, vTextureU) + panU)/self.tex.width;
+				texCoord.y = (vec3Dot(disp, vTextureV) + panV)/self.tex.height;
+				self.texCoords[i-iVertPool] = texCoord;
 			}
 		}
 		int frontInd = [[node valueForKey:@"iFront"] intValue];

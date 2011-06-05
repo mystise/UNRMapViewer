@@ -1,0 +1,8 @@
+pBase is the point index where U and V are = to 0
+vTextureU is the (index of the) vector pointing in the direction of the textures U coord
+vTextureV is the (index of the) vector pointing in the direction of the textures V coord
+
+calc which point is pBase
+calc the displacement of every other vertex from that point
+dot product by the texU and texV to get the U and V for that point
+add panU and panV to get the final tex coord

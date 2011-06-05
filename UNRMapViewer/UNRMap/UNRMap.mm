@@ -12,13 +12,18 @@
 #import "UNRTexture.h"
 #import "UNRNode.h"
 #import "Utilities.h"
-#import "Matrix3D.h"
+#import "Matrix.h"
+#import "GLCamera.h"
 
 using Matrix::Matrix3D;
 
+@interface UNRMap()
+@property(nonatomic, assign) FPSCamera *cam;
+@end
+
 @implementation UNRMap
 
-@synthesize rootNode = rootNode_, textures = textures_, shaders = shaders_;
+@synthesize rootNode = rootNode_, textures = textures_, shaders = shaders_, cam = cam_;
 
 - (id)initWithModel:(NSMutableDictionary *)model andFile:(UNRFile *)file{
 	self = [super init];
@@ -28,6 +33,12 @@ using Matrix::Matrix3D;
 		UNRNode *node = [[UNRNode alloc] initWithModel:model nodeNumber:0 file:file map:self];
 		self.rootNode = node;
 		[node release];
+		
+		//setup vbo
+		
+		self.cam = new FPSCamera;
+		self.cam->setUp(Vector3D(0.0f, 0.0f, 1.0f));
+		self.cam->lookAt(Vector3D(0.0f, 10.0f, 0.0f));
 	}
 	return self;
 }
@@ -36,23 +47,33 @@ using Matrix::Matrix3D;
 	//maybe do cool stuff
 	static float rotation = 0.0f;
 	rotation += 1.0f;
-	Matrix3D mat;
 	
-	Matrix3D projection;
 	Matrix3D modelView;
+	Matrix3D projection;
 	
-	projection.perspective(45.0f, 0.1f, 10000.0f, aspect);
-	modelView.uniformScale(0.01f);
-	modelView.rotateY(rotation);
-	modelView.rotateX(90.0f);
-	//modelView.rotateY(45.0f);
-	mat = projection * modelView;
+	projection.perspective(45.0f, 0.1f, 10000.0f, 0.75f);
+	
+	self.cam->rotateTo(0.0f, rotation);
+	modelView = self.cam->glData();
+	modelView.uniformScale(0.1f);
+	
+	modelView *= projection;
+	
+	[self.rootNode draw:aspect matrix:modelView];
+}
 
-	
-	[self.rootNode draw:aspect matrix:mat];
+- (void)setCam:(FPSCamera *)cam{
+	if(cam_ != NULL){
+		delete cam_;
+	}
+	cam_ = cam;
 }
 
 - (void)dealloc{
+	if(cam_ != NULL){
+		delete cam_;
+	}
+	cam_ = NULL;
 	[rootNode_ release];
 	rootNode_ = nil;
 	[super dealloc];

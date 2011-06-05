@@ -126,7 +126,9 @@
 		4993CC261384D1D900B6CBD2 /* UNRMapSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UNRMapSelectionViewController.h; path = Menu/UNRMapSelectionViewController.h; sourceTree = "<group>"; };
 		4993CC271384D1D900B6CBD2 /* UNRMapSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UNRMapSelectionViewController.m; path = Menu/UNRMapSelectionViewController.m; sourceTree = "<group>"; };
 		4993CC2C1385F20200B6CBD2 /* Maps */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Maps; sourceTree = "<group>"; };
-		49A23E701396F7ED0097C5E6 /* Matrix3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix3D.h; sourceTree = "<group>"; };
+		49A23E701396F7ED0097C5E6 /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
+		49A23E911399DDD40097C5E6 /* GLCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLCamera.h; sourceTree = "<group>"; };
+		49A23E921399DF3E0097C5E6 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
 		49B5F4861395CDCC00421352 /* UNRShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRShader.h; sourceTree = "<group>"; };
 		49B5F4871395CDCC00421352 /* UNRShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRShader.m; sourceTree = "<group>"; };
 		49B5F4891396CFB500421352 /* GLCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLCommon.h; sourceTree = "<group>"; };
@@ -171,6 +173,9 @@
 				49B5F4871395CDCC00421352 /* UNRShader.m */,
 				49836E621389EA53003193CD /* Utilities.h */,
 				49836E611389EA53003193CD /* Utilities.m */,
+				49A23E911399DDD40097C5E6 /* GLCamera.h */,
+				49A23E701396F7ED0097C5E6 /* Matrix.h */,
+				49A23E921399DF3E0097C5E6 /* Vector.h */,
 			);
 			path = UNRMap;
 			sourceTree = "<group>";
@@ -261,7 +266,6 @@
 				493320AE13932B6B007B08F0 /* UNRMap */,
 				498E6121137A30CD00EA243B /* EAGLView.h */,
 				498E6122137A30CD00EA243B /* EAGLView.m */,
-				49A23E701396F7ED0097C5E6 /* Matrix3D.h */,
 				49B5F4891396CFB500421352 /* GLCommon.h */,
 				498E6124137A30CD00EA243B /* UNRMapViewerViewController.h */,
 				498E6125137A30CD00EA243B /* UNRMapViewerViewController.m */,

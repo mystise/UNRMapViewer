@@ -13,7 +13,7 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-#import "Matrix3D.h"
+#import "Matrix.h"
 using Matrix::Matrix3D;
 
 @class UNRFile, UNRTexture, UNRShader, UNRMap;

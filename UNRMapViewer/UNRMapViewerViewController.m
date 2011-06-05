@@ -120,7 +120,7 @@
 		EAGLView *view = (EAGLView *)self.view;
 		float width = view.framebufferWidth;
 		float height = view.framebufferHeight;
-		float aspect = width/height;
+		float aspect = height/width;
 		self.aspect = aspect;
 	}
 }
@@ -144,6 +144,13 @@
 	[(EAGLView *)self.view presentFramebuffer];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
+	if(toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight){
+		return YES;
+	}
+	return NO;
+}
+
 - (void)loadMap:(NSString *)mapPath{
 	UNRFile *file = [[UNRFile alloc] initWithFileData:[NSData dataWithContentsOfMappedFile:mapPath] pluginsDirectory:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Default Plugins"]];
 	self.file = file;
@@ -162,6 +169,7 @@
 		[theMap release];
 	}
 	self.file = nil;
+	((EAGLView *)self.view).map = self.map;
 	/*self.file = [[UNRFile alloc] initWithFileData:[NSData dataWithContentsOfFile:mapPath] pluginsDirectory:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Default Plugins"]];
 	[self.file resolveImportReferences:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Maps/Depend"]];
 	for(UNRExport *obj in self.file.objects){

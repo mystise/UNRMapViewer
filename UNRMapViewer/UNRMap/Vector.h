@@ -151,6 +151,10 @@ namespace Vector{
 			
 		}
 		
+		Vector2D(CGPoint point): x(point.x), y(point.y){
+			
+		}
+		
 		float magnitude(){
 			return sqrtf(x*x + y*y);
 		}

@@ -80,8 +80,8 @@
 			self.normal = vec3Create([[vectors objectAtIndex:[[surf valueForKey:@"vNormal"] intValue]] valueForKey:@"vector"]);
 			vec3 vTextureU = vec3Create([[vectors objectAtIndex:[[surf valueForKey:@"vTextureU"] intValue]] valueForKey:@"vector"]);
 			vec3 vTextureV = vec3Create([[vectors objectAtIndex:[[surf valueForKey:@"vTextureV"] intValue]] valueForKey:@"vector"]);
-			float scaleU = vec3Mag(vTextureU);
-			float scaleV = vec3Mag(vTextureV);
+			//float scaleU = vec3Mag(vTextureU);
+			//float scaleV = vec3Mag(vTextureV);
 			short panU = [[surf valueForKey:@"panU"] shortValue];
 			short panV = [[surf	valueForKey:@"panV"] shortValue];
 			

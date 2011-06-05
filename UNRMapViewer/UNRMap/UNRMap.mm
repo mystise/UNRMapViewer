@@ -16,6 +16,7 @@
 #import "GLCamera.h"
 
 using Matrix::Matrix3D;
+using Vector::Vector2D;
 
 @interface UNRMap()
 @property(nonatomic, assign) FPSCamera *cam;
@@ -45,21 +46,44 @@ using Matrix::Matrix3D;
 
 - (void)draw:(float)aspect{
 	//maybe do cool stuff
-	static float rotation = 0.0f;
-	rotation += 1.0f;
+	//static float rotation = 0.0f;
+	//rotation += 1.0f;
 	
 	Matrix3D modelView;
 	Matrix3D projection;
 	
-	projection.perspective(45.0f, 0.1f, 10000.0f, 0.75f);
+	projection.perspective(60.0f, 0.1f, 10000.0f, aspect);
 	
-	self.cam->rotateTo(0.0f, rotation);
+	//self.cam->rotateTo(0.0f, rotation);
 	modelView = self.cam->glData();
 	modelView.uniformScale(0.1f);
 	
 	modelView *= projection;
 	
 	[self.rootNode draw:aspect matrix:modelView];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+	
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+	NSArray *touches2 = [touches allObjects];
+	for(UITouch *touch in touches2){
+		Vector2D newPoint = [touch locationInView:nil];
+		Vector2D origPoint = [touch previousLocationInView:nil];
+		Vector2D disp = newPoint - origPoint;
+		if(newPoint.y < 512){
+			self.cam->rotate(-disp.x/10.0f, -disp.y/10.0f);
+		}else{
+			//self.cam->move(Vector3D());
+			self.cam->moveRel(Vector3D(disp.x, disp.y, 0.0f));
+		}
+	}
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+	
 }
 
 - (void)setCam:(FPSCamera *)cam{

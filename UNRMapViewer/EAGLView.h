@@ -11,7 +11,7 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-@class EAGLContext;
+@class EAGLContext, UNRMap;
 
 // This class wraps the CAEAGLLayer from CoreAnimation into a convenient UIView subclass.
 // The view content is basically an EAGL surface you render your OpenGL scene into.
@@ -22,7 +22,8 @@
 	GLuint defaultFramebuffer, colorRenderbuffer, depthRenderBuffer;
 }
 
-@property (nonatomic, retain) EAGLContext *context;
+@property(nonatomic, retain) EAGLContext *context;
+@property(nonatomic, retain) UNRMap *map;
 @property(nonatomic, assign) GLint framebufferWidth;
 @property(nonatomic, assign) GLint framebufferHeight;
 

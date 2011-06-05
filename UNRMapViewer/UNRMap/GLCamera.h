@@ -47,17 +47,35 @@ public:
 		return *this;
 	}
 	
-	virtual Matrix3D glData(){
-		Matrix3D mat;
-		mat.translate(-pos);
-		
+	virtual Camera &moveRel(Vector3D disp){
+		float newX, newY, newZ;
+		Vector3D right;
+		fix(right);
+		newX = disp * right;
+		newY = disp * up;
+		newZ = disp * look;
+		Vector3D newDisp = Vector3D(newX, newY, newZ);
+		pos += newDisp;
+		return *this;
+	}
+	
+	Camera &fix(Vector3D &right){
 		look.normalize();
 		
-		Vector3D right = up ^ look;
+		right = up ^ look;
 		up = look ^ right;
 		
 		right.normalize();
 		up.normalize();
+		return *this;
+	}
+	
+	virtual Matrix3D glData(){
+		Matrix3D mat;
+		mat.translate(-pos);
+		
+		Vector3D right;
+		fix(right);
 		
 		mat[0] = right.x;
 		mat[1] = right.y;
@@ -74,7 +92,7 @@ public:
 		return mat;
 	}
 	
-private:
+protected:
 	Vector3D pos, up, look;
 };
 
@@ -88,7 +106,19 @@ public:
 		
 	}
 	
-	Camera &rotateTo(float x, float y){
+	/*virtual FPSCamera &moveRel(Vector3D disp){
+		float newX, newY, newZ;
+		Vector3D right;
+		fix(right);
+		newX = disp * right;
+		newY = disp * up;
+		newZ = disp * look;
+		Vector3D newDisp = Vector3D(newX, newY, newZ);
+		pos += newDisp;
+		return *this;
+	}*/
+	
+	FPSCamera &rotateTo(float x, float y){
 		rotX = x;
 		rotY = y;
 		
@@ -102,7 +132,7 @@ public:
 		return *this;
 	}
 	
-	Camera &rotate(float x, float y){
+	FPSCamera &rotate(float x, float y){
 		rotX += x;
 		rotY += y;
 		
@@ -120,6 +150,6 @@ public:
 		return ((Camera)*this).glData().rotateY(rotY).rotateX(rotX);
 	}
 	
-private:
+protected:
 	float rotX, rotY, clamp;
 };

@@ -65,6 +65,8 @@
 	// Releases the view if it doesn't have a superview.
 	[super didReceiveMemoryWarning];
 	
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Memory alert!" message:@"Alert!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
+	[alert show];
 	// Release any cached data, images, etc. that aren't in use.
 }
 
@@ -161,6 +163,7 @@
 		if([obj.classObj.name.string isEqualToString:@"Level"]){
 			[obj loadPlugin:self.file];
 			level = [[obj.objectData valueForKey:@"bspModel"] objectData];
+			obj.objectData = nil;
 		}
 	}
 	if(level){

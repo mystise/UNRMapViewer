@@ -35,19 +35,22 @@ using Vector::Vector2D;
 		self.rootNode = node;
 		[node release];
 		
-		//setup vbo
+		//setup vbo's
 		
 		self.cam = new FPSCamera;
 		self.cam->setUp(Vector3D(0.0f, 0.0f, 1.0f));
-		self.cam->lookAt(Vector3D(0.0f, 10.0f, 0.0f));
+		self.cam->lookTo(Vector3D(0.0f, 1.0f, 0.0f));
 	}
 	return self;
 }
 
 - (void)draw:(float)aspect{
-	//maybe do cool stuff
 	//static float rotation = 0.0f;
 	//rotation += 1.0f;
+	
+	//static float pos = 0.0f;
+	//pos += 1.0f;
+	//self.cam->moveTo(Vector3D(0.0f, 0.0f, pos));
 	
 	Matrix3D modelView;
 	Matrix3D projection;
@@ -56,9 +59,10 @@ using Vector::Vector2D;
 	
 	//self.cam->rotateTo(0.0f, rotation);
 	modelView = self.cam->glData();
+	//self.cam->moveTo(Vector3D(modelView[12], modelView[13], modelView[14]));
 	modelView.uniformScale(0.1f);
 	
-	modelView *= projection;
+	modelView = projection * modelView;//modelView = projection * modelView
 	
 	[self.rootNode draw:aspect matrix:modelView];
 }
@@ -74,10 +78,10 @@ using Vector::Vector2D;
 		Vector2D origPoint = [touch previousLocationInView:nil];
 		Vector2D disp = newPoint - origPoint;
 		if(newPoint.y < 512){
-			self.cam->rotate(-disp.x/10.0f, -disp.y/10.0f);
+			self.cam->rotate(disp.x/10.0f, disp.y/10.0f);
 		}else{
-			//self.cam->move(Vector3D());
-			self.cam->moveRel(Vector3D(disp.x, disp.y, 0.0f));
+			//self.cam->move(Vector3D(-disp.y, 0.0f, -disp.x));
+			self.cam->moveRel(Vector3D(disp.y/10.0f, 0.0f, disp.x/10.0f));
 		}
 	}
 }

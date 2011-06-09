@@ -71,6 +71,7 @@
 			
 			free(glTexData);
 		}
+		obj.objectData = nil;
 	}
 	return [tex autorelease];
 }

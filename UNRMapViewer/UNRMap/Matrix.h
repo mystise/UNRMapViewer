@@ -11,6 +11,7 @@
 
 #import "Vector.h"
 using Vector::Vector3D;
+using Vector::Vector4D;
 
 namespace Matrix{
 	class Matrix3D{
@@ -33,6 +34,17 @@ namespace Matrix{
 			m[10] = diag;
 			m[11] = m[12] = m[13] = m[14] = 0.0f;
 			m[15] = diag;
+		}
+		
+		inline Matrix3D &identity(){
+			m[0] = 1.0f;
+			m[1] = m[2] = m[3] = m[4] = 0.0f;
+			m[5] = 1.0f;
+			m[6] = m[7] = m[8] = m[9] = 0.0f;
+			m[10] = 1.0f;
+			m[11] = m[12] = m[13] = m[14] = 0.0f;
+			m[15] = 1.0f;
+			return *this;
 		}
 		
 		inline Matrix3D operator *(const Matrix3D &mat) const{
@@ -60,7 +72,7 @@ namespace Matrix{
 		}
 		
 		inline const Matrix3D &operator *=(const Matrix3D &mat){
-			*this = mat * *this;
+			*this = *this * mat;
 			return *this;
 		}
 		
@@ -216,6 +228,7 @@ namespace Matrix{
 			mat[10] = -(far + near) / (far - near);
 			mat[11] = -1.0f;
 			mat[14] = -(2.0f * far * near) / (far - near);
+			mat[15] = 0.0f;
 			*this *= mat;
 			return *this;
 		}

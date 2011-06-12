@@ -67,6 +67,7 @@
 	
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Memory alert!" message:@"Alert!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
 	[alert show];
+	[alert release];
 	// Release any cached data, images, etc. that aren't in use.
 }
 
@@ -139,7 +140,7 @@
 	[(EAGLView *)self.view setFramebuffer];
 	
 	glClearColor(0.1f, 0.5f, 0.5f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
 	
 	[self.map draw:self.aspect];
 	
@@ -154,10 +155,13 @@
 }
 
 - (void)loadMap:(NSString *)mapPath{
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	UNRFile *file = [[UNRFile alloc] initWithFileData:[NSData dataWithContentsOfMappedFile:mapPath] pluginsDirectory:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Default Plugins"]];
 	self.file = file;
 	[file release];
 	[self.file resolveImportReferences:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Maps/Depend"]];
+	[pool drain];
+	pool = [[NSAutoreleasePool alloc] init];
 	NSMutableDictionary *level = nil;
 	for(UNRExport *obj in self.file.objects){
 		if([obj.classObj.name.string isEqualToString:@"Level"]){
@@ -172,7 +176,7 @@
 		[theMap release];
 	}
 	self.file = nil;
-	((EAGLView *)self.view).map = self.map;
+	[pool drain];
 	/*self.file = [[UNRFile alloc] initWithFileData:[NSData dataWithContentsOfFile:mapPath] pluginsDirectory:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Default Plugins"]];
 	[self.file resolveImportReferences:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Maps/Depend"]];
 	for(UNRExport *obj in self.file.objects){
@@ -280,6 +284,18 @@
 		//print each point index
 		//end for
 	}*/
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+	[self.map touchesBegan:touches withEvent:event];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+	[self.map touchesMoved:touches withEvent:event];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+	[self.map touchesEnded:touches withEvent:event];
 }
 
 @end

@@ -9,6 +9,8 @@
 #define DEGREES_TO_RADIANS(x) ((x) / 180.0f * M_PI)
 #define RADIANS_TO_DEGREES(x) ((x) / M_PI * 180.0f)
 
+#import <math.h>
+
 #import "Vector.h"
 using Vector::Vector3D;
 using Vector::Vector4D;

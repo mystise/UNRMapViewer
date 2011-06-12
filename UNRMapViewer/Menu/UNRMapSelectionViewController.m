@@ -121,12 +121,20 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	//push the UNRMapView view controller, and give it the map name
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	/*UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Loading..." message:@"" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+	UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	activity.contentMode = UIViewContentModeCenter;
+	[alert addSubview:activity];
+	[alert show];
+	[activity startAnimating];*/
+	
 	[self.mapViewController loadMap:[self.maps objectAtIndex:indexPath.row]];
 	[self presentModalViewController:self.mapViewController animated:YES];
-	//[self.mapViewController startAnimation];
+	
+	/*[alert dismissWithClickedButtonIndex:0 animated:YES];
+	[alert release];
+	[activity release];*/
 }
 
 @end

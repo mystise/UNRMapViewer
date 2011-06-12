@@ -48,8 +48,7 @@
 			color *glTexData = calloc(levelWidth*levelHeight, sizeof(color));
 			//stored width first
 			
-			if(format == 0){
-				//paletted
+			if(format == 0){ //paletted
 				for(int i = 0; i < levelHeight; i++){
 					for(int j = 0; j < levelWidth; j++){
 						Byte index = [manager loadByte];
@@ -66,12 +65,26 @@
 			[manager release];
 			
 			glTexImage2D(GL_TEXTURE_2D, i, GL_RGBA, levelWidth, levelHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, glTexData);
-			//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			
 			free(glTexData);
 		}
 		obj.objectData = nil;
+	}
+	return [tex autorelease];
+}
+
++ (id)textureWithLightMap:(NSMutableDictionary *)lightMap data:(NSMutableData *)data{
+	UNRTexture *tex = [[self alloc] init];
+	if(tex){
+		tex.width = [[lightMap valueForKey:@"vClamp"] unsignedIntValue];
+		tex.height = [[lightMap valueForKey:@"uClamp"] unsignedIntValue];
+		int dataOffset = [[lightMap valueForKey:@"dataOffset"] unsignedIntValue];
+		if(tex.width*tex.height + dataOffset < [data length]){
+			Byte *texDat;
+			NSData *subDat = [data subdataWithRange:NSMakeRange(dataOffset, tex.width*tex.height)];
+			texDat = (Byte *)[subDat bytes];
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, tex.width, tex.height, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, texDat);
+		}
 	}
 	return [tex autorelease];
 }

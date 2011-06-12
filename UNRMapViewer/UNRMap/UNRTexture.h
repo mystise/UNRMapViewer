@@ -21,6 +21,7 @@ typedef struct{
 }
 
 + (id)textureWithObject:(UNRExport *)obj;
++ (id)textureWithLightMap:(NSMutableDictionary *)lightMap data:(NSMutableData *)data;
 - (void)bind:(int)index;
 
 @property(nonatomic, assign) int width, height;

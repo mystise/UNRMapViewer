@@ -18,7 +18,7 @@
 
 @implementation EAGLView
 
-@synthesize context, framebufferWidth = framebufferWidth_, framebufferHeight = framebufferHeight_, map = map_;
+@synthesize context, framebufferWidth = framebufferWidth_, framebufferHeight = framebufferHeight_;
 
 // You must implement this method
 + (Class)layerClass{
@@ -44,8 +44,6 @@
 - (void)dealloc{
 	[self deleteFramebuffer];	
 	[context release];
-	[map_ release];
-	map_ = nil;
 	
 	[super dealloc];
 }
@@ -143,18 +141,6 @@
 - (void)layoutSubviews{
 	// The framebuffer will be re-created at the beginning of the next setFramebuffer method call.
 	[self deleteFramebuffer];
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-	[self.map touchesBegan:touches withEvent:event];
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-	[self.map touchesMoved:touches withEvent:event];
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-	[self.map touchesEnded:touches withEvent:event];
 }
 
 @end

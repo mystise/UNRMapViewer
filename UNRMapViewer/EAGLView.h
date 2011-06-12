@@ -23,7 +23,6 @@
 }
 
 @property(nonatomic, retain) EAGLContext *context;
-@property(nonatomic, retain) UNRMap *map;
 @property(nonatomic, assign) GLint framebufferWidth;
 @property(nonatomic, assign) GLint framebufferHeight;
 

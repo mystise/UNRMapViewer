@@ -24,5 +24,6 @@
 @property(nonatomic, retain) UNRNode *rootNode;
 @property(nonatomic, retain) NSMutableDictionary *textures;
 @property(nonatomic, retain) NSMutableDictionary *shaders;
+@property(nonatomic, retain) NSMutableArray *lightMaps;
 
 @end

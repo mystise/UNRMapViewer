@@ -24,7 +24,7 @@ using Vector::Vector2D;
 
 @implementation UNRMap
 
-@synthesize rootNode = rootNode_, textures = textures_, shaders = shaders_, cam = cam_;
+@synthesize rootNode = rootNode_, textures = textures_, shaders = shaders_, cam = cam_, lightMaps = lightMaps_;
 
 - (id)initWithModel:(NSMutableDictionary *)model andFile:(UNRFile *)file{
 	self = [super init];
@@ -45,26 +45,17 @@ using Vector::Vector2D;
 }
 
 - (void)draw:(float)aspect{
-	//static float rotation = 0.0f;
-	//rotation += 1.0f;
-	
-	//static float pos = 0.0f;
-	//pos += 1.0f;
-	//self.cam->moveTo(Vector3D(0.0f, 0.0f, pos));
-	
 	Matrix3D modelView;
 	Matrix3D projection;
 	
-	projection.perspective(60.0f, 0.1f, 10000.0f, aspect);
+	projection.perspective(60.0f, 1.7f, 10000.0f, aspect);
 	
-	//self.cam->rotateTo(0.0f, rotation);
 	modelView = self.cam->glData();
-	//self.cam->moveTo(Vector3D(modelView[12], modelView[13], modelView[14]));
 	modelView.uniformScale(0.1f);
 	
-	modelView = projection * modelView;//modelView = projection * modelView
+	modelView = projection * modelView;
 	
-	[self.rootNode draw:aspect matrix:modelView];
+	[self.rootNode drawWithMatrix:modelView];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -78,9 +69,8 @@ using Vector::Vector2D;
 		Vector2D origPoint = [touch previousLocationInView:nil];
 		Vector2D disp = newPoint - origPoint;
 		if(newPoint.y < 512){
-			self.cam->rotate(disp.x/10.0f, disp.y/10.0f);
+			self.cam->rotate(disp.x/10.0f, -disp.y/10.0f);
 		}else{
-			//self.cam->move(Vector3D(-disp.y, 0.0f, -disp.x));
 			self.cam->moveRel(Vector3D(disp.y/10.0f, 0.0f, disp.x/10.0f));
 		}
 	}
@@ -100,8 +90,10 @@ using Vector::Vector2D;
 - (void)dealloc{
 	if(cam_ != NULL){
 		delete cam_;
+		cam_ = NULL;
 	}
-	cam_ = NULL;
+	[lightMaps_ release];
+	lightMaps_ = nil;
 	[rootNode_ release];
 	rootNode_ = nil;
 	[super dealloc];

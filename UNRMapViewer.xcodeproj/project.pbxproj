@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		493320AC13932B40007B08F0 /* UNRMap.mm in Sources */ = {isa = PBXBuildFile; fileRef = 493320AB13932B40007B08F0 /* UNRMap.mm */; };
 		493AE5D31388324200591592 /* UNRTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5B71388324200591592 /* UNRTexture.m */; };
+		493E72C913AD6127008C2E78 /* SkyBox.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 493E72C713AD6127008C2E78 /* SkyBox.fsh */; };
+		493E72CA13AD6127008C2E78 /* SkyBox.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 493E72C813AD6127008C2E78 /* SkyBox.vsh */; };
+		493E72CE13AD6C9B008C2E78 /* UNRCubeCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = 493E72CD13AD6C9B008C2E78 /* UNRCubeCamera.mm */; };
 		49836DED13884817003193CD /* Default Plugins in Resources */ = {isa = PBXBuildFile; fileRef = 49836DEC13884817003193CD /* Default Plugins */; };
 		49836E541388BD64003193CD /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E391388BD64003193CD /* DataManager.m */; };
 		49836E551388BD64003193CD /* UNRBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E3B1388BD64003193CD /* UNRBase.m */; };
@@ -65,6 +68,10 @@
 		493320AB13932B40007B08F0 /* UNRMap.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UNRMap.mm; sourceTree = "<group>"; };
 		493AE5B61388324200591592 /* UNRTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRTexture.h; sourceTree = "<group>"; };
 		493AE5B71388324200591592 /* UNRTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRTexture.m; sourceTree = "<group>"; };
+		493E72C713AD6127008C2E78 /* SkyBox.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = SkyBox.fsh; path = Shaders/SkyBox.fsh; sourceTree = "<group>"; };
+		493E72C813AD6127008C2E78 /* SkyBox.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = SkyBox.vsh; path = Shaders/SkyBox.vsh; sourceTree = "<group>"; };
+		493E72CC13AD6C9B008C2E78 /* UNRCubeCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRCubeCamera.h; sourceTree = "<group>"; };
+		493E72CD13AD6C9B008C2E78 /* UNRCubeCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UNRCubeCamera.mm; sourceTree = "<group>"; };
 		49836DEC13884817003193CD /* Default Plugins */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Default Plugins"; sourceTree = "<group>"; };
 		49836E381388BD64003193CD /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		49836E391388BD64003193CD /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
@@ -169,6 +176,8 @@
 				493AE5B71388324200591592 /* UNRTexture.m */,
 				49836E6C138F4714003193CD /* UNRNode.h */,
 				49836E6D138F4715003193CD /* UNRNode.mm */,
+				493E72CC13AD6C9B008C2E78 /* UNRCubeCamera.h */,
+				493E72CD13AD6C9B008C2E78 /* UNRCubeCamera.mm */,
 				49B5F4861395CDCC00421352 /* UNRShader.h */,
 				49B5F4871395CDCC00421352 /* UNRShader.m */,
 				49836E621389EA53003193CD /* Utilities.h */,
@@ -183,6 +192,7 @@
 		49836E371388BD64003193CD /* UnrealPackage */ = {
 			isa = PBXGroup;
 			children = (
+				49836E491388BD64003193CD /* UNRPluginObject */,
 				49836E3C1388BD64003193CD /* Unreal.h */,
 				49836E381388BD64003193CD /* DataManager.h */,
 				49836E391388BD64003193CD /* DataManager.m */,
@@ -202,7 +212,6 @@
 				49836E481388BD64003193CD /* UNRName.m */,
 				49836E521388BD64003193CD /* UNRUtilities.h */,
 				49836E531388BD64003193CD /* UNRUtilities.m */,
-				49836E491388BD64003193CD /* UNRPluginObject */,
 			);
 			path = UnrealPackage;
 			sourceTree = "<group>";
@@ -261,6 +270,8 @@
 				498E6117137A30CD00EA243B /* UNRMapViewerAppDelegate.h */,
 				498E6118137A30CD00EA243B /* UNRMapViewerAppDelegate.m */,
 				498E611A137A30CD00EA243B /* MainWindow.xib */,
+				493E72C713AD6127008C2E78 /* SkyBox.fsh */,
+				493E72C813AD6127008C2E78 /* SkyBox.vsh */,
 				498E611D137A30CD00EA243B /* Texture.fsh */,
 				498E611F137A30CD00EA243B /* Texture.vsh */,
 				493320AE13932B6B007B08F0 /* UNRMap */,
@@ -386,6 +397,8 @@
 			files = (
 				498E6113137A30CD00EA243B /* InfoPlist.strings in Resources */,
 				498E611C137A30CD00EA243B /* MainWindow.xib in Resources */,
+				493E72C913AD6127008C2E78 /* SkyBox.fsh in Resources */,
+				493E72CA13AD6127008C2E78 /* SkyBox.vsh in Resources */,
 				498E611E137A30CD00EA243B /* Texture.fsh in Resources */,
 				498E6120137A30CD00EA243B /* Texture.vsh in Resources */,
 				498E6129137A30CD00EA243B /* UNRMapViewerViewController.xib in Resources */,
@@ -449,6 +462,7 @@
 				49836E6E138F4716003193CD /* UNRNode.mm in Sources */,
 				493320AC13932B40007B08F0 /* UNRMap.mm in Sources */,
 				49B5F4881395CDCC00421352 /* UNRShader.m in Sources */,
+				493E72CE13AD6C9B008C2E78 /* UNRCubeCamera.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

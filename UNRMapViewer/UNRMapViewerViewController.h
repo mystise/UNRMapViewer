@@ -25,8 +25,8 @@
 	CADisplayLink *displayLink;
 }
 
-@property (readonly, nonatomic, getter=isAnimating) BOOL animating;
-@property (nonatomic) NSInteger animationFrameInterval;
+@property(nonatomic, readonly, getter=isAnimating) BOOL animating;
+@property(nonatomic, assign) NSInteger animationFrameInterval;
 @property(nonatomic, retain) UNRFile *file;
 @property(nonatomic, retain) UNRMap *map;
 @property(nonatomic, assign) float aspect;

@@ -49,6 +49,19 @@ namespace Matrix{
 			return *this;
 		}
 		
+		inline Matrix3D &transpose(){
+			float temp[16];
+			for(int i = 0; i < 4; i++){
+				for(int j = 0; j < 4; j++){
+					temp[j*4 + i] = m[i*4 + j];
+				}
+			}
+			for(int i = 0; i < 16; i++){
+				m[i] = temp[i];
+			}
+			return *this;
+		}
+		
 		inline Matrix3D operator *(const Matrix3D &mat) const{
 			Matrix3D res;
 			res[0] = m[0]  * mat[0]  + m[4] * mat[1]  + m[8]  * mat[2]  + m[12] * mat[3];

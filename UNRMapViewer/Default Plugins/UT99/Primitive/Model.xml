@@ -98,7 +98,7 @@
 		
 		<compactIndex name="lightCount"/>
 		<array name="lights" count="lightCount">
-			<compactIndex name="light"/> <!-- objectReference -->
+			<objectReference name="light"/>
 		</array>
 		
 		<int name="unk1"/>

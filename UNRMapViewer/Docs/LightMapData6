@@ -1,0 +1,4807 @@
+LightMap:
+	width:3 height:6
+	dataOffset:94246 dataLength:105481
+	difference:11235
+	length:18
+LightMap:
+	width:13 height:15
+	dataOffset:89634 dataLength:105481
+	difference:15847
+	length:195
+LightMap:
+	width:23 height:15
+	dataOffset:90024 dataLength:105481
+	difference:15457
+	length:345
+LightMap:
+	width:23 height:13
+	dataOffset:91220 dataLength:105481
+	difference:14261
+	length:299
+LightMap:
+	width:13 height:15
+	dataOffset:89452 dataLength:105481
+	difference:16029
+	length:195
+LightMap:
+	width:13 height:15
+	dataOffset:89556 dataLength:105481
+	difference:15925
+	length:195
+LightMap:
+	width:9 height:15
+	dataOffset:91864 dataLength:105481
+	difference:13617
+	length:135
+LightMap:
+	width:11 height:15
+	dataOffset:92008 dataLength:105481
+	difference:13473
+	length:165
+LightMap:
+	width:13 height:15
+	dataOffset:92294 dataLength:105481
+	difference:13187
+	length:195
+LightMap:
+	width:19 height:13
+	dataOffset:92632 dataLength:105481
+	difference:12849
+	length:247
+LightMap:
+	width:7 height:3
+	dataOffset:93126 dataLength:105481
+	difference:12355
+	length:21
+LightMap:
+	width:4 height:4
+	dataOffset:94772 dataLength:105481
+	difference:10709
+	length:16
+LightMap:
+	width:24 height:32
+	dataOffset:39462 dataLength:105481
+	difference:66019
+	length:768
+LightMap:
+	width:12 height:2
+	dataOffset:44364 dataLength:105481
+	difference:61117
+	length:24
+LightMap:
+	width:24 height:8
+	dataOffset:41832 dataLength:105481
+	difference:63649
+	length:192
+LightMap:
+	width:33 height:14
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:462
+LightMap:
+	width:36 height:36
+	dataOffset:35572 dataLength:105481
+	difference:69909
+	length:1296
+LightMap:
+	width:10 height:46
+	dataOffset:34882 dataLength:105481
+	difference:70599
+	length:460
+LightMap:
+	width:49 height:24
+	dataOffset:23367 dataLength:105481
+	difference:82114
+	length:1176
+LightMap:
+	width:45 height:45
+	dataOffset:33262 dataLength:105481
+	difference:72219
+	length:2025
+LightMap:
+	width:10 height:46
+	dataOffset:35182 dataLength:105481
+	difference:70299
+	length:460
+LightMap:
+	width:46 height:46
+	dataOffset:30778 dataLength:105481
+	difference:74703
+	length:2116
+LightMap:
+	width:24 height:32
+	dataOffset:40038 dataLength:105481
+	difference:65443
+	length:768
+LightMap:
+	width:24 height:28
+	dataOffset:37734 dataLength:105481
+	difference:67747
+	length:672
+LightMap:
+	width:24 height:24
+	dataOffset:36942 dataLength:105481
+	difference:68539
+	length:576
+LightMap:
+	width:15 height:11
+	dataOffset:103867 dataLength:105481
+	difference:1614
+	length:165
+LightMap:
+	width:24 height:8
+	dataOffset:104282 dataLength:105481
+	difference:1199
+	length:192
+LightMap:
+	width:12 height:11
+	dataOffset:104454 dataLength:105481
+	difference:1027
+	length:132
+LightMap:
+	width:8 height:4
+	dataOffset:105285 dataLength:105481
+	difference:196
+	length:32
+LightMap:
+	width:8 height:5
+	dataOffset:105333 dataLength:105481
+	difference:148
+	length:40
+LightMap:
+	width:12 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:24
+LightMap:
+	width:2 height:9
+	dataOffset:104646 dataLength:105481
+	difference:835
+	length:18
+LightMap:
+	width:2 height:16
+	dataOffset:104658 dataLength:105481
+	difference:823
+	length:32
+LightMap:
+	width:25 height:8
+	dataOffset:104354 dataLength:105481
+	difference:1127
+	length:200
+LightMap:
+	width:8 height:8
+	dataOffset:105067 dataLength:105481
+	difference:414
+	length:64
+LightMap:
+	width:14 height:11
+	dataOffset:103957 dataLength:105481
+	difference:1524
+	length:154
+LightMap:
+	width:24 height:8
+	dataOffset:104210 dataLength:105481
+	difference:1271
+	length:192
+LightMap:
+	width:7 height:8
+	dataOffset:105365 dataLength:105481
+	difference:116
+	length:56
+LightMap:
+	width:8 height:4
+	dataOffset:105393 dataLength:105481
+	difference:88
+	length:32
+LightMap:
+	width:8 height:4
+	dataOffset:105425 dataLength:105481
+	difference:56
+	length:32
+LightMap:
+	width:8 height:5
+	dataOffset:105449 dataLength:105481
+	difference:32
+	length:40
+	rawData: ff ef  0  0  0  0  0  0 ff ff ff ff ff ff ff  0 fc fc f8 f8 f0  0  0  0 ff ff ff ff ff ff ff  0
+	failed!!!
+LightMap:
+	width:2 height:16
+	dataOffset:104622 dataLength:105481
+	difference:859
+	length:32
+LightMap:
+	width:2 height:9
+	dataOffset:104626 dataLength:105481
+	difference:855
+	length:18
+LightMap:
+	width:2 height:4
+	dataOffset:104041 dataLength:105481
+	difference:1440
+	length:8
+LightMap:
+	width:4 height:4
+	dataOffset:104051 dataLength:105481
+	difference:1430
+	length:16
+LightMap:
+	width:12 height:4
+	dataOffset:104083 dataLength:105481
+	difference:1398
+	length:48
+LightMap:
+	width:2 height:4
+	dataOffset:104126 dataLength:105481
+	difference:1355
+	length:8
+LightMap:
+	width:9 height:4
+	dataOffset:104138 dataLength:105481
+	difference:1343
+	length:36
+LightMap:
+	width:25 height:12
+	dataOffset:25866 dataLength:105481
+	difference:79615
+	length:300
+LightMap:
+	width:9 height:36
+	dataOffset:36447 dataLength:105481
+	difference:69034
+	length:324
+LightMap:
+	width:35 height:35
+	dataOffset:35572 dataLength:105481
+	difference:69909
+	length:1225
+LightMap:
+	width:9 height:36
+	dataOffset:36807 dataLength:105481
+	difference:68674
+	length:324
+LightMap:
+	width:6 height:2
+	dataOffset:43940 dataLength:105481
+	difference:61541
+	length:12
+LightMap:
+	width:3 height:2
+	dataOffset:43080 dataLength:105481
+	difference:62401
+	length:6
+LightMap:
+	width:6 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:12
+LightMap:
+	width:3 height:2
+	dataOffset:43976 dataLength:105481
+	difference:61505
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:43985 dataLength:105481
+	difference:61496
+	length:6
+LightMap:
+	width:2 height:2
+	dataOffset:43972 dataLength:105481
+	difference:61509
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:43994 dataLength:105481
+	difference:61487
+	length:4
+LightMap:
+	width:7 height:2
+	dataOffset:43048 dataLength:105481
+	difference:62433
+	length:14
+LightMap:
+	width:8 height:7
+	dataOffset:43016 dataLength:105481
+	difference:62465
+	length:56
+LightMap:
+	width:2 height:12
+	dataOffset:104638 dataLength:105481
+	difference:843
+	length:24
+LightMap:
+	width:7 height:2
+	dataOffset:43092 dataLength:105481
+	difference:62389
+	length:14
+LightMap:
+	width:2 height:2
+	dataOffset:43062 dataLength:105481
+	difference:62419
+	length:4
+LightMap:
+	width:8 height:2
+	dataOffset:43106 dataLength:105481
+	difference:62375
+	length:16
+LightMap:
+	width:8 height:2
+	dataOffset:43064 dataLength:105481
+	difference:62417
+	length:16
+LightMap:
+	width:6 height:3
+	dataOffset:43916 dataLength:105481
+	difference:61565
+	length:18
+LightMap:
+	width:7 height:4
+	dataOffset:104083 dataLength:105481
+	difference:1398
+	length:28
+LightMap:
+	width:4 height:4
+	dataOffset:105047 dataLength:105481
+	difference:434
+	length:16
+LightMap:
+	width:2 height:4
+	dataOffset:104118 dataLength:105481
+	difference:1363
+	length:8
+LightMap:
+	width:3 height:2
+	dataOffset:43944 dataLength:105481
+	difference:61537
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:43956 dataLength:105481
+	difference:61525
+	length:6
+LightMap:
+	width:2 height:2
+	dataOffset:43940 dataLength:105481
+	difference:61541
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:43968 dataLength:105481
+	difference:61513
+	length:4
+LightMap:
+	width:8 height:16
+	dataOffset:29290 dataLength:105481
+	difference:76191
+	length:128
+LightMap:
+	width:33 height:12
+	dataOffset:101948 dataLength:105481
+	difference:3533
+	length:396
+LightMap:
+	width:17 height:5
+	dataOffset:101948 dataLength:105481
+	difference:3533
+	length:85
+LightMap:
+	width:12 height:12
+	dataOffset:42704 dataLength:105481
+	difference:62777
+	length:144
+LightMap:
+	width:12 height:14
+	dataOffset:42776 dataLength:105481
+	difference:62705
+	length:168
+LightMap:
+	width:2 height:2
+	dataOffset:105219 dataLength:105481
+	difference:262
+	length:4
+LightMap:
+	width:12 height:12
+	dataOffset:42584 dataLength:105481
+	difference:62897
+	length:144
+LightMap:
+	width:12 height:3
+	dataOffset:44562 dataLength:105481
+	difference:60919
+	length:36
+LightMap:
+	width:6 height:2
+	dataOffset:44448 dataLength:105481
+	difference:61033
+	length:12
+LightMap:
+	width:12 height:3
+	dataOffset:44466 dataLength:105481
+	difference:61015
+	length:36
+LightMap:
+	width:12 height:2
+	dataOffset:44502 dataLength:105481
+	difference:60979
+	length:24
+LightMap:
+	width:4 height:3
+	dataOffset:105201 dataLength:105481
+	difference:280
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:105213 dataLength:105481
+	difference:268
+	length:8
+LightMap:
+	width:2 height:2
+	dataOffset:105217 dataLength:105481
+	difference:264
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:105227 dataLength:105481
+	difference:254
+	length:4
+LightMap:
+	width:17 height:12
+	dataOffset:29356 dataLength:105481
+	difference:76125
+	length:204
+LightMap:
+	width:24 height:8
+	dataOffset:42000 dataLength:105481
+	difference:63481
+	length:192
+LightMap:
+	width:12 height:6
+	dataOffset:43754 dataLength:105481
+	difference:61727
+	length:72
+LightMap:
+	width:2 height:2
+	dataOffset:43814 dataLength:105481
+	difference:61667
+	length:4
+LightMap:
+	width:15 height:11
+	dataOffset:103535 dataLength:105481
+	difference:1946
+	length:165
+LightMap:
+	width:14 height:11
+	dataOffset:103685 dataLength:105481
+	difference:1796
+	length:154
+LightMap:
+	width:2 height:4
+	dataOffset:103769 dataLength:105481
+	difference:1712
+	length:8
+LightMap:
+	width:4 height:4
+	dataOffset:103773 dataLength:105481
+	difference:1708
+	length:16
+LightMap:
+	width:2 height:4
+	dataOffset:103814 dataLength:105481
+	difference:1667
+	length:8
+LightMap:
+	width:9 height:4
+	dataOffset:103822 dataLength:105481
+	difference:1659
+	length:36
+LightMap:
+	width:2 height:4
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:8
+LightMap:
+	width:8 height:2
+	dataOffset:43822 dataLength:105481
+	difference:61659
+	length:16
+LightMap:
+	width:8 height:2
+	dataOffset:43846 dataLength:105481
+	difference:61635
+	length:16
+LightMap:
+	width:8 height:4
+	dataOffset:43862 dataLength:105481
+	difference:61619
+	length:32
+LightMap:
+	width:2 height:4
+	dataOffset:43488 dataLength:105481
+	difference:61993
+	length:8
+LightMap:
+	width:7 height:4
+	dataOffset:103793 dataLength:105481
+	difference:1688
+	length:28
+LightMap:
+	width:16 height:2
+	dataOffset:43490 dataLength:105481
+	difference:61991
+	length:32
+LightMap:
+	width:16 height:34
+	dataOffset:40614 dataLength:105481
+	difference:64867
+	length:544
+LightMap:
+	width:2 height:12
+	dataOffset:41828 dataLength:105481
+	difference:63653
+	length:24
+LightMap:
+	width:16 height:8
+	dataOffset:43602 dataLength:105481
+	difference:61879
+	length:128
+LightMap:
+	width:12 height:2
+	dataOffset:43670 dataLength:105481
+	difference:61811
+	length:24
+LightMap:
+	width:12 height:2
+	dataOffset:43706 dataLength:105481
+	difference:61775
+	length:24
+LightMap:
+	width:2 height:3
+	dataOffset:43666 dataLength:105481
+	difference:61815
+	length:6
+LightMap:
+	width:16 height:2
+	dataOffset:43538 dataLength:105481
+	difference:61943
+	length:32
+LightMap:
+	width:33 height:12
+	dataOffset:101816 dataLength:105481
+	difference:3665
+	length:396
+LightMap:
+	width:12 height:14
+	dataOffset:42920 dataLength:105481
+	difference:62561
+	length:168
+LightMap:
+	width:2 height:2
+	dataOffset:105249 dataLength:105481
+	difference:232
+	length:4
+LightMap:
+	width:9 height:2
+	dataOffset:104852 dataLength:105481
+	difference:629
+	length:18
+LightMap:
+	width:12 height:2
+	dataOffset:104861 dataLength:105481
+	difference:620
+	length:24
+LightMap:
+	width:4 height:8
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:32
+LightMap:
+	width:3 height:5
+	dataOffset:104978 dataLength:105481
+	difference:503
+	length:15
+LightMap:
+	width:2 height:3
+	dataOffset:104987 dataLength:105481
+	difference:494
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:6
+LightMap:
+	width:2 height:5
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:10
+LightMap:
+	width:5 height:2
+	dataOffset:104987 dataLength:105481
+	difference:494
+	length:10
+LightMap:
+	width:4 height:8
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:32
+LightMap:
+	width:3 height:5
+	dataOffset:104987 dataLength:105481
+	difference:494
+	length:15
+LightMap:
+	width:3 height:5
+	dataOffset:104987 dataLength:105481
+	difference:494
+	length:15
+LightMap:
+	width:2 height:2
+	dataOffset:105027 dataLength:105481
+	difference:454
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:105031 dataLength:105481
+	difference:450
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:105033 dataLength:105481
+	difference:448
+	length:4
+LightMap:
+	width:4 height:4
+	dataOffset:105035 dataLength:105481
+	difference:446
+	length:16
+LightMap:
+	width:2 height:3
+	dataOffset:104999 dataLength:105481
+	difference:482
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:105001 dataLength:105481
+	difference:480
+	length:6
+LightMap:
+	width:2 height:5
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:10
+LightMap:
+	width:5 height:2
+	dataOffset:105007 dataLength:105481
+	difference:474
+	length:10
+LightMap:
+	width:4 height:4
+	dataOffset:104954 dataLength:105481
+	difference:527
+	length:16
+LightMap:
+	width:4 height:4
+	dataOffset:104958 dataLength:105481
+	difference:523
+	length:16
+LightMap:
+	width:4 height:8
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:32
+LightMap:
+	width:4 height:8
+	dataOffset:104966 dataLength:105481
+	difference:515
+	length:32
+LightMap:
+	width:12 height:3
+	dataOffset:104897 dataLength:105481
+	difference:584
+	length:36
+LightMap:
+	width:9 height:2
+	dataOffset:104921 dataLength:105481
+	difference:560
+	length:18
+LightMap:
+	width:12 height:3
+	dataOffset:104930 dataLength:105481
+	difference:551
+	length:36
+LightMap:
+	width:12 height:3
+	dataOffset:44316 dataLength:105481
+	difference:61165
+	length:36
+LightMap:
+	width:6 height:2
+	dataOffset:44298 dataLength:105481
+	difference:61183
+	length:12
+LightMap:
+	width:12 height:3
+	dataOffset:44412 dataLength:105481
+	difference:61069
+	length:36
+LightMap:
+	width:4 height:3
+	dataOffset:105233 dataLength:105481
+	difference:248
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:105241 dataLength:105481
+	difference:240
+	length:8
+LightMap:
+	width:2 height:2
+	dataOffset:105245 dataLength:105481
+	difference:236
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:105255 dataLength:105481
+	difference:226
+	length:4
+LightMap:
+	width:6 height:6
+	dataOffset:44777 dataLength:105481
+	difference:60704
+	length:36
+LightMap:
+	width:6 height:2
+	dataOffset:44777 dataLength:105481
+	difference:60704
+	length:12
+LightMap:
+	width:6 height:6
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:36
+LightMap:
+	width:6 height:2
+	dataOffset:44771 dataLength:105481
+	difference:60710
+	length:12
+LightMap:
+	width:6 height:2
+	dataOffset:44777 dataLength:105481
+	difference:60704
+	length:12
+LightMap:
+	width:7 height:2
+	dataOffset:43886 dataLength:105481
+	difference:61595
+	length:14
+LightMap:
+	width:2 height:2
+	dataOffset:43900 dataLength:105481
+	difference:61581
+	length:4
+LightMap:
+	width:7 height:2
+	dataOffset:43902 dataLength:105481
+	difference:61579
+	length:14
+LightMap:
+	width:12 height:2
+	dataOffset:43290 dataLength:105481
+	difference:62191
+	length:24
+LightMap:
+	width:16 height:2
+	dataOffset:43124 dataLength:105481
+	difference:62357
+	length:32
+LightMap:
+	width:24 height:8
+	dataOffset:42072 dataLength:105481
+	difference:63409
+	length:192
+LightMap:
+	width:16 height:8
+	dataOffset:43220 dataLength:105481
+	difference:62261
+	length:128
+LightMap:
+	width:8 height:2
+	dataOffset:43432 dataLength:105481
+	difference:62049
+	length:16
+LightMap:
+	width:12 height:6
+	dataOffset:43362 dataLength:105481
+	difference:62119
+	length:72
+LightMap:
+	width:8 height:4
+	dataOffset:43464 dataLength:105481
+	difference:62017
+	length:32
+LightMap:
+	width:4 height:4
+	dataOffset:44839 dataLength:105481
+	difference:60642
+	length:16
+LightMap:
+	width:24 height:8
+	dataOffset:41952 dataLength:105481
+	difference:63529
+	length:192
+LightMap:
+	width:4 height:4
+	dataOffset:44034 dataLength:105481
+	difference:61447
+	length:16
+LightMap:
+	width:2 height:8
+	dataOffset:105135 dataLength:105481
+	difference:346
+	length:16
+LightMap:
+	width:2 height:8
+	dataOffset:105141 dataLength:105481
+	difference:340
+	length:16
+LightMap:
+	width:2 height:8
+	dataOffset:105143 dataLength:105481
+	difference:338
+	length:16
+LightMap:
+	width:2 height:8
+	dataOffset:105139 dataLength:105481
+	difference:342
+	length:16
+LightMap:
+	width:2 height:12
+	dataOffset:41816 dataLength:105481
+	difference:63665
+	length:24
+LightMap:
+	width:8 height:2
+	dataOffset:43448 dataLength:105481
+	difference:62033
+	length:16
+LightMap:
+	width:12 height:2
+	dataOffset:43338 dataLength:105481
+	difference:62143
+	length:24
+LightMap:
+	width:5 height:5
+	dataOffset:44799 dataLength:105481
+	difference:60682
+	length:25
+LightMap:
+	width:5 height:4
+	dataOffset:44789 dataLength:105481
+	difference:60692
+	length:20
+LightMap:
+	width:5 height:5
+	dataOffset:44814 dataLength:105481
+	difference:60667
+	length:25
+LightMap:
+	width:5 height:4
+	dataOffset:44829 dataLength:105481
+	difference:60652
+	length:20
+LightMap:
+	width:16 height:2
+	dataOffset:43188 dataLength:105481
+	difference:62293
+	length:32
+LightMap:
+	width:25 height:16
+	dataOffset:25998 dataLength:105481
+	difference:79483
+	length:400
+LightMap:
+	width:6 height:8
+	dataOffset:93484 dataLength:105481
+	difference:11997
+	length:48
+LightMap:
+	width:6 height:8
+	dataOffset:93430 dataLength:105481
+	difference:12051
+	length:48
+LightMap:
+	width:2 height:5
+	dataOffset:41814 dataLength:105481
+	difference:63667
+	length:10
+LightMap:
+	width:2 height:5
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:10
+LightMap:
+	width:2 height:12
+	dataOffset:41820 dataLength:105481
+	difference:63661
+	length:24
+LightMap:
+	width:2 height:16
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:32
+LightMap:
+	width:2 height:12
+	dataOffset:41824 dataLength:105481
+	difference:63657
+	length:24
+LightMap:
+	width:2 height:4
+	dataOffset:93223 dataLength:105481
+	difference:12258
+	length:8
+LightMap:
+	width:4 height:6
+	dataOffset:93628 dataLength:105481
+	difference:11853
+	length:24
+LightMap:
+	width:2 height:5
+	dataOffset:93416 dataLength:105481
+	difference:12065
+	length:10
+LightMap:
+	width:4 height:7
+	dataOffset:93308 dataLength:105481
+	difference:12173
+	length:28
+LightMap:
+	width:5 height:6
+	dataOffset:93263 dataLength:105481
+	difference:12218
+	length:30
+LightMap:
+	width:4 height:6
+	dataOffset:93247 dataLength:105481
+	difference:12234
+	length:24
+LightMap:
+	width:24 height:24
+	dataOffset:26954 dataLength:105481
+	difference:78527
+	length:576
+LightMap:
+	width:5 height:5
+	dataOffset:44932 dataLength:105481
+	difference:60549
+	length:25
+LightMap:
+	width:24 height:24
+	dataOffset:27458 dataLength:105481
+	difference:78023
+	length:576
+LightMap:
+	width:5 height:5
+	dataOffset:44912 dataLength:105481
+	difference:60569
+	length:25
+LightMap:
+	width:24 height:4
+	dataOffset:101965 dataLength:105481
+	difference:3516
+	length:96
+LightMap:
+	width:24 height:4
+	dataOffset:102901 dataLength:105481
+	difference:2580
+	length:96
+LightMap:
+	width:24 height:4
+	dataOffset:102325 dataLength:105481
+	difference:3156
+	length:96
+LightMap:
+	width:24 height:4
+	dataOffset:102685 dataLength:105481
+	difference:2796
+	length:96
+LightMap:
+	width:24 height:2
+	dataOffset:102469 dataLength:105481
+	difference:3012
+	length:48
+LightMap:
+	width:24 height:2
+	dataOffset:102565 dataLength:105481
+	difference:2916
+	length:48
+LightMap:
+	width:24 height:2
+	dataOffset:102805 dataLength:105481
+	difference:2676
+	length:48
+LightMap:
+	width:24 height:2
+	dataOffset:102877 dataLength:105481
+	difference:2604
+	length:48
+LightMap:
+	width:24 height:2
+	dataOffset:102133 dataLength:105481
+	difference:3348
+	length:48
+LightMap:
+	width:24 height:2
+	dataOffset:103069 dataLength:105481
+	difference:2412
+	length:48
+LightMap:
+	width:24 height:2
+	dataOffset:103093 dataLength:105481
+	difference:2388
+	length:48
+LightMap:
+	width:24 height:2
+	dataOffset:102253 dataLength:105481
+	difference:3228
+	length:48
+LightMap:
+	width:17 height:7
+	dataOffset:29322 dataLength:105481
+	difference:76159
+	length:119
+LightMap:
+	width:49 height:24
+	dataOffset:24690 dataLength:105481
+	difference:80791
+	length:1176
+LightMap:
+	width:25 height:8
+	dataOffset:26398 dataLength:105481
+	difference:79083
+	length:200
+LightMap:
+	width:5 height:46
+	dataOffset:34942 dataLength:105481
+	difference:70539
+	length:230
+LightMap:
+	width:9 height:36
+	dataOffset:36492 dataLength:105481
+	difference:68989
+	length:324
+LightMap:
+	width:20 height:8
+	dataOffset:26894 dataLength:105481
+	difference:78587
+	length:160
+LightMap:
+	width:4 height:2
+	dataOffset:44018 dataLength:105481
+	difference:61463
+	length:8
+LightMap:
+	width:4 height:3
+	dataOffset:44022 dataLength:105481
+	difference:61459
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:44026 dataLength:105481
+	difference:61455
+	length:8
+LightMap:
+	width:4 height:3
+	dataOffset:44030 dataLength:105481
+	difference:61451
+	length:12
+LightMap:
+	width:2 height:5
+	dataOffset:44016 dataLength:105481
+	difference:61465
+	length:10
+LightMap:
+	width:4 height:2
+	dataOffset:44000 dataLength:105481
+	difference:61481
+	length:8
+LightMap:
+	width:2 height:8
+	dataOffset:105127 dataLength:105481
+	difference:354
+	length:16
+LightMap:
+	width:4 height:3
+	dataOffset:95088 dataLength:105481
+	difference:10393
+	length:12
+LightMap:
+	width:4 height:3
+	dataOffset:94844 dataLength:105481
+	difference:10637
+	length:12
+LightMap:
+	width:6 height:5
+	dataOffset:101582 dataLength:105481
+	difference:3899
+	length:30
+LightMap:
+	width:6 height:5
+	dataOffset:101816 dataLength:105481
+	difference:3665
+	length:30
+LightMap:
+	width:17 height:12
+	dataOffset:29188 dataLength:105481
+	difference:76293
+	length:204
+LightMap:
+	width:16 height:11
+	dataOffset:26573 dataLength:105481
+	difference:78908
+	length:176
+LightMap:
+	width:16 height:8
+	dataOffset:25966 dataLength:105481
+	difference:79515
+	length:128
+LightMap:
+	width:8 height:8
+	dataOffset:45029 dataLength:105481
+	difference:60452
+	length:64
+LightMap:
+	width:16 height:11
+	dataOffset:26743 dataLength:105481
+	difference:78738
+	length:176
+LightMap:
+	width:16 height:11
+	dataOffset:101242 dataLength:105481
+	difference:4239
+	length:176
+LightMap:
+	width:19 height:7
+	dataOffset:101306 dataLength:105481
+	difference:4175
+	length:133
+LightMap:
+	width:2 height:19
+	dataOffset:101382 dataLength:105481
+	difference:4099
+	length:38
+LightMap:
+	width:19 height:4
+	dataOffset:26807 dataLength:105481
+	difference:78674
+	length:76
+LightMap:
+	width:9 height:7
+	dataOffset:45081 dataLength:105481
+	difference:60400
+	length:63
+LightMap:
+	width:8 height:8
+	dataOffset:45021 dataLength:105481
+	difference:60460
+	length:64
+LightMap:
+	width:2 height:19
+	dataOffset:26864 dataLength:105481
+	difference:78617
+	length:38
+LightMap:
+	width:19 height:4
+	dataOffset:26669 dataLength:105481
+	difference:78812
+	length:76
+LightMap:
+	width:16 height:11
+	dataOffset:101418 dataLength:105481
+	difference:4063
+	length:176
+LightMap:
+	width:19 height:7
+	dataOffset:101514 dataLength:105481
+	difference:3967
+	length:133
+LightMap:
+	width:2 height:19
+	dataOffset:101552 dataLength:105481
+	difference:3929
+	length:38
+LightMap:
+	width:2 height:19
+	dataOffset:26707 dataLength:105481
+	difference:78774
+	length:38
+LightMap:
+	width:25 height:8
+	dataOffset:26473 dataLength:105481
+	difference:79008
+	length:200
+LightMap:
+	width:8 height:8
+	dataOffset:45098 dataLength:105481
+	difference:60383
+	length:64
+LightMap:
+	width:8 height:8
+	dataOffset:45090 dataLength:105481
+	difference:60391
+	length:64
+LightMap:
+	width:9 height:8
+	dataOffset:45045 dataLength:105481
+	difference:60436
+	length:72
+LightMap:
+	width:49 height:24
+	dataOffset:23808 dataLength:105481
+	difference:81673
+	length:1176
+LightMap:
+	width:33 height:11
+	dataOffset:101582 dataLength:105481
+	difference:3899
+	length:363
+LightMap:
+	width:17 height:6
+	dataOffset:101714 dataLength:105481
+	difference:3767
+	length:102
+LightMap:
+	width:17 height:5
+	dataOffset:101748 dataLength:105481
+	difference:3733
+	length:85
+LightMap:
+	width:10 height:8
+	dataOffset:28970 dataLength:105481
+	difference:76511
+	length:80
+LightMap:
+	width:8 height:16
+	dataOffset:29105 dataLength:105481
+	difference:76376
+	length:128
+LightMap:
+	width:10 height:2
+	dataOffset:28860 dataLength:105481
+	difference:76621
+	length:20
+LightMap:
+	width:8 height:2
+	dataOffset:28922 dataLength:105481
+	difference:76559
+	length:16
+LightMap:
+	width:5 height:8
+	dataOffset:29090 dataLength:105481
+	difference:76391
+	length:40
+LightMap:
+	width:8 height:10
+	dataOffset:28954 dataLength:105481
+	difference:76527
+	length:80
+LightMap:
+	width:5 height:2
+	dataOffset:29028 dataLength:105481
+	difference:76453
+	length:10
+LightMap:
+	width:8 height:2
+	dataOffset:28890 dataLength:105481
+	difference:76591
+	length:16
+LightMap:
+	width:9 height:8
+	dataOffset:29010 dataLength:105481
+	difference:76471
+	length:72
+LightMap:
+	width:5 height:8
+	dataOffset:29070 dataLength:105481
+	difference:76411
+	length:40
+LightMap:
+	width:4 height:10
+	dataOffset:29038 dataLength:105481
+	difference:76443
+	length:40
+LightMap:
+	width:9 height:36
+	dataOffset:36852 dataLength:105481
+	difference:68629
+	length:324
+LightMap:
+	width:24 height:28
+	dataOffset:38598 dataLength:105481
+	difference:66883
+	length:672
+LightMap:
+	width:15 height:11
+	dataOffset:103189 dataLength:105481
+	difference:2292
+	length:165
+LightMap:
+	width:14 height:11
+	dataOffset:103279 dataLength:105481
+	difference:2202
+	length:154
+LightMap:
+	width:4 height:4
+	dataOffset:103423 dataLength:105481
+	difference:2058
+	length:16
+LightMap:
+	width:7 height:4
+	dataOffset:103443 dataLength:105481
+	difference:2038
+	length:28
+LightMap:
+	width:9 height:4
+	dataOffset:103472 dataLength:105481
+	difference:2009
+	length:36
+LightMap:
+	width:17 height:7
+	dataOffset:29171 dataLength:105481
+	difference:76310
+	length:119
+LightMap:
+	width:4 height:3
+	dataOffset:44004 dataLength:105481
+	difference:61477
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:44008 dataLength:105481
+	difference:61473
+	length:8
+LightMap:
+	width:4 height:3
+	dataOffset:44012 dataLength:105481
+	difference:61469
+	length:12
+LightMap:
+	width:2 height:5
+	dataOffset:43998 dataLength:105481
+	difference:61483
+	length:10
+LightMap:
+	width:17 height:7
+	dataOffset:29137 dataLength:105481
+	difference:76344
+	length:119
+LightMap:
+	width:26 height:26
+	dataOffset:29950 dataLength:105481
+	difference:75531
+	length:676
+LightMap:
+	width:42 height:5
+	dataOffset:95096 dataLength:105481
+	difference:10385
+	length:210
+LightMap:
+	width:42 height:5
+	dataOffset:94936 dataLength:105481
+	difference:10545
+	length:210
+LightMap:
+	width:9 height:14
+	dataOffset:28824 dataLength:105481
+	difference:76657
+	length:126
+LightMap:
+	width:22 height:22
+	dataOffset:28410 dataLength:105481
+	difference:77071
+	length:484
+LightMap:
+	width:32 height:32
+	dataOffset:22983 dataLength:105481
+	difference:82498
+	length:1024
+LightMap:
+	width:4 height:11
+	dataOffset:95441 dataLength:105481
+	difference:10040
+	length:44
+LightMap:
+	width:4 height:11
+	dataOffset:95425 dataLength:105481
+	difference:10056
+	length:44
+LightMap:
+	width:4 height:6
+	dataOffset:95465 dataLength:105481
+	difference:10016
+	length:24
+LightMap:
+	width:6 height:8
+	dataOffset:95477 dataLength:105481
+	difference:10004
+	length:48
+LightMap:
+	width:6 height:3
+	dataOffset:95419 dataLength:105481
+	difference:10062
+	length:18
+LightMap:
+	width:9 height:14
+	dataOffset:28608 dataLength:105481
+	difference:76873
+	length:126
+LightMap:
+	width:9 height:14
+	dataOffset:28644 dataLength:105481
+	difference:76837
+	length:126
+LightMap:
+	width:42 height:5
+	dataOffset:94852 dataLength:105481
+	difference:10629
+	length:210
+LightMap:
+	width:42 height:5
+	dataOffset:95180 dataLength:105481
+	difference:10301
+	length:210
+LightMap:
+	width:9 height:14
+	dataOffset:28716 dataLength:105481
+	difference:76765
+	length:126
+LightMap:
+	width:9 height:3
+	dataOffset:95020 dataLength:105481
+	difference:10461
+	length:27
+LightMap:
+	width:4 height:2
+	dataOffset:94844 dataLength:105481
+	difference:10637
+	length:8
+LightMap:
+	width:41 height:3
+	dataOffset:95047 dataLength:105481
+	difference:10434
+	length:123
+LightMap:
+	width:9 height:3
+	dataOffset:95222 dataLength:105481
+	difference:10259
+	length:27
+LightMap:
+	width:4 height:2
+	dataOffset:95088 dataLength:105481
+	difference:10393
+	length:8
+LightMap:
+	width:41 height:3
+	dataOffset:95231 dataLength:105481
+	difference:10250
+	length:123
+LightMap:
+	width:28 height:28
+	dataOffset:27962 dataLength:105481
+	difference:77519
+	length:784
+LightMap:
+	width:11 height:28
+	dataOffset:30426 dataLength:105481
+	difference:75055
+	length:308
+LightMap:
+	width:28 height:28
+	dataOffset:29390 dataLength:105481
+	difference:76091
+	length:784
+LightMap:
+	width:11 height:28
+	dataOffset:30690 dataLength:105481
+	difference:74791
+	length:308
+LightMap:
+	width:11 height:28
+	dataOffset:30514 dataLength:105481
+	difference:74967
+	length:308
+LightMap:
+	width:6 height:14
+	dataOffset:30366 dataLength:105481
+	difference:75115
+	length:84
+LightMap:
+	width:4 height:5
+	dataOffset:88197 dataLength:105481
+	difference:17284
+	length:20
+LightMap:
+	width:2 height:5
+	dataOffset:93670 dataLength:105481
+	difference:11811
+	length:10
+LightMap:
+	width:2 height:5
+	dataOffset:93383 dataLength:105481
+	difference:12098
+	length:10
+LightMap:
+	width:3 height:5
+	dataOffset:94117 dataLength:105481
+	difference:11364
+	length:15
+LightMap:
+	width:4 height:6
+	dataOffset:94132 dataLength:105481
+	difference:11349
+	length:24
+LightMap:
+	width:4 height:10
+	dataOffset:94029 dataLength:105481
+	difference:11452
+	length:40
+LightMap:
+	width:5 height:10
+	dataOffset:94156 dataLength:105481
+	difference:11325
+	length:50
+LightMap:
+	width:15 height:45
+	dataOffset:35302 dataLength:105481
+	difference:70179
+	length:675
+LightMap:
+	width:4 height:4
+	dataOffset:94749 dataLength:105481
+	difference:10732
+	length:16
+LightMap:
+	width:3 height:2
+	dataOffset:94769 dataLength:105481
+	difference:10712
+	length:6
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:5 height:4
+	dataOffset:94819 dataLength:105481
+	difference:10662
+	length:20
+LightMap:
+	width:4 height:4
+	dataOffset:94780 dataLength:105481
+	difference:10701
+	length:16
+LightMap:
+	width:3 height:2
+	dataOffset:94804 dataLength:105481
+	difference:10677
+	length:6
+LightMap:
+	width:3 height:4
+	dataOffset:93991 dataLength:105481
+	difference:11490
+	length:12
+LightMap:
+	width:4 height:5
+	dataOffset:88173 dataLength:105481
+	difference:17308
+	length:20
+LightMap:
+	width:8 height:9
+	dataOffset:88213 dataLength:105481
+	difference:17268
+	length:72
+LightMap:
+	width:8 height:9
+	dataOffset:88389 dataLength:105481
+	difference:17092
+	length:72
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:95501 dataLength:105481
+	difference:9980
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:95503 dataLength:105481
+	difference:9978
+	length:4
+LightMap:
+	width:4 height:7
+	dataOffset:93997 dataLength:105481
+	difference:11484
+	length:28
+LightMap:
+	width:2 height:8
+	dataOffset:105123 dataLength:105481
+	difference:358
+	length:16
+LightMap:
+	width:2 height:8
+	dataOffset:105129 dataLength:105481
+	difference:352
+	length:16
+LightMap:
+	width:2 height:8
+	dataOffset:105133 dataLength:105481
+	difference:348
+	length:16
+LightMap:
+	width:7 height:8
+	dataOffset:105257 dataLength:105481
+	difference:224
+	length:56
+LightMap:
+	width:8 height:4
+	dataOffset:105309 dataLength:105481
+	difference:172
+	length:32
+LightMap:
+	width:2 height:2
+	dataOffset:43422 dataLength:105481
+	difference:62059
+	length:4
+LightMap:
+	width:2 height:4
+	dataOffset:103419 dataLength:105481
+	difference:2062
+	length:8
+LightMap:
+	width:2 height:4
+	dataOffset:103464 dataLength:105481
+	difference:2017
+	length:8
+LightMap:
+	width:2 height:3
+	dataOffset:43284 dataLength:105481
+	difference:62197
+	length:6
+LightMap:
+	width:2 height:4
+	dataOffset:43122 dataLength:105481
+	difference:62359
+	length:8
+LightMap:
+	width:12 height:14
+	dataOffset:42344 dataLength:105481
+	difference:63137
+	length:168
+LightMap:
+	width:2 height:2
+	dataOffset:105191 dataLength:105481
+	difference:290
+	length:4
+LightMap:
+	width:12 height:12
+	dataOffset:42272 dataLength:105481
+	difference:63209
+	length:144
+LightMap:
+	width:12 height:14
+	dataOffset:42440 dataLength:105481
+	difference:63041
+	length:168
+LightMap:
+	width:2 height:2
+	dataOffset:105165 dataLength:105481
+	difference:316
+	length:4
+LightMap:
+	width:12 height:12
+	dataOffset:42144 dataLength:105481
+	difference:63337
+	length:144
+LightMap:
+	width:2 height:12
+	dataOffset:42264 dataLength:105481
+	difference:63217
+	length:24
+LightMap:
+	width:9 height:2
+	dataOffset:104658 dataLength:105481
+	difference:823
+	length:18
+LightMap:
+	width:12 height:2
+	dataOffset:104667 dataLength:105481
+	difference:814
+	length:24
+LightMap:
+	width:4 height:8
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:32
+LightMap:
+	width:3 height:5
+	dataOffset:104784 dataLength:105481
+	difference:697
+	length:15
+LightMap:
+	width:2 height:3
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:104793 dataLength:105481
+	difference:688
+	length:6
+LightMap:
+	width:2 height:5
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:10
+LightMap:
+	width:5 height:2
+	dataOffset:104793 dataLength:105481
+	difference:688
+	length:10
+LightMap:
+	width:4 height:8
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:32
+LightMap:
+	width:3 height:5
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:15
+LightMap:
+	width:3 height:5
+	dataOffset:104798 dataLength:105481
+	difference:683
+	length:15
+LightMap:
+	width:2 height:2
+	dataOffset:104832 dataLength:105481
+	difference:649
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:104836 dataLength:105481
+	difference:645
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:104838 dataLength:105481
+	difference:643
+	length:4
+LightMap:
+	width:4 height:4
+	dataOffset:104840 dataLength:105481
+	difference:641
+	length:16
+LightMap:
+	width:2 height:3
+	dataOffset:104810 dataLength:105481
+	difference:671
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:104814 dataLength:105481
+	difference:667
+	length:6
+LightMap:
+	width:2 height:5
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:10
+LightMap:
+	width:5 height:2
+	dataOffset:104817 dataLength:105481
+	difference:664
+	length:10
+LightMap:
+	width:4 height:4
+	dataOffset:104760 dataLength:105481
+	difference:721
+	length:16
+LightMap:
+	width:4 height:4
+	dataOffset:104768 dataLength:105481
+	difference:713
+	length:16
+LightMap:
+	width:4 height:8
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:32
+LightMap:
+	width:4 height:8
+	dataOffset:104772 dataLength:105481
+	difference:709
+	length:32
+LightMap:
+	width:12 height:3
+	dataOffset:104703 dataLength:105481
+	difference:778
+	length:36
+LightMap:
+	width:9 height:2
+	dataOffset:104727 dataLength:105481
+	difference:754
+	length:18
+LightMap:
+	width:12 height:3
+	dataOffset:104736 dataLength:105481
+	difference:745
+	length:36
+LightMap:
+	width:12 height:3
+	dataOffset:44178 dataLength:105481
+	difference:61303
+	length:36
+LightMap:
+	width:6 height:2
+	dataOffset:44160 dataLength:105481
+	difference:61321
+	length:12
+LightMap:
+	width:12 height:2
+	dataOffset:44226 dataLength:105481
+	difference:61255
+	length:24
+LightMap:
+	width:12 height:3
+	dataOffset:44274 dataLength:105481
+	difference:61207
+	length:36
+LightMap:
+	width:4 height:3
+	dataOffset:105147 dataLength:105481
+	difference:334
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:8
+LightMap:
+	width:2 height:2
+	dataOffset:105159 dataLength:105481
+	difference:322
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:105173 dataLength:105481
+	difference:308
+	length:4
+LightMap:
+	width:12 height:3
+	dataOffset:44124 dataLength:105481
+	difference:61357
+	length:36
+LightMap:
+	width:6 height:2
+	dataOffset:44046 dataLength:105481
+	difference:61435
+	length:12
+LightMap:
+	width:12 height:3
+	dataOffset:44064 dataLength:105481
+	difference:61417
+	length:36
+LightMap:
+	width:12 height:2
+	dataOffset:44088 dataLength:105481
+	difference:61393
+	length:24
+LightMap:
+	width:4 height:3
+	dataOffset:105177 dataLength:105481
+	difference:304
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:8
+LightMap:
+	width:2 height:2
+	dataOffset:105189 dataLength:105481
+	difference:292
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:105197 dataLength:105481
+	difference:284
+	length:4
+LightMap:
+	width:3 height:4
+	dataOffset:89446 dataLength:105481
+	difference:16035
+	length:12
+LightMap:
+	width:3 height:3
+	dataOffset:89443 dataLength:105481
+	difference:16038
+	length:9
+LightMap:
+	width:4 height:4
+	dataOffset:89328 dataLength:105481
+	difference:16153
+	length:16
+LightMap:
+	width:4 height:4
+	dataOffset:89340 dataLength:105481
+	difference:16141
+	length:16
+LightMap:
+	width:3 height:2
+	dataOffset:88974 dataLength:105481
+	difference:16507
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:89007 dataLength:105481
+	difference:16474
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:89010 dataLength:105481
+	difference:16471
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:88980 dataLength:105481
+	difference:16501
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:88989 dataLength:105481
+	difference:16492
+	length:6
+LightMap:
+	width:4 height:2
+	dataOffset:89048 dataLength:105481
+	difference:16433
+	length:8
+LightMap:
+	width:3 height:2
+	dataOffset:89039 dataLength:105481
+	difference:16442
+	length:6
+LightMap:
+	width:4 height:2
+	dataOffset:89064 dataLength:105481
+	difference:16417
+	length:8
+LightMap:
+	width:3 height:2
+	dataOffset:89076 dataLength:105481
+	difference:16405
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:88995 dataLength:105481
+	difference:16486
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:89001 dataLength:105481
+	difference:16480
+	length:6
+LightMap:
+	width:4 height:3
+	dataOffset:89022 dataLength:105481
+	difference:16459
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:89172 dataLength:105481
+	difference:16309
+	length:8
+LightMap:
+	width:4 height:3
+	dataOffset:89184 dataLength:105481
+	difference:16297
+	length:12
+LightMap:
+	width:3 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:89013 dataLength:105481
+	difference:16468
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:89142 dataLength:105481
+	difference:16339
+	length:6
+LightMap:
+	width:4 height:5
+	dataOffset:89148 dataLength:105481
+	difference:16333
+	length:20
+LightMap:
+	width:3 height:3
+	dataOffset:89016 dataLength:105481
+	difference:16465
+	length:9
+LightMap:
+	width:3 height:3
+	dataOffset:89019 dataLength:105481
+	difference:16462
+	length:9
+LightMap:
+	width:3 height:4
+	dataOffset:89030 dataLength:105481
+	difference:16451
+	length:12
+LightMap:
+	width:4 height:4
+	dataOffset:89156 dataLength:105481
+	difference:16325
+	length:16
+LightMap:
+	width:4 height:5
+	dataOffset:89164 dataLength:105481
+	difference:16317
+	length:20
+LightMap:
+	width:3 height:7
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:21
+LightMap:
+	width:3 height:7
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:21
+LightMap:
+	width:3 height:2
+	dataOffset:89145 dataLength:105481
+	difference:16336
+	length:6
+LightMap:
+	width:4 height:3
+	dataOffset:89308 dataLength:105481
+	difference:16173
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:89304 dataLength:105481
+	difference:16177
+	length:8
+LightMap:
+	width:4 height:5
+	dataOffset:89152 dataLength:105481
+	difference:16329
+	length:20
+LightMap:
+	width:4 height:4
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:16
+LightMap:
+	width:3 height:3
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:9
+LightMap:
+	width:3 height:4
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:12
+LightMap:
+	width:4 height:7
+	dataOffset:89320 dataLength:105481
+	difference:16161
+	length:28
+LightMap:
+	width:4 height:5
+	dataOffset:89312 dataLength:105481
+	difference:16169
+	length:20
+LightMap:
+	width:3 height:7
+	dataOffset:93205 dataLength:105481
+	difference:12276
+	length:21
+LightMap:
+	width:7 height:2
+	dataOffset:93550 dataLength:105481
+	difference:11931
+	length:14
+LightMap:
+	width:3 height:7
+	dataOffset:93389 dataLength:105481
+	difference:12092
+	length:21
+LightMap:
+	width:3 height:7
+	dataOffset:93344 dataLength:105481
+	difference:12137
+	length:21
+LightMap:
+	width:4 height:2
+	dataOffset:89212 dataLength:105481
+	difference:16269
+	length:8
+LightMap:
+	width:3 height:7
+	dataOffset:93374 dataLength:105481
+	difference:12107
+	length:21
+LightMap:
+	width:7 height:2
+	dataOffset:93353 dataLength:105481
+	difference:12128
+	length:14
+LightMap:
+	width:2 height:5
+	dataOffset:88115 dataLength:105481
+	difference:17366
+	length:10
+LightMap:
+	width:6 height:2
+	dataOffset:93652 dataLength:105481
+	difference:11829
+	length:12
+LightMap:
+	width:6 height:2
+	dataOffset:93610 dataLength:105481
+	difference:11871
+	length:12
+LightMap:
+	width:5 height:2
+	dataOffset:88100 dataLength:105481
+	difference:17381
+	length:10
+LightMap:
+	width:7 height:2
+	dataOffset:93577 dataLength:105481
+	difference:11904
+	length:14
+LightMap:
+	width:3 height:6
+	dataOffset:93571 dataLength:105481
+	difference:11910
+	length:18
+LightMap:
+	width:4 height:2
+	dataOffset:89232 dataLength:105481
+	difference:16249
+	length:8
+LightMap:
+	width:3 height:3
+	dataOffset:89387 dataLength:105481
+	difference:16094
+	length:9
+LightMap:
+	width:3 height:3
+	dataOffset:89360 dataLength:105481
+	difference:16121
+	length:9
+LightMap:
+	width:3 height:3
+	dataOffset:89375 dataLength:105481
+	difference:16106
+	length:9
+LightMap:
+	width:4 height:2
+	dataOffset:89200 dataLength:105481
+	difference:16281
+	length:8
+LightMap:
+	width:3 height:2
+	dataOffset:89112 dataLength:105481
+	difference:16369
+	length:6
+LightMap:
+	width:3 height:3
+	dataOffset:89121 dataLength:105481
+	difference:16360
+	length:9
+LightMap:
+	width:3 height:2
+	dataOffset:89085 dataLength:105481
+	difference:16396
+	length:6
+LightMap:
+	width:4 height:2
+	dataOffset:89248 dataLength:105481
+	difference:16233
+	length:8
+LightMap:
+	width:4 height:2
+	dataOffset:89260 dataLength:105481
+	difference:16221
+	length:8
+LightMap:
+	width:3 height:2
+	dataOffset:89094 dataLength:105481
+	difference:16387
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:89103 dataLength:105481
+	difference:16378
+	length:6
+LightMap:
+	width:4 height:2
+	dataOffset:89220 dataLength:105481
+	difference:16261
+	length:8
+LightMap:
+	width:3 height:6
+	dataOffset:93175 dataLength:105481
+	difference:12306
+	length:18
+LightMap:
+	width:7 height:2
+	dataOffset:93184 dataLength:105481
+	difference:12297
+	length:14
+LightMap:
+	width:4 height:6
+	dataOffset:89415 dataLength:105481
+	difference:16066
+	length:24
+LightMap:
+	width:4 height:6
+	dataOffset:93239 dataLength:105481
+	difference:12242
+	length:24
+LightMap:
+	width:4 height:4
+	dataOffset:89280 dataLength:105481
+	difference:16201
+	length:16
+LightMap:
+	width:4 height:3
+	dataOffset:89272 dataLength:105481
+	difference:16209
+	length:12
+LightMap:
+	width:4 height:5
+	dataOffset:89399 dataLength:105481
+	difference:16082
+	length:20
+LightMap:
+	width:3 height:5
+	dataOffset:89434 dataLength:105481
+	difference:16047
+	length:15
+LightMap:
+	width:3 height:3
+	dataOffset:89431 dataLength:105481
+	difference:16050
+	length:9
+LightMap:
+	width:4 height:3
+	dataOffset:89292 dataLength:105481
+	difference:16189
+	length:12
+LightMap:
+	width:4 height:7
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:28
+LightMap:
+	width:4 height:6
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:24
+LightMap:
+	width:4 height:5
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:20
+LightMap:
+	width:4 height:4
+	dataOffset:89296 dataLength:105481
+	difference:16185
+	length:16
+LightMap:
+	width:3 height:3
+	dataOffset:89136 dataLength:105481
+	difference:16345
+	length:9
+LightMap:
+	width:3 height:3
+	dataOffset:89139 dataLength:105481
+	difference:16342
+	length:9
+LightMap:
+	width:3 height:2
+	dataOffset:89130 dataLength:105481
+	difference:16351
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:89133 dataLength:105481
+	difference:16348
+	length:6
+LightMap:
+	width:4 height:4
+	dataOffset:89300 dataLength:105481
+	difference:16181
+	length:16
+LightMap:
+	width:3 height:6
+	dataOffset:89437 dataLength:105481
+	difference:16044
+	length:18
+LightMap:
+	width:3 height:6
+	dataOffset:89440 dataLength:105481
+	difference:16041
+	length:18
+LightMap:
+	width:4 height:2
+	dataOffset:89288 dataLength:105481
+	difference:16193
+	length:8
+LightMap:
+	width:90 height:49
+	dataOffset:73483 dataLength:105481
+	difference:31998
+	length:4410
+LightMap:
+	width:13 height:15
+	dataOffset:45571 dataLength:105481
+	difference:59910
+	length:195
+LightMap:
+	width:98 height:114
+	dataOffset:45649 dataLength:105481
+	difference:59832
+	length:11172
+LightMap:
+	width:90 height:57
+	dataOffset:54763 dataLength:105481
+	difference:50718
+	length:5130
+LightMap:
+	width:13 height:15
+	dataOffset:87143 dataLength:105481
+	difference:18338
+	length:195
+LightMap:
+	width:19 height:13
+	dataOffset:87481 dataLength:105481
+	difference:18000
+	length:247
+LightMap:
+	width:49 height:57
+	dataOffset:50059 dataLength:105481
+	difference:55422
+	length:2793
+LightMap:
+	width:7 height:3
+	dataOffset:88051 dataLength:105481
+	difference:17430
+	length:21
+LightMap:
+	width:45 height:45
+	dataOffset:11133 dataLength:105481
+	difference:94348
+	length:2025
+LightMap:
+	width:4 height:2
+	dataOffset:22349 dataLength:105481
+	difference:83132
+	length:8
+LightMap:
+	width:4 height:2
+	dataOffset:22367 dataLength:105481
+	difference:83114
+	length:8
+LightMap:
+	width:2 height:8
+	dataOffset:100729 dataLength:105481
+	difference:4752
+	length:16
+LightMap:
+	width:2 height:8
+	dataOffset:100739 dataLength:105481
+	difference:4742
+	length:16
+LightMap:
+	width:35 height:35
+	dataOffset:13713 dataLength:105481
+	difference:91768
+	length:1225
+LightMap:
+	width:28 height:28
+	dataOffset:4965 dataLength:105481
+	difference:100516
+	length:784
+LightMap:
+	width:49 height:24
+	dataOffset:978 dataLength:105481
+	difference:104503
+	length:1176
+LightMap:
+	width:49 height:16
+	dataOffset:3221 dataLength:105481
+	difference:102260
+	length:784
+LightMap:
+	width:16 height:11
+	dataOffset:95753 dataLength:105481
+	difference:9728
+	length:176
+LightMap:
+	width:16 height:11
+	dataOffset:95849 dataLength:105481
+	difference:9632
+	length:176
+LightMap:
+	width:2 height:19
+	dataOffset:95945 dataLength:105481
+	difference:9536
+	length:38
+LightMap:
+	width:16 height:8
+	dataOffset:2595 dataLength:105481
+	difference:102886
+	length:128
+LightMap:
+	width:8 height:8
+	dataOffset:45114 dataLength:105481
+	difference:60367
+	length:64
+LightMap:
+	width:8 height:8
+	dataOffset:45106 dataLength:105481
+	difference:60375
+	length:64
+LightMap:
+	width:9 height:7
+	dataOffset:45166 dataLength:105481
+	difference:60315
+	length:63
+LightMap:
+	width:16 height:11
+	dataOffset:95569 dataLength:105481
+	difference:9912
+	length:176
+LightMap:
+	width:16 height:11
+	dataOffset:95665 dataLength:105481
+	difference:9816
+	length:176
+LightMap:
+	width:16 height:11
+	dataOffset:3899 dataLength:105481
+	difference:101582
+	length:176
+LightMap:
+	width:2 height:19
+	dataOffset:3773 dataLength:105481
+	difference:101708
+	length:38
+LightMap:
+	width:16 height:11
+	dataOffset:3741 dataLength:105481
+	difference:101740
+	length:176
+LightMap:
+	width:16 height:11
+	dataOffset:3613 dataLength:105481
+	difference:101868
+	length:176
+LightMap:
+	width:2 height:19
+	dataOffset:3931 dataLength:105481
+	difference:101550
+	length:38
+LightMap:
+	width:2 height:19
+	dataOffset:95729 dataLength:105481
+	difference:9752
+	length:38
+LightMap:
+	width:16 height:11
+	dataOffset:3803 dataLength:105481
+	difference:101678
+	length:176
+LightMap:
+	width:49 height:16
+	dataOffset:2927 dataLength:105481
+	difference:102554
+	length:784
+LightMap:
+	width:25 height:16
+	dataOffset:2627 dataLength:105481
+	difference:102854
+	length:400
+LightMap:
+	width:49 height:24
+	dataOffset:537 dataLength:105481
+	difference:104944
+	length:1176
+LightMap:
+	width:6 height:5
+	dataOffset:95963 dataLength:105481
+	difference:9518
+	length:30
+LightMap:
+	width:40 height:11
+	dataOffset:99635 dataLength:105481
+	difference:5846
+	length:440
+LightMap:
+	width:40 height:11
+	dataOffset:99875 dataLength:105481
+	difference:5606
+	length:440
+LightMap:
+	width:3 height:41
+	dataOffset:100139 dataLength:105481
+	difference:5342
+	length:123
+LightMap:
+	width:33 height:11
+	dataOffset:95963 dataLength:105481
+	difference:9518
+	length:363
+LightMap:
+	width:33 height:11
+	dataOffset:96095 dataLength:105481
+	difference:9386
+	length:363
+LightMap:
+	width:17 height:5
+	dataOffset:96161 dataLength:105481
+	difference:9320
+	length:85
+LightMap:
+	width:98 height:48
+	dataOffset:2007 dataLength:105481
+	difference:103474
+	length:4704
+LightMap:
+	width:8 height:8
+	dataOffset:45175 dataLength:105481
+	difference:60306
+	length:64
+LightMap:
+	width:9 height:8
+	dataOffset:45130 dataLength:105481
+	difference:60351
+	length:72
+LightMap:
+	width:8 height:8
+	dataOffset:45183 dataLength:105481
+	difference:60298
+	length:64
+LightMap:
+	width:49 height:24
+	dataOffset:96 dataLength:105481
+	difference:105385
+	length:1176
+LightMap:
+	width:6 height:5
+	dataOffset:96195 dataLength:105481
+	difference:9286
+	length:30
+LightMap:
+	width:40 height:11
+	dataOffset:100187 dataLength:105481
+	difference:5294
+	length:440
+LightMap:
+	width:40 height:11
+	dataOffset:100427 dataLength:105481
+	difference:5054
+	length:440
+LightMap:
+	width:3 height:41
+	dataOffset:100599 dataLength:105481
+	difference:4882
+	length:123
+LightMap:
+	width:33 height:12
+	dataOffset:96207 dataLength:105481
+	difference:9274
+	length:396
+LightMap:
+	width:33 height:12
+	dataOffset:96339 dataLength:105481
+	difference:9142
+	length:396
+LightMap:
+	width:33 height:10
+	dataOffset:96405 dataLength:105481
+	difference:9076
+	length:330
+LightMap:
+	width:22 height:22
+	dataOffset:5749 dataLength:105481
+	difference:99732
+	length:484
+LightMap:
+	width:16 height:16
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:256
+LightMap:
+	width:4 height:2
+	dataOffset:99623 dataLength:105481
+	difference:5858
+	length:8
+LightMap:
+	width:4 height:2
+	dataOffset:100175 dataLength:105481
+	difference:5306
+	length:8
+LightMap:
+	width:3 height:9
+	dataOffset:100115 dataLength:105481
+	difference:5366
+	length:27
+LightMap:
+	width:3 height:9
+	dataOffset:100587 dataLength:105481
+	difference:4894
+	length:27
+LightMap:
+	width:4 height:6
+	dataOffset:44759 dataLength:105481
+	difference:60722
+	length:24
+LightMap:
+	width:6 height:3
+	dataOffset:44707 dataLength:105481
+	difference:60774
+	length:18
+LightMap:
+	width:4 height:11
+	dataOffset:44719 dataLength:105481
+	difference:60762
+	length:44
+LightMap:
+	width:4 height:11
+	dataOffset:44743 dataLength:105481
+	difference:60738
+	length:44
+LightMap:
+	width:6 height:8
+	dataOffset:95395 dataLength:105481
+	difference:10086
+	length:48
+LightMap:
+	width:5 height:28
+	dataOffset:8589 dataLength:105481
+	difference:96892
+	length:140
+LightMap:
+	width:28 height:28
+	dataOffset:7197 dataLength:105481
+	difference:98284
+	length:784
+LightMap:
+	width:17 height:28
+	dataOffset:6013 dataLength:105481
+	difference:99468
+	length:476
+LightMap:
+	width:9 height:14
+	dataOffset:6253 dataLength:105481
+	difference:99228
+	length:126
+LightMap:
+	width:17 height:28
+	dataOffset:6361 dataLength:105481
+	difference:99120
+	length:476
+LightMap:
+	width:9 height:14
+	dataOffset:6217 dataLength:105481
+	difference:99264
+	length:126
+LightMap:
+	width:26 height:26
+	dataOffset:8093 dataLength:105481
+	difference:97388
+	length:676
+LightMap:
+	width:5 height:28
+	dataOffset:8509 dataLength:105481
+	difference:96972
+	length:140
+LightMap:
+	width:5 height:28
+	dataOffset:8569 dataLength:105481
+	difference:96912
+	length:140
+LightMap:
+	width:5 height:28
+	dataOffset:8609 dataLength:105481
+	difference:96872
+	length:140
+LightMap:
+	width:24 height:8
+	dataOffset:20255 dataLength:105481
+	difference:85226
+	length:192
+LightMap:
+	width:24 height:8
+	dataOffset:98593 dataLength:105481
+	difference:6888
+	length:192
+LightMap:
+	width:5 height:36
+	dataOffset:14413 dataLength:105481
+	difference:91068
+	length:180
+LightMap:
+	width:8 height:16
+	dataOffset:6999 dataLength:105481
+	difference:98482
+	length:128
+LightMap:
+	width:36 height:36
+	dataOffset:13533 dataLength:105481
+	difference:91948
+	length:1296
+LightMap:
+	width:5 height:36
+	dataOffset:14588 dataLength:105481
+	difference:90893
+	length:180
+LightMap:
+	width:33 height:14
+	dataOffset:7031 dataLength:105481
+	difference:98450
+	length:462
+LightMap:
+	width:33 height:14
+	dataOffset:7097 dataLength:105481
+	difference:98384
+	length:462
+LightMap:
+	width:17 height:12
+	dataOffset:7163 dataLength:105481
+	difference:98318
+	length:204
+LightMap:
+	width:24 height:32
+	dataOffset:17255 dataLength:105481
+	difference:88226
+	length:768
+LightMap:
+	width:24 height:32
+	dataOffset:17831 dataLength:105481
+	difference:87650
+	length:768
+LightMap:
+	width:24 height:28
+	dataOffset:15527 dataLength:105481
+	difference:89954
+	length:672
+LightMap:
+	width:24 height:24
+	dataOffset:14663 dataLength:105481
+	difference:90818
+	length:576
+LightMap:
+	width:11 height:10
+	dataOffset:98003 dataLength:105481
+	difference:7478
+	length:110
+LightMap:
+	width:11 height:10
+	dataOffset:98091 dataLength:105481
+	difference:7390
+	length:110
+LightMap:
+	width:4 height:4
+	dataOffset:98163 dataLength:105481
+	difference:7318
+	length:16
+LightMap:
+	width:4 height:7
+	dataOffset:98187 dataLength:105481
+	difference:7294
+	length:28
+LightMap:
+	width:4 height:9
+	dataOffset:98215 dataLength:105481
+	difference:7266
+	length:36
+LightMap:
+	width:2 height:4
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:8
+LightMap:
+	width:4 height:3
+	dataOffset:22371 dataLength:105481
+	difference:83110
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:22375 dataLength:105481
+	difference:83106
+	length:8
+LightMap:
+	width:4 height:3
+	dataOffset:22379 dataLength:105481
+	difference:83102
+	length:12
+LightMap:
+	width:2 height:5
+	dataOffset:22365 dataLength:105481
+	difference:83116
+	length:10
+LightMap:
+	width:24 height:24
+	dataOffset:4029 dataLength:105481
+	difference:101452
+	length:576
+LightMap:
+	width:8 height:16
+	dataOffset:6635 dataLength:105481
+	difference:98846
+	length:128
+LightMap:
+	width:5 height:36
+	dataOffset:14613 dataLength:105481
+	difference:90868
+	length:180
+LightMap:
+	width:33 height:14
+	dataOffset:6667 dataLength:105481
+	difference:98814
+	length:462
+LightMap:
+	width:33 height:14
+	dataOffset:6799 dataLength:105481
+	difference:98682
+	length:462
+LightMap:
+	width:17 height:12
+	dataOffset:6931 dataLength:105481
+	difference:98550
+	length:204
+LightMap:
+	width:24 height:8
+	dataOffset:20375 dataLength:105481
+	difference:85106
+	length:192
+LightMap:
+	width:24 height:8
+	dataOffset:98665 dataLength:105481
+	difference:6816
+	length:192
+LightMap:
+	width:24 height:28
+	dataOffset:16391 dataLength:105481
+	difference:89090
+	length:672
+LightMap:
+	width:11 height:10
+	dataOffset:97743 dataLength:105481
+	difference:7738
+	length:110
+LightMap:
+	width:11 height:10
+	dataOffset:97809 dataLength:105481
+	difference:7672
+	length:110
+LightMap:
+	width:4 height:4
+	dataOffset:97903 dataLength:105481
+	difference:7578
+	length:16
+LightMap:
+	width:4 height:7
+	dataOffset:97927 dataLength:105481
+	difference:7554
+	length:28
+LightMap:
+	width:4 height:9
+	dataOffset:97947 dataLength:105481
+	difference:7534
+	length:36
+LightMap:
+	width:24 height:8
+	dataOffset:19991 dataLength:105481
+	difference:85490
+	length:192
+LightMap:
+	width:11 height:10
+	dataOffset:98263 dataLength:105481
+	difference:7218
+	length:110
+LightMap:
+	width:25 height:8
+	dataOffset:98737 dataLength:105481
+	difference:6744
+	length:200
+LightMap:
+	width:11 height:10
+	dataOffset:98351 dataLength:105481
+	difference:7130
+	length:110
+LightMap:
+	width:4 height:4
+	dataOffset:98451 dataLength:105481
+	difference:7030
+	length:16
+LightMap:
+	width:12 height:4
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:48
+LightMap:
+	width:4 height:7
+	dataOffset:98479 dataLength:105481
+	difference:7002
+	length:28
+LightMap:
+	width:4 height:9
+	dataOffset:98529 dataLength:105481
+	difference:6952
+	length:36
+LightMap:
+	width:24 height:8
+	dataOffset:20159 dataLength:105481
+	difference:85322
+	length:192
+LightMap:
+	width:24 height:24
+	dataOffset:4461 dataLength:105481
+	difference:101020
+	length:576
+LightMap:
+	width:20 height:8
+	dataOffset:3949 dataLength:105481
+	difference:101532
+	length:160
+LightMap:
+	width:4 height:3
+	dataOffset:22353 dataLength:105481
+	difference:83128
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:22357 dataLength:105481
+	difference:83124
+	length:8
+LightMap:
+	width:4 height:3
+	dataOffset:22361 dataLength:105481
+	difference:83120
+	length:12
+LightMap:
+	width:2 height:5
+	dataOffset:22347 dataLength:105481
+	difference:83134
+	length:10
+LightMap:
+	width:5 height:36
+	dataOffset:14438 dataLength:105481
+	difference:91043
+	length:180
+LightMap:
+	width:10 height:2
+	dataOffset:6429 dataLength:105481
+	difference:99052
+	length:20
+LightMap:
+	width:10 height:8
+	dataOffset:6515 dataLength:105481
+	difference:98966
+	length:80
+LightMap:
+	width:8 height:10
+	dataOffset:6499 dataLength:105481
+	difference:98982
+	length:80
+LightMap:
+	width:5 height:2
+	dataOffset:6563 dataLength:105481
+	difference:98918
+	length:10
+LightMap:
+	width:8 height:2
+	dataOffset:6459 dataLength:105481
+	difference:99022
+	length:16
+LightMap:
+	width:8 height:2
+	dataOffset:6475 dataLength:105481
+	difference:99006
+	length:16
+LightMap:
+	width:9 height:8
+	dataOffset:6545 dataLength:105481
+	difference:98936
+	length:72
+LightMap:
+	width:5 height:8
+	dataOffset:6605 dataLength:105481
+	difference:98876
+	length:40
+LightMap:
+	width:5 height:8
+	dataOffset:6625 dataLength:105481
+	difference:98856
+	length:40
+LightMap:
+	width:4 height:10
+	dataOffset:6573 dataLength:105481
+	difference:98908
+	length:40
+LightMap:
+	width:48 height:8
+	dataOffset:96537 dataLength:105481
+	difference:8944
+	length:384
+LightMap:
+	width:48 height:8
+	dataOffset:97473 dataLength:105481
+	difference:8008
+	length:384
+LightMap:
+	width:48 height:8
+	dataOffset:96819 dataLength:105481
+	difference:8662
+	length:384
+LightMap:
+	width:48 height:8
+	dataOffset:97155 dataLength:105481
+	difference:8326
+	length:384
+LightMap:
+	width:2 height:24
+	dataOffset:97107 dataLength:105481
+	difference:8374
+	length:48
+LightMap:
+	width:2 height:24
+	dataOffset:97125 dataLength:105481
+	difference:8356
+	length:48
+LightMap:
+	width:2 height:24
+	dataOffset:97443 dataLength:105481
+	difference:8038
+	length:48
+LightMap:
+	width:2 height:24
+	dataOffset:97467 dataLength:105481
+	difference:8014
+	length:48
+LightMap:
+	width:2 height:24
+	dataOffset:96777 dataLength:105481
+	difference:8704
+	length:48
+LightMap:
+	width:2 height:24
+	dataOffset:97713 dataLength:105481
+	difference:7768
+	length:48
+LightMap:
+	width:2 height:24
+	dataOffset:97719 dataLength:105481
+	difference:7762
+	length:48
+LightMap:
+	width:2 height:24
+	dataOffset:96807 dataLength:105481
+	difference:8674
+	length:48
+LightMap:
+	width:12 height:2
+	dataOffset:22437 dataLength:105481
+	difference:83044
+	length:24
+LightMap:
+	width:12 height:2
+	dataOffset:22719 dataLength:105481
+	difference:82762
+	length:24
+LightMap:
+	width:2 height:12
+	dataOffset:19959 dataLength:105481
+	difference:85522
+	length:24
+LightMap:
+	width:16 height:8
+	dataOffset:21545 dataLength:105481
+	difference:83936
+	length:128
+LightMap:
+	width:2 height:16
+	dataOffset:99127 dataLength:105481
+	difference:6354
+	length:32
+LightMap:
+	width:12 height:14
+	dataOffset:20791 dataLength:105481
+	difference:84690
+	length:168
+LightMap:
+	width:5 height:6
+	dataOffset:100781 dataLength:105481
+	difference:4700
+	length:30
+LightMap:
+	width:12 height:6
+	dataOffset:21687 dataLength:105481
+	difference:83794
+	length:72
+LightMap:
+	width:8 height:4
+	dataOffset:21799 dataLength:105481
+	difference:83682
+	length:32
+LightMap:
+	width:2 height:4
+	dataOffset:97897 dataLength:105481
+	difference:7584
+	length:8
+LightMap:
+	width:2 height:4
+	dataOffset:97939 dataLength:105481
+	difference:7542
+	length:8
+LightMap:
+	width:8 height:2
+	dataOffset:21759 dataLength:105481
+	difference:83722
+	length:16
+LightMap:
+	width:8 height:2
+	dataOffset:21783 dataLength:105481
+	difference:83698
+	length:16
+LightMap:
+	width:2 height:2
+	dataOffset:21747 dataLength:105481
+	difference:83734
+	length:4
+LightMap:
+	width:12 height:2
+	dataOffset:21615 dataLength:105481
+	difference:83866
+	length:24
+LightMap:
+	width:12 height:2
+	dataOffset:21663 dataLength:105481
+	difference:83818
+	length:24
+LightMap:
+	width:2 height:3
+	dataOffset:21609 dataLength:105481
+	difference:83872
+	length:6
+LightMap:
+	width:13 height:12
+	dataOffset:20593 dataLength:105481
+	difference:84888
+	length:156
+LightMap:
+	width:12 height:14
+	dataOffset:20671 dataLength:105481
+	difference:84810
+	length:168
+LightMap:
+	width:5 height:6
+	dataOffset:100828 dataLength:105481
+	difference:4653
+	length:30
+LightMap:
+	width:9 height:12
+	dataOffset:20495 dataLength:105481
+	difference:84986
+	length:108
+LightMap:
+	width:3 height:12
+	dataOffset:44991 dataLength:105481
+	difference:60490
+	length:36
+LightMap:
+	width:2 height:12
+	dataOffset:20585 dataLength:105481
+	difference:84896
+	length:24
+LightMap:
+	width:9 height:2
+	dataOffset:99127 dataLength:105481
+	difference:6354
+	length:18
+LightMap:
+	width:12 height:2
+	dataOffset:99136 dataLength:105481
+	difference:6345
+	length:24
+LightMap:
+	width:4 height:8
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:32
+LightMap:
+	width:3 height:5
+	dataOffset:99253 dataLength:105481
+	difference:6228
+	length:15
+LightMap:
+	width:2 height:3
+	dataOffset:99262 dataLength:105481
+	difference:6219
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:99264 dataLength:105481
+	difference:6217
+	length:6
+LightMap:
+	width:2 height:5
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:10
+LightMap:
+	width:5 height:2
+	dataOffset:99264 dataLength:105481
+	difference:6217
+	length:10
+LightMap:
+	width:4 height:8
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:32
+LightMap:
+	width:3 height:5
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:15
+LightMap:
+	width:5 height:9
+	dataOffset:99274 dataLength:105481
+	difference:6207
+	length:45
+LightMap:
+	width:2 height:2
+	dataOffset:99326 dataLength:105481
+	difference:6155
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:99330 dataLength:105481
+	difference:6151
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:99332 dataLength:105481
+	difference:6149
+	length:4
+LightMap:
+	width:4 height:4
+	dataOffset:99334 dataLength:105481
+	difference:6147
+	length:16
+LightMap:
+	width:2 height:3
+	dataOffset:99314 dataLength:105481
+	difference:6167
+	length:6
+LightMap:
+	width:2 height:3
+	dataOffset:99318 dataLength:105481
+	difference:6163
+	length:6
+LightMap:
+	width:2 height:5
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:10
+LightMap:
+	width:2 height:5
+	dataOffset:99320 dataLength:105481
+	difference:6161
+	length:10
+LightMap:
+	width:4 height:4
+	dataOffset:99229 dataLength:105481
+	difference:6252
+	length:16
+LightMap:
+	width:4 height:4
+	dataOffset:99237 dataLength:105481
+	difference:6244
+	length:16
+LightMap:
+	width:4 height:8
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:32
+LightMap:
+	width:4 height:8
+	dataOffset:99241 dataLength:105481
+	difference:6240
+	length:32
+LightMap:
+	width:12 height:3
+	dataOffset:99172 dataLength:105481
+	difference:6309
+	length:36
+LightMap:
+	width:9 height:2
+	dataOffset:99196 dataLength:105481
+	difference:6285
+	length:18
+LightMap:
+	width:12 height:3
+	dataOffset:99205 dataLength:105481
+	difference:6276
+	length:36
+LightMap:
+	width:12 height:3
+	dataOffset:22473 dataLength:105481
+	difference:83008
+	length:36
+LightMap:
+	width:6 height:2
+	dataOffset:22395 dataLength:105481
+	difference:83086
+	length:12
+LightMap:
+	width:12 height:3
+	dataOffset:22413 dataLength:105481
+	difference:83068
+	length:36
+LightMap:
+	width:4 height:3
+	dataOffset:100811 dataLength:105481
+	difference:4670
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:8
+LightMap:
+	width:5 height:5
+	dataOffset:100823 dataLength:105481
+	difference:4658
+	length:25
+LightMap:
+	width:5 height:5
+	dataOffset:100843 dataLength:105481
+	difference:4638
+	length:25
+LightMap:
+	width:5 height:46
+	dataOffset:13293 dataLength:105481
+	difference:92188
+	length:230
+LightMap:
+	width:46 height:46
+	dataOffset:8649 dataLength:105481
+	difference:96832
+	length:2116
+LightMap:
+	width:5 height:46
+	dataOffset:13503 dataLength:105481
+	difference:91978
+	length:230
+LightMap:
+	width:7 height:8
+	dataOffset:100988 dataLength:105481
+	difference:4493
+	length:56
+LightMap:
+	width:8 height:4
+	dataOffset:101023 dataLength:105481
+	difference:4458
+	length:32
+LightMap:
+	width:8 height:4
+	dataOffset:101047 dataLength:105481
+	difference:4434
+	length:32
+LightMap:
+	width:8 height:5
+	dataOffset:101071 dataLength:105481
+	difference:4410
+	length:40
+LightMap:
+	width:12 height:3
+	dataOffset:22629 dataLength:105481
+	difference:82852
+	length:36
+LightMap:
+	width:12 height:3
+	dataOffset:22533 dataLength:105481
+	difference:82948
+	length:36
+LightMap:
+	width:6 height:2
+	dataOffset:22509 dataLength:105481
+	difference:82972
+	length:12
+LightMap:
+	width:12 height:2
+	dataOffset:22581 dataLength:105481
+	difference:82900
+	length:24
+LightMap:
+	width:4 height:3
+	dataOffset:100745 dataLength:105481
+	difference:4736
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:100761 dataLength:105481
+	difference:4720
+	length:8
+LightMap:
+	width:5 height:5
+	dataOffset:100801 dataLength:105481
+	difference:4680
+	length:25
+LightMap:
+	width:5 height:5
+	dataOffset:100761 dataLength:105481
+	difference:4720
+	length:25
+LightMap:
+	width:2 height:3
+	dataOffset:21425 dataLength:105481
+	difference:84056
+	length:6
+LightMap:
+	width:8 height:8
+	dataOffset:22275 dataLength:105481
+	difference:83206
+	length:64
+LightMap:
+	width:7 height:8
+	dataOffset:101103 dataLength:105481
+	difference:4378
+	length:56
+LightMap:
+	width:8 height:4
+	dataOffset:101178 dataLength:105481
+	difference:4303
+	length:32
+LightMap:
+	width:8 height:5
+	dataOffset:101202 dataLength:105481
+	difference:4279
+	length:40
+LightMap:
+	width:2 height:4
+	dataOffset:98439 dataLength:105481
+	difference:7042
+	length:8
+LightMap:
+	width:4 height:4
+	dataOffset:22247 dataLength:105481
+	difference:83234
+	length:16
+LightMap:
+	width:2 height:4
+	dataOffset:98503 dataLength:105481
+	difference:6978
+	length:8
+LightMap:
+	width:6 height:3
+	dataOffset:100635 dataLength:105481
+	difference:4846
+	length:18
+LightMap:
+	width:6 height:2
+	dataOffset:100659 dataLength:105481
+	difference:4822
+	length:12
+LightMap:
+	width:6 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:12
+LightMap:
+	width:2 height:2
+	dataOffset:100697 dataLength:105481
+	difference:4784
+	length:4
+LightMap:
+	width:2 height:3
+	dataOffset:100703 dataLength:105481
+	difference:4778
+	length:6
+LightMap:
+	width:2 height:2
+	dataOffset:100665 dataLength:105481
+	difference:4816
+	length:4
+LightMap:
+	width:2 height:3
+	dataOffset:100671 dataLength:105481
+	difference:4810
+	length:6
+LightMap:
+	width:8 height:4
+	dataOffset:101138 dataLength:105481
+	difference:4343
+	length:32
+LightMap:
+	width:2 height:3
+	dataOffset:100711 dataLength:105481
+	difference:4770
+	length:6
+LightMap:
+	width:2 height:2
+	dataOffset:100719 dataLength:105481
+	difference:4762
+	length:4
+LightMap:
+	width:2 height:3
+	dataOffset:100681 dataLength:105481
+	difference:4800
+	length:6
+LightMap:
+	width:2 height:2
+	dataOffset:100691 dataLength:105481
+	difference:4790
+	length:4
+LightMap:
+	width:2 height:4
+	dataOffset:98515 dataLength:105481
+	difference:6966
+	length:8
+LightMap:
+	width:8 height:7
+	dataOffset:21369 dataLength:105481
+	difference:84112
+	length:56
+LightMap:
+	width:12 height:11
+	dataOffset:98887 dataLength:105481
+	difference:6594
+	length:132
+LightMap:
+	width:12 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:24
+LightMap:
+	width:2 height:16
+	dataOffset:99079 dataLength:105481
+	difference:6402
+	length:32
+LightMap:
+	width:2 height:9
+	dataOffset:99087 dataLength:105481
+	difference:6394
+	length:18
+LightMap:
+	width:2 height:12
+	dataOffset:99103 dataLength:105481
+	difference:6378
+	length:24
+LightMap:
+	width:2 height:9
+	dataOffset:99111 dataLength:105481
+	difference:6370
+	length:18
+LightMap:
+	width:2 height:7
+	dataOffset:21409 dataLength:105481
+	difference:84072
+	length:14
+LightMap:
+	width:2 height:7
+	dataOffset:21435 dataLength:105481
+	difference:84046
+	length:14
+LightMap:
+	width:2 height:2
+	dataOffset:21415 dataLength:105481
+	difference:84066
+	length:4
+LightMap:
+	width:2 height:8
+	dataOffset:21441 dataLength:105481
+	difference:84040
+	length:16
+LightMap:
+	width:2 height:8
+	dataOffset:21419 dataLength:105481
+	difference:84062
+	length:16
+LightMap:
+	width:6 height:2
+	dataOffset:44634 dataLength:105481
+	difference:60847
+	length:12
+LightMap:
+	width:6 height:6
+	dataOffset:44634 dataLength:105481
+	difference:60847
+	length:36
+LightMap:
+	width:5 height:4
+	dataOffset:44652 dataLength:105481
+	difference:60829
+	length:20
+LightMap:
+	width:5 height:5
+	dataOffset:44662 dataLength:105481
+	difference:60819
+	length:25
+LightMap:
+	width:6 height:6
+	dataOffset:44640 dataLength:105481
+	difference:60841
+	length:36
+LightMap:
+	width:6 height:2
+	dataOffset:44622 dataLength:105481
+	difference:60859
+	length:12
+LightMap:
+	width:2 height:7
+	dataOffset:22231 dataLength:105481
+	difference:83250
+	length:14
+LightMap:
+	width:2 height:2
+	dataOffset:22237 dataLength:105481
+	difference:83244
+	length:4
+LightMap:
+	width:2 height:7
+	dataOffset:22241 dataLength:105481
+	difference:83240
+	length:14
+LightMap:
+	width:16 height:2
+	dataOffset:21449 dataLength:105481
+	difference:84032
+	length:32
+LightMap:
+	width:16 height:2
+	dataOffset:21513 dataLength:105481
+	difference:83968
+	length:32
+LightMap:
+	width:2 height:4
+	dataOffset:21447 dataLength:105481
+	difference:84034
+	length:8
+LightMap:
+	width:8 height:4
+	dataOffset:22207 dataLength:105481
+	difference:83274
+	length:32
+LightMap:
+	width:12 height:14
+	dataOffset:21129 dataLength:105481
+	difference:84352
+	length:168
+LightMap:
+	width:5 height:6
+	dataOffset:100882 dataLength:105481
+	difference:4599
+	length:30
+LightMap:
+	width:13 height:12
+	dataOffset:21025 dataLength:105481
+	difference:84456
+	length:156
+LightMap:
+	width:9 height:12
+	dataOffset:20935 dataLength:105481
+	difference:84546
+	length:108
+LightMap:
+	width:6 height:2
+	dataOffset:22653 dataLength:105481
+	difference:82828
+	length:12
+LightMap:
+	width:3 height:12
+	dataOffset:44957 dataLength:105481
+	difference:60524
+	length:36
+LightMap:
+	width:2 height:12
+	dataOffset:44987 dataLength:105481
+	difference:60494
+	length:24
+LightMap:
+	width:12 height:3
+	dataOffset:22767 dataLength:105481
+	difference:82714
+	length:36
+LightMap:
+	width:12 height:14
+	dataOffset:21273 dataLength:105481
+	difference:84208
+	length:168
+LightMap:
+	width:5 height:6
+	dataOffset:100963 dataLength:105481
+	difference:4518
+	length:30
+LightMap:
+	width:9 height:2
+	dataOffset:99346 dataLength:105481
+	difference:6135
+	length:18
+LightMap:
+	width:12 height:2
+	dataOffset:99355 dataLength:105481
+	difference:6126
+	length:24
+LightMap:
+	width:4 height:8
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:32
+LightMap:
+	width:3 height:5
+	dataOffset:99512 dataLength:105481
+	difference:5969
+	length:15
+LightMap:
+	width:2 height:3
+	dataOffset:99524 dataLength:105481
+	difference:5957
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:99526 dataLength:105481
+	difference:5955
+	length:6
+LightMap:
+	width:2 height:5
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:10
+LightMap:
+	width:5 height:2
+	dataOffset:99532 dataLength:105481
+	difference:5949
+	length:10
+LightMap:
+	width:4 height:8
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:32
+LightMap:
+	width:5 height:9
+	dataOffset:99537 dataLength:105481
+	difference:5944
+	length:45
+LightMap:
+	width:5 height:9
+	dataOffset:99537 dataLength:105481
+	difference:5944
+	length:45
+LightMap:
+	width:2 height:2
+	dataOffset:99599 dataLength:105481
+	difference:5882
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:99603 dataLength:105481
+	difference:5878
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:99605 dataLength:105481
+	difference:5876
+	length:4
+LightMap:
+	width:4 height:4
+	dataOffset:99607 dataLength:105481
+	difference:5874
+	length:16
+LightMap:
+	width:2 height:5
+	dataOffset:99577 dataLength:105481
+	difference:5904
+	length:10
+LightMap:
+	width:2 height:5
+	dataOffset:99579 dataLength:105481
+	difference:5902
+	length:10
+LightMap:
+	width:2 height:9
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:18
+LightMap:
+	width:2 height:9
+	dataOffset:99583 dataLength:105481
+	difference:5898
+	length:18
+LightMap:
+	width:4 height:4
+	dataOffset:99484 dataLength:105481
+	difference:5997
+	length:16
+LightMap:
+	width:4 height:4
+	dataOffset:99488 dataLength:105481
+	difference:5993
+	length:16
+LightMap:
+	width:4 height:8
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:32
+LightMap:
+	width:4 height:8
+	dataOffset:99496 dataLength:105481
+	difference:5985
+	length:32
+LightMap:
+	width:12 height:3
+	dataOffset:99403 dataLength:105481
+	difference:6078
+	length:36
+LightMap:
+	width:9 height:2
+	dataOffset:99439 dataLength:105481
+	difference:6042
+	length:18
+LightMap:
+	width:12 height:3
+	dataOffset:99448 dataLength:105481
+	difference:6033
+	length:36
+LightMap:
+	width:12 height:3
+	dataOffset:22671 dataLength:105481
+	difference:82810
+	length:36
+LightMap:
+	width:4 height:3
+	dataOffset:100932 dataLength:105481
+	difference:4549
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:100944 dataLength:105481
+	difference:4537
+	length:8
+LightMap:
+	width:5 height:5
+	dataOffset:100948 dataLength:105481
+	difference:4533
+	length:25
+LightMap:
+	width:5 height:5
+	dataOffset:100983 dataLength:105481
+	difference:4498
+	length:25
+LightMap:
+	width:2 height:4
+	dataOffset:98157 dataLength:105481
+	difference:7324
+	length:8
+LightMap:
+	width:2 height:4
+	dataOffset:98207 dataLength:105481
+	difference:7274
+	length:8
+LightMap:
+	width:11 height:15
+	dataOffset:86857 dataLength:105481
+	difference:18624
+	length:165
+LightMap:
+	width:9 height:15
+	dataOffset:86713 dataLength:105481
+	difference:18768
+	length:135
+LightMap:
+	width:12 height:3
+	dataOffset:22923 dataLength:105481
+	difference:82558
+	length:36
+LightMap:
+	width:12 height:3
+	dataOffset:22827 dataLength:105481
+	difference:82654
+	length:36
+LightMap:
+	width:6 height:2
+	dataOffset:22803 dataLength:105481
+	difference:82678
+	length:12
+LightMap:
+	width:12 height:2
+	dataOffset:22863 dataLength:105481
+	difference:82618
+	length:24
+LightMap:
+	width:4 height:3
+	dataOffset:100853 dataLength:105481
+	difference:4628
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:100873 dataLength:105481
+	difference:4608
+	length:8
+LightMap:
+	width:5 height:5
+	dataOffset:100877 dataLength:105481
+	difference:4604
+	length:25
+LightMap:
+	width:5 height:5
+	dataOffset:100907 dataLength:105481
+	difference:4574
+	length:25
+LightMap:
+	width:5 height:46
+	dataOffset:13473 dataLength:105481
+	difference:92008
+	length:230
+LightMap:
+	width:12 height:6
+	dataOffset:22083 dataLength:105481
+	difference:83398
+	length:72
+LightMap:
+	width:9 height:2
+	dataOffset:22153 dataLength:105481
+	difference:83328
+	length:18
+LightMap:
+	width:9 height:2
+	dataOffset:22180 dataLength:105481
+	difference:83301
+	length:18
+LightMap:
+	width:2 height:2
+	dataOffset:22143 dataLength:105481
+	difference:83338
+	length:4
+LightMap:
+	width:16 height:2
+	dataOffset:21825 dataLength:105481
+	difference:83656
+	length:32
+LightMap:
+	width:16 height:34
+	dataOffset:18599 dataLength:105481
+	difference:86882
+	length:544
+LightMap:
+	width:2 height:12
+	dataOffset:19975 dataLength:105481
+	difference:85506
+	length:24
+LightMap:
+	width:16 height:8
+	dataOffset:21937 dataLength:105481
+	difference:83544
+	length:128
+LightMap:
+	width:13 height:2
+	dataOffset:22005 dataLength:105481
+	difference:83476
+	length:26
+LightMap:
+	width:13 height:2
+	dataOffset:22031 dataLength:105481
+	difference:83450
+	length:26
+LightMap:
+	width:2 height:3
+	dataOffset:22001 dataLength:105481
+	difference:83480
+	length:6
+LightMap:
+	width:16 height:2
+	dataOffset:21857 dataLength:105481
+	difference:83624
+	length:32
+LightMap:
+	width:2 height:4
+	dataOffset:21823 dataLength:105481
+	difference:83658
+	length:8
+LightMap:
+	width:5 height:4
+	dataOffset:44692 dataLength:105481
+	difference:60789
+	length:20
+LightMap:
+	width:6 height:2
+	dataOffset:44634 dataLength:105481
+	difference:60847
+	length:12
+LightMap:
+	width:5 height:5
+	dataOffset:44677 dataLength:105481
+	difference:60804
+	length:25
+LightMap:
+	width:8 height:8
+	dataOffset:44843 dataLength:105481
+	difference:60638
+	length:64
+LightMap:
+	width:4 height:4
+	dataOffset:22383 dataLength:105481
+	difference:83098
+	length:16
+LightMap:
+	width:2 height:8
+	dataOffset:100725 dataLength:105481
+	difference:4756
+	length:16
+LightMap:
+	width:2 height:8
+	dataOffset:100735 dataLength:105481
+	difference:4746
+	length:16
+LightMap:
+	width:2 height:8
+	dataOffset:100729 dataLength:105481
+	difference:4752
+	length:16
+LightMap:
+	width:2 height:8
+	dataOffset:100739 dataLength:105481
+	difference:4742
+	length:16
+LightMap:
+	width:2 height:8
+	dataOffset:100741 dataLength:105481
+	difference:4740
+	length:16
+LightMap:
+	width:2 height:8
+	dataOffset:100733 dataLength:105481
+	difference:4748
+	length:16
+LightMap:
+	width:3 height:5
+	dataOffset:88626 dataLength:105481
+	difference:16855
+	length:15
+LightMap:
+	width:4 height:5
+	dataOffset:94470 dataLength:105481
+	difference:11011
+	length:20
+LightMap:
+	width:4 height:5
+	dataOffset:93788 dataLength:105481
+	difference:11693
+	length:20
+LightMap:
+	width:5 height:4
+	dataOffset:95526 dataLength:105481
+	difference:9955
+	length:20
+LightMap:
+	width:5 height:4
+	dataOffset:95531 dataLength:105481
+	difference:9950
+	length:20
+LightMap:
+	width:4 height:4
+	dataOffset:95541 dataLength:105481
+	difference:9940
+	length:16
+LightMap:
+	width:5 height:4
+	dataOffset:95545 dataLength:105481
+	difference:9936
+	length:20
+LightMap:
+	width:5 height:4
+	dataOffset:95560 dataLength:105481
+	difference:9921
+	length:20
+LightMap:
+	width:3 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:6
+LightMap:
+	width:5 height:2
+	dataOffset:95536 dataLength:105481
+	difference:9945
+	length:10
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:2 height:3
+	dataOffset:95567 dataLength:105481
+	difference:9914
+	length:6
+LightMap:
+	width:2 height:3
+	dataOffset:95565 dataLength:105481
+	difference:9916
+	length:6
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:10 height:10
+	dataOffset:94270 dataLength:105481
+	difference:11211
+	length:100
+LightMap:
+	width:10 height:9
+	dataOffset:94486 dataLength:105481
+	difference:10995
+	length:90
+LightMap:
+	width:2 height:6
+	dataOffset:93759 dataLength:105481
+	difference:11722
+	length:12
+LightMap:
+	width:7 height:10
+	dataOffset:88806 dataLength:105481
+	difference:16675
+	length:70
+LightMap:
+	width:3 height:5
+	dataOffset:88617 dataLength:105481
+	difference:16864
+	length:15
+LightMap:
+	width:3 height:5
+	dataOffset:93800 dataLength:105481
+	difference:11681
+	length:15
+LightMap:
+	width:4 height:6
+	dataOffset:88638 dataLength:105481
+	difference:16843
+	length:24
+LightMap:
+	width:4 height:6
+	dataOffset:88662 dataLength:105481
+	difference:16819
+	length:24
+LightMap:
+	width:3 height:4
+	dataOffset:94706 dataLength:105481
+	difference:10775
+	length:12
+LightMap:
+	width:3 height:2
+	dataOffset:94724 dataLength:105481
+	difference:10757
+	length:6
+LightMap:
+	width:2 height:2
+	dataOffset:94739 dataLength:105481
+	difference:10742
+	length:4
+LightMap:
+	width:2 height:3
+	dataOffset:94743 dataLength:105481
+	difference:10738
+	length:6
+LightMap:
+	width:2 height:2
+	dataOffset:94745 dataLength:105481
+	difference:10736
+	length:4
+LightMap:
+	width:5 height:10
+	dataOffset:88686 dataLength:105481
+	difference:16795
+	length:50
+LightMap:
+	width:3 height:5
+	dataOffset:93874 dataLength:105481
+	difference:11607
+	length:15
+LightMap:
+	width:7 height:8
+	dataOffset:93818 dataLength:105481
+	difference:11663
+	length:56
+LightMap:
+	width:7 height:8
+	dataOffset:93880 dataLength:105481
+	difference:11601
+	length:56
+LightMap:
+	width:2 height:5
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:10
+LightMap:
+	width:5 height:46
+	dataOffset:13323 dataLength:105481
+	difference:92158
+	length:230
+LightMap:
+	width:2 height:5
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:10
+LightMap:
+	width:4 height:6
+	dataOffset:45533 dataLength:105481
+	difference:59948
+	length:24
+LightMap:
+	width:2 height:12
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:24
+LightMap:
+	width:2 height:16
+	dataOffset:19971 dataLength:105481
+	difference:85510
+	length:32
+LightMap:
+	width:2 height:12
+	dataOffset:19975 dataLength:105481
+	difference:85506
+	length:24
+LightMap:
+	width:5 height:5
+	dataOffset:44887 dataLength:105481
+	difference:60594
+	length:25
+LightMap:
+	width:5 height:5
+	dataOffset:44867 dataLength:105481
+	difference:60614
+	length:25
+LightMap:
+	width:3 height:4
+	dataOffset:93936 dataLength:105481
+	difference:11545
+	length:12
+LightMap:
+	width:4 height:5
+	dataOffset:88145 dataLength:105481
+	difference:17336
+	length:20
+LightMap:
+	width:4 height:5
+	dataOffset:88121 dataLength:105481
+	difference:17360
+	length:20
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:5 height:7
+	dataOffset:93951 dataLength:105481
+	difference:11530
+	length:35
+LightMap:
+	width:3 height:5
+	dataOffset:45556 dataLength:105481
+	difference:59925
+	length:15
+LightMap:
+	width:3 height:3
+	dataOffset:45553 dataLength:105481
+	difference:59928
+	length:9
+LightMap:
+	width:3 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:45199 dataLength:105481
+	difference:60282
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:45202 dataLength:105481
+	difference:60279
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:45205 dataLength:105481
+	difference:60276
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:45211 dataLength:105481
+	difference:60270
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:45217 dataLength:105481
+	difference:60264
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:45270 dataLength:105481
+	difference:60211
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:6
+LightMap:
+	width:3 height:3
+	dataOffset:45226 dataLength:105481
+	difference:60255
+	length:9
+LightMap:
+	width:3 height:3
+	dataOffset:45229 dataLength:105481
+	difference:60252
+	length:9
+LightMap:
+	width:3 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:6
+LightMap:
+	width:4 height:3
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:8
+LightMap:
+	width:3 height:2
+	dataOffset:45309 dataLength:105481
+	difference:60172
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:45312 dataLength:105481
+	difference:60169
+	length:6
+LightMap:
+	width:3 height:3
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:9
+LightMap:
+	width:3 height:2
+	dataOffset:45288 dataLength:105481
+	difference:60193
+	length:6
+LightMap:
+	width:3 height:3
+	dataOffset:45291 dataLength:105481
+	difference:60190
+	length:9
+LightMap:
+	width:4 height:3
+	dataOffset:45415 dataLength:105481
+	difference:60066
+	length:12
+LightMap:
+	width:4 height:3
+	dataOffset:45435 dataLength:105481
+	difference:60046
+	length:12
+LightMap:
+	width:4 height:6
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:24
+LightMap:
+	width:4 height:7
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:28
+LightMap:
+	width:3 height:4
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:12
+LightMap:
+	width:4 height:4
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:16
+LightMap:
+	width:4 height:5
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:20
+LightMap:
+	width:4 height:4
+	dataOffset:45439 dataLength:105481
+	difference:60042
+	length:16
+LightMap:
+	width:3 height:3
+	dataOffset:45303 dataLength:105481
+	difference:60178
+	length:9
+LightMap:
+	width:3 height:3
+	dataOffset:45306 dataLength:105481
+	difference:60175
+	length:9
+LightMap:
+	width:3 height:2
+	dataOffset:45297 dataLength:105481
+	difference:60184
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:45300 dataLength:105481
+	difference:60181
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:45220 dataLength:105481
+	difference:60261
+	length:6
+LightMap:
+	width:3 height:2
+	dataOffset:45223 dataLength:105481
+	difference:60258
+	length:6
+LightMap:
+	width:4 height:4
+	dataOffset:45443 dataLength:105481
+	difference:60038
+	length:16
+LightMap:
+	width:3 height:6
+	dataOffset:45559 dataLength:105481
+	difference:59922
+	length:18
+LightMap:
+	width:3 height:6
+	dataOffset:45562 dataLength:105481
+	difference:59919
+	length:18
+LightMap:
+	width:4 height:2
+	dataOffset:45431 dataLength:105481
+	difference:60050
+	length:8
+LightMap:
+	width:4 height:5
+	dataOffset:45513 dataLength:105481
+	difference:59968
+	length:20
+LightMap:
+	width:3 height:4
+	dataOffset:95513 dataLength:105481
+	difference:9968
+	length:12
+LightMap:
+	width:4 height:2
+	dataOffset:45391 dataLength:105481
+	difference:60090
+	length:8
+LightMap:
+	width:3 height:2
+	dataOffset:45279 dataLength:105481
+	difference:60202
+	length:6
+LightMap:
+	width:4 height:4
+	dataOffset:45423 dataLength:105481
+	difference:60058
+	length:16
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:4 height:4
+	dataOffset:95505 dataLength:105481
+	difference:9976
+	length:16
+LightMap:
+	width:5 height:4
+	dataOffset:95516 dataLength:105481
+	difference:9965
+	length:20
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:4
+LightMap:
+	width:4 height:4
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:16
+LightMap:
+	width:3 height:2
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:6
+LightMap:
+	width:3 height:4
+	dataOffset:45568 dataLength:105481
+	difference:59913
+	length:12
+LightMap:
+	width:3 height:3
+	dataOffset:45565 dataLength:105481
+	difference:59916
+	length:9
+LightMap:
+	width:5 height:2
+	dataOffset:93773 dataLength:105481
+	difference:11708
+	length:10
+LightMap:
+	width:4 height:3
+	dataOffset:93747 dataLength:105481
+	difference:11734
+	length:12
+LightMap:
+	width:3 height:7
+	dataOffset:93726 dataLength:105481
+	difference:11755
+	length:21
+LightMap:
+	width:3 height:4
+	dataOffset:45498 dataLength:105481
+	difference:59983
+	length:12
+LightMap:
+	width:3 height:2
+	dataOffset:45471 dataLength:105481
+	difference:60010
+	length:6
+LightMap:
+	width:3 height:6
+	dataOffset:93598 dataLength:105481
+	difference:11883
+	length:18
+LightMap:
+	width:5 height:5
+	dataOffset:88602 dataLength:105481
+	difference:16879
+	length:25
+LightMap:
+	width:7 height:2
+	dataOffset:88581 dataLength:105481
+	difference:16900
+	length:14
+LightMap:
+	width:4 height:2
+	dataOffset:45379 dataLength:105481
+	difference:60102
+	length:8
+LightMap:
+	width:4 height:3
+	dataOffset:45486 dataLength:105481
+	difference:59995
+	length:12
+LightMap:
+	width:3 height:2
+	dataOffset:45264 dataLength:105481
+	difference:60217
+	length:6
+LightMap:
+	width:4 height:2
+	dataOffset:45403 dataLength:105481
+	difference:60078
+	length:8
+LightMap:
+	width:4 height:2
+	dataOffset:45367 dataLength:105481
+	difference:60114
+	length:8
+LightMap:
+	width:4 height:2
+	dataOffset:45250 dataLength:105481
+	difference:60231
+	length:8
+LightMap:
+	width:3 height:2
+	dataOffset:45258 dataLength:105481
+	difference:60223
+	length:6
+LightMap:
+	width:4 height:2
+	dataOffset:45343 dataLength:105481
+	difference:60138
+	length:8
+LightMap:
+	width:4 height:5
+	dataOffset:45315 dataLength:105481
+	difference:60166
+	length:20
+LightMap:
+	width:4 height:5
+	dataOffset:45319 dataLength:105481
+	difference:60162
+	length:20
+LightMap:
+	width:3 height:7
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:21
+LightMap:
+	width:3 height:7
+	dataOffset:0 dataLength:105481
+	difference:105481
+	length:21
+LightMap:
+	width:4 height:7
+	dataOffset:45451 dataLength:105481
+	difference:60030
+	length:28
+LightMap:
+	width:4 height:5
+	dataOffset:45447 dataLength:105481
+	difference:60034
+	length:20
+LightMap:
+	width:4 height:5
+	dataOffset:45327 dataLength:105481
+	difference:60154
+	length:20
+LightMap:
+	width:4 height:3
+	dataOffset:45232 dataLength:105481
+	difference:60249
+	length:12
+LightMap:
+	width:4 height:4
+	dataOffset:45323 dataLength:105481
+	difference:60158
+	length:16
+LightMap:
+	width:4 height:4
+	dataOffset:45463 dataLength:105481
+	difference:60018
+	length:16
+LightMap:
+	width:4 height:3
+	dataOffset:45339 dataLength:105481
+	difference:60142
+	length:12
+LightMap:
+	width:7 height:2
+	dataOffset:93678 dataLength:105481
+	difference:11803
+	length:14
+LightMap:
+	width:7 height:2
+	dataOffset:93705 dataLength:105481
+	difference:11776
+	length:14
+LightMap:
+	width:3 height:7
+	dataOffset:93699 dataLength:105481
+	difference:11782
+	length:21
+LightMap:
+	width:4 height:4
+	dataOffset:45455 dataLength:105481
+	difference:60026
+	length:16
+LightMap:
+	width:3 height:4
+	dataOffset:45236 dataLength:105481
+	difference:60245
+	length:12
+LightMap:
+	width:3 height:2
+	dataOffset:45239 dataLength:105481
+	difference:60242
+	length:6
+LightMap:
+	width:4 height:2
+	dataOffset:45242 dataLength:105481
+	difference:60239
+	length:8
+LightMap:
+	width:4 height:2
+	dataOffset:45331 dataLength:105481
+	difference:60150
+	length:8
+LightMap:
+	width:4 height:2
+	dataOffset:45355 dataLength:105481
+	difference:60126
+	length:8

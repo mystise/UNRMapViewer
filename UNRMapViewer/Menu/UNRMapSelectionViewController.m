@@ -130,6 +130,7 @@
 	[activity startAnimating];*/
 	
 	[self.mapViewController loadMap:[self.maps objectAtIndex:indexPath.row]];
+	[self.mapViewController setAnimationFrameInterval:2];
 	[self presentModalViewController:self.mapViewController animated:YES];
 	
 	/*[alert dismissWithClickedButtonIndex:0 animated:YES];

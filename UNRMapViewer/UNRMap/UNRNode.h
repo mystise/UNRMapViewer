@@ -24,20 +24,18 @@ using Matrix::Matrix3D;
 
 - (id)initWithModel:(NSMutableDictionary *)model nodeNumber:(int)nodeNum file:(UNRFile *)file map:(UNRMap *)map;
 
-- (void)drawWithMatrix:(Matrix3D &)mat; //rootNode
+- (void)drawWithMatrix:(Matrix3D &)mat cubeMap:(GLuint)texMap cameraPos:(vec3)vec; //rootNode
 
 - (void)drawWithState:(NSMutableDictionary *)state; //any subNode
-
-//@property(nonatomic, assign) vec3 *verts;
-//@property(nonatomic, assign) vec2 *texCoords;
 
 @property(nonatomic, assign) int vertCount;
 @property(nonatomic, assign) GLuint vbo;
 
-@property(nonatomic, assign) vec3 normal;
-@property(nonatomic, retain) NSDictionary *plane;
+//@property(nonatomic, assign) vec3 normal;
+//@property(nonatomic, retain) NSDictionary *plane;
 @property(nonatomic, assign) int surfFlags;
-@property(nonatomic, retain) UNRTexture *tex;
+@property(nonatomic, assign) int strideLength;
+@property(nonatomic, retain) UNRTexture *tex, *lightMap;
 @property(nonatomic, retain) UNRNode *front, *back, *coPlanar;
 @property(nonatomic, retain) UNRShader *shader;
 
@@ -62,7 +60,7 @@ enum EPolyFlags{
 	PF_BigWavy 			= 0x00001000,	// Poly has a big wavy pattern in it.
 	PF_SmallWavy		= 0x00002000,	// Small wavy pattern (for water/enviro reflection).
 	PF_Flat				= 0x00004000,	// Flat surface.
-	PF_LowShadowDetail	= 0x00008000,	// Low detail shadows.
+	PF_LowShadowDetail	= 0x00008000,	// Low detaul shadows.
 	PF_NoMerge			= 0x00010000,	// Don't merge poly's nodes before lighting when rendering.
 	PF_CloudWavy		= 0x00020000,	// Polygon appears wavy like clouds.
 	PF_DirtyShadows		= 0x00040000,	// Dirty shadows.

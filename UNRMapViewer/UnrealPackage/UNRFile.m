@@ -180,26 +180,35 @@
 }
 
 - (void)resolveImportReferences:(NSString *)path{
-	NSMutableDictionary *subFiles = [[NSMutableDictionary alloc] init];
 	NSFileManager *resManager = [[NSFileManager alloc] init];
+	NSMutableDictionary *files = [[NSMutableDictionary alloc] init];
+	NSDirectoryEnumerator *directEnum = [resManager enumeratorAtPath:path];
+	NSString *filePath;
+	while((filePath = [directEnum nextObject]) != nil){
+		NSString *fileName = [[[filePath lastPathComponent] stringByDeletingPathExtension] lowercaseString];
+		[files setValue:filePath forKey:fileName];
+	}
+	
+	[resManager release];
+	
+	NSMutableDictionary *subFiles = [[NSMutableDictionary alloc] init];
 	for(UNRImport *import in self.references){
 		if([import.className.string isEqualToString:@"Package"] && import.package == nil){
-			NSDirectoryEnumerator *directEnum = [resManager enumeratorAtPath:path];
-			NSString *filePath;
-			while((filePath = [directEnum nextObject]) != nil){
-				NSString *fileName = [[filePath lastPathComponent] stringByDeletingPathExtension];
-				if([[fileName lowercaseString] isEqualToString:[import.name.string lowercaseString]]){
-					NSData *dat = [NSData dataWithContentsOfFile:[path stringByAppendingPathComponent:filePath]];
-					UNRFile *file = [[UNRFile alloc] initWithFileData:dat pluginsDirectory:nil];
-					file.pluginLoader = self.pluginLoader;
-					if(file != nil){
-						[subFiles setObject:file forKey:import.name.string];
-					}
-					[file release];
+			NSString *filePath = [files valueForKey:[import.name.string lowercaseString]];
+			if(filePath != nil){
+				NSData *dat = [NSData dataWithContentsOfFile:[path stringByAppendingPathComponent:filePath]];
+				UNRFile *file = [[UNRFile alloc] initWithFileData:dat pluginsDirectory:nil];
+				file.pluginLoader = self.pluginLoader;
+				if(file != nil){
+					[subFiles setObject:file forKey:import.name.string];
 				}
+				[file release];
 			}
 		}
 	}
+	
+	[files release];
+	
 	for(UNRImport *import in self.references){
 		if(![import.className.string isEqualToString:@"Package"]){
 			//load the object from the file
@@ -210,7 +219,7 @@
 			UNRFile *file = [subFiles objectForKey:package.name.string];
 			NSArray *objNames = [[file.objects valueForKeyPath:@"name.string"] retain];
 			NSArray *classNames = [[file.objects valueForKeyPath:@"classObj.name.string"] retain];
-			int index = 0;// = [objNames indexOfObject:import.name.string];
+			int index = 0;
 			for(int i = 0; i < [objNames count]; i++){
 				NSString *name = [objNames objectAtIndex:i];
 				NSString *className = [classNames objectAtIndex:i];
@@ -227,7 +236,6 @@
 			[import.obj loadPlugin:file];
 		}
 	}
-	[resManager release];
 	[subFiles release];
 }
 

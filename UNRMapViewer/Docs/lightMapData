@@ -1,0 +1,324 @@
+LightMap: node:0 lightMap:0
+	coplanar:1 back:30 front:3
+	texture:ancmys3
+	data offset: 40
+	uSize:8 vSize:8 dataOffset:40
+LightMap: node:1 lightMap:0
+	coplanar:2 back:-1 front:-1
+	texture:ancmys3
+	data offset: 40
+	uSize:8 vSize:8 dataOffset:40
+LightMap: node:2 lightMap:0
+	coplanar:-1 back:-1 front:-1
+	texture:ancmys3
+	data offset: 40
+	uSize:8 vSize:8 dataOffset:40
+LightMap: node:3 lightMap:1
+	coplanar:-1 back:17 front:4
+	texture:Tilesa
+	data offset: 236
+	uSize:2 vSize:4 dataOffset:236
+LightMap: node:4 lightMap:2
+	coplanar:-1 back:-1 front:5
+	texture:ancmys3
+	data offset: 0
+	uSize:8 vSize:8 dataOffset:0
+LightMap: node:5 lightMap:3
+	coplanar:-1 back:-1 front:6
+	texture:ancmys3
+	data offset: 24
+	uSize:8 vSize:8 dataOffset:24
+LightMap: node:6 lightMap:4
+	coplanar:-1 back:13 front:7
+	texture:Tilesa
+	data offset: 240
+	uSize:2 vSize:4 dataOffset:240
+LightMap: node:7 lightMap:5
+	coplanar:-1 back:-1 front:8
+	texture:ancmys3
+	data offset: 48
+	uSize:8 vSize:8 dataOffset:48
+LightMap: node:8 lightMap:6
+	coplanar:-1 back:10 front:9
+	texture:Tilesa
+	data offset: 244
+	uSize:2 vSize:4 dataOffset:244
+LightMap: node:9 lightMap:7
+	coplanar:-1 back:-1 front:-1
+	texture:Aceilin1
+	data offset: 64
+	uSize:8 vSize:8 dataOffset:64
+LightMap: node:10 lightMap:8
+	coplanar:-1 back:11 front:-1
+	texture:Tilesa
+	data offset: 262
+	uSize:4 vSize:2 dataOffset:262
+LightMap: node:11 lightMap:9
+	coplanar:-1 back:12 front:-1
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:12 lightMap:10
+	coplanar:-1 back:-1 front:-1
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:13 lightMap:11
+	coplanar:-1 back:15 front:14
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:14 lightMap:5
+	coplanar:-1 back:-1 front:-1
+	texture:ancmys3
+	data offset: 48
+	uSize:8 vSize:8 dataOffset:48
+LightMap: node:15 lightMap:12
+	coplanar:-1 back:16 front:-1
+	texture:Tilesa
+	data offset: 260
+	uSize:4 vSize:2 dataOffset:260
+LightMap: node:16 lightMap:13
+	coplanar:-1 back:-1 front:-1
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:17 lightMap:14
+	coplanar:18 back:-1 front:20
+	texture:FLOOR1
+	data offset: 72
+	uSize:8 vSize:8 dataOffset:72
+LightMap: node:18 lightMap:14
+	coplanar:19 back:-1 front:-1
+	texture:FLOOR1
+	data offset: 72
+	uSize:8 vSize:8 dataOffset:72
+LightMap: node:19 lightMap:14
+	coplanar:-1 back:-1 front:-1
+	texture:FLOOR1
+	data offset: 72
+	uSize:8 vSize:8 dataOffset:72
+LightMap: node:20 lightMap:2
+	coplanar:-1 back:-1 front:21
+	texture:ancmys3
+	data offset: 0
+	uSize:8 vSize:8 dataOffset:0
+LightMap: node:21 lightMap:15
+	coplanar:22 back:24 front:23
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:22 lightMap:21
+	coplanar:-1 back:-1 front:-1
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:23 lightMap:5
+	coplanar:-1 back:-1 front:-1
+	texture:ancmys3
+	data offset: 48
+	uSize:8 vSize:8 dataOffset:48
+LightMap: node:24 lightMap:16
+	coplanar:25 back:27 front:26
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:25 lightMap:20
+	coplanar:-1 back:-1 front:-1
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:26 lightMap:3
+	coplanar:-1 back:-1 front:-1
+	texture:ancmys3
+	data offset: 24
+	uSize:8 vSize:8 dataOffset:24
+LightMap: node:27 lightMap:17
+	coplanar:-1 back:29 front:28
+	texture:Tilesa
+	data offset: 232
+	uSize:2 vSize:4 dataOffset:232
+LightMap: node:28 lightMap:18
+	coplanar:-1 back:-1 front:-1
+	texture:Tilesa
+	data offset: 258
+	uSize:4 vSize:2 dataOffset:258
+LightMap: node:29 lightMap:19
+	coplanar:-1 back:-1 front:-1
+	texture:Tilesa
+	data offset: 256
+	uSize:4 vSize:2 dataOffset:256
+LightMap: node:30 lightMap:22
+	coplanar:31 back:60 front:33
+	texture:ancmys3
+	data offset: 96
+	uSize:8 vSize:8 dataOffset:96
+LightMap: node:31 lightMap:22
+	coplanar:32 back:-1 front:-1
+	texture:ancmys3
+	data offset: 96
+	uSize:8 vSize:8 dataOffset:96
+LightMap: node:32 lightMap:22
+	coplanar:-1 back:-1 front:-1
+	texture:ancmys3
+	data offset: 96
+	uSize:8 vSize:8 dataOffset:96
+LightMap: node:33 lightMap:23
+	coplanar:-1 back:47 front:34
+	texture:Tilesa
+	data offset: 268
+	uSize:2 vSize:4 dataOffset:268
+LightMap: node:34 lightMap:24
+	coplanar:-1 back:-1 front:35
+	texture:ancmys3
+	data offset: 120
+	uSize:8 vSize:8 dataOffset:120
+LightMap: node:35 lightMap:25
+	coplanar:-1 back:-1 front:36
+	texture:ancmys3
+	data offset: 144
+	uSize:8 vSize:8 dataOffset:144
+LightMap: node:36 lightMap:26
+	coplanar:-1 back:43 front:37
+	texture:Tilesa
+	data offset: 272
+	uSize:2 vSize:4 dataOffset:272
+LightMap: node:37 lightMap:27
+	coplanar:-1 back:-1 front:38
+	texture:Aceilin1
+	data offset: 160
+	uSize:8 vSize:8 dataOffset:160
+LightMap: node:38 lightMap:28
+	coplanar:-1 back:40 front:39
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:39 lightMap:29
+	coplanar:-1 back:-1 front:-1
+	texture:ancmys3
+	data offset: 104
+	uSize:8 vSize:8 dataOffset:104
+LightMap: node:40 lightMap:30
+	coplanar:-1 back:41 front:-1
+	texture:Tilesa
+	data offset: 276
+	uSize:2 vSize:4 dataOffset:276
+LightMap: node:41 lightMap:31
+	coplanar:-1 back:42 front:-1
+	texture:Tilesa
+	data offset: 294
+	uSize:4 vSize:2 dataOffset:294
+		Failed!!!
+LightMap: node:42 lightMap:32
+	coplanar:-1 back:-1 front:-1
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:43 lightMap:33
+	coplanar:-1 back:45 front:44
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:44 lightMap:29
+	coplanar:-1 back:-1 front:-1
+	texture:ancmys3
+	data offset: 104
+	uSize:8 vSize:8 dataOffset:104
+LightMap: node:45 lightMap:34
+	coplanar:-1 back:46 front:-1
+	texture:Tilesa
+	data offset: 292
+	uSize:4 vSize:2 dataOffset:292
+		Failed!!!
+LightMap: node:46 lightMap:35
+	coplanar:-1 back:-1 front:-1
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:47 lightMap:36
+	coplanar:48 back:-1 front:50
+	texture:FLOOR1
+	data offset: 168
+	uSize:8 vSize:8 dataOffset:168
+LightMap: node:48 lightMap:36
+	coplanar:49 back:-1 front:-1
+	texture:FLOOR1
+	data offset: 168
+	uSize:8 vSize:8 dataOffset:168
+LightMap: node:49 lightMap:36
+	coplanar:-1 back:-1 front:-1
+	texture:FLOOR1
+	data offset: 168
+	uSize:8 vSize:8 dataOffset:168
+LightMap: node:50 lightMap:24
+	coplanar:-1 back:-1 front:51
+	texture:ancmys3
+	data offset: 120
+	uSize:8 vSize:8 dataOffset:120
+LightMap: node:51 lightMap:37
+	coplanar:52 back:54 front:53
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:52 lightMap:43
+	coplanar:-1 back:-1 front:-1
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:53 lightMap:25
+	coplanar:-1 back:-1 front:-1
+	texture:ancmys3
+	data offset: 144
+	uSize:8 vSize:8 dataOffset:144
+LightMap: node:54 lightMap:38
+	coplanar:55 back:57 front:56
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:55 lightMap:42
+	coplanar:-1 back:-1 front:-1
+	texture:TRIMH
+	data offset: 0
+	uSize:2 vSize:2 dataOffset:0
+LightMap: node:56 lightMap:29
+	coplanar:-1 back:-1 front:-1
+	texture:ancmys3
+	data offset: 104
+	uSize:8 vSize:8 dataOffset:104
+LightMap: node:57 lightMap:39
+	coplanar:-1 back:59 front:58
+	texture:Tilesa
+	data offset: 264
+	uSize:2 vSize:4 dataOffset:264
+LightMap: node:58 lightMap:40
+	coplanar:-1 back:-1 front:-1
+	texture:Tilesa
+	data offset: 290
+	uSize:4 vSize:2 dataOffset:290
+		Failed!!!
+LightMap: node:59 lightMap:41
+	coplanar:-1 back:-1 front:-1
+	texture:Tilesa
+	data offset: 288
+	uSize:4 vSize:2 dataOffset:288
+		Failed!!!
+LightMap: node:60 lightMap:44
+	coplanar:-1 back:-1 front:61
+	texture:HIWALL3E
+	data offset: 192
+	uSize:8 vSize:4 dataOffset:192
+LightMap: node:61 lightMap:45
+	coplanar:-1 back:-1 front:62
+	texture:HIWALL3E
+	data offset: 204
+	uSize:8 vSize:4 dataOffset:204
+LightMap: node:62 lightMap:46
+	coplanar:-1 back:-1 front:63
+	texture:Aceilin1
+	data offset: 216
+	uSize:8 vSize:4 dataOffset:216
+LightMap: node:63 lightMap:47
+	coplanar:-1 back:-1 front:-1
+	texture:Tilesa
+	data offset: 220
+	uSize:8 vSize:4 dataOffset:220

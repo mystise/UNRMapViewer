@@ -28,6 +28,10 @@ public:
 		return *this;
 	}
 	
+	Vector3D getPos(){
+		return pos;
+	}
+	
 	FPSCamera &lookAt(Vector3D vec){
 		look = vec - pos;
 		look.normalize();

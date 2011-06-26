@@ -7,10 +7,13 @@
 //
 
 uniform sampler2D texture;
+uniform sampler2D lightmap;
 
 varying highp vec2 texCoord;
+varying highp vec2 lightCoord;
 
 void main(){
-	//gl_FragColor = vec4(0.0, 1.0, 0.5, 0.0);
-	gl_FragColor = texture2D(texture, texCoord);
+	//gl_FragColor = texture2D(lightmap, lightCoord)*texture2D(texture, texCoord);
+	//gl_FragColor = texture2D(texture, texCoord);
+	gl_FragColor = 2.0*texture2D(lightmap, lightCoord)*texture2D(texture, texCoord);
 }

@@ -19,7 +19,7 @@
 @interface EAGLView : UIView{
 @private
 	// The OpenGL ES names for the framebuffer and renderbuffer used to render to this view.
-	GLuint defaultFramebuffer, colorRenderbuffer, depthRenderBuffer;
+	GLuint defaultFramebuffer, colorRenderbuffer, depthStencilRenderbuffer;
 }
 
 @property(nonatomic, retain) EAGLContext *context;

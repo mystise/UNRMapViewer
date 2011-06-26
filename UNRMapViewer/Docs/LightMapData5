@@ -1,0 +1,246 @@
+LightMap:
+	width:8 height:8
+	dataOffset:40 dataLength:296
+	difference:256
+	length:64
+LightMap:
+	width:4 height:2
+	dataOffset:236 dataLength:296
+	difference:60
+	length:8
+LightMap:
+	width:8 height:8
+	dataOffset:0 dataLength:296
+	difference:296
+	length:64
+LightMap:
+	width:8 height:8
+	dataOffset:24 dataLength:296
+	difference:272
+	length:64
+LightMap:
+	width:4 height:2
+	dataOffset:240 dataLength:296
+	difference:56
+	length:8
+LightMap:
+	width:8 height:8
+	dataOffset:48 dataLength:296
+	difference:248
+	length:64
+LightMap:
+	width:4 height:2
+	dataOffset:244 dataLength:296
+	difference:52
+	length:8
+LightMap:
+	width:8 height:8
+	dataOffset:64 dataLength:296
+	difference:232
+	length:64
+LightMap:
+	width:2 height:4
+	dataOffset:262 dataLength:296
+	difference:34
+	length:8
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:2 height:4
+	dataOffset:260 dataLength:296
+	difference:36
+	length:8
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:8 height:8
+	dataOffset:72 dataLength:296
+	difference:224
+	length:64
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:4 height:2
+	dataOffset:232 dataLength:296
+	difference:64
+	length:8
+LightMap:
+	width:2 height:4
+	dataOffset:258 dataLength:296
+	difference:38
+	length:8
+LightMap:
+	width:2 height:4
+	dataOffset:256 dataLength:296
+	difference:40
+	length:8
+LightMap:
+	width:8 height:8
+	dataOffset:96 dataLength:296
+	difference:200
+	length:64
+LightMap:
+	width:4 height:2
+	dataOffset:268 dataLength:296
+	difference:28
+	length:8
+LightMap:
+	width:8 height:8
+	dataOffset:120 dataLength:296
+	difference:176
+	length:64
+LightMap:
+	width:8 height:8
+	dataOffset:144 dataLength:296
+	difference:152
+	length:64
+LightMap:
+	width:4 height:2
+	dataOffset:272 dataLength:296
+	difference:24
+	length:8
+LightMap:
+	width:8 height:8
+	dataOffset:160 dataLength:296
+	difference:136
+	length:64
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:8 height:8
+	dataOffset:104 dataLength:296
+	difference:192
+	length:64
+LightMap:
+	width:4 height:2
+	dataOffset:276 dataLength:296
+	difference:20
+	length:8
+LightMap:
+	width:2 height:4
+	dataOffset:294 dataLength:296
+	difference:2
+	length:8
+	rawData: f9 ff
+	failed!!!
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:2 height:4
+	dataOffset:292 dataLength:296
+	difference:4
+	length:8
+	rawData: f9 ff f9 ff
+	failed!!!
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:8 height:8
+	dataOffset:168 dataLength:296
+	difference:128
+	length:64
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:2 height:2
+	dataOffset:0 dataLength:296
+	difference:296
+	length:4
+LightMap:
+	width:4 height:2
+	dataOffset:264 dataLength:296
+	difference:32
+	length:8
+LightMap:
+	width:2 height:4
+	dataOffset:290 dataLength:296
+	difference:6
+	length:8
+	rawData: f9 ff f9 ff f9 ff
+	failed!!!
+LightMap:
+	width:2 height:4
+	dataOffset:288 dataLength:296
+	difference:8
+	length:8
+LightMap:
+	width:4 height:8
+	dataOffset:192 dataLength:296
+	difference:104
+	length:32
+LightMap:
+	width:4 height:8
+	dataOffset:204 dataLength:296
+	difference:92
+	length:32
+LightMap:
+	width:4 height:8
+	dataOffset:216 dataLength:296
+	difference:80
+	length:32
+LightMap:
+	width:4 height:8
+	dataOffset:220 dataLength:296
+	difference:76
+	length:32

@@ -9,10 +9,13 @@ uniform mat4 modelViewProjection;
 
 attribute vec4 position;
 attribute vec2 inTexCoord;
+attribute vec2 inLightCoord;
 
-varying highp vec2 texCoord;
+varying vec2 texCoord;
+varying vec2 lightCoord;
 
 void main(){
 	gl_Position = modelViewProjection*position;
 	texCoord = inTexCoord;
+	lightCoord = inLightCoord;
 }

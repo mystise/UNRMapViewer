@@ -1,0 +1,47 @@
+LightMap:
+	width:8 height:8
+	dataOffset:0 dataLength:48
+	difference:48
+	length:64
+	rawData:  0 7e 7e 7e 7e 7e 7e  0
+			  0 7e 7e 7e 7e 7e 7e  0
+			  0 7e 7e 7e 7e 7e 7e  0
+			  0 7e 7e 7e 7e 7e 7e  0
+			  0 7e 7e 7e 7e 7e 7e  0
+			  0 7e 7e 7e 7e 7e 7e  0
+		failed!!!
+LightMap:
+	width:8 height:8
+	dataOffset:8 dataLength:48
+	difference:40
+	length:64
+	rawData:  0 7e 7e 7e 7e 7e 7e  0  0 7e 7e 7e 7e 7e 7e  0  0 7e 7e 7e 7e 7e 7e  0  0 7e 7e 7e 7e 7e 7e  0  0 7e 7e 7e 7e 7e 7e  0
+		failed!!!
+LightMap:
+	width:8 height:8
+	dataOffset:16 dataLength:48
+	difference:32
+	length:64
+	rawData:  0 7e 7e 7e 7e 7e 7e  0  0 7e 7e 7e 7e 7e 7e  0  0 7e 7e 7e 7e 7e 7e  0  0 7e 7e 7e 7e 7e 7e  0
+		failed!!!
+LightMap:
+	width:8 height:8
+	dataOffset:24 dataLength:48
+	difference:24
+	length:64
+	rawData:  0 7e 7e 7e 7e 7e 7e  0  0 7e 7e 7e 7e 7e 7e  0  0 7e 7e 7e 7e 7e 7e  0
+		failed!!!
+LightMap:
+	width:8 height:8
+	dataOffset:32 dataLength:48
+	difference:16
+	length:64
+	rawData:  0 7e 7e 7e 7e 7e 7e  0  0 7e 7e 7e 7e 7e 7e  0
+		failed!!!
+LightMap:
+	width:8 height:8
+	dataOffset:40 dataLength:48
+	difference:8
+	length:64
+	rawData:  0 7e 7e 7e 7e 7e 7e  0
+		failed!!!

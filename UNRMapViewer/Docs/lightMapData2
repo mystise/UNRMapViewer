@@ -1,0 +1,132 @@
+LightMap:
+	width:8 height:8
+	dataOffset:272 dataLength:336
+	difference:64
+	length:64
+	iLightActors:62
+LightMap:
+	width:8 height:8
+	dataOffset:224 dataLength:336
+	difference:112
+	length:64
+	iLightActors:53
+LightMap:
+	width:8 height:8
+	dataOffset:288 dataLength:336
+	difference:48
+	length:64
+	iLightActors:66
+LightMap:
+	width:8 height:8
+	dataOffset:240 dataLength:336
+	difference:96
+	length:64
+	iLightActors:56
+LightMap:
+	width:8 height:8
+	dataOffset:304 dataLength:336
+	difference:32
+	length:64
+	iLightActors:69
+LightMap:
+	width:8 height:8
+	dataOffset:256 dataLength:336
+	difference:80
+	length:64
+	iLightActors:59
+LightMap:
+	width:8 height:8
+	dataOffset:320 dataLength:336
+	difference:16
+	length:64
+	iLightActors:72
+LightMap:
+	width:8 height:8
+	dataOffset:280 dataLength:336
+	difference:56
+	length:64
+	iLightActors:64
+LightMap:
+	width:8 height:8
+	dataOffset:208 dataLength:336
+	difference:128
+	length:64
+	iLightActors:50
+LightMap:
+	width:8 height:8
+	dataOffset:128 dataLength:336
+	difference:208
+	length:64
+	iLightActors:36
+LightMap:
+	width:8 height:8
+	dataOffset:80 dataLength:336
+	difference:256
+	length:64
+	iLightActors:27
+LightMap:
+	width:8 height:8
+	dataOffset:144 dataLength:336
+	difference:192
+	length:64
+	iLightActors:39
+LightMap:
+	width:8 height:8
+	dataOffset:96 dataLength:336
+	difference:240
+	length:64
+	iLightActors:30
+LightMap:
+	width:8 height:8
+	dataOffset:160 dataLength:336
+	difference:176
+	length:64
+	iLightActors:42
+LightMap:
+	width:8 height:8
+	dataOffset:112 dataLength:336
+	difference:224
+	length:64
+	iLightActors:33
+LightMap:
+	width:8 height:8
+	dataOffset:184 dataLength:336
+	difference:152
+	length:64
+	iLightActors:46
+LightMap:
+	width:8 height:8
+	dataOffset:64 dataLength:336
+	difference:272
+	length:64
+	iLightActors:24
+LightMap:
+	width:8 height:8
+	dataOffset:0 dataLength:336
+	difference:336
+	length:64
+	iLightActors:11
+LightMap:
+	width:8 height:8
+	dataOffset:8 dataLength:336
+	difference:328
+	length:64
+	iLightActors:13
+LightMap:
+	width:8 height:8
+	dataOffset:24 dataLength:336
+	difference:312
+	length:64
+	iLightActors:16
+LightMap:
+	width:8 height:8
+	dataOffset:32 dataLength:336
+	difference:304
+	length:64
+	iLightActors:18
+LightMap:
+	width:8 height:8
+	dataOffset:48 dataLength:336
+	difference:288
+	length:64
+	iLightActors:21

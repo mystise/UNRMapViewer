@@ -1,0 +1,23 @@
+float udot = uAxis * origin
+float vdot = vAxis * origin
+for each point:
+	float u = uAxis * point
+	float v = vAxis * point
+	lightMapCoords.x = (u-udot-upan[0])*umult[0]
+	lightMapCoords.y = (v-vdot-vpan[0])*vmult[0]
+	texCoords.x = (u-udot-upan[1])*umult[1]
+	texCoords.y = (v-vdot-vpan[1])*vmult[1]
+	
+umult = 1.0f/uscale*usize
+vmult = 1.0f/vscale*vsize
+upan = pan.x + panbias*uscale
+vpan = pan.y + panbias*vscale
+
+for each point:
+	disp = point - origin
+	float udot = u * disp
+	float vdot = v * disp
+	lightMapCoords.x = (udot-(pan.x + -0.5*uscale))/uscale*usize
+	lightMapCoords.y = (vdot-(pan.y + -0.5*vscale))/vscale*vsize
+	texCoords.x = (udot + panU)/usize
+	texCoords.y = (vdot - panV)/vscale*vsize

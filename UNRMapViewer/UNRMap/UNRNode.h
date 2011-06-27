@@ -29,7 +29,7 @@ using Matrix::Matrix3D;
 - (void)drawWithState:(NSMutableDictionary *)state; //any subNode
 
 @property(nonatomic, assign) int vertCount;
-@property(nonatomic, assign) GLuint vbo;
+@property(nonatomic, assign) GLuint vbo, vao;
 
 //@property(nonatomic, assign) vec3 normal;
 //@property(nonatomic, retain) NSDictionary *plane;

@@ -86,7 +86,7 @@ int roundToNext8(int input){
 	return retVal;
 }
 
-/*color hsvToRGB(Byte inH, Byte inS, Byte inV) {
+color hsvToRGB(Byte inH, Byte inS, Byte inV) {
 	color col = {0};
 	float f, p, q, t;
 	float h, s, v;
@@ -98,17 +98,17 @@ int roundToNext8(int input){
 		col.b = inV;
 		col.a = 0xFF;
 	}else{
-		h = (1.0f - (float)inH/0xFF) * 360.0f;
+		h = (float)inH/0xFF * 360.0f;
 		s = 1.0f - (float)inS/0xFF;
 		v = (float)inV/0xFF;
 		if(h == 360.0f){
 			h = 0.0f;
 		}
 		h /= 60.0f;
-		i = floor(h);					//i = point of the hexagon
-		f = h-i;						//float = distance from point of hexagon
-		p = v * (1.0 - s);				//p = value * (1.0 - saturation)
-		q = v * (1.0 - (s * f));		//q = value * (1.0 - saturation*float)
+		i = floor(h);						//i = point of the hexagon
+		f = h-i;							//float = distance from point of hexagon
+		p = v * (1.0 - s);					//p = value * (1.0 - saturation)
+		q = v * (1.0 - (s * f));			//q = value * (1.0 - saturation*float)
 		t = v * (1.0 - (s * (1.0 - f)));	//t = value * (1.0 - saturation*(1.0 - float))
 		if(i == 0){
 			r = v;
@@ -141,7 +141,7 @@ int roundToNext8(int input){
 		col.a = 0xFF;
 	}
 	return col;
-}*/
+}
 
 void printLightType(int lType){
 	switch(lType){
@@ -279,7 +279,7 @@ void printLightType(int lType){
 						[manager release];
 					}
 					//value = 0xFF;
-					//color rgb = hsvToRGB(hue, saturation, value);
+					color rgb = hsvToRGB(hue, saturation, value);
 					
 					//printf("hsv: %i %i %i\nrgb: %i %i %i\n\n", hue, saturation, value, rgb.r, rgb.g, rgb.b);
 					for(int i = 0; i < tex.height; i++){
@@ -290,7 +290,7 @@ void printLightType(int lType){
 								Byte newDat = ((rawDat[rawIndex]>>x)&0x01);
 								
 								color oldColor = texDat[texIndex];
-								texDat[texIndex] = (color){oldColor.r + newDat*value, oldColor.g + newDat*value, oldColor.b + newDat*value, 0xFF};
+								texDat[texIndex] = (color){oldColor.r + newDat*rgb.r, oldColor.g + newDat*rgb.g, oldColor.b + newDat*rgb.b, 0xFF};
 							}
 						}
 					}
@@ -333,19 +333,8 @@ void printLightType(int lType){
 				printf("\tfailed!!! not enough data!\n");
 			}
 		}else{
-			/*Byte *rawDat;
-			 NSData *subDat = [data subdataWithRange:NSMakeRange(dataOffset, [data length] - dataOffset)];
-			 rawDat = (Byte *)[subDat bytes];
-			 
-			 printf("\trawData:");
-			 for(int i = 0; i < [data length] - dataOffset; i++){
-			 printf(" %2x", rawDat[i]);
-			 }
-			 printf("\n");*/
-			
 			GLubyte texDat = 0x00;
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
-			printf("\tfailed!!! lights = -1\n");
 		}
 		
 		/*if(tex.width*tex.height + dataOffset <= [data length]){

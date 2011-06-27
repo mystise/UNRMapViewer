@@ -14,7 +14,7 @@ using Matrix::Matrix3D;
 
 class FPSCamera{
 public:
-	FPSCamera(): rotY(0.0f), rotX(0.0f), clamp(89.0f), pos(0.0f, 0.0f, 0.0f), up(0.0f, 1.0f, 0.0f), look(0.0f, 0.0f, -1.0f), right(1.0f, 0.0f, 0.0f){
+	FPSCamera(): rotY(0.0f), rotX(0.0f), clamp(90.0f), pos(0.0f, 0.0f, 0.0f), up(0.0f, 1.0f, 0.0f), look(0.0f, 0.0f, -1.0f), right(1.0f, 0.0f, 0.0f){
 		
 	}
 	

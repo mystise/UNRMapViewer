@@ -78,13 +78,12 @@
 		self.framebufferWidth = framebufferWidth;
 		self.framebufferHeight = framebufferHeight;
 		
-		glGenRenderbuffers(1, &depthStencilRenderbuffer);
-		glBindRenderbuffer(GL_RENDERBUFFER, depthStencilRenderbuffer);
+		glGenRenderbuffers(1, &depthRenderbuffer);
+		glBindRenderbuffer(GL_RENDERBUFFER, depthRenderbuffer);
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, framebufferWidth, framebufferHeight);
 
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, colorRenderbuffer);
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthStencilRenderbuffer);
-		//glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, depthStencilRenderbuffer);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthRenderbuffer);
 		
 		if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 			NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
@@ -105,9 +104,9 @@
 			colorRenderbuffer = 0;
 		}
 		
-		if(depthStencilRenderbuffer){
-			glDeleteRenderbuffers(1, &depthStencilRenderbuffer);
-			depthStencilRenderbuffer = 0;
+		if(depthRenderbuffer){
+			glDeleteRenderbuffers(1, &depthRenderbuffer);
+			depthRenderbuffer = 0;
 		}
 	}
 }

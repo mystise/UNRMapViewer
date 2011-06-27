@@ -46,7 +46,6 @@
 	animationFrameInterval = 2;
 	self.displayLink = nil;
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_STENCIL_TEST);
 }
 
 - (void)dealloc{
@@ -143,7 +142,7 @@
 	[(EAGLView *)self.view setFramebuffer];
 	
 	glClearColor(0.1f, 0.5f, 0.5f, 1.0f);
-	glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+	glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
 	
 	[self.map draw:self.aspect withTimestep:animationFrameInterval/60.0f];
 	
@@ -299,6 +298,10 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	[self.map touchesEnded:touches withEvent:event];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
+	[self.map touchesCancelled:touches withEvent:event];
 }
 
 @end

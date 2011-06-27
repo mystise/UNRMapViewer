@@ -22,11 +22,13 @@ using Vector::Vector2D;
 
 @interface UNRMap()
 @property(nonatomic, assign) FPSCamera *cam;
+@property(nonatomic, assign) CGPoint stickPos, stickPrevPos, lookPos, lookPrevPos;
 @end
 
 @implementation UNRMap
 
 @synthesize rootNode = rootNode_, textures = textures_, shaders = shaders_, cam = cam_, lightMaps = lightMaps_, cubeMap = cubeMap_;
+@synthesize stickPos = stickPos_, stickPrevPos = stickPrevPos_, lookPos = lookPos_, lookPrevPos = lookPrevPos_;
 
 - (id)initWithModel:(NSMutableDictionary *)model andFile:(UNRFile *)file{
 	self = [super init];
@@ -82,10 +84,16 @@ using Vector::Vector2D;
 }
 
 - (void)draw:(float)aspect withTimestep:(float)dt{
+	Vector2D disp =  Vector2D(self.stickPrevPos) - Vector2D(self.stickPos);
+	self.cam->moveRel(Vector3D(disp.y/10.0f*dt, 0.0f, disp.x/10.0f*dt));
+	
+	disp =  Vector2D(self.lookPrevPos) - Vector2D(self.lookPos);
+	self.cam->rotate(disp.x/5.0f*dt, -disp.y/5.0f*dt);
+	
 	Matrix3D modelView;
 	Matrix3D projection;
 	
-	projection.perspective(75.0f, 1.7f, 10000.0f, aspect);
+	projection.perspective(90.0f, 1.7f, USHRT_MAX/10.0f, aspect);
 	
 	modelView = self.cam->glData();
 	modelView.uniformScale(0.1f);
@@ -103,25 +111,53 @@ using Vector::Vector2D;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-	
+	for(UITouch *touch in [touches allObjects]){
+		CGPoint point = [touch locationInView:nil];
+		if(point.y < 512){
+			self.lookPos = point;
+			self.lookPrevPos = point;
+		}else{
+			self.stickPos = point;
+			self.stickPrevPos = point;
+		}
+	}
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-	NSArray *touches2 = [touches allObjects];
-	for(UITouch *touch in touches2){
-		Vector2D newPoint = [touch locationInView:nil];
+	for(UITouch *touch in [touches allObjects]){
+		CGPoint prevPos = [touch previousLocationInView:nil];
+		CGPoint curPos = [touch locationInView:nil];
+		if(prevPos.x == self.stickPrevPos.x && prevPos.y == self.stickPrevPos.y){
+			self.stickPrevPos = curPos;
+		}else if(prevPos.x == self.lookPrevPos.x && prevPos.y == self.lookPrevPos.y){
+			self.lookPrevPos = curPos;
+		}
+		/*Vector2D newPoint = [touch locationInView:nil];
 		Vector2D origPoint = [touch previousLocationInView:nil];
 		Vector2D disp = newPoint - origPoint;
 		if(newPoint.y < 512){
 			self.cam->rotate(disp.x/10.0f, -disp.y/10.0f);
 		}else{
 			self.cam->moveRel(Vector3D(disp.y/10.0f, 0.0f, disp.x/10.0f));
-		}
+		}*/
 	}
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-	
+	for(UITouch *touch in [touches allObjects]){
+		CGPoint prevPos = [touch locationInView:nil];
+		if(prevPos.x == self.stickPrevPos.x && prevPos.y == self.stickPrevPos.y){
+			self.stickPrevPos = CGPointMake(0.0f, 0.0f);
+			self.stickPos = CGPointMake(0.0f, 0.0f);
+		}else if(prevPos.x == self.lookPrevPos.x && prevPos.y == self.lookPrevPos.y){
+			self.lookPrevPos = CGPointMake(0.0f, 0.0f);
+			self.lookPos = CGPointMake(0.0f, 0.0f);
+		}
+	}
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
+	[self touchesEnded:touches withEvent:event];
 }
 
 - (void)setCam:(FPSCamera *)cam{

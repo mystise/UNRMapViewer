@@ -14,6 +14,9 @@
 #import "Vector.h"
 using Vector::Vector3D;
 
+#import "Matrix.h"
+using Matrix::Matrix3D;
+
 @class UNRNode;
 
 @interface UNRCubeCamera : NSObject {
@@ -21,10 +24,8 @@ using Vector::Vector3D;
 }
 
 - (void)updateWithTimestep:(float)dt;
-- (void)drawWithRootNode:(UNRNode *)rootNode;
+- (void)drawWithRootNode:(UNRNode *)rootNode baseMatrix:(const Matrix3D &)mat;
 
-@property(nonatomic, assign) GLuint tex;
-@property(nonatomic, assign) GLuint framebuffer, renderbuffer, depthbuffer;
 @property(nonatomic, assign) Vector3D *camPos;
 @property(nonatomic, assign) float rotX, rotY, rotZ;
 @property(nonatomic, assign) float drX, drY, drZ;

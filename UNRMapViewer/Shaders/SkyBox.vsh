@@ -7,14 +7,9 @@
 //
 
 uniform mat4 modelViewProjection;
-//uniform vec4 camPos;
 
 attribute vec4 position;
 
-//varying vec4 pos;
-
 void main(){
 	gl_Position = modelViewProjection*position;
-	//pos = normalize(position + camPos);
-	//pos = position+camPos;
 }

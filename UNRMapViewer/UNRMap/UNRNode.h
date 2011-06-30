@@ -24,20 +24,21 @@ using Matrix::Matrix3D;
 
 - (id)initWithModel:(NSMutableDictionary *)model nodeNumber:(int)nodeNum file:(UNRFile *)file map:(UNRMap *)map;
 
-- (void)drawWithMatrix:(Matrix3D &)mat cubeMap:(GLuint)texMap cameraPos:(vec3)vec; //rootNode
+- (void)drawWithMatrix:(Matrix3D &)mat cameraPos:(vec3)vec; //rootNode
 
 - (void)drawWithState:(NSMutableDictionary *)state; //any subNode
 
 @property(nonatomic, assign) int vertCount;
 @property(nonatomic, assign) GLuint vbo, vao;
 
-//@property(nonatomic, assign) vec3 normal;
-//@property(nonatomic, retain) NSDictionary *plane;
+@property(nonatomic, assign) vec3 normal;
 @property(nonatomic, assign) int surfFlags;
 @property(nonatomic, assign) int strideLength;
 @property(nonatomic, retain) UNRTexture *tex, *lightMap;
 @property(nonatomic, retain) UNRNode *front, *back, *coPlanar;
 @property(nonatomic, retain) UNRShader *shader;
+
+//visibility stuff
 
 @end
 

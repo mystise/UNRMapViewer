@@ -60,6 +60,7 @@
 	if(url == nil){
 		url = [self.plugins valueForKey:@"object"];
 	}
+	NSString *urlString = [NSString stringWithContentsOfURL:url];
 	NSXMLParser *parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
 	parser.delegate = reader;
 	[parser parse];

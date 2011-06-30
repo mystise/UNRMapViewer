@@ -14,7 +14,7 @@ using Matrix::Matrix3D;
 
 class FPSCamera{
 public:
-	FPSCamera(): rotY(0.0f), rotX(0.0f), clamp(90.0f), pos(0.0f, 0.0f, 0.0f), up(0.0f, 1.0f, 0.0f), look(0.0f, 0.0f, -1.0f), right(1.0f, 0.0f, 0.0f){
+	FPSCamera(): rotY(0.0f), rotX(0.0f), rotZ(0.0f), clamp(90.0f), pos(0.0f, 0.0f, 0.0f), up(0.0f, 1.0f, 0.0f), look(0.0f, 0.0f, -1.0f), right(1.0f, 0.0f, 0.0f){
 		
 	}
 	
@@ -49,9 +49,10 @@ public:
 		return *this;
 	}
 	
-	FPSCamera &rotate(float x, float y){
+	FPSCamera &rotate(float x = 0.0f, float y = 0.0f, float z = 0.0f){
 		rotX += x;
 		rotY += y;
+		rotZ += z;
 		if(rotX > clamp){
 			rotX = clamp;
 		}else if(rotX < -clamp){
@@ -60,9 +61,10 @@ public:
 		return *this;
 	}
 	
-	FPSCamera &rotateTo(float x, float y){
+	FPSCamera &rotateTo(float x = 0.0f, float y = 0.0f, float z = 0.0f){
 		rotX = x;
 		rotY = y;
+		rotZ = z;
 		if(rotX > clamp){
 			rotX = clamp;
 		}else if(rotX < -clamp){
@@ -86,6 +88,11 @@ public:
 		return *this;
 	}
 	
+	FPSCamera &rotateZ(float z){
+		rotZ += z;
+		return *this;
+	}
+	
 	FPSCamera &moveRel(Vector3D vec){
 		Matrix3D mat;
 		mat.translate(-vec.x, -vec.y, -vec.z);
@@ -94,6 +101,7 @@ public:
 		
 		{
 			Matrix3D mat;
+			mat.rotateZ(-rotZ);
 			mat.rotateY(-rotY);
 			mat.rotateX(-rotX);
 			
@@ -125,6 +133,7 @@ public:
 		Matrix3D mat;
 		mat.rotateX(-rotX);
 		mat.rotateY(-rotY);
+		mat.rotateZ(-rotZ);
 		
 		Matrix3D mat2;
 		
@@ -159,7 +168,7 @@ protected:
 		up.normalize();
 	}
 	
-	float rotY, rotX, clamp;
+	float rotY, rotX, rotZ, clamp;
 	Vector3D pos, up, look, right;
 };
 

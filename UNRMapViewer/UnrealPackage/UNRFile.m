@@ -224,7 +224,7 @@
 				NSString *name = [objNames objectAtIndex:i];
 				NSString *className = [classNames objectAtIndex:i];
 				if(name != (NSString *)[NSNull null] && className != (NSString *)[NSNull null]){
-					if([[name lowercaseString] isEqualToString:[import.name.string lowercaseString]] && [[className 	lowercaseString] isEqualToString:[import.className.string lowercaseString]]){
+					if([[name lowercaseString] isEqualToString:[import.name.string lowercaseString]] && [[className lowercaseString] isEqualToString:[import.className.string lowercaseString]]){
 						index = i;
 						break;
 					}

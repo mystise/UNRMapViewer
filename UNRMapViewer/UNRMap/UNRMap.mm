@@ -101,13 +101,18 @@ using Vector::Vector2D;
 	
 	modelView = projection * modelView;
 	
-	//glStencilFunc(GL_ALWAYS, 0, UINT_MAX);
-	[self.rootNode drawWithMatrix:modelView cubeMap:0 cameraPos:(vec3){self.cam->getPos().x, self.cam->getPos().y, self.cam->getPos().z}];
+	glStencilFunc(GL_ALWAYS, 1, UINT_MAX);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+	[self.rootNode drawWithMatrix:modelView cameraPos:(vec3){self.cam->getPos().x, self.cam->getPos().y, self.cam->getPos().z}];
+	
+	[self drawCubeMap:dt];
 }
 
 - (void)drawCubeMap:(float)dt{
 	[self.cubeMap updateWithTimestep:dt];
-	[self.cubeMap drawWithRootNode:self.rootNode];
+	FPSCamera cam = FPSCamera(*self.cam);
+	cam.moveTo(Vector3D(0.0f, 0.0f, 0.0f));
+	[self.cubeMap drawWithRootNode:self.rootNode baseMatrix:cam.glData()];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

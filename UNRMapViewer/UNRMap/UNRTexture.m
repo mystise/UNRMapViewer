@@ -261,7 +261,7 @@ void printLightType(int lType){
 				color *texDat = calloc(tex.width*tex.height, sizeof(color));
 				for(int y = 0; y < lightCount; y++){
 					//load the light data
-					Byte hue = 0x00, saturation = 0xFF, value = 0x64;
+					Byte hue = 0, saturation = 255, value = 64, radius = 64;
 					NSMutableArray *currentLight = [[[mapLights objectAtIndex:y] objectData] valueForKey:@"props"];
 					for(UNRProperty *prop in currentLight){
 						DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
@@ -271,14 +271,15 @@ void printLightType(int lType){
 							saturation = [manager loadByte];
 						}else if([prop.name.string isEqualToString:@"LightHue"]){
 							hue = [manager loadByte];
-						}else if([prop.name.string isEqualToString:@"LightType"]){
+						}else if([prop.name.string isEqualToString:@"LightEffect"]){
 							printf("\t");
 							printLightType([manager loadByte]);
 							printf("\n");
+						}else if([prop.name.string isEqualToString:@"LightRadius"]){
+							radius = [manager loadByte];
 						}
 						[manager release];
 					}
-					//value = 0xFF;
 					color rgb = hsvToRGB(hue, saturation, value);
 					
 					//printf("hsv: %i %i %i\nrgb: %i %i %i\n\n", hue, saturation, value, rgb.r, rgb.g, rgb.b);
@@ -287,25 +288,43 @@ void printLightType(int lType){
 							for(int x = 0; x < 8 && x+j < tex.width; x++){
 								int texIndex = i*tex.width + j+x;
 								int rawIndex = i*nextWidth/8 + j/8 + y*texSize;
-								Byte newDat = ((rawDat[rawIndex]>>x)&0x01);
+								float newDat = ((rawDat[rawIndex]>>x)&0x01);
 								
-								color oldColor = texDat[texIndex];
-								texDat[texIndex] = (color){oldColor.r + newDat*rgb.r, oldColor.g + newDat*rgb.g, oldColor.b + newDat*rgb.b, 0xFF};
+								if(newDat == 0.0f){
+									newDat = 0.5f;
+								}
+								
+								color newColor = texDat[texIndex];
+								newColor.r += newDat*rgb.r;
+								newColor.g += newDat*rgb.g;
+								newColor.b += newDat*rgb.b;
+								newColor.a = 0xFF;
+								/*if(newColor.r == 0x00){
+									newColor.r += value/2;
+									newColor.g += value/2;
+									newColor.b += value/2;
+								}*/
+								
+								texDat[texIndex] = newColor;
 							}
 						}
 					}
 				}
 				
-				/*printf("Lightmap: w:%i h:%i lc:%i\n\t", tex.width, tex.height, lightCount);
-				 printf("texData:\n\t");
-				 for(int i = tex.height-1; i >= 0; i--){
-				 for(int j = 0; j < tex.width; j++){
-				 printf(" %2x", texDat[i*tex.width+j].r);
-				 }
-				 printf("\n\t");
-				 }
-				 
-				 printf("rawData:\n\t");
+				//texDat[0] = (color){0x00, 0x00, 0x00, 0xFF};
+				//texDat[tex.width+1] = (color){0x7F, 0x00, 0x00, 0xFF};
+				//texDat[tex.width*tex.height-2-tex.width] = (color){0x00, 0x7F, 0x00, 0xFF};
+				
+				printf("Lightmap: w:%i h:%i lc:%i\n\t", tex.width, tex.height, lightCount);
+				printf("texData:\n\t");
+				for(int i = tex.height-1; i >= 0; i--){
+					for(int j = 0; j < tex.width; j++){
+						printf(" %2x", texDat[i*tex.width+j].r);
+					}
+					printf("\n\t");
+				}
+				
+				/*printf("rawData:\n\t");
 				 for(int i = 0; i < bytesToLoad; i++){
 				 printf(" %2x", rawDat[i]);
 				 }
@@ -313,8 +332,8 @@ void printLightType(int lType){
 				
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 				
 				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex.width, tex.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texDat);
 			}else{

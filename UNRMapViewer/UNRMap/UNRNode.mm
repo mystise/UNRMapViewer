@@ -19,8 +19,7 @@
 
 @implementation UNRNode
 
-/*normal = normal_, plane = plane_, */
-@synthesize vbo = vbo_, vao = vao_, vertCount = vertCount_, tex = tex_, front = front_, back = back_, coPlanar = coPlanar_, surfFlags = surfFlags_, shader = shader_, lightMap = lightMap_, strideLength = strideLength_;
+@synthesize vbo = vbo_, vao = vao_, vertCount = vertCount_, tex = tex_, front = front_, back = back_, coPlanar = coPlanar_, surfFlags = surfFlags_, shader = shader_, lightMap = lightMap_, strideLength = strideLength_, normal = normal_;
 
 - (id)init{
 	self = [super init];
@@ -39,10 +38,6 @@
 		NSMutableDictionary *node = [[model valueForKey:@"nodes"] objectAtIndex:nodeNum];
 		NSMutableDictionary *surf = [[model valueForKey:@"surfs"] objectAtIndex:[[node valueForKey:@"iSurf"] intValue]];
 		self.surfFlags = [[surf valueForKey:@"polyFlags"] intValue];
-		
-		if((self.surfFlags & PF_FakeBackdrop) == PF_FakeBackdrop){
-			self.surfFlags = self.surfFlags | PF_Invisible;
-		}
 		
 		if((self.surfFlags & PF_Invisible) != PF_Invisible){
 			{
@@ -74,34 +69,32 @@
 				}
 			}
 			
-			//self.plane = [node valueForKey:@"plane"];
-			
-			/*if((self.surfFlags & PF_FakeBackdrop) == PF_FakeBackdrop){
-			 if([map.shaders valueForKey:@"SkyBox"]){
-			 self.shader = [map.shaders valueForKey:@"SkyBox"];
-			 }else{
-			 UNRShader *shad = [[UNRShader alloc] initWithShader:@"SkyBox"];
-			 self.shader = shad;
-			 [map.shaders setValue:shad forKey:@"SkyBox"];
-			 [shad release];
-			 }
-			 }else{*/
-			if([map.shaders valueForKey:@"Texture"]){
-				self.shader = [map.shaders valueForKey:@"Texture"];
+			if((self.surfFlags & PF_FakeBackdrop) == PF_FakeBackdrop){
+				if([map.shaders valueForKey:@"SkyBox"]){
+					self.shader = [map.shaders valueForKey:@"SkyBox"];
+				}else{
+					UNRShader *shad = [[UNRShader alloc] initWithShader:@"SkyBox"];
+					self.shader = shad;
+					[map.shaders setValue:shad forKey:@"SkyBox"];
+					[shad release];
+				}
 			}else{
-				UNRShader *shad = [[UNRShader alloc] initWithShader:@"Texture"];
-				self.shader = shad;
-				[map.shaders setValue:shad forKey:@"Texture"];
-				[shad release];
+				if([map.shaders valueForKey:@"Texture"]){
+					self.shader = [map.shaders valueForKey:@"Texture"];
+				}else{
+					UNRShader *shad = [[UNRShader alloc] initWithShader:@"Texture"];
+					self.shader = shad;
+					[map.shaders setValue:shad forKey:@"Texture"];
+					[shad release];
+				}
 			}
-			//}
 			
 			GLuint vbo;
 			glGenBuffers(1, &vbo);
 			self.vbo = vbo;
 			glBindBuffer(GL_ARRAY_BUFFER, self.vbo);
 			
-			//if((self.surfFlags & PF_FakeBackdrop) != PF_FakeBackdrop){
+			if((self.surfFlags & PF_FakeBackdrop) != PF_FakeBackdrop){
 				self.strideLength = 7;
 				
 				NSMutableDictionary *lightMap = nil;
@@ -154,27 +147,27 @@
 				glBufferData(GL_ARRAY_BUFFER, vertCount*sizeof(GLfloat)*self.strideLength, coordinates, GL_STATIC_DRAW);
 				
 				free(coordinates);
-			/*}else{
-			  self.strideLength = 3;
-			  
-			  int iVertPool = [[node valueForKey:@"iVertPool"] intValue];
-			  int vertCount = [[node valueForKey:@"vertCount"] intValue];
-			  GLfloat *coordinates = (GLfloat *)calloc(vertCount*self.strideLength, sizeof(GLfloat));
-			  self.vertCount = vertCount;
-			  int index = 0;
-			  for(int i = 0; i < vertCount; i++){
-			  vec3 coord = vec3Create([points objectAtIndex:[[[verticies objectAtIndex:i+iVertPool] valueForKey:@"pVertex"] intValue]]);
-			  
-			  coordinates[index]   = coord.x;
-			  coordinates[index+1] = coord.y;
-			  coordinates[index+2] = coord.z;
-			  index += self.strideLength;
-			  }
-			  
-			  glBufferData(GL_ARRAY_BUFFER, vertCount*sizeof(GLfloat)*self.strideLength, coordinates, GL_STATIC_DRAW);
-			  
-			  free(coordinates);
-			  }*/
+			}else{
+				self.strideLength = 3;
+				
+				int iVertPool = [[node valueForKey:@"iVertPool"] intValue];
+				int vertCount = [[node valueForKey:@"vertCount"] intValue];
+				GLfloat *coordinates = (GLfloat *)calloc(vertCount*self.strideLength, sizeof(GLfloat));
+				self.vertCount = vertCount;
+				int index = 0;
+				for(int i = 0; i < vertCount; i++){
+					vec3 coord = vec3Create([points objectAtIndex:[[[verticies objectAtIndex:i+iVertPool] valueForKey:@"pVertex"] intValue]]);
+					
+					coordinates[index]   = coord.x;
+					coordinates[index+1] = coord.y;
+					coordinates[index+2] = coord.z;
+					index += self.strideLength;
+				}
+				
+				glBufferData(GL_ARRAY_BUFFER, vertCount*sizeof(GLfloat)*self.strideLength, coordinates, GL_STATIC_DRAW);
+				
+				free(coordinates);
+			}
 			
 			GLuint vao = 0;
 			glGenVertexArraysOES(1, &vao);
@@ -188,25 +181,25 @@
 			GLuint position = [self.shader attribLocation:@"position"];
 			glEnableVertexAttribArray(position);
 			glVertexAttribPointer(position, 3, GL_FLOAT, GL_FALSE, self.strideLength*sizeof(GLfloat), NULL);
-			[self.tex bind:0];
 			
-			//if((self.surfFlags & PF_FakeBackdrop) != PF_FakeBackdrop){
-			[self.lightMap bind:1];
+			if((self.surfFlags & PF_FakeBackdrop) != PF_FakeBackdrop){
+				[self.tex bind:0];
+				[self.lightMap bind:1];
+				
+				GLuint inTexCoord = [self.shader attribLocation:@"inTexCoord"];
+				GLuint inLightCoord = [self.shader attribLocation:@"inLightCoord"];
+				GLuint texture = [self.shader uniformLocation:@"texture"];
+				GLuint lightmap = [self.shader uniformLocation:@"lightmap"];
+				
+				glUniform1i(texture, 0);
+				glUniform1i(lightmap, 1);
+				glEnableVertexAttribArray(inTexCoord);
+				glEnableVertexAttribArray(inLightCoord);
+				glVertexAttribPointer(inTexCoord, 2, GL_FLOAT, GL_FALSE, self.strideLength*sizeof(GLfloat), (void *)(3*sizeof(GLfloat)));
+				glVertexAttribPointer(inLightCoord, 2, GL_FLOAT, GL_FALSE, self.strideLength*sizeof(GLfloat), (void *)(5*sizeof(GLfloat)));
+			}
 			
-			GLuint inTexCoord = [self.shader attribLocation:@"inTexCoord"];
-			GLuint inLightCoord = [self.shader attribLocation:@"inLightCoord"];
-			GLuint texture = [self.shader uniformLocation:@"texture"];
-			GLuint lightmap = [self.shader uniformLocation:@"lightmap"];
-			
-			glUniform1i(texture, 0);
-			glUniform1i(lightmap, 1);
-			glEnableVertexAttribArray(inTexCoord);
-			glEnableVertexAttribArray(inLightCoord);
-			glVertexAttribPointer(inTexCoord, 2, GL_FLOAT, GL_FALSE, self.strideLength*sizeof(GLfloat), (void *)(3*sizeof(GLfloat)));
-			glVertexAttribPointer(inLightCoord, 2, GL_FLOAT, GL_FALSE, self.strideLength*sizeof(GLfloat), (void *)(5*sizeof(GLfloat)));
-			//}
-			
-			//self.normal = vec3Create([[vectors objectAtIndex:[[surf valueForKey:@"vNormal"] intValue]] valueForKey:@"vector"]);
+			self.normal = vec3Create([vectors objectAtIndex:[[surf valueForKey:@"vNormal"] intValue]]);
 		}
 		
 		int frontInd = [[node valueForKey:@"iFront"] intValue];
@@ -218,7 +211,7 @@
 			self.coPlanar = plane;
 			[plane release];
 		}
-		if(frontInd != -1 && frontInd < [[model valueForKey:@"nodes"] count]){
+		if(frontInd != -1){// && frontInd < [[model valueForKey:@"nodes"] count]
 			UNRNode *front = [[UNRNode alloc] initWithModel:model nodeNumber:frontInd file:file map:map];
 			self.front = front;
 			[front release];
@@ -232,14 +225,8 @@
 	return self;
 }
 
-- (void)drawWithMatrix:(Matrix3D &)mat cubeMap:(GLuint)texMap cameraPos:(vec3)vec{
+- (void)drawWithMatrix:(Matrix3D &)mat cameraPos:(vec3)vec{
 	NSMutableDictionary *state = [NSMutableDictionary dictionary];
-	//[self.shader use];
-	//[state setValue:[NSNumber numberWithUnsignedInt:self.shader.program] forKey:@"shader"];
-	
-	//if(texMap != 0){
-	//	[state setValue:[NSNumber numberWithUnsignedInt:texMap] forKey:@"cubeMap"];
-	//}
 	
 	GLuint matrix = [self.shader uniformLocation:@"modelViewProjection"];
 	glUniformMatrix4fv(matrix, 1, GL_FALSE, mat.glData());
@@ -251,9 +238,9 @@
 }
 
 - (void)drawWithState:(NSMutableDictionary *)state{
-	//if(self.shader.program != [[state valueForKey:@"shader"] unsignedIntValue] && self.shader != nil){
-	//[self.shader use];
-	//[state setValue:[NSNumber numberWithUnsignedInt:self.shader.program] forKey:@"shader"];
+	/*if(self.shader.program != [[state valueForKey:@"shader"] unsignedIntValue] && self.shader != nil){
+	 [self.shader use];
+	 [state setValue:[NSNumber numberWithUnsignedInt:self.shader.program] forKey:@"shader"];*/
 	/*GLuint position = [self.shader attribLocation:@"position"];
 	 glEnableVertexAttribArray(position);
 	 
@@ -287,14 +274,20 @@
 		
 		[self.shader use];
 		
-		if([[state valueForKey:@"texture"] unsignedIntValue] != self.tex.glTex){
-			[self.tex bind:0];
-			[state setValue:[NSNumber numberWithUnsignedInt:self.tex.glTex] forKey:@"texture"];
-		}
-		
-		if([[state valueForKey:@"lightMap"] unsignedIntValue] != self.lightMap.glTex){
-			[self.lightMap bind:1];
-			[state setValue:[NSNumber numberWithUnsignedInt:self.lightMap.glTex] forKey:@"lightMap"];
+		if((self.surfFlags & PF_FakeBackdrop) != PF_FakeBackdrop){
+			if([[state valueForKey:@"texture"] unsignedIntValue] != self.tex.glTex){
+				[self.tex bind:0];
+				[state setValue:[NSNumber numberWithUnsignedInt:self.tex.glTex] forKey:@"texture"];
+			}
+			
+			if([[state valueForKey:@"lightMap"] unsignedIntValue] != self.lightMap.glTex){
+				[self.lightMap bind:1];
+				[state setValue:[NSNumber numberWithUnsignedInt:self.lightMap.glTex] forKey:@"lightMap"];
+			}
+		}else{
+			//do the stencil stuff
+			glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+			//glDepthMask(GL_FALSE);
 		}
 		/*GLuint position = [self.shader attribLocation:@"position"];
 		 glBindBuffer(GL_ARRAY_BUFFER, self.vbo);
@@ -334,6 +327,12 @@
 		 }*/
 		
 		glDrawArrays(GL_TRIANGLE_FAN, 0, self.vertCount);
+		
+		if((self.surfFlags & PF_FakeBackdrop) == PF_FakeBackdrop){
+			//turn off the stencil stuff
+			glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+			//glDepthMask(GL_TRUE);
+		}
 	}
 	
 	if(self.coPlanar){

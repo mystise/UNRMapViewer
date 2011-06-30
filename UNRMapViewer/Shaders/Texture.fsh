@@ -13,7 +13,5 @@ varying highp vec2 texCoord;
 varying highp vec2 lightCoord;
 
 void main(){
-	//gl_FragColor = texture2D(lightmap, lightCoord)*texture2D(texture, texCoord);
-	//gl_FragColor = texture2D(texture, texCoord);
 	gl_FragColor = 2.0*texture2D(lightmap, lightCoord)*texture2D(texture, texCoord);
 }

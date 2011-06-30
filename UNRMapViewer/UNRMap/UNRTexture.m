@@ -227,166 +227,126 @@ void printLightType(int lType){
 		glPixelStorei(GL_PACK_ALIGNMENT, 1);
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		
-		int iLightActors = [[lightMap valueForKey:@"iLightActors"] intValue];
-		if(iLightActors != -1){
-			id light = [lights objectAtIndex:iLightActors];
-			for(int i = 1; ![light isKindOfClass:[NSNull class]] && i+iLightActors < [lights count]; i++){
-				if([mapLights count] > 0){
-					if([light isEqual:[mapLights lastObject]]){
-						continue;
-					}
-				}
-				[mapLights addObject:light];
-				light = [lights objectAtIndex:iLightActors+i];
-			}
-			
-			/*printf("LightMap:\n");
-			 printf("\twidth:%i height:%i\n", tex.width, tex.height);
-			 printf("\tdataOffset:%i dataLength:%i\n", dataOffset, [data length]);
-			 printf("\tdifference:%i\n", [data length] - dataOffset);
-			 printf("\tlength:%i\n", tex.width*tex.height);
-			 printf("\tiLightActors:%i\n", [[lightMap valueForKey:@"iLightActors"] intValue]);*/
-			//printf("%i", light);
-			//	printf(" %i", light);
-			//printf("\n");
-			
-			int nextWidth = roundToNext8(tex.width);
-			int lightCount = [mapLights count];
-			int texSize = tex.height*nextWidth/8;
-			int bytesToLoad = texSize*lightCount;
-			if(bytesToLoad + dataOffset <= [data length]){
-				Byte *rawDat;
-				NSData *subDat = [data subdataWithRange:NSMakeRange(dataOffset, bytesToLoad)];
-				rawDat = (Byte *)[subDat bytes];
-				color *texDat = calloc(tex.width*tex.height, sizeof(color));
-				for(int y = 0; y < lightCount; y++){
-					//load the light data
-					Byte hue = 0, saturation = 255, value = 64, radius = 64;
-					NSMutableArray *currentLight = [[[mapLights objectAtIndex:y] objectData] valueForKey:@"props"];
-					for(UNRProperty *prop in currentLight){
-						DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
-						if([prop.name.string isEqualToString:@"LightBrightness"]){
-							value = [manager loadByte];
-						}else if([prop.name.string isEqualToString:@"LightSaturation"]){
-							saturation = [manager loadByte];
-						}else if([prop.name.string isEqualToString:@"LightHue"]){
-							hue = [manager loadByte];
-						}else if([prop.name.string isEqualToString:@"LightEffect"]){
-							printf("\t");
-							printLightType([manager loadByte]);
-							printf("\n");
-						}else if([prop.name.string isEqualToString:@"LightRadius"]){
-							radius = [manager loadByte];
+		//if((node.surfFlags & PF_Unlit) != PF_Unlit){
+			int iLightActors = [[lightMap valueForKey:@"iLightActors"] intValue];
+			if(iLightActors != -1){
+				id light = [lights objectAtIndex:iLightActors];
+				for(int i = 1; ![light isKindOfClass:[NSNull class]] && i+iLightActors < [lights count]; i++){
+					if([mapLights count] > 0){
+						if([light isEqual:[mapLights lastObject]]){
+							continue;
 						}
-						[manager release];
 					}
-					color rgb = hsvToRGB(hue, saturation, value);
-					
-					//printf("hsv: %i %i %i\nrgb: %i %i %i\n\n", hue, saturation, value, rgb.r, rgb.g, rgb.b);
-					for(int i = 0; i < tex.height; i++){
-						for(int j = 0; j < tex.width; j+=8){
-							for(int x = 0; x < 8 && x+j < tex.width; x++){
-								int texIndex = i*tex.width + j+x;
-								int rawIndex = i*nextWidth/8 + j/8 + y*texSize;
-								float newDat = ((rawDat[rawIndex]>>x)&0x01);
-								
-								if(newDat == 0.0f){
-									newDat = 0.5f;
+					[mapLights addObject:light];
+					light = [lights objectAtIndex:iLightActors+i];
+				}
+				
+				/*printf("LightMap:\n");
+				 printf("\twidth:%i height:%i\n", tex.width, tex.height);
+				 printf("\tdataOffset:%i dataLength:%i\n", dataOffset, [data length]);
+				 printf("\tdifference:%i\n", [data length] - dataOffset);
+				 printf("\tlength:%i\n", tex.width*tex.height);
+				 printf("\tiLightActors:%i\n", [[lightMap valueForKey:@"iLightActors"] intValue]);*/
+				//printf("%i", light);
+				//	printf(" %i", light);
+				//printf("\n");
+				
+				int nextWidth = roundToNext8(tex.width);
+				int lightCount = [mapLights count];
+				int texSize = tex.height*nextWidth/8;
+				int bytesToLoad = texSize*lightCount;
+				if(bytesToLoad + dataOffset <= [data length]){
+					Byte *rawDat;
+					NSData *subDat = [data subdataWithRange:NSMakeRange(dataOffset, bytesToLoad)];
+					rawDat = (Byte *)[subDat bytes];
+					color *texDat = calloc(tex.width*tex.height, sizeof(color));
+					for(int y = 0; y < lightCount; y++){
+						//load the light data
+						Byte hue = 0, saturation = 255, value = 64, radius = 64;
+						NSMutableArray *currentLight = [[[mapLights objectAtIndex:y] objectData] valueForKey:@"props"];
+						for(UNRProperty *prop in currentLight){
+							DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
+							if([prop.name.string isEqualToString:@"LightBrightness"]){
+								value = [manager loadByte];
+							}else if([prop.name.string isEqualToString:@"LightSaturation"]){
+								saturation = [manager loadByte];
+							}else if([prop.name.string isEqualToString:@"LightHue"]){
+								hue = [manager loadByte];
+							}else if([prop.name.string isEqualToString:@"LightEffect"]){
+								printf("\t");
+								printLightType([manager loadByte]);
+								printf("\n");
+							}else if([prop.name.string isEqualToString:@"LightRadius"]){
+								radius = [manager loadByte];
+							}
+							[manager release];
+						}
+						color rgb = hsvToRGB(hue, saturation, value);
+						
+						for(int i = 0; i < tex.height; i++){
+							for(int j = 0; j < tex.width; j+=8){
+								for(int x = 0; x < 8 && x+j < tex.width; x++){
+									int texIndex = i*tex.width + j+x;
+									int rawIndex = i*nextWidth/8 + j/8 + y*texSize;
+									float newDat = ((rawDat[rawIndex]>>x)&0x01);
+									
+									//if(newDat == 0.0f){
+									//	newDat = 0.5f;
+									//}
+									
+									color newColor = texDat[texIndex];
+									newColor.r += newDat*rgb.r;
+									newColor.g += newDat*rgb.g;
+									newColor.b += newDat*rgb.b;
+									newColor.a = 0xFF;
+									/*if(newColor.r == 0x00){
+									 newColor.r -= value/2;
+									 newColor.g -= value/2;
+									 newColor.b -= value/2;
+									 or
+									 newColor.r /= 2;
+									 newColor.g /= 2;
+									 newColor.b /= 2;
+									 }*/
+									
+									texDat[texIndex] = newColor;
 								}
-								
-								color newColor = texDat[texIndex];
-								newColor.r += newDat*rgb.r;
-								newColor.g += newDat*rgb.g;
-								newColor.b += newDat*rgb.b;
-								newColor.a = 0xFF;
-								/*if(newColor.r == 0x00){
-									newColor.r += value/2;
-									newColor.g += value/2;
-									newColor.b += value/2;
-								}*/
-								
-								texDat[texIndex] = newColor;
 							}
 						}
 					}
-				}
-				
-				//texDat[0] = (color){0x00, 0x00, 0x00, 0xFF};
-				//texDat[tex.width+1] = (color){0x7F, 0x00, 0x00, 0xFF};
-				//texDat[tex.width*tex.height-2-tex.width] = (color){0x00, 0x7F, 0x00, 0xFF};
-				
-				printf("Lightmap: w:%i h:%i lc:%i\n\t", tex.width, tex.height, lightCount);
-				printf("texData:\n\t");
-				for(int i = tex.height-1; i >= 0; i--){
-					for(int j = 0; j < tex.width; j++){
-						printf(" %2x", texDat[i*tex.width+j].r);
+					
+					//texDat[0] = (color){0x00, 0x00, 0x00, 0xFF};
+					//texDat[tex.width+1] = (color){0x7F, 0x00, 0x00, 0xFF};
+					//texDat[tex.width*tex.height-2-tex.width] = (color){0x00, 0x7F, 0x00, 0xFF};
+					
+					printf("Lightmap: w:%i h:%i lc:%i\n\t", tex.width, tex.height, lightCount);
+					printf("texData:\n\t");
+					for(int i = tex.height-1; i >= 0; i--){
+						for(int j = 0; j < tex.width; j++){
+							printf(" %2x", texDat[i*tex.width+j].r);
+						}
+						printf("\n\t");
 					}
-					printf("\n\t");
+					
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+					
+					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex.width, tex.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texDat);
+				}else{
+					GLubyte texDat = 0xFF/2;
+					glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
+					printf("\tfailed!!! not enough data!\n");
 				}
-				
-				/*printf("rawData:\n\t");
-				 for(int i = 0; i < bytesToLoad; i++){
-				 printf(" %2x", rawDat[i]);
-				 }
-				 printf("\n\n");*/
-				
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-				
-				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex.width, tex.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texDat);
 			}else{
-				/*Byte *rawDat;
-				 NSData *subDat = [data subdataWithRange:NSMakeRange(dataOffset, [data length] - dataOffset)];
-				 rawDat = (Byte *)[subDat bytes];
-				 
-				 printf("\trawData:");
-				 for(int i = 0; i < [data length] - dataOffset; i++){
-				 printf(" %2x", rawDat[i]);
-				 }
-				 printf("\n");*/
-				
-				GLubyte texDat = 0xFF/2;
+				GLubyte texDat = 0x00;
 				glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
-				printf("\tfailed!!! not enough data!\n");
 			}
-		}else{
-			GLubyte texDat = 0x00;
+		/*}else{
+			GLubyte texDat = 0xFF;
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
-		}
-		
-		/*if(tex.width*tex.height + dataOffset <= [data length]){
-		 Byte *rawDat;
-		 NSData *subDat = [data subdataWithRange:NSMakeRange(dataOffset, tex.width*tex.height)];
-		 rawDat = (Byte *)[subDat bytes];
-		 color *texDat = calloc(tex.width*tex.height, sizeof(color));
-		 for(int i = 0; i < tex.width; i++){
-		 for(int j = 0; j < tex.height; j++){
-		 int index = j*tex.width + i;
-		 texDat[index] = (color){rawDat[index], rawDat[index], rawDat[index], 1};
-		 }
-		 }
-		 
-		 texDat[0] = (color){0xFF, 0, 0, 1};
-		 texDat[tex.width*tex.height-1] = (color){0, 0xFF, 0, 1};
-		 
-		 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex.width, tex.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texDat);
-		 
-		 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		 
-		 printf("\trawData:");
-		 for(int i = 0; i < tex.height; i++){
-		 printf("\n\t\t");
-		 for(int j = 0; j < tex.width; j++){
-		 printf(" %2x", rawDat[i*tex.width+j]);
-		 }
-		 }
-		 printf("\n");
-		 }*/
+		}*/
 		
 		glPixelStorei(GL_PACK_ALIGNMENT, 4);
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);

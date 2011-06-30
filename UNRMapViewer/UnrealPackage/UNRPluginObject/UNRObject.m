@@ -61,6 +61,7 @@
 	id current = [self.currentData lastObject];
 	[self processArray:@"addLongWithAttributes:" attribs:attrib];
 	if(![current isKindOfClass:[NSNull class]]){
+		//Crashes on ipad in release mode, why???
 		NSNumber *value = [NSNumber numberWithLong:[self.manager loadLong]];
 		[current setValue:value forKey:[attrib valueForKey:@"name"]];
 	}

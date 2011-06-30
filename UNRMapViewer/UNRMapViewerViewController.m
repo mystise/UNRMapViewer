@@ -149,6 +149,9 @@
 	[self.map draw:self.aspect withTimestep:animationFrameInterval/60.0f];
 	
 	[(EAGLView *)self.view presentFramebuffer];
+	//implement the discard, unknown exactly what that does :)
+	const GLenum attachments[] = {GL_COLOR_ATTACHMENT0, GL_DEPTH_ATTACHMENT, GL_STENCIL_ATTACHMENT};
+	glDiscardFramebufferEXT(GL_RENDERBUFFER, 3, attachments);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{

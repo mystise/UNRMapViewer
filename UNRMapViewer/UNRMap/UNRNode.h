@@ -8,13 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-#import "Utilities.h"
+//#import "Utilities.h"
 
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-#import "Matrix.h"
-using Matrix::Matrix3D;
+//#import "Matrix.h"
+//using Matrix::Matrix3D;
+#import "Matrix3D.h"
+#import "Vector3D.h"
+#import "Vector2D.h"
 
 @class UNRFile, UNRTexture, UNRShader, UNRMap;
 
@@ -24,14 +27,14 @@ using Matrix::Matrix3D;
 
 - (id)initWithModel:(NSMutableDictionary *)model nodeNumber:(int)nodeNum file:(UNRFile *)file map:(UNRMap *)map;
 
-- (void)drawWithMatrix:(Matrix3D &)mat cameraPos:(vec3)vec; //rootNode
+- (void)drawWithMatrix:(Matrix3D)mat cameraPos:(Vector3D)vec; //rootNode
 
 - (void)drawWithState:(NSMutableDictionary *)state; //any subNode
 
 @property(nonatomic, assign) int vertCount;
 @property(nonatomic, assign) GLuint vbo, vao;
 
-@property(nonatomic, assign) vec3 normal;
+@property(nonatomic, assign) Vector3D normal;
 @property(nonatomic, assign) int surfFlags;
 @property(nonatomic, assign) int strideLength;
 @property(nonatomic, retain) UNRTexture *tex, *lightMap;

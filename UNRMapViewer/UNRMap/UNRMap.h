@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class UNRFile, UNRNode, UNRCubeCamera;
+@class UNRFile, UNRNode, UNRCubeCamera, UNRCamera;
 
 @interface UNRMap : NSObject {
 	
@@ -25,8 +25,10 @@
 
 @property(nonatomic, retain) UNRNode *rootNode;
 @property(nonatomic, retain) UNRCubeCamera *cubeMap;
+@property(nonatomic, retain) UNRCamera *cam;
 @property(nonatomic, retain) NSMutableDictionary *textures;
 @property(nonatomic, retain) NSMutableDictionary *shaders;
 @property(nonatomic, retain) NSMutableDictionary *lightMaps;
+@property(nonatomic, assign) CGPoint stickPos, stickPrevPos, lookPos, lookPrevPos;
 
 @end

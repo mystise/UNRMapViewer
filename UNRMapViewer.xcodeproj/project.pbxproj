@@ -11,7 +11,7 @@
 		493AE5D31388324200591592 /* UNRTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5B71388324200591592 /* UNRTexture.m */; };
 		493E72C913AD6127008C2E78 /* SkyBox.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 493E72C713AD6127008C2E78 /* SkyBox.fsh */; };
 		493E72CA13AD6127008C2E78 /* SkyBox.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 493E72C813AD6127008C2E78 /* SkyBox.vsh */; };
-		493E72CE13AD6C9B008C2E78 /* UNRCubeCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = 493E72CD13AD6C9B008C2E78 /* UNRCubeCamera.mm */; };
+		493E72CE13AD6C9B008C2E78 /* UNRCubeCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 493E72CD13AD6C9B008C2E78 /* UNRCubeCamera.m */; };
 		49836E541388BD64003193CD /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E391388BD64003193CD /* DataManager.m */; };
 		49836E551388BD64003193CD /* UNRBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E3B1388BD64003193CD /* UNRBase.m */; };
 		49836E561388BD64003193CD /* UNRExport.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E3E1388BD64003193CD /* UNRExport.m */; };
@@ -50,8 +50,10 @@
 		4993CC281384D1D900B6CBD2 /* UNRMapSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4993CC271384D1D900B6CBD2 /* UNRMapSelectionViewController.m */; };
 		49AAFFBF13BC3A87002D7A41 /* Default Plugins in Resources */ = {isa = PBXBuildFile; fileRef = 49AAFFBD13BC3A87002D7A41 /* Default Plugins */; };
 		49AAFFC013BC3A87002D7A41 /* Maps in Resources */ = {isa = PBXBuildFile; fileRef = 49AAFFBE13BC3A87002D7A41 /* Maps */; };
-		49AAFFC413BCEA50002D7A41 /* UNRMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAFFC313BCEA50002D7A41 /* UNRMatrix.m */; };
 		49AAFFC713BCEC40002D7A41 /* UNRCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAFFC613BCEC3F002D7A41 /* UNRCamera.m */; };
+		49AAFFCE13BD7B90002D7A41 /* Matrix3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAFFCD13BD7B8F002D7A41 /* Matrix3D.m */; };
+		49AAFFD013BD7C0B002D7A41 /* Vector3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAFFCF13BD7C0B002D7A41 /* Vector3D.m */; };
+		49AAFFD213BD7C62002D7A41 /* Vector2D.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAFFD113BD7C62002D7A41 /* Vector2D.m */; };
 		49B5F4881395CDCC00421352 /* UNRShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B5F4871395CDCC00421352 /* UNRShader.m */; };
 /* End PBXBuildFile section */
 
@@ -73,7 +75,7 @@
 		493E72C713AD6127008C2E78 /* SkyBox.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = SkyBox.fsh; path = Shaders/SkyBox.fsh; sourceTree = "<group>"; };
 		493E72C813AD6127008C2E78 /* SkyBox.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = SkyBox.vsh; path = Shaders/SkyBox.vsh; sourceTree = "<group>"; };
 		493E72CC13AD6C9B008C2E78 /* UNRCubeCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRCubeCamera.h; sourceTree = "<group>"; };
-		493E72CD13AD6C9B008C2E78 /* UNRCubeCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UNRCubeCamera.mm; sourceTree = "<group>"; };
+		493E72CD13AD6C9B008C2E78 /* UNRCubeCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRCubeCamera.m; sourceTree = "<group>"; };
 		49836E381388BD64003193CD /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		49836E391388BD64003193CD /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		49836E3A1388BD64003193CD /* UNRBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRBase.h; sourceTree = "<group>"; };
@@ -139,10 +141,13 @@
 		49AAFFBD13BC3A87002D7A41 /* Default Plugins */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Default Plugins"; sourceTree = "<group>"; };
 		49AAFFBE13BC3A87002D7A41 /* Maps */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Maps; sourceTree = "<group>"; };
 		49AAFFC113BCE5EB002D7A41 /* Matrix3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix3D.h; sourceTree = "<group>"; };
-		49AAFFC213BCEA50002D7A41 /* UNRMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRMatrix.h; sourceTree = "<group>"; };
-		49AAFFC313BCEA50002D7A41 /* UNRMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRMatrix.m; sourceTree = "<group>"; };
 		49AAFFC513BCEC3F002D7A41 /* UNRCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRCamera.h; sourceTree = "<group>"; };
 		49AAFFC613BCEC3F002D7A41 /* UNRCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRCamera.m; sourceTree = "<group>"; };
+		49AAFFCB13BCF193002D7A41 /* Vector3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3D.h; sourceTree = "<group>"; };
+		49AAFFCC13BCF899002D7A41 /* Vector2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector2D.h; sourceTree = "<group>"; };
+		49AAFFCD13BD7B8F002D7A41 /* Matrix3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Matrix3D.m; sourceTree = "<group>"; };
+		49AAFFCF13BD7C0B002D7A41 /* Vector3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vector3D.m; sourceTree = "<group>"; };
+		49AAFFD113BD7C62002D7A41 /* Vector2D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vector2D.m; sourceTree = "<group>"; };
 		49B5F4861395CDCC00421352 /* UNRShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRShader.h; sourceTree = "<group>"; };
 		49B5F4871395CDCC00421352 /* UNRShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRShader.m; sourceTree = "<group>"; };
 		49B5F4891396CFB500421352 /* GLCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLCommon.h; sourceTree = "<group>"; };
@@ -184,7 +189,7 @@
 				49836E6C138F4714003193CD /* UNRNode.h */,
 				49836E6D138F4715003193CD /* UNRNode.m */,
 				493E72CC13AD6C9B008C2E78 /* UNRCubeCamera.h */,
-				493E72CD13AD6C9B008C2E78 /* UNRCubeCamera.mm */,
+				493E72CD13AD6C9B008C2E78 /* UNRCubeCamera.m */,
 				49B5F4861395CDCC00421352 /* UNRShader.h */,
 				49B5F4871395CDCC00421352 /* UNRShader.m */,
 				49836E621389EA53003193CD /* Utilities.h */,
@@ -193,8 +198,11 @@
 				49A23E701396F7ED0097C5E6 /* Matrix.h */,
 				49A23E921399DF3E0097C5E6 /* Vector.h */,
 				49AAFFC113BCE5EB002D7A41 /* Matrix3D.h */,
-				49AAFFC213BCEA50002D7A41 /* UNRMatrix.h */,
-				49AAFFC313BCEA50002D7A41 /* UNRMatrix.m */,
+				49AAFFCD13BD7B8F002D7A41 /* Matrix3D.m */,
+				49AAFFCB13BCF193002D7A41 /* Vector3D.h */,
+				49AAFFCF13BD7C0B002D7A41 /* Vector3D.m */,
+				49AAFFCC13BCF899002D7A41 /* Vector2D.h */,
+				49AAFFD113BD7C62002D7A41 /* Vector2D.m */,
 				49AAFFC513BCEC3F002D7A41 /* UNRCamera.h */,
 				49AAFFC613BCEC3F002D7A41 /* UNRCamera.m */,
 			);
@@ -474,9 +482,11 @@
 				49836E6E138F4716003193CD /* UNRNode.m in Sources */,
 				493320AC13932B40007B08F0 /* UNRMap.m in Sources */,
 				49B5F4881395CDCC00421352 /* UNRShader.m in Sources */,
-				493E72CE13AD6C9B008C2E78 /* UNRCubeCamera.mm in Sources */,
-				49AAFFC413BCEA50002D7A41 /* UNRMatrix.m in Sources */,
+				493E72CE13AD6C9B008C2E78 /* UNRCubeCamera.m in Sources */,
 				49AAFFC713BCEC40002D7A41 /* UNRCamera.m in Sources */,
+				49AAFFCE13BD7B90002D7A41 /* Matrix3D.m in Sources */,
+				49AAFFD013BD7C0B002D7A41 /* Vector3D.m in Sources */,
+				49AAFFD213BD7C62002D7A41 /* Vector2D.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -54,6 +54,8 @@
 		49AAFFCE13BD7B90002D7A41 /* Matrix3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAFFCD13BD7B8F002D7A41 /* Matrix3D.m */; };
 		49AAFFD013BD7C0B002D7A41 /* Vector3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAFFCF13BD7C0B002D7A41 /* Vector3D.m */; };
 		49AAFFD213BD7C62002D7A41 /* Vector2D.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAFFD113BD7C62002D7A41 /* Vector2D.m */; };
+		49AAFFD513BE31B2002D7A41 /* Vector4D.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAFFD413BE31B1002D7A41 /* Vector4D.m */; };
+		49AAFFD813BE349A002D7A41 /* UNRZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAFFD713BE3499002D7A41 /* UNRZone.m */; };
 		49B5F4881395CDCC00421352 /* UNRShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B5F4871395CDCC00421352 /* UNRShader.m */; };
 /* End PBXBuildFile section */
 
@@ -148,6 +150,10 @@
 		49AAFFCD13BD7B8F002D7A41 /* Matrix3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Matrix3D.m; sourceTree = "<group>"; };
 		49AAFFCF13BD7C0B002D7A41 /* Vector3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vector3D.m; sourceTree = "<group>"; };
 		49AAFFD113BD7C62002D7A41 /* Vector2D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vector2D.m; sourceTree = "<group>"; };
+		49AAFFD313BE31B0002D7A41 /* Vector4D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector4D.h; sourceTree = "<group>"; };
+		49AAFFD413BE31B1002D7A41 /* Vector4D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vector4D.m; sourceTree = "<group>"; };
+		49AAFFD613BE3499002D7A41 /* UNRZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRZone.h; sourceTree = "<group>"; };
+		49AAFFD713BE3499002D7A41 /* UNRZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRZone.m; sourceTree = "<group>"; };
 		49B5F4861395CDCC00421352 /* UNRShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRShader.h; sourceTree = "<group>"; };
 		49B5F4871395CDCC00421352 /* UNRShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRShader.m; sourceTree = "<group>"; };
 		49B5F4891396CFB500421352 /* GLCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLCommon.h; sourceTree = "<group>"; };
@@ -184,14 +190,18 @@
 			children = (
 				493320AA13932B40007B08F0 /* UNRMap.h */,
 				493320AB13932B40007B08F0 /* UNRMap.m */,
-				493AE5B61388324200591592 /* UNRTexture.h */,
-				493AE5B71388324200591592 /* UNRTexture.m */,
-				49836E6C138F4714003193CD /* UNRNode.h */,
-				49836E6D138F4715003193CD /* UNRNode.m */,
 				493E72CC13AD6C9B008C2E78 /* UNRCubeCamera.h */,
 				493E72CD13AD6C9B008C2E78 /* UNRCubeCamera.m */,
+				493AE5B61388324200591592 /* UNRTexture.h */,
+				493AE5B71388324200591592 /* UNRTexture.m */,
 				49B5F4861395CDCC00421352 /* UNRShader.h */,
 				49B5F4871395CDCC00421352 /* UNRShader.m */,
+				49836E6C138F4714003193CD /* UNRNode.h */,
+				49836E6D138F4715003193CD /* UNRNode.m */,
+				49AAFFC513BCEC3F002D7A41 /* UNRCamera.h */,
+				49AAFFC613BCEC3F002D7A41 /* UNRCamera.m */,
+				49AAFFD613BE3499002D7A41 /* UNRZone.h */,
+				49AAFFD713BE3499002D7A41 /* UNRZone.m */,
 				49836E621389EA53003193CD /* Utilities.h */,
 				49836E611389EA53003193CD /* Utilities.m */,
 				49A23E911399DDD40097C5E6 /* GLCamera.h */,
@@ -199,12 +209,12 @@
 				49A23E921399DF3E0097C5E6 /* Vector.h */,
 				49AAFFC113BCE5EB002D7A41 /* Matrix3D.h */,
 				49AAFFCD13BD7B8F002D7A41 /* Matrix3D.m */,
+				49AAFFD313BE31B0002D7A41 /* Vector4D.h */,
+				49AAFFD413BE31B1002D7A41 /* Vector4D.m */,
 				49AAFFCB13BCF193002D7A41 /* Vector3D.h */,
 				49AAFFCF13BD7C0B002D7A41 /* Vector3D.m */,
 				49AAFFCC13BCF899002D7A41 /* Vector2D.h */,
 				49AAFFD113BD7C62002D7A41 /* Vector2D.m */,
-				49AAFFC513BCEC3F002D7A41 /* UNRCamera.h */,
-				49AAFFC613BCEC3F002D7A41 /* UNRCamera.m */,
 			);
 			path = UNRMap;
 			sourceTree = "<group>";
@@ -487,6 +497,8 @@
 				49AAFFCE13BD7B90002D7A41 /* Matrix3D.m in Sources */,
 				49AAFFD013BD7C0B002D7A41 /* Vector3D.m in Sources */,
 				49AAFFD213BD7C62002D7A41 /* Vector2D.m in Sources */,
+				49AAFFD513BE31B2002D7A41 /* Vector4D.m in Sources */,
+				49AAFFD813BE349A002D7A41 /* UNRZone.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -42,7 +42,7 @@
 	
 	Matrix3DMultiply(projection, modelView, mat);
 	glStencilFunc(GL_EQUAL, 1, UINT_MAX);
-	[rootNode drawWithMatrix:mat cameraPos:self.camPos];
+	[rootNode drawWithMatrix:mat camPos:self.camPos];
 	glStencilFunc(GL_ALWAYS, 1, UINT_MAX);
 }
 

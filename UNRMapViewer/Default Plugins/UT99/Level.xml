@@ -4,10 +4,10 @@
 		<int name="minActors"/>
 		<int name="maxActors"/>
 		<array name="actors" count="maxActors">
-			<compactIndex name="actor"/> <!-- objectReference -->
+			<objectReference name="actor"/>
 		</array>
 		
-		<!-- URL -->
+		<!-- URL, unreal map name and access specifier -->
 		<compactIndex name="protLength"/>
 		<string name="protocol" length="protLength"/>
 		<compactIndex name="hostLength"/>
@@ -29,7 +29,7 @@
 		
 		<objectReference name="bspModel"/>
 		
-		<!-- reachSpecs -->
+		<!-- reachSpecs, ai connections between nodes -->
 		<compactIndex name="reachCount"/>
 		<array name="reachSpecs" count="reachCount">
 			<int name="distance"/>

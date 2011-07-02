@@ -149,7 +149,6 @@
 	[self.map draw:self.aspect withTimestep:animationFrameInterval/60.0f];
 	
 	[(EAGLView *)self.view presentFramebuffer];
-	//implement the discard, unknown exactly what that does :)
 	const GLenum attachments[] = {GL_COLOR_ATTACHMENT0, GL_DEPTH_ATTACHMENT, GL_STENCIL_ATTACHMENT};
 	glDiscardFramebufferEXT(GL_RENDERBUFFER, 3, attachments);
 }
@@ -173,12 +172,12 @@
 	for(UNRExport *obj in self.file.objects){
 		if([obj.classObj.name.string isEqualToString:@"Level"]){
 			[obj loadPlugin:self.file];
-			level = [[obj.objectData valueForKey:@"bspModel"] objectData];
-			obj.objectData = nil;
+			level = obj.objectData;
 		}
 	}
+	
 	if(level){
-		UNRMap *theMap = [[UNRMap alloc] initWithModel:level andFile:self.file];
+		UNRMap *theMap = [[UNRMap alloc] initWithLevel:level andFile:self.file];
 		self.map = theMap;
 		[theMap release];
 	}

@@ -9,6 +9,7 @@
 #import "UNRTexture.h"
 #import "UNRProperty.h"
 #import "UNRExport.h"
+#import "UNRNode.h"
 
 @implementation UNRTexture
 
@@ -19,6 +20,8 @@
 	if(tex){
 		NSArray *palette = nil;
 		int format = 0;
+		BOOL masked = NO;
+		BOOL transparent = NO;
 		for(UNRProperty *prop in [obj.objectData valueForKey:@"props"]){
 			DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
 			if([[prop.name.string lowercaseString] isEqualToString:@"format"]){
@@ -26,6 +29,10 @@
 			}else if([[prop.name.string lowercaseString] isEqualToString:@"palette"]){
 				UNRExport *obj = (UNRExport *)prop.object;
 				palette = [obj.objectData valueForKey:@"palette"];
+			}else if([[prop.name.string lowercaseString] isEqualToString:@"bmasked"]){
+				masked = prop.special;
+			}else if([[prop.name.string lowercaseString] isEqualToString:@"btransparent"]){
+				transparent = prop.special;
 			}
 			[manager release];
 		}
@@ -56,6 +63,12 @@
 						NSNumber *colorG = [[palette objectAtIndex:index] valueForKey:@"green"];
 						NSNumber *colorB = [[palette objectAtIndex:index] valueForKey:@"blue"];
 						NSNumber *colorA = [[palette objectAtIndex:index] valueForKey:@"alpha"];
+						if(index == 0 && masked == YES){
+							colorA = [NSNumber numberWithUnsignedChar:0x00];
+						}
+						if(!transparent){
+							colorA = [NSNumber numberWithUnsignedChar:0xFF];
+						}
 						glTexData[i*levelWidth + j] = (color){[colorR unsignedCharValue], [colorG unsignedCharValue], [colorB unsignedCharValue], [colorA unsignedCharValue]};
 					}
 				}
@@ -210,7 +223,7 @@ void printLightType(int lType){
 	}
 }
 
-+ (id)textureWithLightMap:(NSMutableDictionary *)lightMap data:(NSMutableData *)data lights:(NSMutableArray *)lights{
++ (id)textureWithLightMap:(NSMutableDictionary *)lightMap data:(NSMutableData *)data lights:(NSMutableArray *)lights node:(UNRNode *)node{
 	UNRTexture *tex = [[self alloc] init];
 	if(tex){
 		tex.width = [[lightMap valueForKey:@"uClamp"] unsignedIntValue]; //width and height are not necessarily powers of two
@@ -227,7 +240,7 @@ void printLightType(int lType){
 		glPixelStorei(GL_PACK_ALIGNMENT, 1);
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		
-		//if((node.surfFlags & PF_Unlit) != PF_Unlit){
+		if((node.surfFlags & PF_Unlit) != PF_Unlit){
 			int iLightActors = [[lightMap valueForKey:@"iLightActors"] intValue];
 			if(iLightActors != -1){
 				id light = [lights objectAtIndex:iLightActors];
@@ -240,16 +253,6 @@ void printLightType(int lType){
 					[mapLights addObject:light];
 					light = [lights objectAtIndex:iLightActors+i];
 				}
-				
-				/*printf("LightMap:\n");
-				 printf("\twidth:%i height:%i\n", tex.width, tex.height);
-				 printf("\tdataOffset:%i dataLength:%i\n", dataOffset, [data length]);
-				 printf("\tdifference:%i\n", [data length] - dataOffset);
-				 printf("\tlength:%i\n", tex.width*tex.height);
-				 printf("\tiLightActors:%i\n", [[lightMap valueForKey:@"iLightActors"] intValue]);*/
-				//printf("%i", light);
-				//	printf(" %i", light);
-				//printf("\n");
 				
 				int nextWidth = roundToNext8(tex.width);
 				int lightCount = [mapLights count];
@@ -315,19 +318,15 @@ void printLightType(int lType){
 						}
 					}
 					
-					//texDat[0] = (color){0x00, 0x00, 0x00, 0xFF};
-					//texDat[tex.width+1] = (color){0x7F, 0x00, 0x00, 0xFF};
-					//texDat[tex.width*tex.height-2-tex.width] = (color){0x00, 0x7F, 0x00, 0xFF};
-					
-					printf("Lightmap: w:%i h:%i lc:%i\n\t", tex.width, tex.height, lightCount);
-					printf("texData:\n\t");
-					for(int i = tex.height-1; i >= 0; i--){
-						for(int j = 0; j < tex.width; j++){
-							printf(" %2x", texDat[i*tex.width+j].r);
-						}
-						printf("\n\t");
-					}
-					
+//					printf("Lightmap: w:%i h:%i lc:%i\n\t", tex.width, tex.height, lightCount);
+//					printf("texData:\n\t");
+//					for(int i = tex.height-1; i >= 0; i--){
+//						for(int j = 0; j < tex.width; j++){
+//							printf(" %2x", texDat[i*tex.width+j].r);
+//						}
+//						printf("\n\t");
+//					}
+//					
 					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -343,10 +342,10 @@ void printLightType(int lType){
 				GLubyte texDat = 0x00;
 				glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
 			}
-		/*}else{
+		}else{
 			GLubyte texDat = 0xFF;
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
-		}*/
+		}
 		
 		glPixelStorei(GL_PACK_ALIGNMENT, 4);
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);

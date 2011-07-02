@@ -23,6 +23,8 @@
 	self = [super init];
 	if(self){
 		self.xClamp = 90.0f;
+		self.up = Vector3DCreate(0.0f, 1.0f, 0.0f);
+		self.look = Vector3DCreate(0.0f, 0.0f, -1.0f);
 	}
 	return self;
 }
@@ -62,68 +64,38 @@
 
 - (void)move:(Vector3D)moveVec{
 	if(Vector3DMagnitude(moveVec) != 0){
-		/*Matrix3D mat;
-		 mat.translate(-vec.x, -vec.y, -vec.z);
-		 
-		 Matrix3D mat2;
-		 
-		 {
-		 Matrix3D mat;
-		 mat.rotateZ(-rotZ);
-		 mat.rotateY(-rotY);
-		 mat.rotateX(-rotX);
-		 
-		 prepare();
-		 
-		 mat2[0] = right.x;
-		 mat2[4] = right.y;
-		 mat2[8] = right.z;
-		 
-		 mat2[1] = up.x;
-		 mat2[5] = up.y;
-		 mat2[9] = up.z;
-		 
-		 mat2[2] = look.x;
-		 mat2[6] = look.y;
-		 mat2[10] = look.z;
-		 
-		 mat2 = mat2 * mat;
-		 }
-		 
-		 mat = mat2 * mat;
-		 
-		 pos += Vector3D(mat[12], mat[13], mat[14]);*/
-		Matrix3D mat1, mat2, result;
-		Matrix3DIdentity(mat1);
-		Matrix3DIdentity(mat2);
+		Matrix3D transMat, rotMat, result;
+		Matrix3DIdentity(transMat);
+		Matrix3DIdentity(rotMat);
 		Matrix3DIdentity(result);
-		Matrix3DTranslate(mat1, -moveVec.x, -moveVec.y, -moveVec.z);
 		
 		{
-			Matrix3D mat, mat1;
-			Matrix3DIdentity(mat);
-			Matrix3DIdentity(mat1);
-			Matrix3DRotateZ(mat, -self.rotZ);
-			Matrix3DRotateY(mat, -self.rotY);
-			Matrix3DRotateX(mat, -self.rotX);
+			Matrix3D fpsLookMat, lookMat;
+			Matrix3DIdentity(fpsLookMat);
+			Matrix3DIdentity(lookMat);
+			Matrix3DRotateZ(fpsLookMat, -self.rotZ);
+			Matrix3DRotateY(fpsLookMat, -self.rotY);
+			Matrix3DRotateX(fpsLookMat, -self.rotX);
 			
 			[self prepare];
 			
-			mat1[0] = self.right.x;
-			mat1[4] = self.right.y;
-			mat1[8] = self.right.z;
+			lookMat[0] = self.right.x;
+			lookMat[4] = self.right.y;
+			lookMat[8] = self.right.z;
 			
-			mat1[1] = self.up.x;
-			mat1[5] = self.up.y;
-			mat1[9] = self.up.z;
+			lookMat[1] = self.up.x;
+			lookMat[5] = self.up.y;
+			lookMat[9] = self.up.z;
 			
-			mat1[2] = self.look.x;
-			mat1[6] = self.look.y;
-			mat1[10] = self.look.z;
-			Matrix3DMultiply(mat1, mat, mat2);
+			lookMat[2] = self.look.x;
+			lookMat[6] = self.look.y;
+			lookMat[10] = self.look.z;
+			Matrix3DMultiply(lookMat, fpsLookMat, rotMat);
 		}
 		
-		Matrix3DMultiply(mat2, mat1, result);
+		Matrix3DTranslate(transMat, -moveVec.x, -moveVec.y, -moveVec.z);
+		
+		Matrix3DMultiply(rotMat, transMat, result);
 		
 		self.pos = Vector3DAdd(self.pos, Vector3DCreate(result[12], result[13], result[14]));
 	}
@@ -133,8 +105,45 @@
 	self.right = Vector3DCross(self.look, self.up);
 	self.up = Vector3DCross(self.right, self.look);
 	
-	Vector3DNormalize(&right_);
-	Vector3DNormalize(&up_);
+	Vector3DNormalizeEqual(&right_);
+	Vector3DNormalizeEqual(&up_);
+}
+
+//clearly incorrect
+- (Vector3D)viewVec{
+	Vector3D viewVec;
+	
+	Matrix3D rotMat;
+	
+	{
+		Matrix3D fpsLookMat, lookMat;
+		Matrix3DIdentity(fpsLookMat);
+		Matrix3DIdentity(lookMat);
+		Matrix3DRotateX(fpsLookMat, -self.rotX);
+		Matrix3DRotateY(fpsLookMat, -self.rotY);
+		Matrix3DRotateZ(fpsLookMat, -self.rotZ);
+		
+		[self prepare];
+		
+		lookMat[0] = self.right.x;
+		lookMat[4] = self.right.y;
+		lookMat[8] = self.right.z;
+		
+		lookMat[1] = self.up.x;
+		lookMat[5] = self.up.y;
+		lookMat[9] = self.up.z;
+		
+		lookMat[2] = -self.look.x;
+		lookMat[6] = -self.look.y;
+		lookMat[10] = -self.look.z;
+		Matrix3DMultiply(lookMat, fpsLookMat, rotMat);
+	}
+	
+	viewVec.x = rotMat[2];
+	viewVec.y = rotMat[6];
+	viewVec.z = rotMat[10];
+	
+	return viewVec;
 }
 
 - (void)setRotX:(float)rotX{
@@ -147,8 +156,7 @@
 }
 
 - (void)setLook:(Vector3D)look{
-	Vector3DNormalize(&look);
-	look_ = look;
+	look_ = Vector3DNormalize(look);
 }
 
 @end

@@ -16,12 +16,14 @@ typedef struct{
 	Byte r, g, b, a;
 }color;
 
+@class UNRNode;
+
 @interface UNRTexture : NSObject {
 	
 }
 
 + (id)textureWithObject:(UNRExport *)obj;
-+ (id)textureWithLightMap:(NSMutableDictionary *)lightMap data:(NSMutableData *)data lights:(NSMutableArray *)lights;
++ (id)textureWithLightMap:(NSMutableDictionary *)lightMap data:(NSMutableData *)data lights:(NSMutableArray *)lights node:(UNRNode *)node;
 - (void)bind:(int)index;
 
 @property(nonatomic, assign) int width, height;

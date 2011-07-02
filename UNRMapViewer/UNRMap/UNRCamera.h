@@ -19,5 +19,6 @@
 
 @property(nonatomic, assign) Vector3D pos, up, look, right;
 @property(nonatomic, assign) float rotX, rotY, rotZ, xClamp;
+@property(nonatomic, readonly) Vector3D viewVec;
 
 @end

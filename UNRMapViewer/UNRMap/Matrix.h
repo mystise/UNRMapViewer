@@ -9,6 +9,8 @@
 #define DEGREES_TO_RADIANS(x) ((x) / 180.0f * M_PI)
 #define RADIANS_TO_DEGREES(x) ((x) / M_PI * 180.0f)
 
+#error Matrix3D c++ class is deprecated. Don't use.
+
 #import <math.h>
 
 #import "Vector.h"
@@ -150,7 +152,7 @@ namespace Matrix{
 			Matrix3D mat;
 			float rad = DEGREES_TO_RADIANS(degrees);
 			
-			GLfloat mag = sqrtf((x * x) + (y * y) + (z * z));
+			float mag = sqrtf((x * x) + (y * y) + (z * z));
 			if(mag == 0.0f){
 				x = 1.0f;
 				y = 0.0f;
@@ -160,8 +162,8 @@ namespace Matrix{
 				y /= mag;
 				z /= mag;
 			}
-			GLfloat c = cosf(rad);
-			GLfloat s = sinf(rad);
+			float c = cosf(rad);
+			float s = sinf(rad);
 			
 			mat[0] = (x * x) * (1-c) + c;
 			mat[1] = (x * y) * (1-c) + (z * s);

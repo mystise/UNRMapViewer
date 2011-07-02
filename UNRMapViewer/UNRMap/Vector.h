@@ -8,6 +8,8 @@
 
 #import <math.h>
 
+#error Vector3D, Vector2D, and Vector4D, c++ classes are deprecated. Don't use.
+
 namespace Vector{
 	struct Vector4D{
 	public:

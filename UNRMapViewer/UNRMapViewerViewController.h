@@ -14,7 +14,6 @@
 
 #import "Unreal.h"
 #import "UNRMap.h"
-#import "Utilities.h"
 
 @interface UNRMapViewerViewController : UIViewController{
 @private

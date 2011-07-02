@@ -13,13 +13,6 @@
 
 #import "Matrix3D.h"
 #import "Vector3D.h"
-//#import "Utilities.h"
-
-//#import "Vector.h"
-//using Vector::Vector3D;
-
-//#import "Matrix.h"
-//using Matrix::Matrix3D;
 
 @class UNRNode, UNRCamera;
 

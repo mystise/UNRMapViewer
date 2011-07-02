@@ -22,7 +22,8 @@
 			<compactIndex name="iPlane"/>
 			<compactIndex name="iCollBound"/>
 			<compactIndex name="iRenderBound"/>
-			<short name="iZone"/>
+			<byte name="iZone1"/>
+			<byte name="iZone2"/>
 			<compactIndex name="vertCount"/>
 			<int name="iLeaf1"/>
 			<int name="iLeaf2"/>
@@ -55,8 +56,8 @@
 		<compactIndex name="rootOutside"/> -->
 		<int name="unk"/>
 		
-		<int name="zonePropertiesCount"/>
-		<array name="zoneProperties" count="zonePropertiesCount">
+		<int name="zoneCount"/>
+		<array name="zones" count="zoneCount">
 			<compactIndex name="zoneActor"/> <!-- objectReference -->
 			<long name="connectivity"/>
 			<long name="visibility"/>

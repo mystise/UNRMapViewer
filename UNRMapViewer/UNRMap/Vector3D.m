@@ -60,6 +60,10 @@ Vector3D Vector3DNegation(Vector3D vec){
 	return Vector3DCreate(-vec.x, -vec.y, -vec.z);
 }
 
+Vector3D Vector3DNormalize(Vector3D vec){
+	return Vector3DDivide(vec, Vector3DMagnitude(vec));
+}
+
 void Vector3DAddEqual(Vector3D *vec1, Vector3D vec2){
 	*vec1 = Vector3DAdd(*vec1, vec2);
 }
@@ -76,6 +80,6 @@ void Vector3DDivEqual(Vector3D *vec, float scale){
 	*vec = Vector3DDivide(*vec, scale);
 }
 
-void Vector3DNormalize(Vector3D *vec){
-	Vector3DDivEqual(vec, Vector3DMagnitude(*vec));
+void Vector3DNormalizeEqual(Vector3D *vec){
+	*vec = Vector3DNormalize(*vec);
 }

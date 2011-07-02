@@ -14,7 +14,7 @@
 	
 }
 
-- (id)initWithModel:(NSMutableDictionary *)model andFile:(UNRFile *)file;
+- (id)initWithLevel:(NSMutableDictionary *)level andFile:(UNRFile *)file;
 - (void)draw:(float)aspect withTimestep:(float)dt;
 - (void)drawCubeMap:(float)dt;
 
@@ -29,6 +29,8 @@
 @property(nonatomic, retain) NSMutableDictionary *textures;
 @property(nonatomic, retain) NSMutableDictionary *shaders;
 @property(nonatomic, retain) NSMutableDictionary *lightMaps;
+@property(nonatomic, retain) NSMutableDictionary *zones;
+@property(nonatomic, retain) NSMutableDictionary *actors;
 @property(nonatomic, assign) CGPoint stickPos, stickPrevPos, lookPos, lookPrevPos;
 
 @end

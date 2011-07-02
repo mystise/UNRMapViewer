@@ -50,6 +50,10 @@ Vector2D Vector2DNegation(Vector2D vec){
 	return Vector2DCreate(-vec.x, -vec.y);
 }
 
+Vector2D Vector2DNormalize(Vector2D vec){
+	return Vector2DDivide(vec, Vector2DMagnitude(vec));
+}
+
 void Vector2DAddEqual(Vector2D *vec1, Vector2D vec2){
 	*vec1 = Vector2DAdd(*vec1, vec2);
 }
@@ -66,6 +70,6 @@ void Vector2DDivEqual(Vector2D *vec, float scale){
 	*vec = Vector2DDivide(*vec, scale);
 }
 
-void Vector2DNormalize(Vector2D *vec){
-	Vector2DDivEqual(vec, Vector2DMagnitude(*vec));
+void Vector2DNormalizeEqual(Vector2D *vec){
+	*vec = Vector2DNormalize(*vec);
 }

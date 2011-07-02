@@ -16,10 +16,11 @@
 //#import "Matrix.h"
 //using Matrix::Matrix3D;
 #import "Matrix3D.h"
+#import "Vector4D.h"
 #import "Vector3D.h"
 #import "Vector2D.h"
 
-@class UNRFile, UNRTexture, UNRShader, UNRMap;
+@class UNRFile, UNRTexture, UNRShader, UNRMap, UNRZone;
 
 @interface UNRNode : NSObject {
 	
@@ -27,21 +28,22 @@
 
 - (id)initWithModel:(NSMutableDictionary *)model nodeNumber:(int)nodeNum file:(UNRFile *)file map:(UNRMap *)map;
 
-- (void)drawWithMatrix:(Matrix3D)mat cameraPos:(Vector3D)vec; //rootNode
-
+- (void)drawWithMatrix:(Matrix3D)mat camPos:(Vector3D)camPos; //rootNode
 - (void)drawWithState:(NSMutableDictionary *)state; //any subNode
+
+- (UNRZone *)zoneForCamera:(Vector3D)camPos;
 
 @property(nonatomic, assign) int vertCount;
 @property(nonatomic, assign) GLuint vbo, vao;
 
-@property(nonatomic, assign) Vector3D normal;
+@property(nonatomic, assign) Vector3D normal, origin;
+@property(nonatomic, assign) Vector4D plane;
 @property(nonatomic, assign) int surfFlags;
 @property(nonatomic, assign) int strideLength;
 @property(nonatomic, retain) UNRTexture *tex, *lightMap;
 @property(nonatomic, retain) UNRNode *front, *back, *coPlanar;
 @property(nonatomic, retain) UNRShader *shader;
-
-//visibility stuff
+@property(nonatomic, retain) UNRZone *frontZone, *backZone;
 
 @end
 

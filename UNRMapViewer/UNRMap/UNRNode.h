@@ -20,7 +20,7 @@
 #import "Vector3D.h"
 #import "Vector2D.h"
 
-@class UNRFile, UNRTexture, UNRShader, UNRMap, UNRZone;
+@class UNRFile, UNRTexture, UNRShader, UNRMap, UNRZone, UNRBoundingBox;
 
 @interface UNRNode : NSObject {
 	
@@ -29,9 +29,11 @@
 - (id)initWithModel:(NSMutableDictionary *)model nodeNumber:(int)nodeNum file:(UNRFile *)file map:(UNRMap *)map;
 
 - (void)drawWithMatrix:(Matrix3D)mat camPos:(Vector3D)camPos; //rootNode
-- (void)drawWithState:(NSMutableDictionary *)state; //any subNode
+- (void)drawWithState:(NSMutableDictionary *)state matrix:(Matrix3D)mat camPos:(Vector3D)camPos; //any subNode
 
 - (UNRZone *)zoneForCamera:(Vector3D)camPos;
+
+- (void)setupState:(NSMutableDictionary *)state;
 
 @property(nonatomic, assign) int vertCount;
 @property(nonatomic, assign) GLuint vbo, vao;
@@ -44,6 +46,7 @@
 @property(nonatomic, retain) UNRNode *front, *back, *coPlanar;
 @property(nonatomic, retain) UNRShader *shader;
 @property(nonatomic, retain) UNRZone *frontZone, *backZone;
+@property(nonatomic, retain) UNRBoundingBox *renderBox;
 
 @end
 
@@ -77,6 +80,8 @@ enum EPolyFlags{
 	PF_HighShadowDetail	= 0x00800000,	// High detail shadows.
 	PF_Portal			= 0x04000000,	// Portal between iZones.
 	PF_Mirrored			= 0x08000000,	// Reflective surface.
+	PF_RenderFog		= 0x40000000,	// Render with fogmapping.
+	PF_Occlude			= 0x80000000,	// Occludes even if PF_NoOcclude.
 	
 	// Combinations of flags.
 	PF_NoOcclude		= PF_Masked | PF_Translucent | PF_Invisible | PF_Modulated,

@@ -15,13 +15,13 @@
 
 @synthesize width = width_, height = height_, glTex = glTex_;
 
-+ (id)textureWithObject:(UNRExport *)obj{
++ (id)textureWithObject:(UNRExport *)obj attributes:(NSDictionary *)attrib{
 	UNRTexture *tex = [[self alloc] init];
 	if(tex){
 		NSArray *palette = nil;
 		int format = 0;
-		BOOL masked = NO;
-		BOOL transparent = NO;
+		BOOL masked = [[attrib valueForKey:@"masked"] boolValue];
+		int correctMipCount = 0;
 		for(UNRProperty *prop in [obj.objectData valueForKey:@"props"]){
 			DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
 			if([[prop.name.string lowercaseString] isEqualToString:@"format"]){
@@ -29,10 +29,16 @@
 			}else if([[prop.name.string lowercaseString] isEqualToString:@"palette"]){
 				UNRExport *obj = (UNRExport *)prop.object;
 				palette = [obj.objectData valueForKey:@"palette"];
-			}else if([[prop.name.string lowercaseString] isEqualToString:@"bmasked"]){
-				masked = prop.special;
-			}else if([[prop.name.string lowercaseString] isEqualToString:@"btransparent"]){
-				transparent = prop.special;
+			}else if([[prop.name.string lowercaseString] isEqualToString:@"ubits"]){
+				Byte uBits = [manager loadByte];
+				if(uBits > correctMipCount){
+					correctMipCount = uBits;
+				}
+			}else if([[prop.name.string lowercaseString] isEqualToString:@"vbits"]){
+				Byte vBits = [manager loadByte];
+				if(vBits > correctMipCount){
+					correctMipCount = vBits;
+				}
 			}
 			[manager release];
 		}
@@ -63,11 +69,12 @@
 						NSNumber *colorG = [[palette objectAtIndex:index] valueForKey:@"green"];
 						NSNumber *colorB = [[palette objectAtIndex:index] valueForKey:@"blue"];
 						NSNumber *colorA = [[palette objectAtIndex:index] valueForKey:@"alpha"];
-						if(index == 0 && masked == YES){
-							colorA = [NSNumber numberWithUnsignedChar:0x00];
-						}
-						if(!transparent){
-							colorA = [NSNumber numberWithUnsignedChar:0xFF];
+						if(masked == YES){
+							if(index == 0){
+								colorA = [NSNumber numberWithUnsignedChar:0x00];
+							}else{
+								colorA = [NSNumber numberWithUnsignedChar:0xFF];
+							}
 						}
 						glTexData[i*levelWidth + j] = (color){[colorR unsignedCharValue], [colorG unsignedCharValue], [colorB unsignedCharValue], [colorA unsignedCharValue]};
 					}
@@ -77,7 +84,11 @@
 			}
 			[manager release];
 			
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+			if([[obj.objectData valueForKey:@"mipMapCount"] intValue] != correctMipCount){
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			}else{
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+			}
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			
 			glTexImage2D(GL_TEXTURE_2D, i, GL_RGBA, levelWidth, levelHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, glTexData);
@@ -240,7 +251,12 @@ void printLightType(int lType){
 		glPixelStorei(GL_PACK_ALIGNMENT, 1);
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		
-		if((node.surfFlags & PF_Unlit) != PF_Unlit){
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		
+		if(!(node.surfFlags & PF_NoShadows)){
 			int iLightActors = [[lightMap valueForKey:@"iLightActors"] intValue];
 			if(iLightActors != -1){
 				id light = [lights objectAtIndex:iLightActors];
@@ -293,10 +309,6 @@ void printLightType(int lType){
 									int rawIndex = i*nextWidth/8 + j/8 + y*texSize;
 									float newDat = ((rawDat[rawIndex]>>x)&0x01);
 									
-									//if(newDat == 0.0f){
-									//	newDat = 0.5f;
-									//}
-									
 									color newColor = texDat[texIndex];
 									newColor.r += newDat*rgb.r;
 									newColor.g += newDat*rgb.g;
@@ -327,24 +339,21 @@ void printLightType(int lType){
 //						printf("\n\t");
 //					}
 //					
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-					
 					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex.width, tex.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texDat);
-				}else{
-					GLubyte texDat = 0xFF/2;
-					glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
-					printf("\tfailed!!! not enough data!\n");
-				}
+				}//else{
+//					GLubyte texDat = 0xFF/2;
+//					glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
+//					printf("\tfailed!!! not enough data!\n");
+//				}
 			}else{
-				GLubyte texDat = 0x00;
+				GLubyte texDat = 0xFF;
 				glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
+				printf("very dark...\n");
 			}
 		}else{
-			GLubyte texDat = 0xFF;
+			GLubyte texDat = 0xFF/2;
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
+			printf("unlit.\n");
 		}
 		
 		glPixelStorei(GL_PACK_ALIGNMENT, 4);

@@ -28,9 +28,10 @@
 @synthesize rootNode = rootNode_, textures = textures_, shaders = shaders_, cam = cam_, lightMaps = lightMaps_, cubeMap = cubeMap_;
 @synthesize stickPos = stickPos_, stickPrevPos = stickPrevPos_, lookPos = lookPos_, lookPrevPos = lookPrevPos_, zones = zones_, actors = actors_;
 
-- (id)initWithLevel:(NSMutableDictionary *)level andFile:(UNRFile *)file{
+- (id)initWithLevel:(NSMutableDictionary *)level andFile:(UNRFile *)file label:(UILabel *)label progress:(UIProgressView *)progress{
 	self = [super init];
 	if(self != nil){
+		dispatch_queue_t mainThread = dispatch_get_main_queue();
 		NSMutableDictionary *model = [[level valueForKey:@"bspModel"] objectData];
 		
 		self.textures = [NSMutableDictionary dictionary];
@@ -38,6 +39,10 @@
 		self.lightMaps = [NSMutableDictionary dictionary];
 		self.zones = [NSMutableDictionary dictionary];
 		
+		dispatch_async(mainThread, ^(void){
+			label.text = @"Loading nodes...";
+			progress.progress = 0.5f;
+		});
 		UNRNode *node = [[UNRNode alloc] initWithModel:model nodeNumber:0 file:file map:self];
 		self.rootNode = node;
 		[node release];
@@ -52,56 +57,39 @@
 		
 		self.actors = [NSMutableDictionary dictionary];
 		
-		for(UNRExport *obj in [[level valueForKey:@"actors"] valueForKey:@""]){
-			NSString *className = obj.classObj.name.string;
-			if([self.actors valueForKey:className] == nil){
-				[self.actors setValue:[NSMutableArray array] forKey:className];
+		dispatch_async(mainThread, ^(void){
+			label.text = @"Loading actors...";
+			progress.progress = 0.6f;
+		});
+		
+		for(UNRExport *obj in [[level valueForKey:@"actors"] valueForKey:@"actor"]){
+			if(![obj isKindOfClass:[NSNull class]]){
+				NSString *className = obj.classObj.name.string;
+				//ignore all types not relevant to us
+				if(![className isEqualToString:@"Brush"] && ![className isEqualToString:@"Camera"] && ![className isEqualToString:@"PathNode"]){
+					if([self.actors valueForKey:className] == nil){
+						[self.actors setValue:[NSMutableArray array] forKey:className];
+					}
+					[obj loadPlugin:file];
+					[[self.actors valueForKey:className] addObject:obj];
+				}
 			}
-			[obj loadPlugin:file];
-			[[self.actors valueForKey:className] addObject:obj];
 		}
 		
+		dispatch_async(mainThread, ^(void){
+			label.text = @"Initializing skybox...";
+			progress.progress = 0.7f;
+		});
 		NSMutableArray *skyBox = nil;
 		NSMutableDictionary *skyBoxes = [NSMutableDictionary dictionary];
 		//find the skyBoxInfo with highDetail set to 1
-		/*for(UNRExport *obj in file.objects){
-			if([obj.classObj.name.string isEqualToString:@"SkyZoneInfo"]){
-				[obj loadPlugin:file];
-				for(UNRProperty *prop in [obj.objectData valueForKey:@"props"]){
-					DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
-					if([prop.name.string isEqualToString:@"Location"]){
-						Vector3D camPos;
-						camPos.x = [manager loadFloat];
-						camPos.y = [manager loadFloat];
-						camPos.z = [manager	loadFloat];
-						self.cubeMap.camPos = camPos;
-					}else if([prop.name.string isEqualToString:@"bHighDetail"]){
-						if(prop.special == YES){
-							[skyBoxes setValue:[obj.objectData valueForKey:@"props"] forKey:@"highDetail"];
-						}
-					}
-					[manager release];
-				}
-				if([skyBoxes valueForKey:@"highDetail"] == nil){
-					[skyBoxes setValue:[obj.objectData valueForKey:@"props"] forKey:@"lowDetail"];
-				}
-			}
-		}*/
 		for(UNRExport *obj in [self.actors valueForKey:@"SkyZoneInfo"]){
 			for(UNRProperty *prop in [obj.objectData valueForKey:@"props"]){
-				DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
-				if([prop.name.string isEqualToString:@"Location"]){
-					Vector3D camPos;
-					camPos.x = [manager loadFloat];
-					camPos.y = [manager loadFloat];
-					camPos.z = [manager	loadFloat];
-					self.cubeMap.camPos = camPos;
-				}else if([prop.name.string isEqualToString:@"bHighDetail"]){
+				if([prop.name.string isEqualToString:@"bHighDetail"]){
 					if(prop.special == YES){
 						[skyBoxes setValue:[obj.objectData valueForKey:@"props"] forKey:@"highDetail"];
 					}
 				}
-				[manager release];
 			}
 			if([skyBoxes valueForKey:@"highDetail"] == nil){
 				[skyBoxes setValue:[obj.objectData valueForKey:@"props"] forKey:@"lowDetail"];
@@ -117,55 +105,80 @@
 		for(UNRProperty *prop in skyBox){
 			DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
 			if([prop.name.string isEqualToString:@"Location"]){
-				/*Vector3D camPos;
-				 camPos.x = [manager loadFloat];
-				 camPos.y = [manager loadFloat];
-				 camPos.z = [manager	loadFloat];
-				 self.cubeMap.camPos = camPos;*/
+				Vector3D camPos;
+				camPos.x = [manager loadFloat];
+				camPos.y = [manager loadFloat];
+				camPos.z = [manager loadFloat];
+				//camPos = Vector3DMultiply(camPos, 0.1f);
+				self.cubeMap.cam.pos = camPos;
+				//self.cam.pos = camPos;
 			}else if([prop.name.string isEqualToString:@"RotationRate"]){
-				self.cubeMap.drX = [manager loadInt]/(float)0xFFFF;
-				self.cubeMap.drY = [manager loadInt]/(float)0xFFFF;
-				self.cubeMap.drZ = [manager loadInt]/(float)0xFFFF;
-			}else if([prop.name.string isEqualToString:@"Region"]){
-				//possibly do something with region
+				self.cubeMap.drX = [manager loadInt]*45/8192;
+				self.cubeMap.drY = [manager loadInt]*45/8192;
+				self.cubeMap.drZ = [manager loadInt]*45/8192;
 			}
 			[manager release];
 		}
+		
+		for(UNRExport *obj in [self.actors valueForKey:@"PlayerStart"]){
+			for(UNRProperty *prop in [obj.objectData valueForKey:@"props"]){
+				DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
+				if([prop.name.string isEqualToString:@"Location"]){
+					Vector3D camPos;
+					camPos.x = [manager loadFloat];
+					camPos.y = [manager loadFloat];
+					camPos.z = [manager loadFloat];
+					self.cam.pos = camPos;
+				}else if([prop.name.string isEqualToString:@"Rotation"]){
+					self.cam.rotX = [manager loadInt]*45/8192;
+					self.cam.rotY = [manager loadInt]*45/8192;
+					self.cam.rotZ = [manager loadInt]*45/8192;
+				}else{
+					
+				}
+				[manager release];
+			}
+		}
+		
+		//setup all inventory spots
 	}
 	return self;
 }
 
 - (void)draw:(float)aspect withTimestep:(float)dt{
 	CGPoint disp = CGPointMake(self.stickPrevPos.x - self.stickPos.x, self.stickPrevPos.y - self.stickPos.y);
-	[self.cam move:Vector3DCreate(disp.y/10.0f*dt, 0.0f, disp.x/10.0f*dt)];
+	[self.cam move:Vector3DCreate(disp.y*2.0f*dt, 0.0f, disp.x*2.0f*dt)];
 	
 	disp = CGPointMake(self.lookPrevPos.x - self.lookPos.x, self.lookPrevPos.y - self.lookPos.y);
 	self.cam.rotX += disp.x/5.0f*dt;
 	self.cam.rotY += -disp.y/5.0f*dt;
+//	self.cam.rotX += self.cubeMap.drX * dt;
+//	self.cam.rotY += self.cubeMap.drY * dt;
+//	self.cam.rotZ += self.cubeMap.drZ * dt;
 	
 	Matrix3D modelView;
 	Matrix3D projection;
 	Matrix3DIdentity(projection);
 	
-	Matrix3DPerspective(projection, 90.0f, 1.7f, USHRT_MAX/10.0f, aspect);
+	Matrix3DPerspective(projection, 90.0f, 17.0f, USHRT_MAX, aspect);
 	
 	[self.cam getGLData:modelView];
-	Matrix3DUniformScale(modelView, 0.1f);
-	Matrix3DScale(modelView, -1.0f, 1.0f, 1.0f);
+	//Matrix3DUniformScale(modelView, 0.1f);
 	
 	Matrix3D res;
 	Matrix3DMultiply(projection, modelView, res);
 	
 	glStencilFunc(GL_ALWAYS, 1, UINT_MAX);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-	[self.rootNode drawWithMatrix:res camPos:self.cam.pos];
+	glStencilOp(GL_ZERO, GL_ZERO, GL_ZERO);
 	
-	//[self drawCubeMap:dt];
-}
-
-- (void)drawCubeMap:(float)dt{
+	//glDepthMask(GL_FALSE);
+	Vector3D camPos = self.cam.pos;
+	//camPos = Vector3DMultiply(camPos, 0.1f);
+	//glDisable(GL_DEPTH_TEST);
+	[self.rootNode drawWithMatrix:res camPos:camPos];
+	
 	[self.cubeMap updateWithTimestep:dt];
-	[self.cubeMap drawWithRootNode:self.rootNode camera:self.cam];
+	[self.cubeMap drawWithRootNode:self.rootNode camera:self.cam projMat:projection];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

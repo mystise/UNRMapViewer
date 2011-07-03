@@ -66,8 +66,6 @@
 	if(Vector3DMagnitude(moveVec) != 0){
 		Matrix3D transMat, rotMat, result;
 		Matrix3DIdentity(transMat);
-		Matrix3DIdentity(rotMat);
-		Matrix3DIdentity(result);
 		
 		{
 			Matrix3D fpsLookMat, lookMat;
@@ -102,11 +100,25 @@
 }
 
 - (void)prepare{
-	self.right = Vector3DCross(self.look, self.up);
-	self.up = Vector3DCross(self.right, self.look);
+	Vector3D look = Vector3DNegation(self.look);
+	self.right = Vector3DCross(look, self.up);
+	self.up = Vector3DCross(self.right, look);
 	
 	Vector3DNormalizeEqual(&right_);
 	Vector3DNormalizeEqual(&up_);
+}
+
+- (id)copyWithZone:(NSZone *)zone{
+	UNRCamera *copy = [[[self class] allocWithZone:zone] init];
+	copy.pos = self.pos;
+	copy.up = self.up;
+	copy.look = self.look;
+	copy.right = self.right;
+	copy.rotX = self.rotX;
+	copy.rotY = self.rotY;
+	copy.rotZ = self.rotZ;
+	copy.xClamp = self.xClamp;
+	return copy;
 }
 
 //clearly incorrect

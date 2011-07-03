@@ -12,6 +12,7 @@
 		493E72C913AD6127008C2E78 /* SkyBox.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 493E72C713AD6127008C2E78 /* SkyBox.fsh */; };
 		493E72CA13AD6127008C2E78 /* SkyBox.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 493E72C813AD6127008C2E78 /* SkyBox.vsh */; };
 		493E72CE13AD6C9B008C2E78 /* UNRCubeCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 493E72CD13AD6C9B008C2E78 /* UNRCubeCamera.m */; };
+		494158BA13BEC59F008F58C9 /* UNRBoundingBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 494158B913BEC59F008F58C9 /* UNRBoundingBox.m */; };
 		49836E541388BD64003193CD /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E391388BD64003193CD /* DataManager.m */; };
 		49836E551388BD64003193CD /* UNRBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E3B1388BD64003193CD /* UNRBase.m */; };
 		49836E561388BD64003193CD /* UNRExport.m in Sources */ = {isa = PBXBuildFile; fileRef = 49836E3E1388BD64003193CD /* UNRExport.m */; };
@@ -78,6 +79,8 @@
 		493E72C813AD6127008C2E78 /* SkyBox.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = SkyBox.vsh; path = Shaders/SkyBox.vsh; sourceTree = "<group>"; };
 		493E72CC13AD6C9B008C2E78 /* UNRCubeCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRCubeCamera.h; sourceTree = "<group>"; };
 		493E72CD13AD6C9B008C2E78 /* UNRCubeCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRCubeCamera.m; sourceTree = "<group>"; };
+		494158B813BEC59F008F58C9 /* UNRBoundingBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRBoundingBox.h; sourceTree = "<group>"; };
+		494158B913BEC59F008F58C9 /* UNRBoundingBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRBoundingBox.m; sourceTree = "<group>"; };
 		49836E381388BD64003193CD /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		49836E391388BD64003193CD /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		49836E3A1388BD64003193CD /* UNRBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRBase.h; sourceTree = "<group>"; };
@@ -198,6 +201,8 @@
 				49B5F4871395CDCC00421352 /* UNRShader.m */,
 				49836E6C138F4714003193CD /* UNRNode.h */,
 				49836E6D138F4715003193CD /* UNRNode.m */,
+				494158B813BEC59F008F58C9 /* UNRBoundingBox.h */,
+				494158B913BEC59F008F58C9 /* UNRBoundingBox.m */,
 				49AAFFC513BCEC3F002D7A41 /* UNRCamera.h */,
 				49AAFFC613BCEC3F002D7A41 /* UNRCamera.m */,
 				49AAFFD613BE3499002D7A41 /* UNRZone.h */,
@@ -499,6 +504,7 @@
 				49AAFFD213BD7C62002D7A41 /* Vector2D.m in Sources */,
 				49AAFFD513BE31B2002D7A41 /* Vector4D.m in Sources */,
 				49AAFFD813BE349A002D7A41 /* UNRZone.m in Sources */,
+				494158BA13BEC59F008F58C9 /* UNRBoundingBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

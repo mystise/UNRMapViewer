@@ -253,12 +253,14 @@
 		float vecZ2 = [self.manager loadFloat];
 		Byte boxIsValid = [self.manager loadByte];
 		NSDictionary *box = [NSDictionary dictionaryWithObjectsAndKeys:
-							 [NSNumber numberWithFloat:vecX1], @"x1",
-							 [NSNumber numberWithFloat:vecY1], @"y1",
-							 [NSNumber numberWithFloat:vecZ1], @"z1",
-							 [NSNumber numberWithFloat:vecX2], @"x2",
-							 [NSNumber numberWithFloat:vecY2], @"y2",
-							 [NSNumber numberWithFloat:vecZ2], @"z2",
+							 [NSDictionary dictionaryWithObjectsAndKeys:
+							  [NSNumber numberWithFloat:vecX1], @"x",
+							  [NSNumber numberWithFloat:vecY1], @"y",
+							  [NSNumber numberWithFloat:vecZ1], @"z", nil], @"min",
+							 [NSDictionary dictionaryWithObjectsAndKeys:
+							  [NSNumber numberWithFloat:vecX2], @"x",
+							  [NSNumber numberWithFloat:vecY2], @"y",
+							  [NSNumber numberWithFloat:vecZ2], @"z", nil], @"max",
 							 [NSNumber numberWithUnsignedChar:boxIsValid], @"isValid",
 							 nil];
 		[current setValue:box forKey:[attrib valueForKey:@"name"]];

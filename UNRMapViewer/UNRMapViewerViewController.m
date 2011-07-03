@@ -28,10 +28,11 @@
 		return;
 	}
 	
-	if(!aContext)
+	if(!aContext){
 		NSLog(@"Failed to create ES context");
-	else if(![EAGLContext setCurrentContext:aContext])
+	}else if(![EAGLContext setCurrentContext:aContext]){
 		NSLog(@"Failed to set ES context current");
+	}
 	
 	self.context = aContext;
 	[aContext release];
@@ -45,10 +46,17 @@
 	animating = FALSE;
 	animationFrameInterval = 2;
 	self.displayLink = nil;
-	glEnable(GL_DEPTH_TEST);
+	
+	//glEnable(GL_DEPTH_TEST);
 	glEnable(GL_STENCIL_TEST);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_FRONT);
 	glClearColor(0.1f, 0.5f, 0.5f, 1.0f);
 	glClearStencil(0);
+	//glClearDepthf(1.0f);
+	//glDepthRangef(-1.0f, 1.0f);
+	
+	[EAGLContext setCurrentContext:nil];
 }
 
 - (void)dealloc{
@@ -90,8 +98,8 @@
 
 - (void)viewDidUnload{
 	[super viewDidUnload];
-	[self.map release];
-	[self.file release];
+	self.map = nil;
+	self.file = nil;
 	// Tear down context.
 	if([EAGLContext currentContext] == context)
 		[EAGLContext setCurrentContext:nil];
@@ -123,6 +131,10 @@
 		[aDisplayLink setFrameInterval:animationFrameInterval];
 		[aDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 		self.displayLink = aDisplayLink;
+		
+		if(![EAGLContext setCurrentContext:self.context]){
+			NSLog(@"Failed to set ES context current");
+		}
 		
 		animating = TRUE;
 		EAGLView *view = (EAGLView *)self.view;
@@ -160,14 +172,30 @@
 	return NO;
 }
 
-- (void)loadMap:(NSString *)mapPath{
+- (void)loadMap:(NSString *)mapPath withLabel:(UILabel *)label andBar:(UIProgressView *)progress{
+	dispatch_queue_t mainThread = dispatch_get_main_queue();
+	if(![EAGLContext setCurrentContext:self.context]){
+		NSLog(@"Failed to set ES context current");
+	}
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	dispatch_async(mainThread, ^(void){
+		label.text = @"Loading map...";
+		progress.progress = 0.1f;
+	});
 	UNRFile *file = [[UNRFile alloc] initWithFileData:[NSData dataWithContentsOfMappedFile:mapPath] pluginsDirectory:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Default Plugins"]];
 	self.file = file;
 	[file release];
+	dispatch_async(mainThread, ^(void){
+		label.text = @"Resolving references...";
+		progress.progress = 0.2f;
+	});
 	[self.file resolveImportReferences:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Maps/Depend"]];
 	[pool drain];
 	pool = [[NSAutoreleasePool alloc] init];
+	dispatch_async(mainThread, ^(void){
+		label.text = @"Finding level...";
+		progress.progress = 0.3f;
+	});
 	NSMutableDictionary *level = nil;
 	for(UNRExport *obj in self.file.objects){
 		if([obj.classObj.name.string isEqualToString:@"Level"]){
@@ -176,13 +204,27 @@
 		}
 	}
 	
+	[pool drain];
+	pool = [[NSAutoreleasePool alloc] init];
+	
+	dispatch_async(mainThread, ^(void){
+		label.text = @"Loading level...";
+		progress.progress = 0.4f;
+	});
 	if(level){
-		UNRMap *theMap = [[UNRMap alloc] initWithLevel:level andFile:self.file];
+		UNRMap *theMap = [[UNRMap alloc] initWithLevel:level andFile:self.file label:label progress:progress];
 		self.map = theMap;
 		[theMap release];
 	}
 	self.file = nil;
 	[pool drain];
+	dispatch_async(mainThread, ^(void){
+		label.text = @"Done.";
+		progress.progress = 1.0f;
+	});
+	if(![EAGLContext setCurrentContext:nil]){
+		NSLog(@"Failed to release current EAGL context");
+	}
 	/*self.file = [[UNRFile alloc] initWithFileData:[NSData dataWithContentsOfFile:mapPath] pluginsDirectory:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Default Plugins"]];
 	[self.file resolveImportReferences:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Maps/Depend"]];
 	for(UNRExport *obj in self.file.objects){

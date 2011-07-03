@@ -33,6 +33,6 @@
 - (void)startAnimation;
 - (void)stopAnimation;
 
-- (void)loadMap:(NSString *)mapPath;
+- (void)loadMap:(NSString *)mapPath withLabel:(UILabel *)label andBar:(UIProgressView *)progress;
 
 @end

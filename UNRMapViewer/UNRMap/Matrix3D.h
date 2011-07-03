@@ -16,6 +16,7 @@
 typedef float Matrix3D[16];
 
 void Matrix3DIdentity(Matrix3D mat);
+void Matrix3DCopy(Matrix3D mat, Matrix3D res);
 void Matrix3DTranspose(Matrix3D mat);
 void Matrix3DMultiply(Matrix3D mat1, Matrix3D mat2, Matrix3D res);
 void Matrix3DMultEqual(Matrix3D mat1, Matrix3D mat2);

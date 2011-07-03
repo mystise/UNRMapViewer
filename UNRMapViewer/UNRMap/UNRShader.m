@@ -61,10 +61,12 @@
 		}
 		
 		// Release vertex and fragment shaders.
-		if(vshader)
+		if(vshader){
 			glDeleteShader(vshader);
-		if(fshader)
+		}
+		if(fshader){
 			glDeleteShader(fshader);
+		}
 	}
 	return self;
 }
@@ -115,6 +117,7 @@
 	if(logLength > 0){
 		GLchar *log = (GLchar *)malloc(logLength);
 		glGetProgramInfoLog(self.program, logLength, &logLength, log);
+		log[logLength-1] = 0x00;
 		NSLog(@"Program link log:\n\t%s", log);
 		free(log);
 	}

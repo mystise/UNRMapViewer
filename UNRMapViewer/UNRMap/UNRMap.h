@@ -6,6 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
 @class UNRFile, UNRNode, UNRCubeCamera, UNRCamera;
@@ -14,9 +15,8 @@
 	
 }
 
-- (id)initWithLevel:(NSMutableDictionary *)level andFile:(UNRFile *)file;
+- (id)initWithLevel:(NSMutableDictionary *)level andFile:(UNRFile *)file label:(UILabel *)label progress:(UIProgressView *)progress;
 - (void)draw:(float)aspect withTimestep:(float)dt;
-- (void)drawCubeMap:(float)dt;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;

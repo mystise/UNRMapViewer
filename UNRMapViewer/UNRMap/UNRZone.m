@@ -17,7 +17,8 @@
 	self = [super init];
 	if(self){
 		self.zoneIndex = zoneIndex;
-		self.visibility = [[zone valueForKey:@"visibility"] longLongValue];
+		//self.visibility = [[zone valueForKey:@"visibility"] longLongValue];
+		self.visibility = [[zone valueForKey:@"connectivity"] longLongValue];
 		self.connectivity = [[zone valueForKey:@"connectivity"] longLongValue];
 	}
 	return self;
@@ -29,6 +30,10 @@
 
 - (BOOL)isVisibleFromZone:(UNRZone *)zone{
 	return (zone.visibility & (1<<self.zoneIndex))!=0;
+}
+
+- (NSString *)description{
+	return [NSString stringWithFormat:@"<UNRZone:%i Connect:%x>", self.zoneIndex, self.connectivity];
 }
 
 @end

@@ -186,7 +186,7 @@
 	NSString *filePath;
 	while((filePath = [directEnum nextObject]) != nil){
 		NSString *fileName = [[[filePath lastPathComponent] stringByDeletingPathExtension] lowercaseString];
-		[files setValue:filePath forKey:fileName];
+		[files setValue:[path stringByAppendingPathComponent:filePath] forKey:fileName];
 	}
 	
 	[resManager release];
@@ -196,7 +196,7 @@
 		if([import.className.string isEqualToString:@"Package"] && import.package == nil){
 			NSString *filePath = [files valueForKey:[import.name.string lowercaseString]];
 			if(filePath != nil){
-				NSData *dat = [NSData dataWithContentsOfFile:[path stringByAppendingPathComponent:filePath]];
+				NSData *dat = [NSData dataWithContentsOfFile:filePath];
 				UNRFile *file = [[UNRFile alloc] initWithFileData:dat pluginsDirectory:nil];
 				file.pluginLoader = self.pluginLoader;
 				if(file != nil){

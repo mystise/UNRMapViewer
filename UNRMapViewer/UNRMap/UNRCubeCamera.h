@@ -21,10 +21,9 @@
 }
 
 - (void)updateWithTimestep:(float)dt;
-- (void)drawWithRootNode:(UNRNode *)rootNode camera:(UNRCamera *)cam;
+- (void)drawWithRootNode:(UNRNode *)rootNode camera:(UNRCamera *)cam projMat:(Matrix3D)projection;
 
-@property(nonatomic, assign) Vector3D camPos;
-@property(nonatomic, assign) float rotX, rotY, rotZ;
+@property(nonatomic, retain) UNRCamera *cam;
 @property(nonatomic, assign) float drX, drY, drZ;
 
 @end

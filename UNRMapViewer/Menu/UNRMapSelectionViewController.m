@@ -9,6 +9,8 @@
 #import "UNRMapSelectionViewController.h"
 #import "UNRMapViewerViewController.h"
 
+#import <dispatch/dispatch.h>
+
 @implementation UNRMapSelectionViewController
 
 @synthesize maps = maps_, mapViewController = mapViewController_;
@@ -122,20 +124,43 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-	/*UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Loading..." message:@"" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
-	UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-	activity.contentMode = UIViewContentModeCenter;
-	[alert addSubview:activity];
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Loading..." message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+	UIProgressView *progress = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+	UILabel *label = [[UILabel alloc] init];
+	//UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	//activity.contentMode = UIViewContentModeCenter;
+	//[alert addSubview:activity];
+	[alert addSubview:progress];
+	[alert addSubview:label];
 	[alert show];
-	[activity startAnimating];*/
+	//[activity startAnimating];
+	CGRect alertFrame = alert.bounds;
+	//const float actSize = 10.0f;
+	const float disp = 10.0f;
+	label.frame = CGRectMake(disp, alertFrame.size.height-disp*6.0f, alertFrame.size.width-2*disp, 25.0f);
+	label.text = @"Hello...";
+	label.opaque = NO;
+	label.backgroundColor = [UIColor clearColor];
+	//[label setB]
+	progress.frame = CGRectMake(disp, alertFrame.size.height-disp*3.0f, alertFrame.size.width-2*disp, disp);
+	//activity.frame = CGRectMake(alertFrame.size.width*0.5f-actSize*0.5f, alertFrame.size.height-actSize*5.0f, actSize, actSize);
 	
-	[self.mapViewController loadMap:[self.maps objectAtIndex:indexPath.row]];
-	[self.mapViewController setAnimationFrameInterval:2];
-	[self presentModalViewController:self.mapViewController animated:YES];
+	dispatch_queue_t loadingQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, (unsigned long)NULL);
 	
-	/*[alert dismissWithClickedButtonIndex:0 animated:YES];
-	[alert release];
-	[activity release];*/
+	dispatch_block_t loadingBlock = ^(void){
+		[self.mapViewController loadMap:[self.maps objectAtIndex:indexPath.row] withLabel:label andBar:progress];
+		[self.mapViewController setAnimationFrameInterval:2];
+		dispatch_block_t finishBlock = ^(void){
+			[self presentModalViewController:self.mapViewController animated:YES];
+			[alert dismissWithClickedButtonIndex:0 animated:YES];
+			[alert release];
+			[progress release];
+			//[activity release];
+		};
+		dispatch_async(dispatch_get_main_queue(), finishBlock);
+	};
+	
+	dispatch_async(loadingQueue, loadingBlock);
 }
 
 @end

@@ -22,7 +22,7 @@ typedef struct{
 	
 }
 
-+ (id)textureWithObject:(UNRExport *)obj;
++ (id)textureWithObject:(UNRExport *)obj attributes:(NSDictionary *)attrib;
 + (id)textureWithLightMap:(NSMutableDictionary *)lightMap data:(NSMutableData *)data lights:(NSMutableArray *)lights node:(UNRNode *)node;
 - (void)bind:(int)index;
 

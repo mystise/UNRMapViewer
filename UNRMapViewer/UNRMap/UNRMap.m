@@ -43,7 +43,15 @@
 			label.text = @"Loading nodes...";
 			progress.progress = 0.5f;
 		});
-		UNRNode *node = [[UNRNode alloc] initWithModel:model nodeNumber:0 file:file map:self];
+		NSMutableDictionary *attrib = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+									   [[model valueForKey:@"vectors"] valueForKey:@"vector"], @"vectors",
+									   [[model valueForKey:@"points"] valueForKey:@"point"], @"points",
+									   [model valueForKey:@"verts"], @"verts",
+									   [[model valueForKey:@"lights"] valueForKey:@"light"], @"lights",
+									   self, @"map",
+									   [NSNumber numberWithInt:0], @"iNode",
+									   nil];
+		UNRNode *node = [[UNRNode alloc] initWithModel:model attributes:attrib];//nodeNumber:0 file:file map:self
 		self.rootNode = node;
 		[node release];
 		
@@ -111,6 +119,8 @@
 				camPos.z = [manager loadFloat];
 				//camPos = Vector3DMultiply(camPos, 0.1f);
 				self.cubeMap.cam.pos = camPos;
+				self.cubeMap.cam.up = Vector3DCreate(0.0f, 0.0f, 1.0f);
+				self.cubeMap.cam.look = Vector3DCreate(0.0f, 1.0f, 0.0f);
 				//self.cam.pos = camPos;
 			}else if([prop.name.string isEqualToString:@"RotationRate"]){
 				self.cubeMap.drX = [manager loadInt]*45/8192;

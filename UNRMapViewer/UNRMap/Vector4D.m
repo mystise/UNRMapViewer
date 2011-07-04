@@ -63,7 +63,7 @@ Vector4D Vector4DNormalize(Vector4D vec){
 }
 
 float Vector4DDistance(Vector4D plane, Vector3D point){
-	return plane.x*point.x + plane.y*point.y + plane.z*point.z + plane.w;
+	return plane.x*point.x + plane.y*point.y + plane.z*point.z - plane.w;
 }
 
 void Vector4DAddEqual(Vector4D *vec1, Vector4D vec2){

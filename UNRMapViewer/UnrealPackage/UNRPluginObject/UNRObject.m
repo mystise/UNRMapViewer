@@ -23,7 +23,10 @@
 		self.currentCommands = [NSMutableArray array];
 		self.file = newFile;
 		self.obj = newObj;
-		self.manager = [[[DataManager alloc] initWithFileData:newObj.data] autorelease];
+		DataManager *manager = [[DataManager alloc] initWithFileData:newObj.data];
+		self.manager = manager;
+		[manager release];
+		manager = nil;
 	}
 	return self;
 }
@@ -61,8 +64,7 @@
 	id current = [self.currentData lastObject];
 	[self processArray:@"addLongWithAttributes:" attribs:attrib];
 	if(![current isKindOfClass:[NSNull class]]){
-		//Crashes on ipad in release mode, why???
-		NSNumber *value = [NSNumber numberWithLong:[self.manager loadLong]];
+		NSNumber *value = [NSNumber numberWithLongLong:[self.manager loadLong]];
 		[current setValue:value forKey:[attrib valueForKey:@"name"]];
 	}
 }

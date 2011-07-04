@@ -34,16 +34,23 @@ enum{
 @synthesize frontZone = frontZone_, backZone = backZone_;
 @synthesize renderBox = renderBox_;
 
-- (id)initWithModel:(NSMutableDictionary *)model nodeNumber:(int)nodeNum file:(UNRFile *)file map:(UNRMap *)map{
+- (id)initWithModel:(NSMutableDictionary *)model attributes:(NSMutableDictionary *)attrib{//nodeNumber:(int)nodeNum file:(UNRFile *)file map:(UNRMap *)map
 	self = [super init];
 	if(self){
-		NSMutableArray *vectors = [[model valueForKey:@"vectors"] valueForKey:@"vector"];
-		NSMutableArray *points = [[model valueForKey:@"points"] valueForKey:@"point"];
-		NSMutableArray *verticies = [model valueForKey:@"verts"];
-		NSMutableDictionary *node = [[model valueForKey:@"nodes"] objectAtIndex:nodeNum];
+		UNRMap *map = [attrib valueForKey:@"map"];
+		NSMutableArray *vectors = [attrib valueForKey:@"vectors"];
+		NSMutableArray *points = [attrib valueForKey:@"points"];
+		NSMutableArray *verticies = [attrib valueForKey:@"verts"];
+		NSMutableArray *lights = [attrib valueForKey:@"lights"];
+		//NSMutableArray *lights = [[model valueForKey:@"lights"] valueForKey:@"light"];
+		//NSMutableArray *vectors = [[model valueForKey:@"vectors"] valueForKey:@"vector"];
+		//NSMutableArray *points = [[model valueForKey:@"points"] valueForKey:@"point"];
+		//NSMutableArray *verticies = [model valueForKey:@"verts"];
+		NSMutableDictionary *node = [[model valueForKey:@"nodes"] objectAtIndex:[[attrib valueForKey:@"iNode"] intValue]];
 		NSMutableDictionary *surf = [[model valueForKey:@"surfs"] objectAtIndex:[[node valueForKey:@"iSurf"] intValue]];
+		
 		self.surfFlags = [[surf valueForKey:@"polyFlags"] intValue];
-		if(!(self.surfFlags & (PF_Translucent|PF_Modulated))){
+		if(!(self.surfFlags & PF_NoOcclude)){
 			self.surfFlags |= PF_Occlude;
 		}
 		if(self.surfFlags & PF_Translucent){
@@ -89,7 +96,7 @@ enum{
 			}
 			if([map.lightMaps valueForKey:[NSString stringWithFormat:@"%i", lightIndex]] == nil){
 				NSMutableData *lightData = [model valueForKey:@"LightBits"];
-				UNRTexture *lighting = [UNRTexture textureWithLightMap:lightMap data:lightData lights:[[model valueForKey:@"lights"] valueForKey:@"light"] node:self];
+				UNRTexture *lighting = [UNRTexture textureWithLightMap:lightMap data:lightData lights:lights node:self];
 				[map.lightMaps setValue:lighting forKey:[NSString stringWithFormat:@"%i", lightIndex]];
 				self.lightMap = lighting;
 			}else{
@@ -247,19 +254,22 @@ enum{
 		int planeInd = [[node valueForKey:@"iPlane"] intValue];
 		
 		if(planeInd != -1){
-			UNRNode *plane = [[UNRNode alloc] initWithModel:model nodeNumber:planeInd file:file map:map];
+			[attrib setValue:[NSNumber numberWithInt:planeInd] forKey:@"iNode"];
+			UNRNode *plane = [[UNRNode alloc] initWithModel:model attributes:attrib];//nodeNumber:planeInd file:file map:map
 			self.coPlanar = plane;
 			[plane release];
 		}
 		
 		if(frontInd != -1){
-			UNRNode *front = [[UNRNode alloc] initWithModel:model nodeNumber:frontInd file:file map:map];
+			[attrib setValue:[NSNumber numberWithInt:frontInd] forKey:@"iNode"];
+			UNRNode *front = [[UNRNode alloc] initWithModel:model attributes:attrib];//nodeNumber:frontInd file:file map:map
 			self.front = front;
 			[front release];
 		}
 		
 		if(backInd != -1){
-			UNRNode *back = [[UNRNode alloc] initWithModel:model nodeNumber:backInd file:file map:map];
+			[attrib setValue:[NSNumber numberWithInt:backInd] forKey:@"iNode"];
+			UNRNode *back = [[UNRNode alloc] initWithModel:model attributes:attrib];//nodeNumber:backInd file:file map:map
 			self.back = back;
 			[back release];
 		}
@@ -276,10 +286,10 @@ enum{
 	
 	[self.shader use];
 	
-	[self drawWithState:state matrix:mat camPos:camPos];
+	[self drawWithState:state matrix:mat camPos:&camPos];
 }
 
-- (void)drawWithState:(NSMutableDictionary *)state matrix:(Matrix3D)mat camPos:(Vector3D)camPos{
+- (void)drawWithState:(NSMutableDictionary *)state matrix:(Matrix3D)mat camPos:(Vector3D *)camPos{
 	/*#if defined(DEBUG)
 	 if(![self.shader validate]){
 	 NSLog(@"Failed to validate program: %d", self.shader.program);
@@ -295,24 +305,29 @@ enum{
 	
 	BOOL shouldDraw = YES;
 	
-	/*if([[state valueForKey:@"shouldBoundTest"] boolValue] == YES){
-	 //do the bounding box test, only draw if it succedes, set the shouldBoundTest to whether it fully passed, or only partly passed
-	 CollType culling = [self.renderBox classify:mat];
-	 if(culling == C_In){
-	 [state setValue:[NSNumber numberWithBool:NO] forKey:@"shouldBoundTest"];
-	 }else if(culling == C_Out){
-	 shouldDraw = NO;
-	 }
-	 }*/
+	if([[state valueForKey:@"shouldBoundTest"] boolValue] == YES){
+		//do the bounding box test, only draw if it succedes, set the shouldBoundTest to whether it fully passed, or only partly passed
+		CollType culling = [self.renderBox classify:mat];
+		if(culling == C_In){
+			[state setValue:[NSNumber numberWithBool:NO] forKey:@"shouldBoundTest"];
+		}else if(culling == C_Out){
+			shouldDraw = NO;
+		}
+	}
 	
 	if(shouldDraw){
-		
-		float dist = Vector3DDot(self.normal, Vector3DSubtract(camPos, self.origin));
-		//float dist2 = Vector4DDistance(self.plane, camPos);
-		if(dist <= 0.0f){
-			[self.front drawWithState:state matrix:mat camPos:camPos];
-		}else{
-			[self.back drawWithState:state matrix:mat camPos:camPos];
+		BOOL isCoplanar = [[state valueForKey:@"isCoplane"] boolValue];
+		//float dist = Vector3DDot(self.normal, Vector3DSubtract(*camPos, self.origin));
+		float dist = Vector4DDistance(self.plane, *camPos);
+		//if(self.surfFlags & (PF_Modulated | PF_Masked | PF_Translucent)){
+		dist = -dist;
+		//}
+		if(!isCoplanar){
+			if(dist > 0.0f){
+				[self.front drawWithState:state matrix:mat camPos:camPos];
+			}else{
+				[self.back drawWithState:state matrix:mat camPos:camPos];
+			}
 		}
 		
 		if((self.surfFlags & PF_Invisible) != PF_Invisible){
@@ -320,11 +335,6 @@ enum{
 			
 			GLuint matrix = [self.shader uniformLocation:@"modelViewProjection"];
 			glUniformMatrix4fv(matrix, 1, GL_FALSE, mat);
-			//[state setValue:[NSNumber numberWithUnsignedInt:(unsigned int)mat] forKey:@"matrix"];
-			
-			//if([[state valueForKey:@"shader"] unsignedIntValue] != self.shader.program){
-			//	[self.shader use];
-			//}
 			
 			if((self.surfFlags & PF_FakeBackdrop) != PF_FakeBackdrop){
 				if([[state valueForKey:@"texture"] unsignedIntValue] != self.tex.glTex){
@@ -345,10 +355,12 @@ enum{
 		
 		[self.coPlanar drawWithState:state matrix:mat camPos:camPos];
 		
-		if(dist <= 0.0f){
-			[self.back drawWithState:state matrix:mat camPos:camPos];
-		}else{
-			[self.front drawWithState:state matrix:mat camPos:camPos];
+		if(!isCoplanar){
+			if(dist > 0.0f){
+				[self.back drawWithState:state matrix:mat camPos:camPos];
+			}else{
+				[self.front drawWithState:state matrix:mat camPos:camPos];
+			}
 		}
 	}
 }
@@ -359,7 +371,6 @@ enum{
 	//setup stuff
 	
 	if(changed & PF_FakeBackdrop){
-		//TODO: find a way to draw the skybox with depth testing on.
 		if(self.surfFlags & PF_FakeBackdrop){
 			glStencilOp(GL_ZERO, GL_ZERO, GL_REPLACE);
 		}else{
@@ -368,25 +379,19 @@ enum{
 	}
 	
 	if(changed & (PF_Translucent | PF_Modulated | PF_Masked)){
-		glEnable(GL_BLEND);
-		if(self.surfFlags & PF_Translucent){
-			glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
-		}else if(self.surfFlags & PF_Modulated){
-			glBlendFunc(GL_DST_COLOR, GL_SRC_COLOR);
-		}else if(self.surfFlags & PF_Masked){
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		if(self.surfFlags & (PF_Translucent | PF_Modulated | PF_Masked)){
+			glEnable(GL_BLEND);
+			if(self.surfFlags & PF_Translucent){
+				glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+			}else if(self.surfFlags & PF_Modulated){
+				glBlendFunc(GL_DST_COLOR, GL_SRC_COLOR);
+			}else if(self.surfFlags & PF_Masked){
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			}
 		}else{
 			glDisable(GL_BLEND);
 		}
 	}
-	
-	/*if(changed & PF_Occlude){
-	 glDepthMask((self.surfFlags & PF_Occlude) != 0);
-	 }
-	 
-	 if(changed & PF_NoOcclude){
-	 glDepthMask((self.surfFlags & PF_NoOcclude) == 0);
-	 }*/
 	
 	if(changed & PF_TwoSided){
 		if(self.surfFlags & PF_TwoSided){
@@ -394,6 +399,10 @@ enum{
 		}else{
 			glEnable(GL_CULL_FACE);
 		}
+	}
+	
+	if(changed & (PF_Occlude | PF_NoOcclude)){
+		glDepthMask((self.surfFlags & PF_Occlude) != 0);
 	}
 	
 	[state setValue:[NSNumber numberWithInt:self.surfFlags] forKey:@"flags"];

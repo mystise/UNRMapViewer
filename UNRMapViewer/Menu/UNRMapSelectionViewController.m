@@ -26,6 +26,7 @@
 
 - (void)awakeFromNib{
 	NSMutableArray *mapNames = [[[NSBundle mainBundle] pathsForResourcesOfType:@"unr" inDirectory:@"Maps"] mutableCopy];
+	[mapNames addObjectsFromArray:[[NSBundle mainBundle] pathsForResourcesOfType:@"nrf" inDirectory:@"Maps"]];
 	self.maps = mapNames;
 	[mapNames release];
 }
@@ -116,7 +117,7 @@
     }
     
     // Configure the cell...
-	cell.textLabel.text = [[[self.maps objectAtIndex:indexPath.row] lastPathComponent] stringByDeletingPathExtension];
+	cell.textLabel.text = [[self.maps objectAtIndex:indexPath.row] lastPathComponent];
     
     return cell;
 }

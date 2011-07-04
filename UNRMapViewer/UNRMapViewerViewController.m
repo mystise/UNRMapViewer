@@ -161,8 +161,8 @@
 	[self.map draw:self.aspect withTimestep:animationFrameInterval/60.0f];
 	
 	[(EAGLView *)self.view presentFramebuffer];
-	const GLenum attachments[] = {GL_COLOR_ATTACHMENT0, GL_DEPTH_ATTACHMENT, GL_STENCIL_ATTACHMENT};
-	glDiscardFramebufferEXT(GL_RENDERBUFFER, 3, attachments);
+	const GLenum attachments[] = {GL_COLOR_ATTACHMENT0, GL_STENCIL_ATTACHMENT}; //, GL_DEPTH_ATTACHMENT
+	glDiscardFramebufferEXT(GL_FRAMEBUFFER, 2, attachments);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
@@ -197,7 +197,8 @@
 		progress.progress = 0.3f;
 	});
 	NSMutableDictionary *level = nil;
-	for(UNRExport *obj in self.file.objects){
+	for(int i = [self.file.objects count]-1; i >= 0; i--){
+		UNRExport *obj = [self.file.objects objectAtIndex:i];
 		if([obj.classObj.name.string isEqualToString:@"Level"]){
 			[obj loadPlugin:self.file];
 			level = obj.objectData;

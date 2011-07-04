@@ -46,7 +46,6 @@
 		GLuint glTex = 0;
 		glGenTextures(1, &glTex);
 		tex.glTex = glTex;
-		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, tex.glTex);
 		
 		tex.width = [[[[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:0] valueForKey:@"width"] intValue];
@@ -346,7 +345,7 @@ void printLightType(int lType){
 //					printf("\tfailed!!! not enough data!\n");
 //				}
 			}else{
-				GLubyte texDat = 0xFF;
+				GLubyte texDat = 0x00;
 				glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
 				printf("very dark...\n");
 			}
@@ -355,9 +354,6 @@ void printLightType(int lType){
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
 			printf("unlit.\n");
 		}
-		
-		glPixelStorei(GL_PACK_ALIGNMENT, 4);
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 	}
 	return [tex autorelease];
 }

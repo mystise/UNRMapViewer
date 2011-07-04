@@ -11,12 +11,12 @@
 
 @implementation DataManager
 
-@synthesize fileData, curPos;
+@synthesize fileData = fileData_, curPos = curPos_;
 
 - (id)initWithFileData:(NSData *)data{
 	self = [super init];
 	if(self){
-		fileData = [data retain];
+		fileData_ = [data retain];
 		self.curPos = 0;
 	}
 	return self;
@@ -24,7 +24,7 @@
 
 - (void)setCurPos:(unsigned int)newCurPos{
 	if(newCurPos <= [self.fileData length]){
-		curPos = newCurPos;
+		curPos_ = newCurPos;
 	}else{
 		printf("Error! Offset is past the end of the file!");
 	}
@@ -35,8 +35,8 @@
 }
 
 - (BOOL)endOfFile{
-	if(self.curPos >= [fileData length]){
-		self.curPos = [fileData length];
+	if(self.curPos >= [self.fileData length]){
+		self.curPos = [self.fileData length];
 		return YES;
 	}
 	return NO;
@@ -74,7 +74,7 @@
 
 - (long)loadLong{
 	if(![self endOfFile] && [self distanceToEOF] >= 8){
-		long data;
+		long long data;
 		[self.fileData getBytes:(void *)&data range:NSMakeRange(self.curPos, 8)];
 		self.curPos += 8;
 		return data;
@@ -93,7 +93,8 @@
 }
 
 - (void)dealloc{
-	[fileData release];
+	[fileData_ release];
+	fileData_ = nil;
 	[super dealloc];
 }
 

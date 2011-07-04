@@ -26,10 +26,10 @@
 	
 }
 
-- (id)initWithModel:(NSMutableDictionary *)model nodeNumber:(int)nodeNum file:(UNRFile *)file map:(UNRMap *)map;
+- (id)initWithModel:(NSMutableDictionary *)model attributes:(NSMutableDictionary *)attrib;//nodeNumber:(int)nodeNum file:(UNRFile *)file map:(UNRMap *)map
 
 - (void)drawWithMatrix:(Matrix3D)mat camPos:(Vector3D)camPos; //rootNode
-- (void)drawWithState:(NSMutableDictionary *)state matrix:(Matrix3D)mat camPos:(Vector3D)camPos; //any subNode
+- (void)drawWithState:(NSMutableDictionary *)state matrix:(Matrix3D)mat camPos:(Vector3D *)camPos; //any subNode
 
 - (UNRZone *)zoneForCamera:(Vector3D)camPos;
 

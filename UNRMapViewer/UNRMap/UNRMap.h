@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
+
+#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES2/glext.h>
 
 @class UNRFile, UNRNode, UNRCubeCamera, UNRCamera;
 
@@ -32,5 +34,6 @@
 @property(nonatomic, retain) NSMutableDictionary *zones;
 @property(nonatomic, retain) NSMutableDictionary *actors;
 @property(nonatomic, assign) CGPoint stickPos, stickPrevPos, lookPos, lookPrevPos;
+//@property(nonatomic, assign) GLuint mapVbo;
 
 @end

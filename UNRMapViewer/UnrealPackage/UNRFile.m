@@ -42,9 +42,6 @@
 		self.pluginLoader = loader;
 		[loader release];
 		
-		self.objects = [NSMutableArray array];
-		self.names = [NSMutableArray array];
-		self.references = [NSMutableArray array];
 		self.generations = [NSMutableArray array];
 		self.version = [NSNumber numberWithInt:0];
 		self.licensee = [NSNumber numberWithInt:0];
@@ -95,6 +92,10 @@
 				[self.generations addObject:[UNRGeneration generationWithManager:manager]];
 			}
 		}
+		
+		self.objects = [NSMutableArray arrayWithCapacity:exportCount];
+		self.names = [NSMutableArray arrayWithCapacity:nameCount];
+		self.references = [NSMutableArray arrayWithCapacity:importCount];
 		
 		manager.curPos = nameOffset;
 		
@@ -176,7 +177,7 @@
 			break;
 		}
 	}
-	return (negative)?final*-1:final;
+	return (negative)?-final:final;
 }
 
 - (void)resolveImportReferences:(NSString *)path{
@@ -196,7 +197,7 @@
 		if([import.className.string isEqualToString:@"Package"] && import.package == nil){
 			NSString *filePath = [files valueForKey:[import.name.string lowercaseString]];
 			if(filePath != nil){
-				NSData *dat = [NSData dataWithContentsOfFile:filePath];
+				NSData *dat = [NSData dataWithContentsOfMappedFile:filePath];
 				UNRFile *file = [[UNRFile alloc] initWithFileData:dat pluginsDirectory:nil];
 				file.pluginLoader = self.pluginLoader;
 				if(file != nil){
@@ -217,86 +218,32 @@
 				package = package.package;
 			}
 			UNRFile *file = [subFiles objectForKey:package.name.string];
-			NSArray *objNames = [[file.objects valueForKeyPath:@"name.string"] retain];
-			NSArray *classNames = [[file.objects valueForKeyPath:@"classObj.name.string"] retain];
-			int index = 0;
-			for(int i = 0; i < [objNames count]; i++){
-				NSString *name = [objNames objectAtIndex:i];
-				NSString *className = [classNames objectAtIndex:i];
-				if(name != (NSString *)[NSNull null] && className != (NSString *)[NSNull null]){
-					if([[name lowercaseString] isEqualToString:[import.name.string lowercaseString]] && [[className lowercaseString] isEqualToString:[import.className.string lowercaseString]]){
-						index = i;
-						break;
-					}
-				}
+			if(file){
+				/*NSArray *objNames = [[file.objects valueForKeyPath:@"name.string"] retain];
+				 NSArray *classNames = [[file.objects valueForKeyPath:@"classObj.name.string"] retain];
+				 int index = 0;
+				 for(int i = 0; i < [objNames count]; i++){
+				 NSString *name = [objNames objectAtIndex:i];
+				 NSString *className = [classNames objectAtIndex:i];
+				 if(name != (NSString *)[NSNull null] && className != (NSString *)[NSNull null]){
+				 if([[name lowercaseString] isEqualToString:[import.name.string lowercaseString]] && [[className lowercaseString] isEqualToString:[import.className.string lowercaseString]]){
+				 index = i;
+				 break;
+				 }
+				 }
+				 }
+				 [objNames release];
+				 [classNames release];
+				 import.obj = [file.objects objectAtIndex:index];*/
+				NSPredicate *pred = [NSPredicate predicateWithFormat:@"name.string == %@ && classObj.name.string == %@", import.name.string, import.className.string];
+				NSArray *filteredObj = [file.objects filteredArrayUsingPredicate:pred];
+				import.obj = [filteredObj lastObject];
+				[import.obj loadPlugin:file];
 			}
-			[objNames release];
-			[classNames release];
-			import.obj = [file.objects objectAtIndex:index];
-			[import.obj loadPlugin:file];
 		}
 	}
 	[subFiles release];
 }
-
-/*- (NSData *)dataFromFile{
- NSMutableData *data = [NSMutableData data];
- 
- //write header
- 
- for(UNRExport *obj in objects){
- [data appendData:[obj dataFromExport]];
- }
- 
- for(UNRImport *obj in references){
- [data appendData:[obj dataFromImport]];
- }
- 
- for(UNRName *name in names){
- [data appendData:[name dataFromName]];
- }
- //then do data from the exports object data
- 
- return [[data copy] autorelease];
- }
- 
- + (NSData *)writeCompactIndex:(int)index{
- NSMutableData *data = [NSMutableData data];
- Byte negative = 0x00;
- if(index < 0){
- negative = 0x80;
- }
- Byte length;
- if(index < pow(2.0f, 6.0f)){ //6 bit
- length = 1;
- }else if(index < pow(2.0f, 13.0f)){ //13 bit
- length = 2;
- }else if(index < pow(2.0f, 20.0f)){ //20 bit
- length = 3;
- }else if(index < pow(2.0f, 27.0f)){//27 bit
- length = 4;
- }else{//35 bit
- length = 5;
- }
- 
- Byte *indexData = malloc(sizeof(Byte)*length);
- 
- for(int i = 0; i < length; i++){
- Byte loadNext = 0x00;
- if(i+1 < length){
- loadNext = 0x80;
- }
- if(i == 0){
- indexData[i] = negative | (loadNext>>1) | (index&0x3F);
- }else{
- indexData[i] = loadNext | ((index>>(6+7*(i-1)))&0x7F);
- }
- }
- 
- [data appendBytes:(const void *)indexData length:length];
- 
- return [[data copy] autorelease];
- }*/
 
 - (void)dealloc{
 	[names_ release];

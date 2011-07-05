@@ -37,6 +37,8 @@ enum{
 - (id)initWithModel:(NSMutableDictionary *)model attributes:(NSMutableDictionary *)attrib{//nodeNumber:(int)nodeNum file:(UNRFile *)file map:(UNRMap *)map
 	self = [super init];
 	if(self){
+		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+		
 		UNRMap *map = [attrib valueForKey:@"map"];
 		NSMutableArray *vectors = [attrib valueForKey:@"vectors"];
 		NSMutableArray *points = [attrib valueForKey:@"points"];
@@ -50,12 +52,6 @@ enum{
 		NSMutableDictionary *surf = [[model valueForKey:@"surfs"] objectAtIndex:[[node valueForKey:@"iSurf"] intValue]];
 		
 		self.surfFlags = [[surf valueForKey:@"polyFlags"] intValue];
-		if(!(self.surfFlags & PF_NoOcclude)){
-			self.surfFlags |= PF_Occlude;
-		}
-		if(self.surfFlags & PF_Translucent){
-			self.surfFlags &= ~PF_Masked;
-		}
 		
 		self.origin = Vector3DCreateWithDictionary([points objectAtIndex:[[surf valueForKey:@"pBase"] intValue]]);
 		
@@ -253,6 +249,10 @@ enum{
 		int backInd = [[node valueForKey:@"iBack"] intValue];
 		int planeInd = [[node valueForKey:@"iPlane"] intValue];
 		
+		[pool drain];
+		
+		pool = [[NSAutoreleasePool alloc] init];
+		
 		if(planeInd != -1){
 			[attrib setValue:[NSNumber numberWithInt:planeInd] forKey:@"iNode"];
 			UNRNode *plane = [[UNRNode alloc] initWithModel:model attributes:attrib];//nodeNumber:planeInd file:file map:map
@@ -273,6 +273,8 @@ enum{
 			self.back = back;
 			[back release];
 		}
+		
+		[pool drain];
 	}
 	return self;
 }
@@ -284,7 +286,20 @@ enum{
 	
 	[state setValue:[NSNumber numberWithBool:YES] forKey:@"shouldBoundTest"];
 	
+	[state setValue:[NSNumber numberWithBool:NO] forKey:@"nonSolid"];
+	
 	[self.shader use];
+	
+	GLuint matrix = [self.shader uniformLocation:@"modelViewProjection"];
+	glUniformMatrix4fv(matrix, 1, GL_FALSE, mat);
+	
+	glDisable(GL_BLEND);
+	
+	[self drawWithState:state matrix:mat camPos:&camPos];
+	
+	[state setValue:[NSNumber numberWithBool:YES] forKey:@"nonSolid"];
+	
+	glEnable(GL_BLEND);
 	
 	[self drawWithState:state matrix:mat camPos:&camPos];
 }
@@ -316,25 +331,16 @@ enum{
 	}
 	
 	if(shouldDraw){
-		BOOL isCoplanar = [[state valueForKey:@"isCoplane"] boolValue];
 		//float dist = Vector3DDot(self.normal, Vector3DSubtract(*camPos, self.origin));
 		float dist = Vector4DDistance(self.plane, *camPos);
-		//if(self.surfFlags & (PF_Modulated | PF_Masked | PF_Translucent)){
-		dist = -dist;
-		//}
-		if(!isCoplanar){
-			if(dist > 0.0f){
-				[self.front drawWithState:state matrix:mat camPos:camPos];
-			}else{
-				[self.back drawWithState:state matrix:mat camPos:camPos];
-			}
+		if(dist < 0.0f){
+			[self.front drawWithState:state matrix:mat camPos:camPos];
+		}else{
+			[self.back drawWithState:state matrix:mat camPos:camPos];
 		}
 		
-		if((self.surfFlags & PF_Invisible) != PF_Invisible){
+		if((self.surfFlags & PF_Invisible) != PF_Invisible && [[state valueForKey:@"nonSolid"] boolValue] == ((self.surfFlags & PF_NotSolid) != 0)){//&& !(self.surfFlags & (PF_Modulated | PF_Masked | PF_Translucent))
 			glBindVertexArrayOES(self.vao);
-			
-			GLuint matrix = [self.shader uniformLocation:@"modelViewProjection"];
-			glUniformMatrix4fv(matrix, 1, GL_FALSE, mat);
 			
 			if((self.surfFlags & PF_FakeBackdrop) != PF_FakeBackdrop){
 				if([[state valueForKey:@"texture"] unsignedIntValue] != self.tex.glTex){
@@ -350,28 +356,28 @@ enum{
 			
 			[self setupState:state];
 			
+			//glDrawElements(GL_TRIANGLE_FAN, <#GLsizei count#>, GL_UNSIGNED_SHORT, <#const GLvoid *indices#>);
 			glDrawArrays(GL_TRIANGLE_FAN, 0, self.vertCount);
 		}
 		
 		[self.coPlanar drawWithState:state matrix:mat camPos:camPos];
 		
-		if(!isCoplanar){
-			if(dist > 0.0f){
-				[self.back drawWithState:state matrix:mat camPos:camPos];
-			}else{
-				[self.front drawWithState:state matrix:mat camPos:camPos];
-			}
+		if(dist < 0.0f){
+			[self.back drawWithState:state matrix:mat camPos:camPos];
+		}else{
+			[self.front drawWithState:state matrix:mat camPos:camPos];
 		}
 	}
 }
 
 - (void)setupState:(NSMutableDictionary *)state{
 	int flags = [[state valueForKey:@"flags"] intValue];
-	int changed = self.surfFlags ^ flags;
+	int surfFlags = self.surfFlags;
+	int changed = surfFlags ^ flags;
 	//setup stuff
 	
 	if(changed & PF_FakeBackdrop){
-		if(self.surfFlags & PF_FakeBackdrop){
+		if(surfFlags & PF_FakeBackdrop){
 			glStencilOp(GL_ZERO, GL_ZERO, GL_REPLACE);
 		}else{
 			glStencilOp(GL_ZERO, GL_ZERO, GL_ZERO);
@@ -379,33 +385,24 @@ enum{
 	}
 	
 	if(changed & (PF_Translucent | PF_Modulated | PF_Masked)){
-		if(self.surfFlags & (PF_Translucent | PF_Modulated | PF_Masked)){
-			glEnable(GL_BLEND);
-			if(self.surfFlags & PF_Translucent){
-				glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
-			}else if(self.surfFlags & PF_Modulated){
-				glBlendFunc(GL_DST_COLOR, GL_SRC_COLOR);
-			}else if(self.surfFlags & PF_Masked){
-				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			}
-		}else{
-			glDisable(GL_BLEND);
+		if(surfFlags & PF_Translucent){
+			glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+		}else if(surfFlags & PF_Modulated){
+			glBlendFunc(GL_DST_COLOR, GL_SRC_COLOR);
+		}else if(surfFlags & PF_Masked){
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		}
 	}
 	
 	if(changed & PF_TwoSided){
-		if(self.surfFlags & PF_TwoSided){
+		if(surfFlags & PF_TwoSided){
 			glDisable(GL_CULL_FACE);
 		}else{
 			glEnable(GL_CULL_FACE);
 		}
 	}
 	
-	if(changed & (PF_Occlude | PF_NoOcclude)){
-		glDepthMask((self.surfFlags & PF_Occlude) != 0);
-	}
-	
-	[state setValue:[NSNumber numberWithInt:self.surfFlags] forKey:@"flags"];
+	[state setValue:[NSNumber numberWithInt:surfFlags] forKey:@"flags"];
 }
 
 - (UNRZone *)zoneForCamera:(Vector3D)camPos{

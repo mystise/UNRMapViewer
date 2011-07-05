@@ -47,14 +47,13 @@
 	animationFrameInterval = 2;
 	self.displayLink = nil;
 	
-	//glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_STENCIL_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
 	glClearColor(0.1f, 0.5f, 0.5f, 1.0f);
 	glClearStencil(0);
-	//glClearDepthf(1.0f);
-	//glDepthRangef(-1.0f, 1.0f);
+	glClearDepthf(1.0f);
 	
 	[EAGLContext setCurrentContext:nil];
 }
@@ -78,9 +77,9 @@
 	// Releases the view if it doesn't have a superview.
 	[super didReceiveMemoryWarning];
 	
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Memory alert!" message:@"Alert!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
+	/*UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Memory alert!" message:@"Alert!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
 	[alert show];
-	[alert release];
+	[alert release];*/
 	// Release any cached data, images, etc. that aren't in use.
 }
 
@@ -161,8 +160,8 @@
 	[self.map draw:self.aspect withTimestep:animationFrameInterval/60.0f];
 	
 	[(EAGLView *)self.view presentFramebuffer];
-	const GLenum attachments[] = {GL_COLOR_ATTACHMENT0, GL_STENCIL_ATTACHMENT}; //, GL_DEPTH_ATTACHMENT
-	glDiscardFramebufferEXT(GL_FRAMEBUFFER, 2, attachments);
+	const GLenum attachments[] = {GL_COLOR_ATTACHMENT0, GL_STENCIL_ATTACHMENT, GL_DEPTH_ATTACHMENT};
+	glDiscardFramebufferEXT(GL_FRAMEBUFFER, 3, attachments);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
@@ -191,21 +190,24 @@
 	});
 	[self.file resolveImportReferences:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Maps/Depend"]];
 	[pool drain];
-	pool = [[NSAutoreleasePool alloc] init];
 	dispatch_async(mainThread, ^(void){
 		label.text = @"Finding level...";
 		progress.progress = 0.3f;
 	});
 	NSMutableDictionary *level = nil;
 	for(int i = [self.file.objects count]-1; i >= 0; i--){
+		pool = [[NSAutoreleasePool alloc] init];
 		UNRExport *obj = [self.file.objects objectAtIndex:i];
 		if([obj.classObj.name.string isEqualToString:@"Level"]){
 			[obj loadPlugin:self.file];
-			level = obj.objectData;
+			level = [obj.objectData retain];
+			[pool drain];
+			break;
 		}
+		[pool drain];
 	}
 	
-	[pool drain];
+	
 	pool = [[NSAutoreleasePool alloc] init];
 	
 	dispatch_async(mainThread, ^(void){
@@ -218,6 +220,7 @@
 		[theMap release];
 	}
 	self.file = nil;
+	[level release];
 	[pool drain];
 	dispatch_async(mainThread, ^(void){
 		label.text = @"Done.";

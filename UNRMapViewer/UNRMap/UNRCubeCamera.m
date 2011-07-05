@@ -43,15 +43,11 @@
 	Matrix3D modelView, mat;
 	[newCam getGLData:modelView];
 	[newCam release];
-	//Matrix3DUniformScale(modelView, 0.1f);
 	
 	Matrix3DMultiply(projection, modelView, mat);
 	glStencilFunc(GL_EQUAL, 1, UINT_MAX);
 	glStencilMask(0);
 	Vector3D camPos = self.cam.pos;
-//	camPos.x = -camPos.x;
-//	camPos.y = -camPos.y;
-//	camPos.z = -camPos.z;
 	[rootNode drawWithMatrix:mat camPos:camPos];
 	glStencilFunc(GL_ALWAYS, 1, UINT_MAX);
 	glStencilMask(UINT_MAX);

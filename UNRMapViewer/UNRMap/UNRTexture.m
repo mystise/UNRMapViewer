@@ -290,11 +290,11 @@ void printLightType(int lType){
 								saturation = [manager loadByte];
 							}else if([prop.name.string isEqualToString:@"LightHue"]){
 								hue = [manager loadByte];
-							}else if([prop.name.string isEqualToString:@"LightEffect"]){
+							}/*else if([prop.name.string isEqualToString:@"LightEffect"]){
 								printf("\t");
 								printLightType([manager loadByte]);
 								printf("\n");
-							}else if([prop.name.string isEqualToString:@"LightRadius"]){
+							}*/else if([prop.name.string isEqualToString:@"LightRadius"]){
 								radius = [manager loadByte];
 							}
 							[manager release];
@@ -347,12 +347,12 @@ void printLightType(int lType){
 			}else{
 				GLubyte texDat = 0x00;
 				glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
-				printf("very dark...\n");
+				//printf("very dark...\n");
 			}
 		}else{
 			GLubyte texDat = 0xFF/2;
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
-			printf("unlit.\n");
+			//printf("unlit.\n");
 		}
 	}
 	return [tex autorelease];

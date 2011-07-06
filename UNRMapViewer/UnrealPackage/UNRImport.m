@@ -28,7 +28,7 @@
 }
 
 - (NSString *)description{
-	return [NSString stringWithFormat:@"UNRImport: %@", self.name.string];
+	return [NSString stringWithFormat:@"<UNRImport: %X %@ %@>", self, self.className.string, self.name.string];
 }
 
 - (void)resolveRefrences:(UNRFile *)file{

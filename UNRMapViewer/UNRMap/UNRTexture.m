@@ -15,14 +15,39 @@
 
 @synthesize width = width_, height = height_, glTex = glTex_;
 
-+ (id)textureWithObject:(UNRExport *)obj attributes:(NSDictionary *)attrib{
++ (id)textureWithObject:(NSMutableDictionary *)obj attributes:(NSDictionary *)attrib{
 	UNRTexture *tex = [[self alloc] init];
 	if(tex){
 		NSArray *palette = nil;
 		int format = 0;
 		BOOL masked = [[attrib valueForKey:@"masked"] boolValue];
+		int startMip = [[attrib valueForKey:@"startMip"] intValue];
+		BOOL noSmooth = [[attrib valueForKey:@"noSmooth"] boolValue];
 		int correctMipCount = 0;
-		for(UNRProperty *prop in [obj.objectData valueForKey:@"props"]){
+		
+		{
+			NSMutableDictionary *props = [obj valueForKey:@"props"];
+			UNRProperty *formatProp = [props valueForKey:@"Format"];
+			format = [formatProp.manager loadByte];
+			
+			UNRProperty *paletteProp = [props valueForKey:@"Palette"];
+			UNRExport *paletteObj = (UNRExport *)paletteProp.object;
+			palette = [paletteObj.objectData valueForKey:@"palette"];
+			
+			UNRProperty *ubit = [props valueForKey:@"UBits"];
+			Byte ubits = [ubit.manager loadByte];
+			if(ubits > correctMipCount){
+				correctMipCount = ubits;
+			}
+			
+			UNRProperty *vbit = [props valueForKey:@"VBits"];
+			Byte vbits = [vbit.manager loadByte];
+			if(vbits > correctMipCount){
+				correctMipCount = vbits;
+			}
+		}
+		
+		/*for(UNRProperty *prop in [obj.objectData valueForKey:@"props"]){
 			DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
 			if([[prop.name.string lowercaseString] isEqualToString:@"format"]){
 				format = [manager loadByte];
@@ -41,6 +66,16 @@
 				}
 			}
 			[manager release];
+		}*/
+		
+		if(startMip >= correctMipCount){
+			startMip = correctMipCount-1;
+		}
+		if(startMip >= [[obj valueForKey:@"mipMapLevels"] count]){
+			startMip = [[obj valueForKey:@"mipMapLevels"] count]-1;
+		}
+		if(startMip < 0){
+			startMip = 0;
 		}
 		
 		GLuint glTex = 0;
@@ -48,10 +83,33 @@
 		tex.glTex = glTex;
 		glBindTexture(GL_TEXTURE_2D, tex.glTex);
 		
-		tex.width = [[[[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:0] valueForKey:@"width"] intValue];
-		tex.height = [[[[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:0] valueForKey:@"height"] intValue];
-		for(int i = 0; i < [[obj.objectData valueForKey:@"mipMapCount"] intValue]; i++){
-			NSMutableDictionary *texLevel = [[obj.objectData valueForKey:@"mipMapLevels"] objectAtIndex:i];
+		tex.width = [[[[obj valueForKey:@"mipMapLevels"] objectAtIndex:0] valueForKey:@"width"] intValue];
+		tex.height = [[[[obj valueForKey:@"mipMapLevels"] objectAtIndex:0] valueForKey:@"height"] intValue];
+		
+		GLenum magMode = GL_LINEAR;
+		if(noSmooth){
+			magMode = GL_NEAREST;
+		}
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magMode);
+		
+		GLenum minMode = GL_LINEAR_MIPMAP_NEAREST;
+		if(noSmooth){
+			minMode = GL_NEAREST_MIPMAP_NEAREST;
+		}
+		if([[obj valueForKey:@"mipMapCount"] intValue] != correctMipCount){ //if mipMapping is disabled for this texture
+			minMode -= 0x100; //disable mipmapping
+		}
+		
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minMode);
+		
+		/*if([[obj valueForKey:@"mipMapCount"] intValue] != correctMipCount){
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		}else{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+		}*/
+		
+		for(int i = startMip; i < [[obj valueForKey:@"mipMapCount"] intValue]; i++){
+			NSMutableDictionary *texLevel = [[obj valueForKey:@"mipMapLevels"] objectAtIndex:i];
 			DataManager *manager = [[DataManager alloc] initWithFileData:[texLevel valueForKey:@"mipMap"]];
 			
 			int levelWidth = [[texLevel valueForKey:@"width"] intValue];
@@ -61,6 +119,7 @@
 			//stored width first
 			
 			if(format == 0){ //paletted
+				//TODO: do this using Core Graphics ?
 				for(int i = 0; i < levelHeight; i++){
 					for(int j = 0; j < levelWidth; j++){
 						Byte index = [manager loadByte];
@@ -79,22 +138,14 @@
 					}
 				}
 			}else{
-				NSLog(@"Un-paletted textures are currently unsupported: %@\n", obj.name.string);
+				NSLog(@"Un-paletted textures are currently unsupported.\n");
 			}
 			[manager release];
 			
-			if([[obj.objectData valueForKey:@"mipMapCount"] intValue] != correctMipCount){
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			}else{
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
-			}
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			
-			glTexImage2D(GL_TEXTURE_2D, i, GL_RGBA, levelWidth, levelHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, glTexData);
+			glTexImage2D(GL_TEXTURE_2D, i-startMip, GL_RGBA, levelWidth, levelHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, glTexData);
 			
 			free(glTexData);
 		}
-		obj.objectData = nil;
 	}
 	return [tex autorelease];
 }
@@ -282,7 +333,28 @@ void printLightType(int lType){
 						//load the light data
 						Byte hue = 0, saturation = 255, value = 64, radius = 64;
 						NSMutableArray *currentLight = [[[mapLights objectAtIndex:y] objectData] valueForKey:@"props"];
-						for(UNRProperty *prop in currentLight){
+						{
+							UNRProperty *brightProp = [currentLight valueForKey:@"LightBrightness"];
+							if(brightProp){
+								value = [brightProp.manager loadByte];
+							}
+							
+							UNRProperty *satProp = [currentLight valueForKey:@"LightSaturation"];
+							if(satProp){
+								saturation = [satProp.manager loadByte];
+							}
+							
+							UNRProperty *hueProp = [currentLight valueForKey:@"LightHue"];
+							if(hueProp){
+								hue = [hueProp.manager loadByte];
+							}
+							
+							UNRProperty *radProp = [currentLight valueForKey:@"LightRadius"];
+							if(radProp){
+								radius = [radProp.manager loadByte];
+							}
+						}
+						/*for(UNRProperty *prop in currentLight){
 							DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
 							if([prop.name.string isEqualToString:@"LightBrightness"]){
 								value = [manager loadByte];
@@ -290,15 +362,16 @@ void printLightType(int lType){
 								saturation = [manager loadByte];
 							}else if([prop.name.string isEqualToString:@"LightHue"]){
 								hue = [manager loadByte];
-							}/*else if([prop.name.string isEqualToString:@"LightEffect"]){
-								printf("\t");
-								printLightType([manager loadByte]);
-								printf("\n");
-							}*/else if([prop.name.string isEqualToString:@"LightRadius"]){
+							}else if([prop.name.string isEqualToString:@"LightRadius"]){
 								radius = [manager loadByte];
 							}
 							[manager release];
-						}
+						}*/
+						/*else if([prop.name.string isEqualToString:@"LightEffect"]){
+						 printf("\t");
+						 printLightType([manager loadByte]);
+						 printf("\n");
+						 }*/
 						color rgb = hsvToRGB(hue, saturation, value);
 						
 						for(int i = 0; i < tex.height; i++){

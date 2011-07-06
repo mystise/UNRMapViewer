@@ -30,16 +30,16 @@
 		<objectReference name="bspModel"/>
 		
 		<!-- reachSpecs, ai connections between nodes -->
-		<compactIndex name="reachCount"/>
+		<!-- <compactIndex name="reachCount"/>
 		<array name="reachSpecs" count="reachCount">
 			<int name="distance"/>
-			<compactIndex name="startActor"/> <!-- objectReference -->
-			<compactIndex name="endActor"/> <!-- objectReference -->
+			<compactIndex name="startActor"/>
+			<compactIndex name="endActor"/>
 			<int name="collRadius"/>
 			<int name="collHeight"/>
 			<int name="reachFlags"/>
 			<byte name="pruned"/>
-		</array>
+		</array> -->
 		
 		<!-- textBlocks and unknown -->
 	</info>

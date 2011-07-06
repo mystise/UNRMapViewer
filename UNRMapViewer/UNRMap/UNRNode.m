@@ -31,7 +31,7 @@ enum{
 @synthesize tex = tex_, lightMap = lightMap_, surfFlags = surfFlags_;
 @synthesize front = front_, back = back_, coPlanar = coPlanar_;
 @synthesize normal = normal_, origin = origin_, plane = plane_;
-@synthesize frontZone = frontZone_, backZone = backZone_;
+//@synthesize frontZone = frontZone_, backZone = backZone_;
 @synthesize renderBox = renderBox_;
 
 - (id)initWithModel:(NSMutableDictionary *)model attributes:(NSMutableDictionary *)attrib{//nodeNumber:(int)nodeNum file:(UNRFile *)file map:(UNRMap *)map
@@ -44,14 +44,15 @@ enum{
 		NSMutableArray *points = [attrib valueForKey:@"points"];
 		NSMutableArray *verticies = [attrib valueForKey:@"verts"];
 		NSMutableArray *lights = [attrib valueForKey:@"lights"];
-		//NSMutableArray *lights = [[model valueForKey:@"lights"] valueForKey:@"light"];
-		//NSMutableArray *vectors = [[model valueForKey:@"vectors"] valueForKey:@"vector"];
-		//NSMutableArray *points = [[model valueForKey:@"points"] valueForKey:@"point"];
-		//NSMutableArray *verticies = [model valueForKey:@"verts"];
 		NSMutableDictionary *node = [[model valueForKey:@"nodes"] objectAtIndex:[[attrib valueForKey:@"iNode"] intValue]];
 		NSMutableDictionary *surf = [[model valueForKey:@"surfs"] objectAtIndex:[[node valueForKey:@"iSurf"] intValue]];
 		
+		printf("\nLoading node:%i\n", [[attrib valueForKey:@"iNode"] intValue]);
+		
 		self.surfFlags = [[surf valueForKey:@"polyFlags"] intValue];
+		if(!(self.surfFlags & PF_NoOcclude)){
+			self.surfFlags |= PF_Occlude;
+		}
 		
 		self.origin = Vector3DCreateWithDictionary([points objectAtIndex:[[surf valueForKey:@"pBase"] intValue]]);
 		
@@ -63,6 +64,8 @@ enum{
 			self.renderBox = renderBox;
 			[renderBox release];
 		}
+		
+		printf("\tDone loading Box\n");
 		
 		if((self.surfFlags & PF_Invisible) != PF_Invisible){
 			{
@@ -76,14 +79,17 @@ enum{
 					if([map.textures valueForKey:exp.name.string]){
 						self.tex = [map.textures valueForKey:exp.name.string];
 					}else{
-						UNRTexture *tex = [UNRTexture textureWithObject:exp attributes:[NSDictionary dictionaryWithObjectsAndKeys:
-																						[NSNumber numberWithBool:((self.surfFlags & PF_Masked) == PF_Masked)], @"masked",
-																						nil]];
+						UNRTexture *tex = [UNRTexture textureWithObject:exp.objectData attributes:[NSDictionary dictionaryWithObjectsAndKeys:
+																								   [NSNumber numberWithBool:((self.surfFlags & PF_Masked) == PF_Masked)], @"masked",
+																								   [NSNumber numberWithInt:0], @"startMip",
+																								   [NSNumber numberWithBool:((self.surfFlags & PF_NoSmooth) != 0)], @"noSmooth",
+																								   nil]];
 						self.tex = tex;
 						[map.textures setValue:tex forKey:exp.name.string];
 					}
 				}
 			}
+			printf("\tDone loading Texture\n");
 			
 			int lightIndex = [[surf valueForKey:@"iLightMap"] intValue];
 			NSMutableDictionary *lightMap = nil;
@@ -98,6 +104,8 @@ enum{
 			}else{
 				self.lightMap = [map.lightMaps valueForKey:[NSString stringWithFormat:@"%i", lightIndex]];
 			}
+			
+			printf("\tDone loading LightMap\n");
 			
 			/*if((self.surfFlags & PF_FakeBackdrop) == PF_FakeBackdrop){
 			 if([map.shaders valueForKey:@"SkyBox"]){
@@ -118,6 +126,8 @@ enum{
 				[shad release];
 			}
 			//}
+			
+			printf("\tDone loading Shader\n");
 			
 			GLuint vbo;
 			glGenBuffers(1, &vbo);
@@ -146,7 +156,8 @@ enum{
 				self.vertCount = vertCount;
 				int index = 0;
 				for(int i = 0; i < vertCount; i++){
-					Vector3D coord = Vector3DCreateWithDictionary([points objectAtIndex:[[[verticies objectAtIndex:i+iVertPool] valueForKey:@"pVertex"] intValue]]);
+					int pointIndex = [[[verticies objectAtIndex:i+iVertPool] valueForKey:@"pVertex"] intValue];
+					Vector3D coord = Vector3DCreateWithDictionary([points objectAtIndex:pointIndex]);
 					Vector3D disp = Vector3DSubtract(coord, self.origin);
 					
 					Vector2D texCoord = {0.0f, 0.0f};
@@ -179,7 +190,8 @@ enum{
 				self.vertCount = vertCount;
 				int index = 0;
 				for(int i = 0; i < vertCount; i++){
-					Vector3D coord = Vector3DCreateWithDictionary([points objectAtIndex:[[[verticies objectAtIndex:i+iVertPool] valueForKey:@"pVertex"] intValue]]);
+					int pointIndex = [[[verticies objectAtIndex:i+iVertPool] valueForKey:@"pVertex"] intValue];
+					Vector3D coord = Vector3DCreateWithDictionary([points objectAtIndex:pointIndex]);
 					
 					coordinates[index]   = coord.x;
 					coordinates[index+1] = coord.y;
@@ -191,6 +203,8 @@ enum{
 				
 				free(coordinates);
 			}
+			
+			printf("\tDone loading VBO\n");
 			
 			GLuint vao = 0;
 			glGenVertexArraysOES(1, &vao);
@@ -224,26 +238,30 @@ enum{
 			
 			glBindVertexArrayOES(0);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			
+			printf("\tDone loading VAO\n");
 		}
 		
-		/*int frontZoneIndex = [[node valueForKey:@"iZone1"] intValue];
-		 int backZoneIndex = [[node valueForKey:@"iZone2"] intValue];
-		 
-		 if([map.zones valueForKey:[NSString stringWithFormat:@"%i", frontZoneIndex]] == nil){
-		 UNRZone *frontZone = [[UNRZone alloc] initWithZone:[[model valueForKey:@"zones"] objectAtIndex:frontZoneIndex] index:frontZoneIndex];
-		 self.frontZone = frontZone;
-		 [frontZone release];
-		 }else{
-		 self.frontZone = [map.zones valueForKey:[NSString stringWithFormat:@"%i", frontZoneIndex]];
-		 }
-		 
-		 if([map.zones valueForKey:[NSString stringWithFormat:@"%i", backZoneIndex]] == nil){
-		 UNRZone *backZone = [[UNRZone alloc] initWithZone:[[model valueForKey:@"zones"] objectAtIndex:backZoneIndex] index:backZoneIndex];
-		 self.backZone = backZone;
-		 [backZone release];
-		 }else{
-		 self.backZone = [map.zones valueForKey:[NSString stringWithFormat:@"%i", backZoneIndex]];
-		 }*/
+		//		int frontZoneIndex = [[node valueForKey:@"iZone1"] intValue];
+		//		int backZoneIndex = [[node valueForKey:@"iZone2"] intValue];
+		//		
+		//		if([map.zones valueForKey:[NSString stringWithFormat:@"%i", frontZoneIndex]] == nil){
+		//			UNRZone *frontZone = [[UNRZone alloc] initWithZone:[[model valueForKey:@"zones"] objectAtIndex:frontZoneIndex] index:frontZoneIndex];
+		//			self.frontZone = frontZone;
+		//			[frontZone release];
+		//		}else{
+		//			self.frontZone = [map.zones valueForKey:[NSString stringWithFormat:@"%i", frontZoneIndex]];
+		//		}
+		//		
+		//		if([map.zones valueForKey:[NSString stringWithFormat:@"%i", backZoneIndex]] == nil){
+		//			UNRZone *backZone = [[UNRZone alloc] initWithZone:[[model valueForKey:@"zones"] objectAtIndex:backZoneIndex] index:backZoneIndex];
+		//			self.backZone = backZone;
+		//			[backZone release];
+		//		}else{
+		//			self.backZone = [map.zones valueForKey:[NSString stringWithFormat:@"%i", backZoneIndex]];
+		//		}
+		
+		printf("Done loading node.\n");
 		
 		int frontInd = [[node valueForKey:@"iFront"] intValue];
 		int backInd = [[node valueForKey:@"iBack"] intValue];
@@ -279,29 +297,32 @@ enum{
 	return self;
 }
 
-- (void)drawWithMatrix:(Matrix3D)mat camPos:(Vector3D)camPos{
+- (void)drawWithMatrix:(Matrix3D)mat camPos:(Vector3D)camPos nonSolid:(BOOL)nonSolid{
 	NSMutableDictionary *state = [NSMutableDictionary dictionary];
 	
-	[state setValue:[self zoneForCamera:camPos] forKey:@"zone"];
+	//[state setValue: forKey:@"zone"];
+	//UNRZone *zone = [self zoneForCamera:camPos];
 	
 	[state setValue:[NSNumber numberWithBool:YES] forKey:@"shouldBoundTest"];
-	
-	[state setValue:[NSNumber numberWithBool:NO] forKey:@"nonSolid"];
 	
 	[self.shader use];
 	
 	GLuint matrix = [self.shader uniformLocation:@"modelViewProjection"];
 	glUniformMatrix4fv(matrix, 1, GL_FALSE, mat);
 	
-	glDisable(GL_BLEND);
+	[state setValue:[NSNumber numberWithBool:nonSolid] forKey:@"nonSolid"];
+	if(nonSolid){
+		glEnable(GL_BLEND);
+	}else{
+		glDisable(GL_BLEND);
+	}
 	
 	[self drawWithState:state matrix:mat camPos:&camPos];
 	
-	[state setValue:[NSNumber numberWithBool:YES] forKey:@"nonSolid"];
-	
-	glEnable(GL_BLEND);
-	
-	[self drawWithState:state matrix:mat camPos:&camPos];
+//	[state setValue:[NSNumber numberWithBool:YES] forKey:@"nonSolid"];
+//	glEnable(GL_BLEND);
+//	
+//	[self drawWithState:state matrix:mat camPos:&camPos];
 }
 
 - (void)drawWithState:(NSMutableDictionary *)state matrix:(Matrix3D)mat camPos:(Vector3D *)camPos{
@@ -313,7 +334,7 @@ enum{
 	 #endif*/
 	
 	//TODO: only draw the node and it's sub nodes if it is visible from the camera position
-	//frustum cull, and visibility test
+	//frustum cull
 	
 	//visibility test each subNode, back and front, not coplaner, and only draw them if they are visible.
 	//frustum cull each node in the visible space
@@ -330,37 +351,41 @@ enum{
 		}
 	}
 	
+	//if portal, and portal is occluded, don't draw the back half
+	
 	if(shouldDraw){
 		//float dist = Vector3DDot(self.normal, Vector3DSubtract(*camPos, self.origin));
 		float dist = Vector4DDistance(self.plane, *camPos);
+		BOOL nonSolid = [[state valueForKey:@"nonSolid"] boolValue];
 		if(dist < 0.0f){
 			[self.front drawWithState:state matrix:mat camPos:camPos];
 		}else{
 			[self.back drawWithState:state matrix:mat camPos:camPos];
 		}
 		
-		if((self.surfFlags & PF_Invisible) != PF_Invisible && [[state valueForKey:@"nonSolid"] boolValue] == ((self.surfFlags & PF_NotSolid) != 0)){//&& !(self.surfFlags & (PF_Modulated | PF_Masked | PF_Translucent))
-			glBindVertexArrayOES(self.vao);
-			
-			if((self.surfFlags & PF_FakeBackdrop) != PF_FakeBackdrop){
-				if([[state valueForKey:@"texture"] unsignedIntValue] != self.tex.glTex){
-					[self.tex bind:0];
-					[state setValue:[NSNumber numberWithUnsignedInt:self.tex.glTex] forKey:@"texture"];
+		if((self.surfFlags & PF_TwoSided) || (dist > 0.0f)){
+			if((self.surfFlags & PF_Invisible) != PF_Invisible && nonSolid == ((self.surfFlags & PF_NotSolid) != 0)){
+				glBindVertexArrayOES(self.vao);
+				
+				if((self.surfFlags & PF_FakeBackdrop) != PF_FakeBackdrop){
+					if([[state valueForKey:@"texture"] unsignedIntValue] != self.tex.glTex){
+						[self.tex bind:0];
+						[state setValue:[NSNumber numberWithUnsignedInt:self.tex.glTex] forKey:@"texture"];
+					}
+					
+					if([[state valueForKey:@"lightMap"] unsignedIntValue] != self.lightMap.glTex){
+						[self.lightMap bind:1];
+						[state setValue:[NSNumber numberWithUnsignedInt:self.lightMap.glTex] forKey:@"lightMap"];
+					}
 				}
 				
-				if([[state valueForKey:@"lightMap"] unsignedIntValue] != self.lightMap.glTex){
-					[self.lightMap bind:1];
-					[state setValue:[NSNumber numberWithUnsignedInt:self.lightMap.glTex] forKey:@"lightMap"];
-				}
+				[self setupState:state];
+				
+				glDrawArrays(GL_TRIANGLE_FAN, 0, self.vertCount);
 			}
 			
-			[self setupState:state];
-			
-			//glDrawElements(GL_TRIANGLE_FAN, <#GLsizei count#>, GL_UNSIGNED_SHORT, <#const GLvoid *indices#>);
-			glDrawArrays(GL_TRIANGLE_FAN, 0, self.vertCount);
+			[self.coPlanar drawWithState:state matrix:mat camPos:camPos];
 		}
-		
-		[self.coPlanar drawWithState:state matrix:mat camPos:camPos];
 		
 		if(dist < 0.0f){
 			[self.back drawWithState:state matrix:mat camPos:camPos];
@@ -394,38 +419,42 @@ enum{
 		}
 	}
 	
-	if(changed & PF_TwoSided){
-		if(surfFlags & PF_TwoSided){
-			glDisable(GL_CULL_FACE);
-		}else{
-			glEnable(GL_CULL_FACE);
-		}
+	if(changed & PF_NotSolid){
+		glDepthMask(surfFlags & PF_NotSolid);
 	}
+	
+	/*if(changed & PF_TwoSided){
+	 if(surfFlags & PF_TwoSided){
+	 glDisable(GL_CULL_FACE);
+	 }else{
+	 glEnable(GL_CULL_FACE);
+	 }
+	 }*/
 	
 	[state setValue:[NSNumber numberWithInt:surfFlags] forKey:@"flags"];
 }
 
-- (UNRZone *)zoneForCamera:(Vector3D)camPos{
-	float dot = Vector4DDistance(self.plane, camPos);
-	const float tolerance = 0.01f;
-	
-	if(dot > tolerance){
-		UNRZone *frontZone = [self.front zoneForCamera:camPos];
-		if(frontZone != nil){
-			return frontZone;
-		}else{
-			return self.frontZone;
-		}
-	}else if(dot < -tolerance){
-		UNRZone *backZone = [self.back zoneForCamera:camPos];
-		if(backZone != nil){
-			return backZone;
-		}else{
-			return self.backZone;
-		}
-	}
-	return self.frontZone;
-}
+/*- (UNRZone *)zoneForCamera:(Vector3D)camPos{
+ float dot = Vector4DDistance(self.plane, camPos);
+ const float tolerance = 0.01f;
+ 
+ if(dot > tolerance){
+ UNRZone *frontZone = [self.front zoneForCamera:camPos];
+ if(frontZone != nil){
+ return frontZone;
+ }else{
+ return self.frontZone;
+ }
+ }else if(dot < -tolerance){
+ UNRZone *backZone = [self.back zoneForCamera:camPos];
+ if(backZone != nil){
+ return backZone;
+ }else{
+ return self.backZone;
+ }
+ }
+ return self.frontZone;
+ }*/
 
 - (void)dealloc{
 	if(vbo_){
@@ -448,10 +477,10 @@ enum{
 	coPlanar_ = nil;
 	[shader_ release];
 	shader_ = nil;
-	[backZone_ release];
-	backZone_ = nil;
-	[frontZone_ release];
-	frontZone_ = nil;
+	/*[backZone_ release];
+	 backZone_ = nil;
+	 [frontZone_ release];
+	 frontZone_ = nil;*/
 	[renderBox_ release];
 	renderBox_ = nil;
 	

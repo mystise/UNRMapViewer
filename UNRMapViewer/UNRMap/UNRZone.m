@@ -8,7 +8,6 @@
 
 #import "UNRZone.h"
 
-
 @implementation UNRZone
 
 @synthesize zoneIndex = zoneIndex_, visibility = visibility_, connectivity = connectivity_;

@@ -38,31 +38,6 @@
 		self.shaders = [NSMutableDictionary dictionary];
 		self.lightMaps = [NSMutableDictionary dictionary];
 		self.zones = [NSMutableDictionary dictionary];
-		
-		dispatch_async(mainThread, ^(void){
-			label.text = @"Loading nodes...";
-			progress.progress = 0.5f;
-		});
-		NSMutableDictionary *attrib = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-									   [[model valueForKey:@"vectors"] valueForKey:@"vector"], @"vectors",
-									   [[model valueForKey:@"points"] valueForKey:@"point"], @"points",
-									   [model valueForKey:@"verts"], @"verts",
-									   [[model valueForKey:@"lights"] valueForKey:@"light"], @"lights",
-									   self, @"map",
-									   [NSNumber numberWithInt:0], @"iNode",
-									   nil];
-		UNRNode *node = [[UNRNode alloc] initWithModel:model attributes:attrib];//nodeNumber:0 file:file map:self
-		self.rootNode = node;
-		[node release];
-		
-		UNRCubeCamera *cam = [[UNRCubeCamera alloc] init];
-		self.cubeMap = cam;
-		[cam release];
-		
-		self.cam = [[UNRCamera alloc] init];
-		self.cam.up = Vector3DCreate(0.0f, 0.0f, 1.0f);
-		self.cam.look = Vector3DCreate(0.0f, 1.0f, 0.0f);
-		
 		self.actors = [NSMutableDictionary dictionary];
 		
 		dispatch_async(mainThread, ^(void){
@@ -86,66 +61,102 @@
 				   ![className isEqualToString:@"teamtrigger"] &&
 				   ![className isEqualToString:@"DistanceViewTrigger"] &&
 				   ![className isEqualToString:@"BlockAll"] &&
-				   ![className isEqualToString:@"InterpolationPoint"]){
+				   ![className isEqualToString:@"InterpolationPoint"] &&
+				   ![className isEqualToString:@"LiftCenter"] &&
+				   ![className isEqualToString:@"JumpExit"] &&
+				   ![className isEqualToString:@"JumpCenter"]){
 					if([self.actors valueForKey:className] == nil){
 						[self.actors setValue:[NSMutableArray array] forKey:className];
 					}
-					[obj loadPlugin:file];
+					//[obj loadPlugin:file];
 					obj.data = nil;
-					[[self.actors valueForKey:className] addObject:obj.objectData];
+					[[self.actors valueForKey:className] addObject:[obj.objectData valueForKey:@"props"]];
 				}
 			}
 		}
 		
 		dispatch_async(mainThread, ^(void){
+			label.text = @"Loading nodes...";
+			progress.progress = 0.5f;
+		});
+		NSMutableDictionary *attrib = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+									   [[model valueForKey:@"vectors"] valueForKey:@"vector"], @"vectors",
+									   [[model valueForKey:@"points"] valueForKey:@"point"], @"points",
+									   [model valueForKey:@"verts"], @"verts",
+									   [[model valueForKey:@"lights"] valueForKey:@"light"], @"lights",
+									   self, @"map",
+									   [NSNumber numberWithInt:0], @"iNode",
+									   nil];
+		UNRNode *node = [[UNRNode alloc] initWithModel:model attributes:attrib];//nodeNumber:0 file:file map:self
+		self.rootNode = node;
+		[node release];
+		
+		UNRCubeCamera *cubeCam = [[UNRCubeCamera alloc] init];
+		self.cubeMap = cubeCam;
+		self.cubeMap.cam.up = Vector3DCreate(0.0f, 0.0f, 1.0f);
+		self.cubeMap.cam.look = Vector3DCreate(0.0f, 1.0f, 0.0f);
+		[cubeCam release];
+		
+		UNRCamera *cam = [[UNRCamera alloc] init];
+		self.cam = cam;
+		[cam release];
+		self.cam.up = Vector3DCreate(0.0f, 0.0f, 1.0f);
+		self.cam.look = Vector3DCreate(0.0f, 1.0f, 0.0f);
+		
+		dispatch_async(mainThread, ^(void){
 			label.text = @"Initializing skybox...";
 			progress.progress = 0.7f;
 		});
-		NSMutableArray *skyBox = nil;
-		NSMutableDictionary *skyBoxes = [NSMutableDictionary dictionary];
+		NSMutableDictionary *skyBox = nil;
+		//NSMutableDictionary *skyBoxes = [NSMutableDictionary dictionary];
 		//find the skyBoxInfo with highDetail set to 1
 		for(NSMutableDictionary *obj in [self.actors valueForKey:@"SkyZoneInfo"]){
-			for(UNRProperty *prop in [obj valueForKey:@"props"]){
-				if([prop.name.string isEqualToString:@"bHighDetail"]){
-					if(prop.special == YES){
-						[skyBoxes setValue:[obj valueForKey:@"props"] forKey:@"highDetail"];
-					}
-				}
-			}
-			if([skyBoxes valueForKey:@"highDetail"] == nil){
-				[skyBoxes setValue:[obj valueForKey:@"props"] forKey:@"lowDetail"];
+			UNRProperty *prop = [obj valueForKey:@"bHighDetail"];
+			if(prop.special == YES){
+				skyBox = obj;
+				//[skyBoxes setValue:[obj valueForKey:@"props"] forKey:@"highDetail"];
+			}else if(skyBox == nil){
+				skyBox = obj;
+				//[skyBoxes setValue:[obj valueForKey:@"props"] forKey:@"lowDetail"];
 			}
 		}
 		
-		if([skyBoxes valueForKey:@"highDetail"] != nil){
-			skyBox = [skyBoxes valueForKey:@"highDetail"];
-		}else{
-			skyBox = [skyBoxes valueForKey:@"lowDetail"];
+		//		if([skyBoxes valueForKey:@"highDetail"] != nil){
+		//			skyBox = [skyBoxes valueForKey:@"highDetail"];
+		//		}else{
+		//			skyBox = [skyBoxes valueForKey:@"lowDetail"];
+		//		}
+		
+		{
+			UNRProperty *location = [skyBox valueForKey:@"Location"];
+			Vector3D camPos;
+			camPos.x = [location.manager loadFloat];
+			camPos.y = [location.manager loadFloat];
+			camPos.z = [location.manager loadFloat];
+			self.cubeMap.cam.pos = camPos;
+			
+			UNRProperty *rotRate = [skyBox valueForKey:@"RotationRate"];
+			self.cubeMap.drX = [rotRate.manager loadInt]*45/8192;
+			self.cubeMap.drY = [rotRate.manager loadInt]*45/8192;
+			self.cubeMap.drZ = [rotRate.manager loadInt]*45/8192;
 		}
 		
-		for(UNRProperty *prop in skyBox){
-			DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
-			if([prop.name.string isEqualToString:@"Location"]){
-				Vector3D camPos;
-				camPos.x = [manager loadFloat];
-				camPos.y = [manager loadFloat];
-				camPos.z = [manager loadFloat];
-				//camPos = Vector3DMultiply(camPos, 0.1f);
-				self.cubeMap.cam.pos = camPos;
-				self.cubeMap.cam.up = Vector3DCreate(0.0f, 0.0f, 1.0f);
-				self.cubeMap.cam.look = Vector3DCreate(0.0f, 1.0f, 0.0f);
-				//self.cam.pos = camPos;
-			}else if([prop.name.string isEqualToString:@"RotationRate"]){
-				self.cubeMap.drX = [manager loadInt]*45/8192;
-				self.cubeMap.drY = [manager loadInt]*45/8192;
-				self.cubeMap.drZ = [manager loadInt]*45/8192;
-			}
-			[manager release];
-		}
-		
-		//for(UNRExport *obj in [self.actors valueForKey:@"PlayerStart"]){
 		NSMutableDictionary *obj = [[self.actors valueForKey:@"PlayerStart"] objectAtIndex:0];
-		for(UNRProperty *prop in [obj valueForKey:@"props"]){
+		{
+			UNRProperty *location = [obj valueForKey:@"Location"];
+			Vector3D camPos;
+			camPos.x = [location.manager loadFloat];
+			camPos.y = [location.manager loadFloat];
+			camPos.z = [location.manager loadFloat];
+			self.cam.pos = camPos;
+			
+			UNRProperty *rotation = [obj valueForKey:@"Rotation"];
+			self.cam.rotX = [rotation.manager loadInt]*45/8192;
+			self.cam.rotY = [rotation.manager loadInt]*45/8192;
+			self.cam.rotZ = [rotation.manager loadInt]*45/8192;
+		}
+		
+		/*for(UNRProperty *prop in [obj valueForKey:@"props"]){
 			DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
 			if([prop.name.string isEqualToString:@"Location"]){
 				Vector3D camPos;
@@ -161,8 +172,7 @@
 				
 			}
 			[manager release];
-		}
-		//}
+		}*/
 		
 		//setup all inventory spots
 	}
@@ -192,13 +202,16 @@
 	glStencilOp(GL_ZERO, GL_ZERO, GL_ZERO);
 	
 	Vector3D camPos = self.cam.pos;
-	//glDisable(GL_DEPTH_TEST);
 	glDepthRangef(0.5f, 1.0f);
-	[self.rootNode drawWithMatrix:res camPos:camPos];
+	glDepthMask(GL_TRUE);
+	[self.rootNode drawWithMatrix:res camPos:camPos nonSolid:NO];
 	
 	glDepthRangef(0.0f, 0.5f);
 	[self.cubeMap updateWithTimestep:dt];
 	[self.cubeMap drawWithRootNode:self.rootNode camera:self.cam projMat:projection];
+	
+	glDepthRangef(0.5f, 1.0f);
+	[self.rootNode drawWithMatrix:res camPos:camPos nonSolid:YES];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

@@ -48,7 +48,8 @@
 	glStencilFunc(GL_EQUAL, 1, UINT_MAX);
 	glStencilMask(0);
 	Vector3D camPos = self.cam.pos;
-	[rootNode drawWithMatrix:mat camPos:camPos];
+	[rootNode drawWithMatrix:mat camPos:camPos nonSolid:NO];
+	[rootNode drawWithMatrix:mat camPos:camPos nonSolid:YES];
 	glStencilFunc(GL_ALWAYS, 1, UINT_MAX);
 	glStencilMask(UINT_MAX);
 }

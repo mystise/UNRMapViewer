@@ -192,8 +192,39 @@
 	
 	[resManager release];
 	
-	NSMutableDictionary *subFiles = [[NSMutableDictionary alloc] init];
-	for(UNRImport *import in self.references){
+	//NSMutableDictionary *subFiles = [[NSMutableDictionary alloc] init];
+	
+	NSPredicate *pred1 = [NSPredicate predicateWithFormat:@"package == nil && className.string == %@", @"Package"];
+	NSArray *packageImports = [self.references filteredArrayUsingPredicate:pred1];
+	NSPredicate *pred2 = [NSPredicate predicateWithFormat:@"className.string != %@", @"Package"];
+	NSArray *objectImports = [self.references filteredArrayUsingPredicate:pred2];
+	
+	for(UNRImport *package in packageImports){
+		NSString *filePath = [files valueForKey:[package.name.string lowercaseString]];
+		if(filePath != nil){
+			NSData *dat = [NSData dataWithContentsOfMappedFile:filePath];
+			UNRFile *file = [[UNRFile alloc] initWithFileData:dat pluginsDirectory:nil];
+			file.pluginLoader = self.pluginLoader;
+			if(file != nil){
+				for(UNRImport *object in objectImports){
+					UNRBase *objPackage = object.package;
+					while(objPackage.package != nil){
+						objPackage = objPackage.package;
+					}
+					if([objPackage.name.string isEqualToString:package.name.string]){
+						NSPredicate *pred = [NSPredicate predicateWithFormat:@"name.string == %@ && classObj.name.string == %@", object.name.string, object.className.string];
+						NSArray *filteredObj = [file.objects filteredArrayUsingPredicate:pred];
+						object.obj = [filteredObj lastObject];
+						[object.obj loadPlugin:file];
+					}
+				}
+				//[subFiles setObject:file forKey:import.name.string];
+			}
+			[file release];
+		}
+	}
+	
+	/*for(UNRImport *import in self.references){
 		if([import.className.string isEqualToString:@"Package"] && import.package == nil){
 			NSString *filePath = [files valueForKey:[import.name.string lowercaseString]];
 			if(filePath != nil){
@@ -206,11 +237,28 @@
 				[file release];
 			}
 		}
-	}
+	}*/
+	
+	/*NSArray *objNames = [[file.objects valueForKeyPath:@"name.string"] retain];
+	 NSArray *classNames = [[file.objects valueForKeyPath:@"classObj.name.string"] retain];
+	 int index = 0;
+	 for(int i = 0; i < [objNames count]; i++){
+	 NSString *name = [objNames objectAtIndex:i];
+	 NSString *className = [classNames objectAtIndex:i];
+	 if(name != (NSString *)[NSNull null] && className != (NSString *)[NSNull null]){
+	 if([[name lowercaseString] isEqualToString:[import.name.string lowercaseString]] && [[className lowercaseString] isEqualToString:[import.className.string lowercaseString]]){
+	 index = i;
+	 break;
+	 }
+	 }
+	 }
+	 [objNames release];
+	 [classNames release];
+	 import.obj = [file.objects objectAtIndex:index];*/
 	
 	[files release];
 	
-	for(UNRImport *import in self.references){
+	/*for(UNRImport *import in self.references){
 		if(![import.className.string isEqualToString:@"Package"]){
 			//load the object from the file
 			UNRBase *package = import.package;
@@ -219,30 +267,15 @@
 			}
 			UNRFile *file = [subFiles objectForKey:package.name.string];
 			if(file){
-				/*NSArray *objNames = [[file.objects valueForKeyPath:@"name.string"] retain];
-				 NSArray *classNames = [[file.objects valueForKeyPath:@"classObj.name.string"] retain];
-				 int index = 0;
-				 for(int i = 0; i < [objNames count]; i++){
-				 NSString *name = [objNames objectAtIndex:i];
-				 NSString *className = [classNames objectAtIndex:i];
-				 if(name != (NSString *)[NSNull null] && className != (NSString *)[NSNull null]){
-				 if([[name lowercaseString] isEqualToString:[import.name.string lowercaseString]] && [[className lowercaseString] isEqualToString:[import.className.string lowercaseString]]){
-				 index = i;
-				 break;
-				 }
-				 }
-				 }
-				 [objNames release];
-				 [classNames release];
-				 import.obj = [file.objects objectAtIndex:index];*/
+				
 				NSPredicate *pred = [NSPredicate predicateWithFormat:@"name.string == %@ && classObj.name.string == %@", import.name.string, import.className.string];
 				NSArray *filteredObj = [file.objects filteredArrayUsingPredicate:pred];
 				import.obj = [filteredObj lastObject];
 				[import.obj loadPlugin:file];
 			}
 		}
-	}
-	[subFiles release];
+	}*/
+	//[subFiles release];
 }
 
 - (void)dealloc{

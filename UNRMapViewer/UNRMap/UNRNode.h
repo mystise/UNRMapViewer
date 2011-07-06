@@ -8,19 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-//#import "Utilities.h"
-
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-//#import "Matrix.h"
-//using Matrix::Matrix3D;
+//#import "UNRZone.h"
+
 #import "Matrix3D.h"
 #import "Vector4D.h"
 #import "Vector3D.h"
 #import "Vector2D.h"
 
-@class UNRFile, UNRTexture, UNRShader, UNRMap, UNRZone, UNRBoundingBox;
+@class UNRFile, UNRTexture, UNRShader, UNRMap, UNRBoundingBox;//UNRZone
 
 @interface UNRNode : NSObject {
 	
@@ -28,24 +26,24 @@
 
 - (id)initWithModel:(NSMutableDictionary *)model attributes:(NSMutableDictionary *)attrib;//nodeNumber:(int)nodeNum file:(UNRFile *)file map:(UNRMap *)map
 
-- (void)drawWithMatrix:(Matrix3D)mat camPos:(Vector3D)camPos; //rootNode
+- (void)drawWithMatrix:(Matrix3D)mat camPos:(Vector3D)camPos nonSolid:(BOOL)nonSolid; //rootNode
 - (void)drawWithState:(NSMutableDictionary *)state matrix:(Matrix3D)mat camPos:(Vector3D *)camPos; //any subNode
 
-- (UNRZone *)zoneForCamera:(Vector3D)camPos;
+//- (UNRZone *)zoneForCamera:(Vector3D)camPos;
 
 - (void)setupState:(NSMutableDictionary *)state;
 
 @property(nonatomic, assign) int vertCount;
 @property(nonatomic, assign) GLuint vbo, vao;
-
 @property(nonatomic, assign) Vector3D normal, origin;
 @property(nonatomic, assign) Vector4D plane;
 @property(nonatomic, assign) int surfFlags;
 @property(nonatomic, assign) int strideLength;
+
+//@property(nonatomic, retain) UNRZone *frontZone, *backZone;
 @property(nonatomic, retain) UNRTexture *tex, *lightMap;
 @property(nonatomic, retain) UNRNode *front, *back, *coPlanar;
 @property(nonatomic, retain) UNRShader *shader;
-@property(nonatomic, retain) UNRZone *frontZone, *backZone;
 @property(nonatomic, retain) UNRBoundingBox *renderBox;
 
 @end

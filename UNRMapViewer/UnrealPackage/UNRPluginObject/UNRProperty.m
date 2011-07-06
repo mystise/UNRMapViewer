@@ -11,7 +11,7 @@
 
 @implementation UNRProperty
 
-@synthesize name = name_, structName = structName_, special = special_, type = type_, index = index_, data = data_, object = object_;
+@synthesize name = name_, structName = structName_, special = special_, type = type_, index = index_, manager = manager_, object = object_;
 
 - (id)initWithManager:(DataManager *)manager file:(UNRFile *)newFile{
 	self = [super init];
@@ -75,13 +75,15 @@
 			self.index = [UNRProperty readIndex:manager];
 		}
 		if(self.type != 0x03){
-			self.data = [manager.fileData subdataWithRange:NSMakeRange(manager.curPos, realSize)];
+			NSData *data = [manager.fileData subdataWithRange:NSMakeRange(manager.curPos, realSize)];
+			DataManager *newManager = [[DataManager alloc] initWithFileData:data];
+			self.manager = newManager;
 			manager.curPos += realSize;
 			if(self.type == 0x05){
-				DataManager *manager = [[DataManager alloc] initWithFileData:self.data];
-				self.object = [newFile resolveObjectReference:[UNRFile readCompactIndex:manager]];
-				[manager release];
+				self.object = [newFile resolveObjectReference:[UNRFile readCompactIndex:self.manager]];
 			}
+			self.manager.curPos = 0;
+			[newManager release];
 		}
 	}
 	return self;
@@ -215,8 +217,10 @@
 	name_ = nil;
 	[structName_ release];
 	structName_ = nil;
-	[data_ release];
-	data_ = nil;
+	[manager_ release];
+	manager_ = nil;
+//	[data_ release];
+//	data_ = nil;
 	[object_ release];
 	object_ = nil;
 	[super dealloc];

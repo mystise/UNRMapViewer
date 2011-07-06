@@ -25,7 +25,7 @@
 @property(nonatomic, assign) BOOL special;
 @property(nonatomic, assign) Byte type;
 @property(nonatomic, assign) int index;
-@property(nonatomic, retain) NSData *data;
+@property(nonatomic, retain) DataManager *manager;
 @property(nonatomic, retain) UNRBase *object;
 //@property(nonatomic, assign) UNRFile *file;
 

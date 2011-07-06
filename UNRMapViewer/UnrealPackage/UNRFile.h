@@ -21,9 +21,6 @@
 - (id)resolveObjectReference:(int)ref;
 + (int)readCompactIndex:(DataManager *)manager;
 
-/*- (NSData *)dataFromFile;
-+ (NSData *)writeCompactIndex:(int)index;*/
-
 - (NSUInteger)nameCount;
 - (NSUInteger)objectCount;
 - (NSUInteger)referenceCount;

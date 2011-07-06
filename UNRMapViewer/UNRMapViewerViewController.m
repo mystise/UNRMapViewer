@@ -49,8 +49,8 @@
 	
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_STENCIL_TEST);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_FRONT);
+	//glEnable(GL_CULL_FACE);
+	//glCullFace(GL_FRONT);
 	glClearColor(0.1f, 0.5f, 0.5f, 1.0f);
 	glClearStencil(0);
 	glClearDepthf(1.0f);
@@ -214,12 +214,14 @@
 		label.text = @"Loading level...";
 		progress.progress = 0.4f;
 	});
+	self.file = nil;
+	[pool drain];
+	pool = [[NSAutoreleasePool alloc] init];
 	if(level){
 		UNRMap *theMap = [[UNRMap alloc] initWithLevel:level andFile:self.file label:label progress:progress];
 		self.map = theMap;
 		[theMap release];
 	}
-	self.file = nil;
 	[level release];
 	[pool drain];
 	dispatch_async(mainThread, ^(void){

@@ -36,7 +36,7 @@
 }
 
 - (NSString *)description{
-	return [NSString stringWithFormat:@"UNRExport: %@", self.name.string];
+	return [NSString stringWithFormat:@"<UNRExport: %X %@ %@>", self, self.classObj.name.string, self.name.string];
 }
 
 - (void)resolveRefrences:(UNRFile *)file{

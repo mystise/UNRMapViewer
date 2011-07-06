@@ -82,10 +82,10 @@
 	id current = [self.currentData lastObject];
 	[self processArray:@"addPropertiesWithAttributes:" attribs:attrib];
 	if(![current isKindOfClass:[NSNull class]]){
-		NSMutableArray *value = [NSMutableArray array];
+		NSMutableDictionary *value = [NSMutableDictionary dictionary];
 		UNRProperty *prop = [[UNRProperty alloc] initWithManager:self.manager file:self.file];
 		while(prop){
-			[value addObject:prop];
+			[value setObject:prop forKey:prop.name.string];
 			[prop release];
 			prop = [[UNRProperty alloc] initWithManager:self.manager file:self.file];
 		}

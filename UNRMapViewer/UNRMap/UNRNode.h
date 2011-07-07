@@ -17,6 +17,7 @@
 #import "Vector4D.h"
 #import "Vector3D.h"
 #import "Vector2D.h"
+#import "UNRFrustum.h"
 
 @class UNRFile, UNRTexture, UNRShader, UNRMap, UNRBoundingBox;//UNRZone
 
@@ -26,8 +27,8 @@
 
 - (id)initWithModel:(NSMutableDictionary *)model attributes:(NSMutableDictionary *)attrib;//nodeNumber:(int)nodeNum file:(UNRFile *)file map:(UNRMap *)map
 
-- (void)drawWithMatrix:(Matrix3D)mat camPos:(Vector3D)camPos nonSolid:(BOOL)nonSolid; //rootNode
-- (void)drawWithState:(NSMutableDictionary *)state matrix:(Matrix3D)mat camPos:(Vector3D *)camPos; //any subNode
+- (void)drawWithMatrix:(Matrix3D)mat frustum:(UNRFrustum)frustum camPos:(Vector3D)camPos nonSolid:(BOOL)nonSolid; //rootNode
+- (void)drawWithState:(NSMutableDictionary *)state frustum:(UNRFrustum)frustum camPos:(Vector3D *)camPos; //any subNode
 
 //- (UNRZone *)zoneForCamera:(Vector3D)camPos;
 

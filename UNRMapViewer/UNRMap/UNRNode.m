@@ -47,7 +47,7 @@ enum{
 		NSMutableDictionary *node = [[model valueForKey:@"nodes"] objectAtIndex:[[attrib valueForKey:@"iNode"] intValue]];
 		NSMutableDictionary *surf = [[model valueForKey:@"surfs"] objectAtIndex:[[node valueForKey:@"iSurf"] intValue]];
 		
-		printf("\nLoading node:%i\n", [[attrib valueForKey:@"iNode"] intValue]);
+//		printf("\nLoading node:%i\n", [[attrib valueForKey:@"iNode"] intValue]);
 		
 		self.surfFlags = [[surf valueForKey:@"polyFlags"] intValue];
 		if(!(self.surfFlags & PF_NoOcclude)){
@@ -65,7 +65,7 @@ enum{
 			[renderBox release];
 		}
 		
-		printf("\tDone loading Box\n");
+//		printf("\tDone loading Box\n");
 		
 		if((self.surfFlags & PF_Invisible) != PF_Invisible){
 			{
@@ -89,7 +89,7 @@ enum{
 					}
 				}
 			}
-			printf("\tDone loading Texture\n");
+//			printf("\tDone loading Texture\n");
 			
 			int lightIndex = [[surf valueForKey:@"iLightMap"] intValue];
 			NSMutableDictionary *lightMap = nil;
@@ -105,7 +105,7 @@ enum{
 				self.lightMap = [map.lightMaps valueForKey:[NSString stringWithFormat:@"%i", lightIndex]];
 			}
 			
-			printf("\tDone loading LightMap\n");
+//			printf("\tDone loading LightMap\n");
 			
 			/*if((self.surfFlags & PF_FakeBackdrop) == PF_FakeBackdrop){
 			 if([map.shaders valueForKey:@"SkyBox"]){
@@ -127,7 +127,7 @@ enum{
 			}
 			//}
 			
-			printf("\tDone loading Shader\n");
+//			printf("\tDone loading Shader\n");
 			
 			GLuint vbo;
 			glGenBuffers(1, &vbo);
@@ -204,7 +204,7 @@ enum{
 				free(coordinates);
 			}
 			
-			printf("\tDone loading VBO\n");
+//			printf("\tDone loading VBO\n");
 			
 			GLuint vao = 0;
 			glGenVertexArraysOES(1, &vao);
@@ -239,7 +239,7 @@ enum{
 			glBindVertexArrayOES(0);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 			
-			printf("\tDone loading VAO\n");
+//			printf("\tDone loading VAO\n");
 		}
 		
 		//		int frontZoneIndex = [[node valueForKey:@"iZone1"] intValue];
@@ -261,7 +261,7 @@ enum{
 		//			self.backZone = [map.zones valueForKey:[NSString stringWithFormat:@"%i", backZoneIndex]];
 		//		}
 		
-		printf("Done loading node.\n");
+//		printf("Done loading node.\n");
 		
 		int frontInd = [[node valueForKey:@"iFront"] intValue];
 		int backInd = [[node valueForKey:@"iBack"] intValue];
@@ -297,7 +297,7 @@ enum{
 	return self;
 }
 
-- (void)drawWithMatrix:(Matrix3D)mat camPos:(Vector3D)camPos nonSolid:(BOOL)nonSolid{
+- (void)drawWithMatrix:(Matrix3D)mat frustum:(UNRFrustum)frustum camPos:(Vector3D)camPos nonSolid:(BOOL)nonSolid{
 	NSMutableDictionary *state = [NSMutableDictionary dictionary];
 	
 	//[state setValue: forKey:@"zone"];
@@ -317,7 +317,7 @@ enum{
 		glDisable(GL_BLEND);
 	}
 	
-	[self drawWithState:state matrix:mat camPos:&camPos];
+	[self drawWithState:state frustum:frustum camPos:&camPos];
 	
 //	[state setValue:[NSNumber numberWithBool:YES] forKey:@"nonSolid"];
 //	glEnable(GL_BLEND);
@@ -325,7 +325,7 @@ enum{
 //	[self drawWithState:state matrix:mat camPos:&camPos];
 }
 
-- (void)drawWithState:(NSMutableDictionary *)state matrix:(Matrix3D)mat camPos:(Vector3D *)camPos{
+- (void)drawWithState:(NSMutableDictionary *)state frustum:(UNRFrustum)frustum camPos:(Vector3D *)camPos{
 	/*#if defined(DEBUG)
 	 if(![self.shader validate]){
 	 NSLog(@"Failed to validate program: %d", self.shader.program);
@@ -343,7 +343,7 @@ enum{
 	
 	if([[state valueForKey:@"shouldBoundTest"] boolValue] == YES){
 		//do the bounding box test, only draw if it succedes, set the shouldBoundTest to whether it fully passed, or only partly passed
-		CollType culling = [self.renderBox classify:mat];
+		CollType culling = [self.renderBox classify:frustum];
 		if(culling == C_In){
 			[state setValue:[NSNumber numberWithBool:NO] forKey:@"shouldBoundTest"];
 		}else if(culling == C_Out){
@@ -356,14 +356,14 @@ enum{
 	if(shouldDraw){
 		//float dist = Vector3DDot(self.normal, Vector3DSubtract(*camPos, self.origin));
 		float dist = Vector4DDistance(self.plane, *camPos);
-		BOOL nonSolid = [[state valueForKey:@"nonSolid"] boolValue];
 		if(dist < 0.0f){
-			[self.front drawWithState:state matrix:mat camPos:camPos];
+			[self.front drawWithState:state frustum:frustum camPos:camPos];
 		}else{
-			[self.back drawWithState:state matrix:mat camPos:camPos];
+			[self.back drawWithState:state frustum:frustum camPos:camPos];
 		}
 		
 		if((self.surfFlags & PF_TwoSided) || (dist > 0.0f)){
+			BOOL nonSolid = [[state valueForKey:@"nonSolid"] boolValue];
 			if((self.surfFlags & PF_Invisible) != PF_Invisible && nonSolid == ((self.surfFlags & PF_NotSolid) != 0)){
 				glBindVertexArrayOES(self.vao);
 				
@@ -384,13 +384,13 @@ enum{
 				glDrawArrays(GL_TRIANGLE_FAN, 0, self.vertCount);
 			}
 			
-			[self.coPlanar drawWithState:state matrix:mat camPos:camPos];
+			[self.coPlanar drawWithState:state frustum:frustum camPos:camPos];
 		}
 		
 		if(dist < 0.0f){
-			[self.back drawWithState:state matrix:mat camPos:camPos];
+			[self.back drawWithState:state frustum:frustum camPos:camPos];
 		}else{
-			[self.front drawWithState:state matrix:mat camPos:camPos];
+			[self.front drawWithState:state frustum:frustum camPos:camPos];
 		}
 	}
 }

@@ -13,6 +13,7 @@
 
 #import "Matrix3D.h"
 #import "Vector3D.h"
+#import "UNRFrustum.h"
 
 @class UNRNode, UNRCamera;
 
@@ -21,7 +22,7 @@
 }
 
 - (void)updateWithTimestep:(float)dt;
-- (void)drawWithRootNode:(UNRNode *)rootNode camera:(UNRCamera *)cam projMat:(Matrix3D)projection;
+- (void)drawWithRootNode:(UNRNode *)rootNode frustum:(UNRFrustum)frustum camera:(UNRCamera *)cam projMat:(Matrix3D)projection;
 
 @property(nonatomic, retain) UNRCamera *cam;
 @property(nonatomic, assign) float drX, drY, drZ;

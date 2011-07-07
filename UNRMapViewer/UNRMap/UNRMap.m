@@ -18,6 +18,7 @@
 #import "UNRCamera.h"
 #import "Matrix3D.h"
 #import "Vector3D.h"
+#import "UNRFrustum.h"
 
 @interface UNRMap()
 
@@ -198,20 +199,30 @@
 	Matrix3D res;
 	Matrix3DMultiply(projection, modelView, res);
 	
+	Matrix3D frustumRes;
+	Matrix3DIdentity(modelView);
+	Matrix3DRotateX(modelView, 90.0f);
+	
+	Matrix3DMultiply(projection, modelView, frustumRes);
+	
+	UNRFrustum frustum;
+	UNRFrustumCreate(frustum, frustumRes);
+	
 	glStencilFunc(GL_ALWAYS, 1, UINT_MAX);
 	glStencilOp(GL_ZERO, GL_ZERO, GL_ZERO);
 	
 	Vector3D camPos = self.cam.pos;
+	camPos = Vector3DCreateEmpty();
 	glDepthRangef(0.5f, 1.0f);
 	glDepthMask(GL_TRUE);
-	[self.rootNode drawWithMatrix:res camPos:camPos nonSolid:NO];
+	[self.rootNode drawWithMatrix:res frustum:frustum camPos:camPos nonSolid:NO];
 	
 	glDepthRangef(0.0f, 0.5f);
 	[self.cubeMap updateWithTimestep:dt];
-	[self.cubeMap drawWithRootNode:self.rootNode camera:self.cam projMat:projection];
+	[self.cubeMap drawWithRootNode:self.rootNode frustum:frustum camera:self.cam projMat:projection];
 	
 	glDepthRangef(0.5f, 1.0f);
-	[self.rootNode drawWithMatrix:res camPos:camPos nonSolid:YES];
+	[self.rootNode drawWithMatrix:res frustum:frustum camPos:camPos nonSolid:YES];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

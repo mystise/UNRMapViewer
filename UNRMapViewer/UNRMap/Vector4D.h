@@ -26,6 +26,7 @@ float Vector4DDot(Vector4D vec1, Vector4D vec2);
 Vector4D Vector4DDivide(Vector4D vec, float scale);
 Vector4D Vector4DNegation(Vector4D vec);
 Vector4D Vector4DNormalize(Vector4D vec);
+Vector4D Vector4DPlaneNormalize(Vector4D vec);
 float Vector4DDistance(Vector4D plane, Vector3D point);
 void Vector4DAddEqual(Vector4D *vec1, Vector4D vec2);
 void Vector4DSubEqual(Vector4D *vec1, Vector4D vec2);

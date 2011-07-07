@@ -290,6 +290,16 @@ void printLightType(int lType){
 		tex.width = [[lightMap valueForKey:@"uClamp"] unsignedIntValue]; //width and height are not necessarily powers of two
 		tex.height = [[lightMap valueForKey:@"vClamp"] unsignedIntValue];
 		int dataOffset = [[lightMap valueForKey:@"dataOffset"] unsignedIntValue];
+		float lightUScale = [[lightMap valueForKey:@"uScale"] floatValue];
+		float lightVScale = [[lightMap valueForKey:@"vScale"] floatValue];
+		Vector3D lightPan = Vector3DCreateWithDictionary([lightMap valueForKey:@"pan"]);
+		//int lightScale = (-lightPan.x + 0.5f*lightUScale)/(lightUScale*tex.width);
+		//int dx = tex.width*lightScale;
+		
+		// - lightPan.x + 0.5f*lightUScale)/(lightUScale*self.lightMap.width)
+		//value ranges from 0 to 1
+		
+		int lightScaleV = ((int)-lightPan.y)/[tex height];
 		
 		NSMutableArray *mapLights = [NSMutableArray array];
 		
@@ -332,6 +342,7 @@ void printLightType(int lType){
 					for(int y = 0; y < lightCount; y++){
 						//load the light data
 						Byte hue = 0, saturation = 255, value = 64, radius = 64;
+						Vector3D lightPos;
 						NSMutableArray *currentLight = [[[mapLights objectAtIndex:y] objectData] valueForKey:@"props"];
 						{
 							UNRProperty *brightProp = [currentLight valueForKey:@"LightBrightness"];
@@ -353,6 +364,11 @@ void printLightType(int lType){
 							if(radProp){
 								radius = [radProp.manager loadByte];
 							}
+							
+							UNRProperty *location = [currentLight valueForKey:@"Location"];
+							lightPos.x = [location.manager loadFloat];
+							lightPos.y = [location.manager loadFloat];
+							lightPos.z = [location.manager loadFloat];
 						}
 						/*for(UNRProperty *prop in currentLight){
 							DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
@@ -373,6 +389,9 @@ void printLightType(int lType){
 						 printf("\n");
 						 }*/
 						color rgb = hsvToRGB(hue, saturation, value);
+						
+						Vector3D initDisp = Vector3DSubtract(node.origin, lightPos);
+						int dx, dy;
 						
 						for(int i = 0; i < tex.height; i++){
 							for(int j = 0; j < tex.width; j+=8){

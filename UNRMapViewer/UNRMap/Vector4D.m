@@ -62,6 +62,16 @@ Vector4D Vector4DNormalize(Vector4D vec){
 	return Vector4DDivide(vec, Vector4DMagnitude(vec));
 }
 
+Vector4D Vector4DPlaneNormalize(Vector4D vec){
+	float mag = sqrtf(vec.x*vec.x + vec.y*vec.y + vec.z*vec.z);
+	Vector4D retVec;
+	retVec.x = vec.x/mag;
+	retVec.y = vec.y/mag;
+	retVec.z = vec.z/mag;
+	retVec.w = vec.w;
+	return retVec;
+}
+
 float Vector4DDistance(Vector4D plane, Vector3D point){
 	return plane.x*point.x + plane.y*point.y + plane.z*point.z - plane.w;
 }

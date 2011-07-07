@@ -31,7 +31,7 @@
 	self.cam.rotZ += self.drZ*dt;
 }
 
-- (void)drawWithRootNode:(UNRNode *)rootNode camera:(UNRCamera *)cam projMat:(Matrix3D)projection{
+- (void)drawWithRootNode:(UNRNode *)rootNode frustum:(UNRFrustum)frustum camera:(UNRCamera *)cam projMat:(Matrix3D)projection{
 	//create a matrix from the camPos and the rotation
 	//draw the rootNode with the matrix
 	
@@ -48,8 +48,8 @@
 	glStencilFunc(GL_EQUAL, 1, UINT_MAX);
 	glStencilMask(0);
 	Vector3D camPos = self.cam.pos;
-	[rootNode drawWithMatrix:mat camPos:camPos nonSolid:NO];
-	[rootNode drawWithMatrix:mat camPos:camPos nonSolid:YES];
+	[rootNode drawWithMatrix:mat frustum:frustum camPos:camPos nonSolid:NO];
+	[rootNode drawWithMatrix:mat frustum:frustum camPos:camPos nonSolid:YES];
 	glStencilFunc(GL_ALWAYS, 1, UINT_MAX);
 	glStencilMask(UINT_MAX);
 }

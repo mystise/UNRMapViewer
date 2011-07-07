@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49156E2813C55D0B00A37F6D /* UNRFrustum.m in Sources */ = {isa = PBXBuildFile; fileRef = 49156E2713C55D0900A37F6D /* UNRFrustum.m */; };
 		493320AC13932B40007B08F0 /* UNRMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 493320AB13932B40007B08F0 /* UNRMap.m */; };
 		493AE5D31388324200591592 /* UNRTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5B71388324200591592 /* UNRTexture.m */; };
 		493E72C913AD6127008C2E78 /* SkyBox.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 493E72C713AD6127008C2E78 /* SkyBox.fsh */; };
@@ -71,6 +72,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		49156E2613C55D0800A37F6D /* UNRFrustum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRFrustum.h; sourceTree = "<group>"; };
+		49156E2713C55D0900A37F6D /* UNRFrustum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRFrustum.m; sourceTree = "<group>"; };
 		493320AA13932B40007B08F0 /* UNRMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRMap.h; sourceTree = "<group>"; };
 		493320AB13932B40007B08F0 /* UNRMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRMap.m; sourceTree = "<group>"; };
 		493AE5B61388324200591592 /* UNRTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRTexture.h; sourceTree = "<group>"; };
@@ -220,6 +223,8 @@
 				49AAFFCF13BD7C0B002D7A41 /* Vector3D.m */,
 				49AAFFCC13BCF899002D7A41 /* Vector2D.h */,
 				49AAFFD113BD7C62002D7A41 /* Vector2D.m */,
+				49156E2613C55D0800A37F6D /* UNRFrustum.h */,
+				49156E2713C55D0900A37F6D /* UNRFrustum.m */,
 			);
 			path = UNRMap;
 			sourceTree = "<group>";
@@ -505,6 +510,7 @@
 				49AAFFD513BE31B2002D7A41 /* Vector4D.m in Sources */,
 				49AAFFD813BE349A002D7A41 /* UNRZone.m in Sources */,
 				494158BA13BEC59F008F58C9 /* UNRBoundingBox.m in Sources */,
+				49156E2813C55D0B00A37F6D /* UNRFrustum.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

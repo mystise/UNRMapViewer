@@ -9,12 +9,14 @@
 #import <Foundation/Foundation.h>
 
 #import "Vector3D.h"
+#import "Vector4D.h"
 #import "Matrix3D.h"
+#import "UNRFrustum.h"
 
 typedef enum{
-	C_Out,
-	C_In,
-	C_Part
+	C_Out = -1,
+	C_In = 0,
+	C_Part = 1
 }CollType;
 
 @interface UNRBoundingBox : NSObject {
@@ -23,7 +25,7 @@ typedef enum{
 
 - (id)initWithBox:(NSMutableDictionary *)box;
 
-- (CollType)classify:(Matrix3D)frustum;
+- (CollType)classify:(UNRFrustum)frustum;
 
 @property(nonatomic, assign) Vector3D min, max;
 

@@ -155,7 +155,7 @@
 - (void)drawFrame{
 	[(EAGLView *)self.view setFramebuffer];
 	
-	glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+	glClear(GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
 	
 	[self.map draw:self.aspect withTimestep:animationFrameInterval/60.0f];
 	

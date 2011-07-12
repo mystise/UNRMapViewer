@@ -11,6 +11,70 @@
 #import "UNRExport.h"
 #import "UNRNode.h"
 
+#define USE_32_Bit 0
+
+#if USE_32_Bit
+typedef struct{
+	Byte r, g, b, a;
+}color;
+
+color ColorCreate(Byte r, Byte g, Byte b, Byte a){
+	color retCol;
+	retCol.r = r;
+	retCol.g = g;
+	retCol.b = b;
+	retCol.a = a;
+	return retCol;
+}
+#else
+#pragma pack(push)
+#pragma pack(2)
+typedef struct{
+	union{
+		unsigned short color;
+		struct{
+			Byte a:1, b:5, g:5, r:5;
+		};
+	};
+}color;
+#pragma pack(pop)
+
+color ColorCreate(int r, int g, int b, int a){
+	color retCol = {0};
+	retCol.r = r*31/255;
+	retCol.g = g*31/255;
+	retCol.b = b*31/255;
+	retCol.a = a/255;
+	return retCol;
+}
+
+color ColorAdd(color col1, color col2){
+	color retCol;
+	
+	Byte added = col1.r + col2.r;
+	if(added > 31){
+		added = 31;
+	}
+	retCol.r = added;
+	
+	added = col1.g + col2.g;
+	if(added > 31){
+		added = 31;
+	}
+	retCol.g = added;
+	
+	added = col1.b + col2.b;
+	if(added > 31){
+		added = 31;
+	}
+	retCol.b = added;
+	
+	retCol.a = 1;
+	
+	return retCol;
+}
+#endif
+
 @implementation UNRTexture
 
 @synthesize width = width_, height = height_, glTex = glTex_;
@@ -32,6 +96,10 @@
 			
 			UNRProperty *paletteProp = [props valueForKey:@"Palette"];
 			UNRExport *paletteObj = (UNRExport *)paletteProp.object;
+			if([paletteObj isKindOfClass:[UNRImport class]]){
+				UNRImport *obj2 = (UNRImport *)paletteObj;
+				paletteObj = obj2.obj;
+			}
 			palette = [paletteObj.objectData valueForKey:@"palette"];
 			
 			UNRProperty *ubit = [props valueForKey:@"UBits"];
@@ -46,27 +114,6 @@
 				correctMipCount = vbits;
 			}
 		}
-		
-		/*for(UNRProperty *prop in [obj.objectData valueForKey:@"props"]){
-			DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
-			if([[prop.name.string lowercaseString] isEqualToString:@"format"]){
-				format = [manager loadByte];
-			}else if([[prop.name.string lowercaseString] isEqualToString:@"palette"]){
-				UNRExport *obj = (UNRExport *)prop.object;
-				palette = [obj.objectData valueForKey:@"palette"];
-			}else if([[prop.name.string lowercaseString] isEqualToString:@"ubits"]){
-				Byte uBits = [manager loadByte];
-				if(uBits > correctMipCount){
-					correctMipCount = uBits;
-				}
-			}else if([[prop.name.string lowercaseString] isEqualToString:@"vbits"]){
-				Byte vBits = [manager loadByte];
-				if(vBits > correctMipCount){
-					correctMipCount = vBits;
-				}
-			}
-			[manager release];
-		}*/
 		
 		if(startMip >= correctMipCount){
 			startMip = correctMipCount-1;
@@ -103,10 +150,10 @@
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minMode);
 		
 		/*if([[obj valueForKey:@"mipMapCount"] intValue] != correctMipCount){
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		}else{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
-		}*/
+		 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		 }else{
+		 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+		 }*/
 		
 		for(int i = startMip; i < [[obj valueForKey:@"mipMapCount"] intValue]; i++){
 			NSMutableDictionary *texLevel = [[obj valueForKey:@"mipMapLevels"] objectAtIndex:i];
@@ -134,7 +181,8 @@
 								colorA = [NSNumber numberWithUnsignedChar:0xFF];
 							}
 						}
-						glTexData[i*levelWidth + j] = (color){[colorR unsignedCharValue], [colorG unsignedCharValue], [colorB unsignedCharValue], [colorA unsignedCharValue]};
+						//(color){[colorR unsignedCharValue]*63/255, [colorG unsignedCharValue]*63/255, [colorB unsignedCharValue]*63/255, [colorA unsignedCharValue]*1/255}
+						glTexData[i*levelWidth + j] = ColorCreate([colorR unsignedCharValue], [colorG unsignedCharValue], [colorB unsignedCharValue], [colorA unsignedCharValue]);
 					}
 				}
 			}else{
@@ -142,7 +190,14 @@
 			}
 			[manager release];
 			
+			//glPixelStorei(GL_PACK_ALIGNMENT, 2);
+			//glPixelStorei(GL_UNPACK_ALIGNMENT, 2);
+			
+#if USE_32_Bit
 			glTexImage2D(GL_TEXTURE_2D, i-startMip, GL_RGBA, levelWidth, levelHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, glTexData);
+#else
+			glTexImage2D(GL_TEXTURE_2D, i-startMip, GL_RGBA, levelWidth, levelHeight, 0, GL_RGBA, GL_UNSIGNED_SHORT_5_5_5_1, glTexData);
+#endif
 			
 			free(glTexData);
 		}
@@ -167,10 +222,7 @@ color hsvToRGB(Byte inH, Byte inS, Byte inV) {
 	float r = 0.0f, g = 0.0f, b = 0.0f;
 	int i;
 	if(inS == 0xFF){
-		col.r = inV;
-		col.g = inV;
-		col.b = inV;
-		col.a = 0xFF;
+		col = ColorCreate(inV, inV, inV, 0xFF);
 	}else{
 		h = (float)inH/0xFF * 360.0f;
 		s = 1.0f - (float)inS/0xFF;
@@ -209,10 +261,7 @@ color hsvToRGB(Byte inH, Byte inS, Byte inV) {
 			g = p;
 			b = q;
 		}
-		col.r = r*0xFF;
-		col.g = g*0xFF;
-		col.b = b*0xFF;
-		col.a = 0xFF;
+		col = ColorCreate(r*255, g*255, b*255, 0xFF);
 	}
 	return col;
 }
@@ -284,24 +333,17 @@ void printLightType(int lType){
 	}
 }
 
-+ (id)textureWithLightMap:(NSMutableDictionary *)lightMap data:(NSMutableData *)data lights:(NSMutableArray *)lights node:(UNRNode *)node{
++ (id)textureWithLightMap:(NSMutableDictionary *)lightMap data:(NSMutableData *)data lights:(NSMutableArray *)lights node:(struct UNRNode *)node{
 	UNRTexture *tex = [[self alloc] init];
 	if(tex){
 		tex.width = [[lightMap valueForKey:@"uClamp"] unsignedIntValue]; //width and height are not necessarily powers of two
 		tex.height = [[lightMap valueForKey:@"vClamp"] unsignedIntValue];
 		int dataOffset = [[lightMap valueForKey:@"dataOffset"] unsignedIntValue];
-		float lightUScale = [[lightMap valueForKey:@"uScale"] floatValue];
-		float lightVScale = [[lightMap valueForKey:@"vScale"] floatValue];
-		Vector3D lightPan = Vector3DCreateWithDictionary([lightMap valueForKey:@"pan"]);
-		//int lightScale = (-lightPan.x + 0.5f*lightUScale)/(lightUScale*tex.width);
-		//int dx = tex.width*lightScale;
 		
-		// - lightPan.x + 0.5f*lightUScale)/(lightUScale*self.lightMap.width)
-		//value ranges from 0 to 1
-		
-		int lightScaleV = ((int)-lightPan.y)/[tex height];
-		
-		NSMutableArray *mapLights = [NSMutableArray array];
+		Vector3D lightU = node->uVec;
+		Vector3D lightV = node->vVec;
+		Vector3D dx = Vector3DMultiply(Vector3DNormalize(lightU), 32.0f/Vector3DMagnitude(lightU));
+		Vector3D dy = Vector3DMultiply(Vector3DNormalize(lightV), 32.0f/Vector3DMagnitude(lightV));
 		
 		GLuint texture;
 		glGenTextures(1, &texture);
@@ -316,9 +358,10 @@ void printLightType(int lType){
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		
-		if(!(node.surfFlags & PF_NoShadows)){
+		if(!(node->surfFlags & PF_NoShadows)){
 			int iLightActors = [[lightMap valueForKey:@"iLightActors"] intValue];
 			if(iLightActors != -1){
+				NSMutableArray *mapLights = [NSMutableArray array];
 				id light = [lights objectAtIndex:iLightActors];
 				for(int i = 1; ![light isKindOfClass:[NSNull class]] && i+iLightActors < [lights count]; i++){
 					if([mapLights count] > 0){
@@ -335,12 +378,26 @@ void printLightType(int lType){
 				int texSize = tex.height*nextWidth/8;
 				int bytesToLoad = texSize*lightCount;
 				if(bytesToLoad + dataOffset <= [data length]){
+					
+					Byte *coverage = calloc(tex.width*tex.height, sizeof(Byte));
+					color *texDat = calloc(tex.width*tex.height, sizeof(color));
+					
 					Byte *rawDat;
 					NSData *subDat = [data subdataWithRange:NSMakeRange(dataOffset, bytesToLoad)];
 					rawDat = (Byte *)[subDat bytes];
-					color *texDat = calloc(tex.width*tex.height, sizeof(color));
 					for(int y = 0; y < lightCount; y++){
-						//load the light data
+						for(int i = 0; i < tex.height; i++){
+							for(int j = 0; j < tex.width; j+=8){
+								for(int x = 0; x < 8 && x+j < tex.width; x++){
+									int rawIndex = i*nextWidth/8 + j/8 + y*texSize;
+									int texIndex = i*tex.width + j+x;
+									Byte newDat = ((rawDat[rawIndex]>>x)&0x01);
+									
+									coverage[texIndex] = newDat;
+								}
+							}
+						}
+						
 						Byte hue = 0, saturation = 255, value = 64, radius = 64;
 						Vector3D lightPos;
 						NSMutableArray *currentLight = [[[mapLights objectAtIndex:y] objectData] valueForKey:@"props"];
@@ -348,103 +405,136 @@ void printLightType(int lType){
 							UNRProperty *brightProp = [currentLight valueForKey:@"LightBrightness"];
 							if(brightProp){
 								value = [brightProp.manager loadByte];
+								brightProp.manager.curPos = 0;
 							}
 							
 							UNRProperty *satProp = [currentLight valueForKey:@"LightSaturation"];
 							if(satProp){
 								saturation = [satProp.manager loadByte];
+								satProp.manager.curPos = 0;
 							}
 							
 							UNRProperty *hueProp = [currentLight valueForKey:@"LightHue"];
 							if(hueProp){
 								hue = [hueProp.manager loadByte];
+								hueProp.manager.curPos = 0;
 							}
 							
 							UNRProperty *radProp = [currentLight valueForKey:@"LightRadius"];
 							if(radProp){
 								radius = [radProp.manager loadByte];
+								radProp.manager.curPos = 0;
 							}
 							
 							UNRProperty *location = [currentLight valueForKey:@"Location"];
 							lightPos.x = [location.manager loadFloat];
 							lightPos.y = [location.manager loadFloat];
 							lightPos.z = [location.manager loadFloat];
+							location.manager.curPos = 0;
 						}
-						/*for(UNRProperty *prop in currentLight){
-							DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
-							if([prop.name.string isEqualToString:@"LightBrightness"]){
-								value = [manager loadByte];
-							}else if([prop.name.string isEqualToString:@"LightSaturation"]){
-								saturation = [manager loadByte];
-							}else if([prop.name.string isEqualToString:@"LightHue"]){
-								hue = [manager loadByte];
-							}else if([prop.name.string isEqualToString:@"LightRadius"]){
-								radius = [manager loadByte];
-							}
-							[manager release];
-						}*/
 						/*else if([prop.name.string isEqualToString:@"LightEffect"]){
 						 printf("\t");
 						 printLightType([manager loadByte]);
 						 printf("\n");
 						 }*/
+						
 						color rgb = hsvToRGB(hue, saturation, value);
 						
-						Vector3D initDisp = Vector3DSubtract(node.origin, lightPos);
-						int dx, dy;
+						Vector3D initDisp = Vector3DSubtract(node->origin, lightPos);
 						
 						for(int i = 0; i < tex.height; i++){
-							for(int j = 0; j < tex.width; j+=8){
-								for(int x = 0; x < 8 && x+j < tex.width; x++){
-									int texIndex = i*tex.width + j+x;
-									int rawIndex = i*nextWidth/8 + j/8 + y*texSize;
-									float newDat = ((rawDat[rawIndex]>>x)&0x01);
-									
-									color newColor = texDat[texIndex];
-									newColor.r += newDat*rgb.r;
-									newColor.g += newDat*rgb.g;
-									newColor.b += newDat*rgb.b;
-									newColor.a = 0xFF;
-									/*if(newColor.r == 0x00){
-									 newColor.r -= value/2;
-									 newColor.g -= value/2;
-									 newColor.b -= value/2;
-									 or
-									 newColor.r /= 2;
-									 newColor.g /= 2;
-									 newColor.b /= 2;
-									 }*/
-									
-									texDat[texIndex] = newColor;
+							for(int j = 0; j < tex.width; j++){
+								int texIndex = i*tex.width + j;
+								float cov = 0.0f;
+								{
+									float empty = coverage[texIndex]/14.0f;
+									float texData2[9] = {
+										j==0||i==0?empty:coverage[texIndex-tex.width-1]/14.0f, i==0?empty:coverage[texIndex-tex.width]/7.0f, i==0||j==tex.width-1?empty:coverage[texIndex-tex.width+1]/14.0f,
+										j==0?empty:coverage[texIndex-1]/7.0f, coverage[texIndex]/7.0f, j==tex.width-1?empty:coverage[texIndex+1]/7.0f,
+										j==0||i==tex.height-1?empty:coverage[texIndex+tex.width-1]/14.0f, i==tex.height-1?empty:coverage[texIndex+tex.width]/7.0f, j==tex.width-1||i==tex.height-1?empty:coverage[texIndex+tex.width+1]/14.0f
+									};
+									for(int i = 0; i < 9; i++){
+										cov += texData2[i];
+									}
 								}
+								Vector3D pos = Vector3DAdd(initDisp, Vector3DAdd(Vector3DMultiply(dy, i-tex.height+1), Vector3DMultiply(dx, j)));
+								float dist = Vector3DDot(pos, node->normal);
+								if(dist > radius){
+									dist = radius;
+								}
+								float dot = Vector3DDot(Vector3DNormalize(pos), Vector3DNormalize(node->normal));
+								float oneOver = dist/radius;
+								//float oneOver2 = dot*radius;
+								
+								color newColor;
+								color oldColor = texDat[texIndex];
+								//newColor.r += newDat*rgb.r*dot;
+								//newColor.g += newDat*rgb.g*dot;
+								//newColor.b += newDat*rgb.b*dot;
+								
+								newColor.r = cov*dot*rgb.r; //mult by oneOver, oneOver2 or something
+								newColor.g = cov*dot*rgb.g;
+								newColor.b = cov*dot*rgb.b;
+								newColor.a = 1;
+								
+								texDat[texIndex] = ColorAdd(newColor, oldColor);
 							}
 						}
+						
+						/*for(int i = 0; i < tex.height; i++){
+						 for(int j = 0; j < tex.width; j+=8){
+						 for(int x = 0; x < 8 && x+j < tex.width; x++){
+						 int texIndex = i*tex.width + j+x;
+						 int rawIndex = i*nextWidth/8 + j/8 + y*texSize;
+						 float newDat = ((rawDat[rawIndex]>>x)&0x01);
+						 
+						 Vector3D pos = Vector3DAdd(initDisp, Vector3DAdd(Vector3DMultiply(dy, i-tex.height+1), Vector3DMultiply(dx, j+x)));
+						 //float dist = Vector3DDot(pos, node->normal);
+						 float dot = Vector3DDot(Vector3DNormalize(pos), Vector3DNormalize(node->normal));
+						 if(dot != 0){
+						 //float oneOver = dist/radius;
+						 //float oneOver2 = dot*radius;
+						 
+						 color newColor = texDat[texIndex];
+						 //newColor.r += newDat*rgb.r*dot;
+						 //newColor.g += newDat*rgb.g*dot;
+						 //newColor.b += newDat*rgb.b*dot;
+						 
+						 newColor.r += dot*31*newDat;
+						 newColor.g += dot*31*newDat;
+						 newColor.b += dot*31*newDat;
+						 newColor.a = 1;
+						 
+						 texDat[texIndex] = newColor;
+						 }
+						 }
+						 }
+						 }*/
 					}
 					
-//					printf("Lightmap: w:%i h:%i lc:%i\n\t", tex.width, tex.height, lightCount);
-//					printf("texData:\n\t");
-//					for(int i = tex.height-1; i >= 0; i--){
-//						for(int j = 0; j < tex.width; j++){
-//							printf(" %2x", texDat[i*tex.width+j].r);
-//						}
-//						printf("\n\t");
-//					}
-//					
+					//texDat[0] = ColorCreate(0xFF, 0x00, 0x00, 0xFF);
+					
+					/*texDat[0] = ColorCreate(0xFF, 0x00, 0xFF, 0xFF);
+					 texDat[tex.width-1] = ColorCreate(0xFF, 0xFF, 0x00, 0xFF);
+					 texDat[tex.width*tex.height-1] = ColorCreate(0xFF, 0x00, 0x00, 0xFF);
+					 texDat[tex.width*tex.height-tex.width] = ColorCreate(0xFF, 0xFF, 0xFF, 0xFF);*/
+					
+#if USE_32_Bit
 					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex.width, tex.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texDat);
-				}//else{
-//					GLubyte texDat = 0xFF/2;
-//					glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
-//					printf("\tfailed!!! not enough data!\n");
-//				}
+#else
+					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex.width, tex.height, 0, GL_RGBA, GL_UNSIGNED_SHORT_5_5_5_1, texDat);
+#endif
+					
+					free(coverage);
+					free(texDat);
+				}
 			}else{
 				GLubyte texDat = 0x00;
 				glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
-				//printf("very dark...\n");
 			}
 		}else{
 			GLubyte texDat = 0xFF/2;
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
-			//printf("unlit.\n");
 		}
 	}
 	return [tex autorelease];

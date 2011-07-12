@@ -34,7 +34,7 @@
 		eaglLayer.opaque = TRUE;
 		eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
 										[NSNumber numberWithBool:FALSE], kEAGLDrawablePropertyRetainedBacking,
-										kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat,
+										kEAGLColorFormatRGB565, kEAGLDrawablePropertyColorFormat, //kEAGLColorFormatRGBA8
 										nil];
 	}
 	
@@ -70,6 +70,7 @@
 		// Create color render buffer and allocate backing store.
 		glGenRenderbuffers(1, &colorRenderbuffer);
 		glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
+		//TODO: use 16-bit graphics ???
 		[context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer *)self.layer];
 		GLint framebufferWidth = 0;
 		GLint framebufferHeight = 0;

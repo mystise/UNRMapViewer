@@ -68,12 +68,12 @@ Vector4D Vector4DPlaneNormalize(Vector4D vec){
 	retVec.x = vec.x/mag;
 	retVec.y = vec.y/mag;
 	retVec.z = vec.z/mag;
-	retVec.w = vec.w;
+	retVec.w = vec.w/mag;
 	return retVec;
 }
 
 float Vector4DDistance(Vector4D plane, Vector3D point){
-	return plane.x*point.x + plane.y*point.y + plane.z*point.z - plane.w;
+	return plane.x*point.x + plane.y*point.y + plane.z*point.z + plane.w;
 }
 
 void Vector4DAddEqual(Vector4D *vec1, Vector4D vec2){

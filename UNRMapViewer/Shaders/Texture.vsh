@@ -17,6 +17,7 @@ varying vec2 lightCoord;
 
 void main(){
 	gl_Position = modelViewProjection*position;
+	gl_PointSize = 0.0;
 	texCoord = inTexCoord;
 	lightCoord = inLightCoord;
 }

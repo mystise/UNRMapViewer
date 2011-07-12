@@ -21,7 +21,7 @@
 
 @class UNRFile, UNRTexture, UNRShader, UNRMap, UNRBoundingBox;//UNRZone
 
-@interface UNRNode : NSObject {
+/*@interface UNRNode : NSObject {
 	
 }
 
@@ -47,7 +47,35 @@
 @property(nonatomic, retain) UNRShader *shader;
 @property(nonatomic, retain) UNRBoundingBox *renderBox;
 
-@end
+@end*/
+
+struct UNRNode;
+
+typedef struct{
+	GLuint tex, lightmap;
+	int currentFlags;
+	BOOL shouldBoundTest, nonSolid, backDrop;
+}UNRState;
+
+typedef struct UNRNode{
+	int vertCount;
+	GLuint vbo, vao;
+	Vector3D origin, uVec, vVec, normal;
+	Vector4D plane;
+	int surfFlags;
+	int strideLength;
+	UNRTexture *tex, *lightMap;
+	struct UNRNode *front, *back, *coPlanar;
+	UNRShader *shader;
+	UNRBoundingBox *renderBox;
+	UNRState *state;
+}UNRNode;
+
+UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib);
+
+void UNRNodeDraw(UNRNode *root, Matrix3D mat, UNRFrustum frustum, Vector3D camPos, BOOL nonSolid, BOOL backDrop);
+
+void UNRNodeDelete(UNRNode *node);
 
 //Note: ripped out of Unreal public headers
 // Flags describing effects and properties of a Bsp polygon.

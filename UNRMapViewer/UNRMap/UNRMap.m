@@ -69,7 +69,6 @@
 					if([self.actors valueForKey:className] == nil){
 						[self.actors setValue:[NSMutableArray array] forKey:className];
 					}
-					//[obj loadPlugin:file];
 					obj.data = nil;
 					[[self.actors valueForKey:className] addObject:[obj.objectData valueForKey:@"props"]];
 				}
@@ -88,9 +87,10 @@
 									   self, @"map",
 									   [NSNumber numberWithInt:0], @"iNode",
 									   nil];
-		UNRNode *node = [[UNRNode alloc] initWithModel:model attributes:attrib];//nodeNumber:0 file:file map:self
+		//UNRNode *node = [[UNRNode alloc] initWithModel:model attributes:attrib];//nodeNumber:0 file:file map:self
+		UNRNode *node = UNRNodeCreate(model, attrib);
 		self.rootNode = node;
-		[node release];
+		//[node release];
 		
 		UNRCubeCamera *cubeCam = [[UNRCubeCamera alloc] init];
 		self.cubeMap = cubeCam;
@@ -109,24 +109,14 @@
 			progress.progress = 0.7f;
 		});
 		NSMutableDictionary *skyBox = nil;
-		//NSMutableDictionary *skyBoxes = [NSMutableDictionary dictionary];
-		//find the skyBoxInfo with highDetail set to 1
 		for(NSMutableDictionary *obj in [self.actors valueForKey:@"SkyZoneInfo"]){
 			UNRProperty *prop = [obj valueForKey:@"bHighDetail"];
 			if(prop.special == YES){
 				skyBox = obj;
-				//[skyBoxes setValue:[obj valueForKey:@"props"] forKey:@"highDetail"];
 			}else if(skyBox == nil){
 				skyBox = obj;
-				//[skyBoxes setValue:[obj valueForKey:@"props"] forKey:@"lowDetail"];
 			}
 		}
-		
-		//		if([skyBoxes valueForKey:@"highDetail"] != nil){
-		//			skyBox = [skyBoxes valueForKey:@"highDetail"];
-		//		}else{
-		//			skyBox = [skyBoxes valueForKey:@"lowDetail"];
-		//		}
 		
 		{
 			UNRProperty *location = [skyBox valueForKey:@"Location"];
@@ -157,24 +147,6 @@
 			self.cam.rotZ = [rotation.manager loadInt]*45/8192;
 		}
 		
-		/*for(UNRProperty *prop in [obj valueForKey:@"props"]){
-			DataManager *manager = [[DataManager alloc] initWithFileData:prop.data];
-			if([prop.name.string isEqualToString:@"Location"]){
-				Vector3D camPos;
-				camPos.x = [manager loadFloat];
-				camPos.y = [manager loadFloat];
-				camPos.z = [manager loadFloat];
-				self.cam.pos = camPos;
-			}else if([prop.name.string isEqualToString:@"Rotation"]){
-				self.cam.rotX = [manager loadInt]*45/8192;
-				self.cam.rotY = [manager loadInt]*45/8192;
-				self.cam.rotZ = [manager loadInt]*45/8192;
-			}else{
-				
-			}
-			[manager release];
-		}*/
-		
 		//setup all inventory spots
 	}
 	return self;
@@ -182,11 +154,11 @@
 
 - (void)draw:(float)aspect withTimestep:(float)dt{
 	CGPoint disp = CGPointMake(self.stickPrevPos.x - self.stickPos.x, self.stickPrevPos.y - self.stickPos.y);
-	[self.cam move:Vector3DCreate(disp.y*2.0f*dt, 0.0f, disp.x*2.0f*dt)];
+	[self.cam move:Vector3DCreate(disp.y*3.0f*dt, 0.0f, disp.x*3.0f*dt)];
 	
 	disp = CGPointMake(self.lookPrevPos.x - self.lookPos.x, self.lookPrevPos.y - self.lookPos.y);
-	self.cam.rotX += disp.x/5.0f*dt;
-	self.cam.rotY += -disp.y/5.0f*dt;
+	self.cam.rotX += disp.x/3.0f*dt;
+	self.cam.rotY += -disp.y/3.0f*dt;
 	
 	Matrix3D modelView;
 	Matrix3D projection;
@@ -199,30 +171,31 @@
 	Matrix3D res;
 	Matrix3DMultiply(projection, modelView, res);
 	
-	Matrix3D frustumRes;
+	/*Matrix3D frustumRes;
 	Matrix3DIdentity(modelView);
 	Matrix3DRotateX(modelView, 90.0f);
 	
-	Matrix3DMultiply(projection, modelView, frustumRes);
+	Matrix3DMultiply(projection, modelView, frustumRes);*/
 	
 	UNRFrustum frustum;
-	UNRFrustumCreate(frustum, frustumRes);
+	UNRFrustumCreate(frustum, res);
 	
 	glStencilFunc(GL_ALWAYS, 1, UINT_MAX);
-	glStencilOp(GL_ZERO, GL_ZERO, GL_ZERO);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
 	
 	Vector3D camPos = self.cam.pos;
-	camPos = Vector3DCreateEmpty();
 	glDepthRangef(0.5f, 1.0f);
 	glDepthMask(GL_TRUE);
-	[self.rootNode drawWithMatrix:res frustum:frustum camPos:camPos nonSolid:NO];
+	UNRNodeDraw(self.rootNode, res, frustum, camPos, NO, NO);
+	//[self.rootNode drawWithMatrix:res frustum:frustum camPos:camPos nonSolid:NO];
 	
 	glDepthRangef(0.0f, 0.5f);
 	[self.cubeMap updateWithTimestep:dt];
-	[self.cubeMap drawWithRootNode:self.rootNode frustum:frustum camera:self.cam projMat:projection];
+	[self.cubeMap drawWithRootNode:self.rootNode camera:self.cam projMat:projection];
 	
-	glDepthRangef(0.5f, 1.0f);
-	[self.rootNode drawWithMatrix:res frustum:frustum camPos:camPos nonSolid:YES];
+	//glDepthRangef(0.5f, 1.0f);
+	//[self.rootNode drawWithMatrix:res frustum:frustum camPos:camPos nonSolid:YES];
+	//UNRNodeDraw(self.rootNode, res, frustum, camPos, YES, NO);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -247,14 +220,6 @@
 		}else if(prevPos.x == self.lookPrevPos.x && prevPos.y == self.lookPrevPos.y){
 			self.lookPrevPos = curPos;
 		}
-		/*Vector2D newPoint = [touch locationInView:nil];
-		 Vector2D origPoint = [touch previousLocationInView:nil];
-		 Vector2D disp = newPoint - origPoint;
-		 if(newPoint.y < 512){
-		 self.cam->rotate(disp.x/10.0f, -disp.y/10.0f);
-		 }else{
-		 self.cam->moveRel(Vector3D(disp.y/10.0f, 0.0f, disp.x/10.0f));
-		 }*/
 	}
 }
 
@@ -289,8 +254,12 @@
 	zones_ = nil;
 	[actors_ release];
 	actors_ = nil;
-	[rootNode_ release];
-	rootNode_ = nil;
+	if(rootNode_){
+		UNRNodeDelete(rootNode_);
+		rootNode_ = nil;
+	}
+	//[rootNode_ release];
+	//rootNode_ = nil;
 	[super dealloc];
 }
 

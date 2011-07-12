@@ -15,14 +15,15 @@
 #import "Vector3D.h"
 #import "UNRFrustum.h"
 
-@class UNRNode, UNRCamera;
+@class UNRCamera;
+struct UNRNode;
 
 @interface UNRCubeCamera : NSObject {
     
 }
 
 - (void)updateWithTimestep:(float)dt;
-- (void)drawWithRootNode:(UNRNode *)rootNode frustum:(UNRFrustum)frustum camera:(UNRCamera *)cam projMat:(Matrix3D)projection;
+- (void)drawWithRootNode:(struct UNRNode *)rootNode camera:(UNRCamera *)cam projMat:(Matrix3D)projection;
 
 @property(nonatomic, retain) UNRCamera *cam;
 @property(nonatomic, assign) float drX, drY, drZ;

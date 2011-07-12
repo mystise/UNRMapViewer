@@ -20,13 +20,11 @@ typedef enum{
 }CollType;
 
 @interface UNRBoundingBox : NSObject {
-    
+    Vector3D points[8];
 }
 
 - (id)initWithBox:(NSMutableDictionary *)box;
 
 - (CollType)classify:(UNRFrustum)frustum;
-
-@property(nonatomic, assign) Vector3D min, max;
 
 @end

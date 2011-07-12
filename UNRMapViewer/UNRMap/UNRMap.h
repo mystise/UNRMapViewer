@@ -11,7 +11,8 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-@class UNRFile, UNRNode, UNRCubeCamera, UNRCamera;
+@class UNRFile, UNRCubeCamera, UNRCamera;
+struct UNRNode;
 
 @interface UNRMap : NSObject {
 	
@@ -25,7 +26,7 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
 
-@property(nonatomic, retain) UNRNode *rootNode;
+@property(nonatomic, assign) struct UNRNode *rootNode;
 @property(nonatomic, retain) UNRCubeCamera *cubeMap;
 @property(nonatomic, retain) UNRCamera *cam;
 @property(nonatomic, retain) NSMutableDictionary *textures;

@@ -99,10 +99,8 @@
 									   self, @"map",
 									   [NSNumber numberWithInt:0], @"iNode",
 									   nil];
-		//UNRNode *node = [[UNRNode alloc] initWithModel:model attributes:attrib];//nodeNumber:0 file:file map:self
 		UNRNode *node = UNRNodeCreate(model, attrib);
 		self.rootNode = node;
-		//[node release];
 		
 		UNRCubeCamera *cubeCam = [[UNRCubeCamera alloc] init];
 		self.cubeMap = cubeCam;
@@ -159,6 +157,15 @@
 			self.cam.rotZ = [rotation.manager loadInt]*45/8192;
 		}
 		
+		for(NSMutableDictionary *obj in [self.actors valueForKey:@"InventorySpot"]){
+			printf("Inventory!\n");
+			UNRExport *markedItem = [obj valueForKey:@"markedItem"];
+			if([markedItem isKindOfClass:[UNRImport class]]){
+				UNRImport *item = (UNRImport *)markedItem;
+				markedItem = item.obj;
+			}
+			//what I want is markedItem.class.defaultProperties.mesh and then load that into memory, and release all the rest.
+		}
 		//setup all inventory spots
 	}
 	return self;

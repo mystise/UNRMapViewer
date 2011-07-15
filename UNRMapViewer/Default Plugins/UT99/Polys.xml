@@ -12,8 +12,8 @@
 				<vector name="vertex"/>
 			</array>
 			<int name="polyFlags"/>
-			<objectReference name="actor"/>
-			<objectReference name="texture"/>
+			<compactIndex name="actor"/>
+			<compactIndex name="texture"/>
 			<compactIndex name="itemName"/>
 			<compactIndex name="iLink"/>
 			<compactIndex name="iBrushPoly"/>

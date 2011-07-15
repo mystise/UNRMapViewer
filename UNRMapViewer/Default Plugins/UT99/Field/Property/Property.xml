@@ -3,7 +3,7 @@
 		<short name="arrayDimension"/>
 		<short name="elementSize"/>
 		<int name="propertyFlags"/>
-		<nameReference name="category"/>
+		<compactIndex name="category"/>
 		<if objectValue="propertyFlags" comparator="and" compareValue="32">
 			<short name="replicationOffset"/>
 		</if>

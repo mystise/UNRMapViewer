@@ -7,7 +7,7 @@
 //
 
 #import "UNRObject.h"
-
+#import "UNRScriptParser.h"
 
 @implementation UNRObject
 

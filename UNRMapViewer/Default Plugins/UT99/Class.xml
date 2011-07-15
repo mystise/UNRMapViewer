@@ -10,12 +10,12 @@
 			</if>
 		</if>
 		
-		<objectReference name="superField"/>
-		<objectReference name="nextField"/>
+		<compactIndex name="superField"/>
+		<compactIndex name="nextField"/>
 		
-		<objectReference name="scriptText"/>
-		<objectReference name="firstChild"/>
-		<nameReference name="friendlyName"/>
+		<compactIndex name="scriptText"/>
+		<compactIndex name="firstChild"/>
+		<compactIndex name="friendlyName"/>
 		<int name="line"/>
 		<int name="textPos"/>
 		<int name="scriptSize"/>
@@ -34,22 +34,21 @@
 		<guid name="classGuid"/>
 		<compactIndex name="dependCount"/>
 		<array name="depends" count="dependCount">
-			<objectReference name="class"/>
+			<compactIndex name="class"/> <!-- objectReference -->
 			<int name="deep"/>
 			<int name="scriptTextCRC"/>
 		</array>
 		<compactIndex name="importCount"/>
 		<array name="imports" count="importCount">
-			<objectReference name="import"/>
+			<compactIndex name="import"/> <!-- objectReference -->
 		</array>
 		
 		<if objectValue="file.version" comparator="greater" compareValue="61">
-			<objectReference name="classWithin"/>
+			<compactIndex name="classWithin"/> <!-- objectReference -->
 			<nameReference name="classConfigName"/>
 		</if>
 		<properties name="props"/>
 	</info>
 	<controls>
-		<listControl label="Properties:" input="props.description" size="medium"/>
 	</controls>
 </plugin>

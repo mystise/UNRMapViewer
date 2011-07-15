@@ -322,6 +322,7 @@ Byte loadToken(UNRObject *self, NSMutableData *scriptData, BOOL *done){
 		if(token < 0x70){
 			function = (token & 0x0F) << 8 | [self.manager loadByte];
 		}
+		printf("Native function: %i\n", function);
 	}
 	return token;
 }

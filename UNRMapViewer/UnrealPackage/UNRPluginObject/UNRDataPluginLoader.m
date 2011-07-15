@@ -60,18 +60,20 @@
 	if(url == nil){
 		url = [self.plugins valueForKey:@"object"];
 	}
-	NSXMLParser *parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
-	parser.delegate = reader;
-	[parser parse];
-	[parser release];
-	
-	/*int leftOverData = [reader.obj.manager.fileData length]-reader.obj.manager.curPos;
-	if(leftOverData > 0){
-		[[reader.obj.currentData objectAtIndex:0] setValue:[reader.obj.manager.fileData subdataWithRange:NSMakeRange(reader.obj.manager.curPos, leftOverData)] forKey:@"leftoverData"];
-	}*/
-	
-	object.objectData = [reader.obj.currentData objectAtIndex:0];
-	object.data = nil;
+	if(url != nil){
+		NSXMLParser *parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
+		parser.delegate = reader;
+		[parser parse];
+		[parser release];
+		
+		/*int leftOverData = [reader.obj.manager.fileData length]-reader.obj.manager.curPos;
+		 if(leftOverData > 0){
+		 [[reader.obj.currentData objectAtIndex:0] setValue:[reader.obj.manager.fileData subdataWithRange:NSMakeRange(reader.obj.manager.curPos, leftOverData)] forKey:@"leftoverData"];
+		 }*/
+		
+		object.objectData = [reader.obj.currentData objectAtIndex:0];
+		object.data = nil;
+	}
 	reader.obj = nil;
 	[reader release];
 	[pool drain];

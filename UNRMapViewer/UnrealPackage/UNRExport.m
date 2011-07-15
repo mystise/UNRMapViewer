@@ -31,6 +31,7 @@
 			export.data = [manager.fileData subdataWithRange:NSMakeRange(fileOffset, fileSize)];
 		}
 		export.objectData = nil;
+		export.loading = YES;
 	}
 	return export;
 }
@@ -43,6 +44,7 @@
 	[super resolveRefrences:file];
 	self.classObj = [file resolveObjectReference:self.classObjRef];
 	self.superObj = [file resolveObjectReference:self.superObjRef];
+	self.loading = NO;
 }
 
 - (void)loadPlugin:(UNRFile *)file{

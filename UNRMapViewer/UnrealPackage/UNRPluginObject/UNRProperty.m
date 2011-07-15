@@ -11,7 +11,7 @@
 
 @implementation UNRProperty
 
-@synthesize name = name_, structName = structName_, special = special_, type = type_, index = index_, manager = manager_, object = object_;
+@synthesize name = name_, structName = structName_, special = special_, type = type_, index = index_, manager = manager_, object = object_, objName = objName_;
 
 - (id)initWithManager:(DataManager *)manager file:(UNRFile *)newFile{
 	self = [super init];
@@ -81,6 +81,8 @@
 			manager.curPos += realSize;
 			if(self.type == 0x05){
 				self.object = [newFile resolveObjectReference:[UNRFile readCompactIndex:self.manager]];
+			}else if(self.type == 0x06){
+				self.objName = [newFile.names objectAtIndex:[UNRFile readCompactIndex:self.manager]];
 			}
 			self.manager.curPos = 0;
 			[newManager release];
@@ -89,7 +91,7 @@
 	return self;
 }
 
-/*- (NSString *)shortDescription{
+- (NSString *)shortDescription{
 	NSMutableString *propString = [NSMutableString string];
 	switch(self.type){
 		case 0x01:
@@ -153,14 +155,14 @@
 
 - (NSString *)description{
 	NSMutableString *propString = [NSMutableString stringWithString:[self shortDescription]];
-	DataManager *manager = [[[DataManager alloc] initWithFileData:self.data] autorelease];
+	self.manager.curPos = 0;
 	[propString appendString:@" = "];
 	switch(self.type){
 		case 0x01://byte
-			[propString appendFormat:@"%i;", [manager loadByte]];
+			[propString appendFormat:@"%i;", [self.manager loadByte]];
 			break;
 		case 0x02://int
-			[propString appendFormat:@"%i;", [manager loadInt]];
+			[propString appendFormat:@"%i;", [self.manager loadInt]];
 			break;
 		case 0x03://Bool
 			if(self.special){
@@ -170,29 +172,26 @@
 			}
 			break;
 		case 0x04://float
-			[propString appendFormat:@"%f;", [manager loadFloat]];
+			[propString appendFormat:@"%f;", [self.manager loadFloat]];
 			break;
 		case 0x05://Object
-		{
-			UNRBase *obj = [self.file resolveObjectReference:[UNRFile readCompactIndex:manager]];
-			[propString appendFormat:@"%@;", obj.name.string];
-		}
+			[propString appendFormat:@"%@;", self.object.name.string];
 			break;
 		case 0x06://Name
-			[propString appendFormat:@"%@;", [[self.file.names objectAtIndex:[UNRFile readCompactIndex:manager]] string]];
+			[propString appendFormat:@"%@;", self.objName.string];
 			break;
 		//case 0x07://String
 		//	[propString appendString:[[[NSString alloc] initWithBytes:(const void *)[data bytes] length:[data length] encoding:NSUTF8StringEncoding] autorelease]];
 		//	break;
 		case 0x0D://Str
-			[propString appendString:[[[NSString alloc] initWithBytes:(const void *)[[self.data subdataWithRange:NSMakeRange(1, [self.data length]-1)] bytes] length:[self.data length]-1 encoding:NSASCIIStringEncoding] autorelease]];
+			[propString appendString:[[[NSString alloc] initWithBytes:(const void *)[[self.manager.fileData subdataWithRange:NSMakeRange(1, [self.manager.fileData length]-1)] bytes] length:[self.manager.fileData length]-1 encoding:NSASCIIStringEncoding] autorelease]];
 			break;
 		default:
-			[propString appendFormat:@"%@;", self.data];
+			[propString appendFormat:@"%@;", self.manager.fileData];
 			break;
 	}
 	return [[propString copy] autorelease];
-}*/
+}
 
 + (int)readIndex:(DataManager *)manager{
 	Byte indexByte1 = [manager loadByte];
@@ -221,6 +220,8 @@
 	manager_ = nil;
 //	[data_ release];
 //	data_ = nil;
+	[objName_ release];
+	objName_ = nil;
 	[object_ release];
 	object_ = nil;
 	[super dealloc];

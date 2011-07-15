@@ -1,6 +1,6 @@
 <plugin class="byteproperty" group="official" game="UT99" super="property">
 	<info>
-		<objectReference name="enumType"/>
+		<compactIndex name="enumType"/>
 	</info>
 	<controls>
 		<stringControl label="Enum:" input="enumType.name.string" editable="no"/>

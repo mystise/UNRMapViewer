@@ -27,6 +27,7 @@
 @property(nonatomic, assign) int index;
 @property(nonatomic, retain) DataManager *manager;
 @property(nonatomic, retain) UNRBase *object;
+@property(nonatomic, retain) UNRName *objName;
 //@property(nonatomic, assign) UNRFile *file;
 
 @end

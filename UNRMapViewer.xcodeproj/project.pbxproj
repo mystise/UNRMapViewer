@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		49156E2813C55D0B00A37F6D /* UNRFrustum.m in Sources */ = {isa = PBXBuildFile; fileRef = 49156E2713C55D0900A37F6D /* UNRFrustum.m */; };
 		493320AC13932B40007B08F0 /* UNRMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 493320AB13932B40007B08F0 /* UNRMap.m */; };
+		4939C41C13D0A1620049D122 /* UNRScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4939C41B13D0A1620049D122 /* UNRScriptParser.m */; };
 		493AE5D31388324200591592 /* UNRTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 493AE5B71388324200591592 /* UNRTexture.m */; };
 		493E72C913AD6127008C2E78 /* SkyBox.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 493E72C713AD6127008C2E78 /* SkyBox.fsh */; };
 		493E72CA13AD6127008C2E78 /* SkyBox.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 493E72C813AD6127008C2E78 /* SkyBox.vsh */; };
@@ -76,6 +77,8 @@
 		49156E2713C55D0900A37F6D /* UNRFrustum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRFrustum.m; sourceTree = "<group>"; };
 		493320AA13932B40007B08F0 /* UNRMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRMap.h; sourceTree = "<group>"; };
 		493320AB13932B40007B08F0 /* UNRMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRMap.m; sourceTree = "<group>"; };
+		4939C41A13D0A1620049D122 /* UNRScriptParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRScriptParser.h; sourceTree = "<group>"; };
+		4939C41B13D0A1620049D122 /* UNRScriptParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRScriptParser.m; sourceTree = "<group>"; };
 		493AE5B61388324200591592 /* UNRTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRTexture.h; sourceTree = "<group>"; };
 		493AE5B71388324200591592 /* UNRTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRTexture.m; sourceTree = "<group>"; wrapsLines = 0; };
 		493E72C713AD6127008C2E78 /* SkyBox.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = SkyBox.fsh; path = Shaders/SkyBox.fsh; sourceTree = "<group>"; };
@@ -106,7 +109,7 @@
 		49836E4C1388BD64003193CD /* UNRDataPluginReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRDataPluginReader.h; sourceTree = "<group>"; };
 		49836E4D1388BD64003193CD /* UNRDataPluginReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRDataPluginReader.m; sourceTree = "<group>"; };
 		49836E4E1388BD64003193CD /* UNRObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRObject.h; sourceTree = "<group>"; };
-		49836E4F1388BD64003193CD /* UNRObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRObject.m; sourceTree = "<group>"; };
+		49836E4F1388BD64003193CD /* UNRObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRObject.m; sourceTree = "<group>"; wrapsLines = 1; };
 		49836E501388BD64003193CD /* UNRProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRProperty.h; sourceTree = "<group>"; };
 		49836E511388BD64003193CD /* UNRProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRProperty.m; sourceTree = "<group>"; };
 		49836E521388BD64003193CD /* UNRUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRUtilities.h; sourceTree = "<group>"; };
@@ -267,6 +270,8 @@
 				49836E4F1388BD64003193CD /* UNRObject.m */,
 				49836E501388BD64003193CD /* UNRProperty.h */,
 				49836E511388BD64003193CD /* UNRProperty.m */,
+				4939C41A13D0A1620049D122 /* UNRScriptParser.h */,
+				4939C41B13D0A1620049D122 /* UNRScriptParser.m */,
 			);
 			path = UNRPluginObject;
 			sourceTree = "<group>";
@@ -511,6 +516,7 @@
 				49AAFFD813BE349A002D7A41 /* UNRZone.m in Sources */,
 				494158BA13BEC59F008F58C9 /* UNRBoundingBox.m in Sources */,
 				49156E2813C55D0B00A37F6D /* UNRFrustum.m in Sources */,
+				4939C41C13D0A1620049D122 /* UNRScriptParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

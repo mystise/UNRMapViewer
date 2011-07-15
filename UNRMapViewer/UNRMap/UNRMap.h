@@ -34,6 +34,7 @@ struct UNRNode;
 @property(nonatomic, retain) NSMutableDictionary *lightMaps;
 @property(nonatomic, retain) NSMutableDictionary *zones;
 @property(nonatomic, retain) NSMutableDictionary *actors;
+@property(nonatomic, retain) NSMutableDictionary *classes;
 @property(nonatomic, assign) CGPoint stickPos, stickPrevPos, lookPos, lookPrevPos;
 //@property(nonatomic, assign) GLuint mapVbo;
 

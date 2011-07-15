@@ -31,6 +31,8 @@
 - (void)addDataWithAttributes:(NSDictionary *)attrib;
 - (void)addObjectReferenceWithAttributes:(NSDictionary *)attrib;
 - (void)addNameReferenceWithAttributes:(NSDictionary *)attrib;
+- (void)addGuidWithAttributes:(NSDictionary *)attrib;
+- (void)addScriptWithAttributes:(NSDictionary *)attrib;
 
 - (void)addIntVectorWithAttributes:(NSDictionary *)attrib;
 - (void)addVectorWithAttributes:(NSDictionary *)attrib;

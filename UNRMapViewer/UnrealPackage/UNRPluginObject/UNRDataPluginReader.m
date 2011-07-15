@@ -36,6 +36,8 @@
 						  @"addBoxWithAttributes:",				@"box",
 						  @"addSphereWithAttributes:",			@"sphere",
 						  @"addRotatorWithAttributes:",			@"rotator",
+						  @"addGuidWithAttributes:",			@"guid",
+						  @"addScriptWithAttributes:",			@"script",
 						  nil];
 		
 		self.dataEndTypes = [NSDictionary dictionaryWithObjectsAndKeys:

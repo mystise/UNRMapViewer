@@ -1,5 +1,20 @@
 <plugin class="function" group="official" game="UT99" super="field">
 	<info>
+		<if objectValue="file.version" comparator="less" compareValue="64">
+			<compactIndex name="parmsSize"/>
+		</if>
+		<short name="iNative"/>
+		<if objectValue="file.version" comparator="less" compareValue="64">
+			<compactIndex name="numParms"/>
+		</if>
+		<byte name="operatorPrecedence"/>
+		<if objectValue="file.version" comparator="less" compareValue="64">
+			<compactIndex name="returnValueOffset"/>
+		</if>
+		<int name="functionFlags"/>
+		<if objectValue="functionFlags" comparator="and" compareValue="64">
+			<short name="replicationOffset"/>
+		</if>
 	</info>
 	<controls>
 	</controls>

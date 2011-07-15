@@ -11,7 +11,7 @@
 #import "UNRExport.h"
 #import "UNRNode.h"
 
-#define USE_32_Bit 0
+#define USE_32_Bit 1
 
 #if USE_32_Bit
 typedef struct{
@@ -24,6 +24,32 @@ color ColorCreate(Byte r, Byte g, Byte b, Byte a){
 	retCol.g = g;
 	retCol.b = b;
 	retCol.a = a;
+	return retCol;
+}
+
+color ColorAdd(color col1, color col2){
+	color retCol;
+	
+	int added = col1.r + col2.r;
+	if(added > 0xFF){
+		added = 0xFF;
+	}
+	retCol.r = added;
+	
+	added = col1.g + col2.g;
+	if(added > 0xFF){
+		added = 0xFF;
+	}
+	retCol.g = added;
+	
+	added = col1.b + col2.b;
+	if(added > 0xFF){
+		added = 0xFF;
+	}
+	retCol.b = added;
+	
+	retCol.a = 0xFF;
+	
 	return retCol;
 }
 #else
@@ -39,35 +65,47 @@ typedef struct{
 }color;
 #pragma pack(pop)
 
-color ColorCreate(int r, int g, int b, int a){
+color ColorCreate(float r, float g, float b, float a){
 	color retCol = {0};
-	retCol.r = r*31/255;
-	retCol.g = g*31/255;
-	retCol.b = b*31/255;
-	retCol.a = a/255;
+	retCol.r = r*31.0f/255.0f;
+	retCol.g = g*31.0f/255.0f;
+	retCol.b = b*31.0f/255.0f;
+	retCol.a = a/255.0f;
 	return retCol;
 }
 
 color ColorAdd(color col1, color col2){
 	color retCol;
 	
-	Byte added = col1.r + col2.r;
-	if(added > 31){
-		added = 31;
-	}
-	retCol.r = added;
+	float div = 1.0f;
 	
-	added = col1.g + col2.g;
-	if(added > 31){
-		added = 31;
+	Byte red = col1.r + col2.r;
+	if(red > 31){
+		float div2 = red/31.0f;
+		if(div2 > div){
+			div = div2;
+		}
 	}
-	retCol.g = added;
 	
-	added = col1.b + col2.b;
-	if(added > 31){
-		added = 31;
+	Byte green = col1.g + col2.g;
+	if(green > 31){
+		float div2 = green/31.0f;
+		if(div2 > div){
+			div = div2;
+		}
 	}
-	retCol.b = added;
+	
+	Byte blue = col1.b + col2.b;
+	if(blue > 31){
+		float div2 = blue/31.0f;
+		if(div2 > div){
+			div = div2;
+		}
+	}
+	
+	retCol.r = red/div;
+	retCol.g = green/div;
+	retCol.b = blue/div;
 	
 	retCol.a = 1;
 	
@@ -149,12 +187,6 @@ color ColorAdd(color col1, color col2){
 		
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minMode);
 		
-		/*if([[obj valueForKey:@"mipMapCount"] intValue] != correctMipCount){
-		 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		 }else{
-		 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
-		 }*/
-		
 		for(int i = startMip; i < [[obj valueForKey:@"mipMapCount"] intValue]; i++){
 			NSMutableDictionary *texLevel = [[obj valueForKey:@"mipMapLevels"] objectAtIndex:i];
 			DataManager *manager = [[DataManager alloc] initWithFileData:[texLevel valueForKey:@"mipMap"]];
@@ -215,7 +247,7 @@ int roundToNext8(int input){
 	return retVal;
 }
 
-color hsvToRGB(Byte inH, Byte inS, Byte inV) {
+color hsvToRGB(unsigned int inH, unsigned int inS, unsigned int inV) {
 	color col = {0};
 	float f, p, q, t;
 	float h, s, v;
@@ -355,12 +387,13 @@ void printLightType(int lType){
 		
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		
 		if(!(node->surfFlags & PF_NoShadows)){
 			int iLightActors = [[lightMap valueForKey:@"iLightActors"] intValue];
 			if(iLightActors != -1){
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+				
 				NSMutableArray *mapLights = [NSMutableArray array];
 				id light = [lights objectAtIndex:iLightActors];
 				for(int i = 1; ![light isKindOfClass:[NSNull class]] && i+iLightActors < [lights count]; i++){
@@ -398,7 +431,8 @@ void printLightType(int lType){
 							}
 						}
 						
-						Byte hue = 0, saturation = 255, value = 64, radius = 64;
+						Byte hue = 0, saturation = 255, value = 64;
+						int radius = 64;
 						Vector3D lightPos;
 						NSMutableArray *currentLight = [[[mapLights objectAtIndex:y] objectData] valueForKey:@"props"];
 						{
@@ -458,67 +492,33 @@ void printLightType(int lType){
 									}
 								}
 								Vector3D pos = Vector3DAdd(initDisp, Vector3DAdd(Vector3DMultiply(dy, i-tex.height+1), Vector3DMultiply(dx, j)));
-								float dist = Vector3DDot(pos, node->normal);
-								if(dist > radius){
-									dist = radius;
-								}
+								float dist = Vector3DMagnitude(pos);
+								
 								float dot = Vector3DDot(Vector3DNormalize(pos), Vector3DNormalize(node->normal));
-								float oneOver = dist/radius;
+								float falloff = 1 - 1/(radius*25.6f)*dist;
+								
+								if(falloff > 2.0f){
+									falloff = 2.0f;
+								}
+								if(falloff < 0.0f){
+									falloff = 0.0f;
+								}
 								//float oneOver2 = dot*radius;
 								
 								color newColor;
 								color oldColor = texDat[texIndex];
-								//newColor.r += newDat*rgb.r*dot;
-								//newColor.g += newDat*rgb.g*dot;
-								//newColor.b += newDat*rgb.b*dot;
 								
-								newColor.r = cov*dot*rgb.r; //mult by oneOver, oneOver2 or something
-								newColor.g = cov*dot*rgb.g;
-								newColor.b = cov*dot*rgb.b;
-								newColor.a = 1;
+								float scaling = cov*dot*falloff*1.4f;
+								
+								newColor.r = scaling*rgb.r;
+								newColor.g = scaling*rgb.g;
+								newColor.b = scaling*rgb.b;
+								newColor.a = 0xFF;
 								
 								texDat[texIndex] = ColorAdd(newColor, oldColor);
 							}
 						}
-						
-						/*for(int i = 0; i < tex.height; i++){
-						 for(int j = 0; j < tex.width; j+=8){
-						 for(int x = 0; x < 8 && x+j < tex.width; x++){
-						 int texIndex = i*tex.width + j+x;
-						 int rawIndex = i*nextWidth/8 + j/8 + y*texSize;
-						 float newDat = ((rawDat[rawIndex]>>x)&0x01);
-						 
-						 Vector3D pos = Vector3DAdd(initDisp, Vector3DAdd(Vector3DMultiply(dy, i-tex.height+1), Vector3DMultiply(dx, j+x)));
-						 //float dist = Vector3DDot(pos, node->normal);
-						 float dot = Vector3DDot(Vector3DNormalize(pos), Vector3DNormalize(node->normal));
-						 if(dot != 0){
-						 //float oneOver = dist/radius;
-						 //float oneOver2 = dot*radius;
-						 
-						 color newColor = texDat[texIndex];
-						 //newColor.r += newDat*rgb.r*dot;
-						 //newColor.g += newDat*rgb.g*dot;
-						 //newColor.b += newDat*rgb.b*dot;
-						 
-						 newColor.r += dot*31*newDat;
-						 newColor.g += dot*31*newDat;
-						 newColor.b += dot*31*newDat;
-						 newColor.a = 1;
-						 
-						 texDat[texIndex] = newColor;
-						 }
-						 }
-						 }
-						 }*/
 					}
-					
-					//texDat[0] = ColorCreate(0xFF, 0x00, 0x00, 0xFF);
-					
-					/*texDat[0] = ColorCreate(0xFF, 0x00, 0xFF, 0xFF);
-					 texDat[tex.width-1] = ColorCreate(0xFF, 0xFF, 0x00, 0xFF);
-					 texDat[tex.width*tex.height-1] = ColorCreate(0xFF, 0x00, 0x00, 0xFF);
-					 texDat[tex.width*tex.height-tex.width] = ColorCreate(0xFF, 0xFF, 0xFF, 0xFF);*/
-					
 #if USE_32_Bit
 					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex.width, tex.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texDat);
 #else
@@ -533,6 +533,8 @@ void printLightType(int lType){
 				glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
 			}
 		}else{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			GLubyte texDat = 0xFF/2;
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
 		}

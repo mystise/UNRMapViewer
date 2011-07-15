@@ -1,5 +1,9 @@
 <plugin class="state" group="official" game="UT99" super="field">
 	<info>
+		<long name="ProbeMask"/>
+		<long name="IgnoreMask"/>
+		<short name="LabelTableOffset"/>
+		<int name="StateFlags"/>
 	</info>
 	<controls>
 	</controls>

@@ -1,6 +1,55 @@
 <plugin class="class" group="official" game="UT99">
 	<info>
+		<if objectValue="obj.flags" comparator="and" compareValue="OF_HasStack">
+			<compactIndex name="StateFrame.Node"/>
+			<compactIndex name="StateFrame.StateNode"/>
+			<long name="StateFrame.ProbeMask"/>
+			<int name="StateFrame.LatentAction"/>
+			<if objectValue="StateFrame.Node" comparator="!=" compareValue="0">
+				<compactIndex name="Offset"/>
+			</if>
+		</if>
+		
+		<objectReference name="superField"/>
+		<objectReference name="nextField"/>
+		
+		<objectReference name="scriptText"/>
+		<objectReference name="firstChild"/>
+		<nameReference name="friendlyName"/>
+		<int name="line"/>
+		<int name="textPos"/>
+		<int name="scriptSize"/>
+		
+		<script name="script" size="scriptSize"/>
+		
+		<long name="ProbeMask"/>
+		<long name="IgnoreMask"/>
+		<short name="LabelTableOffset"/>
+		<int name="StateFlags"/>
+		
+		<if objectValue="file.version" comparator="less" compareValue="62">
+			<int name="oldClassRecordSize"/>
+		</if>
+		<int name="classFlags"/>
+		<guid name="classGuid"/>
+		<compactIndex name="dependCount"/>
+		<array name="depends" count="dependCount">
+			<objectReference name="class"/>
+			<int name="deep"/>
+			<int name="scriptTextCRC"/>
+		</array>
+		<compactIndex name="importCount"/>
+		<array name="imports" count="importCount">
+			<objectReference name="import"/>
+		</array>
+		
+		<if objectValue="file.version" comparator="greater" compareValue="61">
+			<objectReference name="classWithin"/>
+			<nameReference name="classConfigName"/>
+		</if>
+		<properties name="props"/>
 	</info>
 	<controls>
+		<listControl label="Properties:" input="props.description" size="medium"/>
 	</controls>
 </plugin>

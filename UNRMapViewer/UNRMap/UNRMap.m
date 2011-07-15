@@ -27,7 +27,7 @@
 @implementation UNRMap
 
 @synthesize rootNode = rootNode_, textures = textures_, shaders = shaders_, cam = cam_, lightMaps = lightMaps_, cubeMap = cubeMap_;
-@synthesize stickPos = stickPos_, stickPrevPos = stickPrevPos_, lookPos = lookPos_, lookPrevPos = lookPrevPos_, zones = zones_, actors = actors_;
+@synthesize stickPos = stickPos_, stickPrevPos = stickPrevPos_, lookPos = lookPos_, lookPrevPos = lookPrevPos_, zones = zones_, actors = actors_, classes = classes_;
 
 - (id)initWithLevel:(NSMutableDictionary *)level andFile:(UNRFile *)file label:(UILabel *)label progress:(UIProgressView *)progress{
 	self = [super init];
@@ -40,6 +40,7 @@
 		self.lightMaps = [NSMutableDictionary dictionary];
 		self.zones = [NSMutableDictionary dictionary];
 		self.actors = [NSMutableDictionary dictionary];
+		self.classes = [NSMutableDictionary dictionary];
 		
 		dispatch_async(mainThread, ^(void){
 			label.text = @"Loading actors...";
@@ -71,6 +72,17 @@
 					}
 					obj.data = nil;
 					[[self.actors valueForKey:className] addObject:[obj.objectData valueForKey:@"props"]];
+					
+					if([self.classes valueForKey:className] == nil){
+						UNRExport *defaultProps = (UNRExport *)obj.classObj;
+						if([defaultProps isKindOfClass:[UNRImport class]]){
+							UNRImport *imp = (UNRImport *)defaultProps;
+							defaultProps = imp.obj;
+						}
+						NSMutableDictionary *classProps = [defaultProps.objectData valueForKey:@"props"];
+						
+						[self.classes setValue:classProps forKey:className];
+					}
 				}
 			}
 		}
@@ -171,12 +183,6 @@
 	Matrix3D res;
 	Matrix3DMultiply(projection, modelView, res);
 	
-	/*Matrix3D frustumRes;
-	Matrix3DIdentity(modelView);
-	Matrix3DRotateX(modelView, 90.0f);
-	
-	Matrix3DMultiply(projection, modelView, frustumRes);*/
-	
 	UNRFrustum frustum;
 	UNRFrustumCreate(frustum, res);
 	
@@ -254,6 +260,8 @@
 	zones_ = nil;
 	[actors_ release];
 	actors_ = nil;
+	[classes_ release];
+	classes_ = nil;
 	if(rootNode_){
 		UNRNodeDelete(rootNode_);
 		rootNode_ = nil;

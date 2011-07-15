@@ -212,7 +212,11 @@
 						objPackage = objPackage.package;
 					}
 					if([objPackage.name.string isEqualToString:package.name.string]){
-						NSPredicate *pred = [NSPredicate predicateWithFormat:@"name.string == %@ && classObj.name.string == %@", object.name.string, object.className.string];
+						NSString *className = object.className.string;
+						if([className isEqualToString:@"Class"]){
+							className = (NSString *)[NSNull null];
+						}
+						NSPredicate *pred = [NSPredicate predicateWithFormat:@"name.string == %@ && classObj.name.string == %@", object.name.string, className];
 						NSArray *filteredObj = [file.objects filteredArrayUsingPredicate:pred];
 						object.obj = [filteredObj lastObject];
 						[object.obj loadPlugin:file];

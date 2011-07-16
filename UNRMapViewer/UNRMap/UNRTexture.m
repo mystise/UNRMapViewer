@@ -398,7 +398,8 @@ void printLightType(int lType){
 				id light = [lights objectAtIndex:iLightActors];
 				for(int i = 1; ![light isKindOfClass:[NSNull class]] && i+iLightActors < [lights count]; i++){
 					if([mapLights count] > 0){
-						if([light isEqual:[mapLights lastObject]]){
+						if(light == [mapLights lastObject]){
+							printf("Same!!!\n");
 							continue;
 						}
 					}
@@ -492,14 +493,15 @@ void printLightType(int lType){
 									}
 								}
 								Vector3D pos = Vector3DAdd(initDisp, Vector3DAdd(Vector3DMultiply(dy, i-tex.height+1), Vector3DMultiply(dx, j)));
-								float dist = Vector3DMagnitude(pos);
+								//float dist = Vector3DMagnitude(pos);
+								float dist = Vector3DDot(pos, node->normal);
 								
 								float dot = Vector3DDot(Vector3DNormalize(pos), Vector3DNormalize(node->normal));
 								float falloff = 1 - 1/(radius*25.6f)*dist;
 								
-								if(falloff > 2.0f){
-									falloff = 2.0f;
-								}
+								//if(falloff > 2.0f){
+								//	falloff = 2.0f;
+								//}
 								if(falloff < 0.0f){
 									falloff = 0.0f;
 								}
@@ -508,7 +510,7 @@ void printLightType(int lType){
 								color newColor;
 								color oldColor = texDat[texIndex];
 								
-								float scaling = cov*dot*falloff*1.4f;
+								float scaling = cov*dot*falloff;
 								
 								newColor.r = scaling*rgb.r;
 								newColor.g = scaling*rgb.g;

@@ -160,8 +160,8 @@
 	[self.map draw:self.aspect withTimestep:animationFrameInterval/60.0f];
 	
 	[(EAGLView *)self.view presentFramebuffer];
-	const GLenum attachments[] = {GL_COLOR_ATTACHMENT0, GL_STENCIL_ATTACHMENT, GL_DEPTH_ATTACHMENT};
-	glDiscardFramebufferEXT(GL_FRAMEBUFFER, 3, attachments);
+	//const GLenum attachments[] = {GL_COLOR_ATTACHMENT0, GL_STENCIL_ATTACHMENT, GL_DEPTH_ATTACHMENT};
+	//glDiscardFramebufferEXT(GL_FRAMEBUFFER, 3, attachments);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{

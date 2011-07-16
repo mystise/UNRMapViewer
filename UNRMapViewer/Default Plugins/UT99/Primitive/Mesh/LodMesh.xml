@@ -1,0 +1,65 @@
+<plugin class="lodmesh" group="official" game="UT99" super="mesh">
+	<info>
+		<compactIndex name="collapsePointCount"/>
+		<array name="collapsePoints" count="collapsePointCount">
+			<short name="collapsePoint"/>
+		</array>
+		
+		<compactIndex name="faceLevelCount"/>
+		<array name="faceLevels" count="faceLevelCount">
+			<short name="faceLevel"/>
+		</array>
+		
+		<compactIndex name="faceCount"/>
+		<array name="faces" count="faceCount">
+			<short name="wedgeIndex1"/>
+			<short name="wedgeIndex2"/>
+			<short name="wedgeIndex3"/>
+			<short name="materialIndex"/>
+		</array>
+		
+		<compactIndex name="collapseWedgeCount"/>
+		<array name="collapseWedges" count="collapseWedgeCount">
+			<short name="collapseWedge"/>
+		</array>
+		
+		<compactIndex name="wedgeCount"/>
+		<array name="wedges" count="wedgeCount">
+			<short name="vertexIndex"/>
+			<byte name="s"/>
+			<byte name="t"/>
+		</array>
+		
+		<compactIndex name="materialCount"/>
+		<array name="materials" count="materialCount">
+			<int name="matFlags"/>
+			<int name="textureIndex"/>
+		</array>
+		
+		<compactIndex name="specialFaceCount"/>
+		<array name="specialFaces" count="specialFaceCount">
+			<short name="wedgeIndex1"/>
+			<short name="wedgeIndex2"/>
+			<short name="wedgeIndex3"/>
+			<short name="materialIndex"/>
+		</array>
+		
+		<int name="modelVerts"/>
+		<int name="specialVerts"/>
+		<float name="meshScaleMax"/>
+		<float name="lodHysteresis"/>
+		<float name="lodStrength"/>
+		<int name="lodMinVerts"/>
+		<float name="lodMorph"/>
+		<float name="lodZDisplace"/>
+		
+		<compactIndex name="reMapAnimVertsCount"/>
+		<array name="reMapAnimVerts" count="reMapAnimVertsCount">
+			<short name="reMapAnimVerts"/>
+		</array>
+		
+		<int name="oldFrameVerts"/>
+	</info>
+	<controls>
+	</controls>
+</plugin>

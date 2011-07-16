@@ -11,8 +11,18 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
+#import "Matrix3D.h"
+#import "Vector3D.h"
+
+#import "UNRNode.h"
+#import "UNRMesh.h"
+
 @class UNRFile, UNRCubeCamera, UNRCamera;
-struct UNRNode;
+
+typedef struct{
+	int meshUsed;
+	Matrix3D matrix;
+}UNRMeshContainer;
 
 @interface UNRMap : NSObject {
 	
@@ -26,16 +36,15 @@ struct UNRNode;
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
 
-@property(nonatomic, assign) struct UNRNode *rootNode;
+@property(nonatomic, assign) UNRNode *rootNode;
+@property(nonatomic, assign) UNRMesh **meshes;
+@property(nonatomic, assign) int meshCount;
+@property(nonatomic, assign) UNRMeshContainer *meshMats;
+@property(nonatomic, assign) int meshMatCount;
+@property(nonatomic, assign) CGPoint stickPos, stickPrevPos, lookPos, lookPrevPos;
+
 @property(nonatomic, retain) UNRCubeCamera *cubeMap;
 @property(nonatomic, retain) UNRCamera *cam;
-@property(nonatomic, retain) NSMutableDictionary *textures;
-@property(nonatomic, retain) NSMutableDictionary *shaders;
-@property(nonatomic, retain) NSMutableDictionary *lightMaps;
-@property(nonatomic, retain) NSMutableDictionary *zones;
-@property(nonatomic, retain) NSMutableDictionary *actors;
-@property(nonatomic, retain) NSMutableDictionary *classes;
-@property(nonatomic, assign) CGPoint stickPos, stickPrevPos, lookPos, lookPrevPos;
-//@property(nonatomic, assign) GLuint mapVbo;
+@property(nonatomic, retain) NSMutableDictionary *textures, *shaders, *lightMaps, *actors, *classes;
 
 @end

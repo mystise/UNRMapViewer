@@ -61,11 +61,29 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 		
 		nodeStruct->origin = Vector3DCreateWithDictionary([points objectAtIndex:[[surf valueForKey:@"pBase"] intValue]]);
 		
+		{
+			int iVertPool = [[node valueForKey:@"iVertPool"] intValue];
+			int pointIndexA = [[[verticies objectAtIndex:iVertPool] valueForKey:@"pVertex"] intValue];
+			Vector3D A = Vector3DCreateWithDictionary([points objectAtIndex:pointIndexA]);
+			
+			int pointIndexB = [[[verticies objectAtIndex:iVertPool+1] valueForKey:@"pVertex"] intValue];
+			Vector3D B = Vector3DCreateWithDictionary([points objectAtIndex:pointIndexB]);
+			
+			int pointIndexC = [[[verticies objectAtIndex:iVertPool+2] valueForKey:@"pVertex"] intValue];
+			Vector3D C = Vector3DCreateWithDictionary([points objectAtIndex:pointIndexC]);
+			
+			Vector3D AB = Vector3DSubtract(B, A);
+			Vector3D AC = Vector3DSubtract(C, A);
+			Vector3D normal = Vector3DNormalize(Vector3DCross(AC, AB));
+			float w = Vector3DDot(A, normal);
+			
+			nodeStruct->normal = normal;
+			nodeStruct->plane.x = normal.x;
+			nodeStruct->plane.y = normal.y;
+			nodeStruct->plane.z = normal.z;
+			nodeStruct->plane.w = w;
+		}
 		nodeStruct->normal = Vector3DNegation(Vector3DCreateWithDictionary([vectors objectAtIndex:[[surf valueForKey:@"vNormal"] intValue]]));
-		//nodeStruct->normal = Vector3DCreateWithDictionary([vectors objectAtIndex:[[surf valueForKey:@"vNormal"] intValue]]);
-		//Vector3D normal = Vector3DCreateWithDictionary([vectors objectAtIndex:[[surf valueForKey:@"vNormal"] intValue]]);
-		//float negDot = -Vector3DDot(nodeStruct->origin, normal);
-		//nodeStruct->plane = Vector4DCreate(normal.x, normal.y, normal.z, negDot);
 		nodeStruct->plane = Vector4DCreateWithDictionary([node valueForKey:@"plane"]);
 		nodeStruct->plane.w = -nodeStruct->plane.w;
 		
@@ -150,6 +168,7 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 				
 				int iVertPool = [[node valueForKey:@"iVertPool"] intValue];
 				int vertCount = [[node valueForKey:@"vertCount"] intValue];
+				
 				GLfloat *coordinates = (GLfloat *)calloc(vertCount*nodeStruct->strideLength, sizeof(GLfloat));
 				nodeStruct->vertCount = vertCount;
 				int index = 0;
@@ -397,7 +416,7 @@ void UNRNodeDrawWithState(UNRNode *node, UNRState *state, UNRFrustum frustum, Ve
 	
 	BOOL shouldDraw = YES;
 	
-	/*if(state->shouldBoundTest == YES){
+	if(state->shouldBoundTest == YES){
 		//do the bounding box test, only draw if it succedes, set the shouldBoundTest to whether it fully passed, or only partly passed
 		CollType culling = [node->renderBox classify:frustum];
 		if(culling == C_In){
@@ -405,14 +424,15 @@ void UNRNodeDrawWithState(UNRNode *node, UNRState *state, UNRFrustum frustum, Ve
 		}else if(culling == C_Out){
 			shouldDraw = NO;
 		}
-	}*/
+	}
 	
 	//if portal, and portal is occluded, don't draw the back half
 	
 	if(shouldDraw){
 		//glDisable(GL_DEPTH_TEST);
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_FRONT);
 		float dist = Vector4DDistance(node->plane, *camPos);
-		//BOOL drawBack = !(((node->surfFlags & PF_FakeBackdrop) != 0) && state->backDrop);
 		BOOL nonSolid = state->nonSolid;
 		if(dist > 0.0f){
 			if(node->front){

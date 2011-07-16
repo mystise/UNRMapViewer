@@ -322,24 +322,25 @@ Byte loadToken(UNRObject *self, NSMutableData *scriptData, BOOL *done){
 		if(token < 0x70){
 			function = (token & 0x0F) << 8 | [self.manager loadByte];
 		}
-		printf("Native function: %i\n", function);
+		//printf("Native function: %i\n", function);
 	}
 	return token;
 }
 
 NSMutableData *loadScript(UNRObject *self, int size){
 	NSMutableData *scriptData = [NSMutableData data];
-	printf("UNRScript:\n");
+	//printf("UNRScript:\n");
 	//loop over the data, loading as you go, and add to scriptData
 	if(size > 0){
 		BOOL done = NO;
 		while(!done){
-			printf("\t%X\n", loadToken(self, scriptData, &done));
+			Byte token = loadToken(self, scriptData, &done);
+			//printf("\t%X\n", token);
 			if([scriptData length] >= size){
 				done = YES;
 			}
 		}
 	}
-	printf("\n\n");
+	//printf("\n\n");
 	return scriptData;
 }

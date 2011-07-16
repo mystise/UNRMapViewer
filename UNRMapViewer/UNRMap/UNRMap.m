@@ -12,12 +12,9 @@
 #import "UNRProperty.h"
 
 #import "UNRTexture.h"
-#import "UNRNode.h"
 #import "UNRCubeCamera.h"
 
 #import "UNRCamera.h"
-#import "Matrix3D.h"
-#import "Vector3D.h"
 #import "UNRFrustum.h"
 
 @interface UNRMap()
@@ -27,7 +24,8 @@
 @implementation UNRMap
 
 @synthesize rootNode = rootNode_, textures = textures_, shaders = shaders_, cam = cam_, lightMaps = lightMaps_, cubeMap = cubeMap_;
-@synthesize stickPos = stickPos_, stickPrevPos = stickPrevPos_, lookPos = lookPos_, lookPrevPos = lookPrevPos_, zones = zones_, actors = actors_, classes = classes_;
+@synthesize stickPos = stickPos_, stickPrevPos = stickPrevPos_, lookPos = lookPos_, lookPrevPos = lookPrevPos_, actors = actors_, classes = classes_;
+@synthesize meshes = meshes_, meshCount = meshCount_, meshMats = meshMats_, meshMatCount = meshMatCount_;
 
 - (id)initWithLevel:(NSMutableDictionary *)level andFile:(UNRFile *)file label:(UILabel *)label progress:(UIProgressView *)progress{
 	self = [super init];
@@ -38,7 +36,6 @@
 		self.textures = [NSMutableDictionary dictionary];
 		self.shaders = [NSMutableDictionary dictionary];
 		self.lightMaps = [NSMutableDictionary dictionary];
-		self.zones = [NSMutableDictionary dictionary];
 		self.actors = [NSMutableDictionary dictionary];
 		self.classes = [NSMutableDictionary dictionary];
 		
@@ -157,16 +154,25 @@
 			self.cam.rotZ = [rotation.manager loadInt]*45/8192;
 		}
 		
-		for(NSMutableDictionary *obj in [self.actors valueForKey:@"InventorySpot"]){
-			printf("Inventory!\n");
-			UNRExport *markedItem = [obj valueForKey:@"markedItem"];
-			if([markedItem isKindOfClass:[UNRImport class]]){
-				UNRImport *item = (UNRImport *)markedItem;
-				markedItem = item.obj;
+		/*for(NSMutableDictionary *obj in [self.actors valueForKey:@"InventorySpot"]){
+			UNRExport *classObj = (UNRExport *)[[[obj valueForKey:@"markedItem"] object] classObj];
+			if([classObj isKindOfClass:[UNRImport class]]){
+				UNRImport *item = (UNRImport *)classObj;
+				classObj = item.obj;
 			}
-			//what I want is markedItem.class.defaultProperties.mesh and then load that into memory, and release all the rest.
-		}
-		//setup all inventory spots
+			NSMutableDictionary *props = [classObj.objectData valueForKey:@"props"];
+			
+			UNRExport *meshObj = [[props valueForKey:@"Mesh"] object];
+			NSMutableDictionary *mesh = [meshObj objectData];
+			
+			self.meshCount++;
+			self.meshes = realloc(self.meshes, self.meshCount*sizeof(UNRMesh *));
+			
+			self.meshes[self.meshCount-1] = UNRMeshCreate(mesh);
+		}*/
+		
+		self.actors = nil;
+		self.classes = nil;
 	}
 	return self;
 }
@@ -263,8 +269,6 @@
 	shaders_ = nil;
 	[textures_ release];
 	textures_ = nil;
-	[zones_ release];
-	zones_ = nil;
 	[actors_ release];
 	actors_ = nil;
 	[classes_ release];
@@ -272,6 +276,19 @@
 	if(rootNode_){
 		UNRNodeDelete(rootNode_);
 		rootNode_ = nil;
+	}
+	if(meshes_){
+		for(int i = 0; i < meshCount_; i++){
+			UNRMeshDelete(meshes_[i]);
+		}
+		free(meshes_);
+		meshes_ = NULL;
+		meshCount_ = 0;
+	}
+	if(meshMats_){
+		free(meshMats_);
+		meshMats_ = NULL;
+		meshMatCount_ = 0;
 	}
 	//[rootNode_ release];
 	//rootNode_ = nil;

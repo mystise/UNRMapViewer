@@ -43,7 +43,7 @@
 		<if objectValue="file.version" comparator="greater" compareValue="61">
 			<int name="connectsJump"/>
 		</if>
-		<int name="connectCount"/>
+		<compactIndex name="connectCount"/>
 		<array name="connects" count="connectCount">
 			<int name="numVertTriangles"/>
 			<int name="triListOffset"/>

@@ -71,7 +71,7 @@
 		</array>
 		
 		<compactIndex name="boundingSphereCount"/>
-		<array name="boundingBoxes" count="boundingSphereCount">
+		<array name="boundingSpheres" count="boundingSphereCount">
 			<sphere name="boundingSphere"/>
 		</array>
 		

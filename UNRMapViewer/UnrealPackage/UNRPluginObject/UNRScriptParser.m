@@ -335,6 +335,9 @@ NSMutableData *loadScript(UNRObject *self, int size){
 		BOOL done = NO;
 		while(!done){
 			Byte token = loadToken(self, scriptData, &done);
+			if(token == 0){
+				
+			}
 			//printf("\t%X\n", token);
 			if([scriptData length] >= size){
 				done = YES;

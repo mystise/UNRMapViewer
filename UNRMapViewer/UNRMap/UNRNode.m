@@ -61,7 +61,11 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 		
 		nodeStruct->origin = Vector3DCreateWithDictionary([points objectAtIndex:[[surf valueForKey:@"pBase"] intValue]]);
 		
-		{
+		nodeStruct->normal = Vector3DNegation(Vector3DCreateWithDictionary([vectors objectAtIndex:[[surf valueForKey:@"vNormal"] intValue]]));
+		nodeStruct->plane = Vector4DCreateWithDictionary([node valueForKey:@"plane"]);
+		nodeStruct->plane.w = -nodeStruct->plane.w;
+		
+		/*{
 			int iVertPool = [[node valueForKey:@"iVertPool"] intValue];
 			int pointIndexA = [[[verticies objectAtIndex:iVertPool] valueForKey:@"pVertex"] intValue];
 			Vector3D A = Vector3DCreateWithDictionary([points objectAtIndex:pointIndexA]);
@@ -74,18 +78,17 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 			
 			Vector3D AB = Vector3DSubtract(B, A);
 			Vector3D AC = Vector3DSubtract(C, A);
-			Vector3D normal = Vector3DNormalize(Vector3DCross(AC, AB));
-			float w = Vector3DDot(A, normal);
+			Vector3D normal = Vector3DNormalize(Vector3DCross(AB, AC));
+			float w = -Vector3DDot(A, normal);
 			
-			nodeStruct->normal = normal;
+			Vector4D plane = nodeStruct->plane;
+			
+			//nodeStruct->normal = normal;
 			nodeStruct->plane.x = normal.x;
 			nodeStruct->plane.y = normal.y;
 			nodeStruct->plane.z = normal.z;
 			nodeStruct->plane.w = w;
-		}
-		nodeStruct->normal = Vector3DNegation(Vector3DCreateWithDictionary([vectors objectAtIndex:[[surf valueForKey:@"vNormal"] intValue]]));
-		nodeStruct->plane = Vector4DCreateWithDictionary([node valueForKey:@"plane"]);
-		nodeStruct->plane.w = -nodeStruct->plane.w;
+		}*/
 		
 		nodeStruct->uVec = Vector3DCreateWithDictionary([vectors objectAtIndex:[[surf valueForKey:@"vTextureU"] intValue]]);
 		nodeStruct->vVec = Vector3DCreateWithDictionary([vectors objectAtIndex:[[surf valueForKey:@"vTextureV"] intValue]]);
@@ -306,6 +309,14 @@ void UNRNodeSetupState(UNRNode *node, UNRState *state){
 		}
 	}
 	
+	if(changed & PF_TwoSided){
+		if(surfFlags & PF_TwoSided){
+			glDisable(GL_CULL_FACE);
+		}else{
+			glEnable(GL_CULL_FACE);
+		}
+	}
+	
 	if(changed & (PF_Translucent | PF_Modulated | PF_Masked)){
 		/*if(surfFlags & (PF_Translucent | PF_Modulated | PF_Masked)){
 		 glStencilMask(0x00);
@@ -430,8 +441,6 @@ void UNRNodeDrawWithState(UNRNode *node, UNRState *state, UNRFrustum frustum, Ve
 	
 	if(shouldDraw){
 		//glDisable(GL_DEPTH_TEST);
-		glEnable(GL_CULL_FACE);
-		glCullFace(GL_FRONT);
 		float dist = Vector4DDistance(node->plane, *camPos);
 		BOOL nonSolid = state->nonSolid;
 		if(dist > 0.0f){

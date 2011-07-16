@@ -16,13 +16,20 @@
 #import "Vector3D.h"
 #import "Vector2D.h"
 #import "UNRFrustum.h"
+#import "UNRTexture.h"
+#import "UNRBoundingBox.h"
 
 typedef struct{
 	GLuint *vbos; //one for each frame
+	int nameIndex;
+	UNRTexture *tex;
+	Vector3D rotation;
+	Vector3D scale;
+	UNRBoundingBox *box;
 	//other needed data
 }UNRMesh;
 
-UNRMesh *UNRMeshCreate(NSMutableDictionary *lodMesh);
+UNRMesh *UNRMeshCreate(NSMutableDictionary *lodMesh, int nameIndex);
 
 void UNRMeshDraw(UNRMesh *mesh, Matrix3D mat, UNRFrustum frustum);
 

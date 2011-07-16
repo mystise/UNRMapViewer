@@ -49,8 +49,8 @@
 	
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_STENCIL_TEST);
-	//glEnable(GL_CULL_FACE);
-	//glCullFace(GL_FRONT);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_FRONT);
 	glClearColor(0.1f, 0.5f, 0.5f, 1.0f);
 	glClearStencil(0);
 	glClearDepthf(1.0f);

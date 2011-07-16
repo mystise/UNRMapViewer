@@ -154,7 +154,7 @@
 			self.cam.rotZ = [rotation.manager loadInt]*45/8192;
 		}
 		
-		/*for(NSMutableDictionary *obj in [self.actors valueForKey:@"InventorySpot"]){
+		for(NSMutableDictionary *obj in [self.actors valueForKey:@"InventorySpot"]){
 			UNRExport *classObj = (UNRExport *)[[[obj valueForKey:@"markedItem"] object] classObj];
 			if([classObj isKindOfClass:[UNRImport class]]){
 				UNRImport *item = (UNRImport *)classObj;
@@ -164,12 +164,45 @@
 			
 			UNRExport *meshObj = [[props valueForKey:@"Mesh"] object];
 			NSMutableDictionary *mesh = [meshObj objectData];
+			int nameRef = meshObj.nameRef;
 			
-			self.meshCount++;
-			self.meshes = realloc(self.meshes, self.meshCount*sizeof(UNRMesh *));
+			int index = -1;
+			for(int i = 0; i < self.meshCount; i++){
+				if(self.meshes[i]->nameIndex == nameRef){
+					index = i;
+					break;
+				}
+			}
 			
-			self.meshes[self.meshCount-1] = UNRMeshCreate(mesh);
-		}*/
+			if(index == -1){
+				self.meshCount++;
+				self.meshes = realloc(self.meshes, self.meshCount*sizeof(UNRMesh *));
+				
+				self.meshes[self.meshCount-1] = UNRMeshCreate(mesh, nameRef);
+				index = self.meshCount-1;
+			}
+			
+			self.meshMatCount++;
+			self.meshMats = realloc(self.meshMats, self.meshMatCount*sizeof(UNRMeshContainer));
+			self.meshMats[self.meshMatCount-1].meshUsed = index;
+			
+			UNRProperty *locProp = [obj valueForKey:@"Location"];
+			Vector3D position;
+			position.x = [locProp.manager loadFloat];
+			position.y = [locProp.manager loadFloat];
+			position.z = [locProp.manager loadFloat];
+			
+			Matrix3D mat;
+			Matrix3DIdentity(mat);
+			
+			Matrix3DTranslate(mat, position.x, position.y, position.z);
+			Matrix3DRotateX(mat, self.meshes[index]->rotation.x);
+			Matrix3DRotateY(mat, self.meshes[index]->rotation.y);
+			Matrix3DRotateZ(mat, self.meshes[index]->rotation.z);
+			
+			Matrix3DCopy(mat, self.meshMats[self.meshMatCount-1].matrix);
+			//self.meshMats[self.meshMatCount-1].matrix = mat;
+		}
 		
 		self.actors = nil;
 		self.classes = nil;

@@ -66,29 +66,29 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 		nodeStruct->plane.w = -nodeStruct->plane.w;
 		
 		/*{
-			int iVertPool = [[node valueForKey:@"iVertPool"] intValue];
-			int pointIndexA = [[[verticies objectAtIndex:iVertPool] valueForKey:@"pVertex"] intValue];
-			Vector3D A = Vector3DCreateWithDictionary([points objectAtIndex:pointIndexA]);
-			
-			int pointIndexB = [[[verticies objectAtIndex:iVertPool+1] valueForKey:@"pVertex"] intValue];
-			Vector3D B = Vector3DCreateWithDictionary([points objectAtIndex:pointIndexB]);
-			
-			int pointIndexC = [[[verticies objectAtIndex:iVertPool+2] valueForKey:@"pVertex"] intValue];
-			Vector3D C = Vector3DCreateWithDictionary([points objectAtIndex:pointIndexC]);
-			
-			Vector3D AB = Vector3DSubtract(B, A);
-			Vector3D AC = Vector3DSubtract(C, A);
-			Vector3D normal = Vector3DNormalize(Vector3DCross(AB, AC));
-			float w = -Vector3DDot(A, normal);
-			
-			Vector4D plane = nodeStruct->plane;
-			
-			//nodeStruct->normal = normal;
-			nodeStruct->plane.x = normal.x;
-			nodeStruct->plane.y = normal.y;
-			nodeStruct->plane.z = normal.z;
-			nodeStruct->plane.w = w;
-		}*/
+		 int iVertPool = [[node valueForKey:@"iVertPool"] intValue];
+		 int pointIndexA = [[[verticies objectAtIndex:iVertPool] valueForKey:@"pVertex"] intValue];
+		 Vector3D A = Vector3DCreateWithDictionary([points objectAtIndex:pointIndexA]);
+		 
+		 int pointIndexB = [[[verticies objectAtIndex:iVertPool+1] valueForKey:@"pVertex"] intValue];
+		 Vector3D B = Vector3DCreateWithDictionary([points objectAtIndex:pointIndexB]);
+		 
+		 int pointIndexC = [[[verticies objectAtIndex:iVertPool+2] valueForKey:@"pVertex"] intValue];
+		 Vector3D C = Vector3DCreateWithDictionary([points objectAtIndex:pointIndexC]);
+		 
+		 Vector3D AB = Vector3DSubtract(B, A);
+		 Vector3D AC = Vector3DSubtract(C, A);
+		 Vector3D normal = Vector3DNormalize(Vector3DCross(AB, AC));
+		 float w = -Vector3DDot(A, normal);
+		 
+		 Vector4D plane = nodeStruct->plane;
+		 
+		 //nodeStruct->normal = normal;
+		 nodeStruct->plane.x = normal.x;
+		 nodeStruct->plane.y = normal.y;
+		 nodeStruct->plane.z = normal.z;
+		 nodeStruct->plane.w = w;
+		 }*/
 		
 		nodeStruct->uVec = Vector3DCreateWithDictionary([vectors objectAtIndex:[[surf valueForKey:@"vTextureU"] intValue]]);
 		nodeStruct->vVec = Vector3DCreateWithDictionary([vectors objectAtIndex:[[surf valueForKey:@"vTextureV"] intValue]]);
@@ -135,6 +135,11 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 				nodeStruct->lightMap = [lighting retain];
 			}else{
 				nodeStruct->lightMap = [[map.lightMaps valueForKey:[NSString stringWithFormat:@"%i", lightIndex]] retain];
+				if(nodeStruct->lightMap == nil){
+					UNRTexture *lighting = [UNRTexture textureWithLightMap:nil data:nil lights:nil node:nodeStruct];
+					[map.lightMaps setValue:lighting forKey:[NSString stringWithFormat:@"%i", lightIndex]];
+					nodeStruct->lightMap = [lighting retain];
+				}
 			}
 			
 			if([map.shaders valueForKey:@"Texture"]){
@@ -152,7 +157,7 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 			glBindBuffer(GL_ARRAY_BUFFER, nodeStruct->vbo);
 			
 			if((nodeStruct->surfFlags & PF_FakeBackdrop) != PF_FakeBackdrop){
-				nodeStruct->strideLength = 5;
+				nodeStruct->strideLength = 7;
 				
 				//float scaleU = Vector3DMagnitude(vTextureU);
 				//float scaleV = Vector3DMagnitude(vTextureV);
@@ -164,6 +169,12 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 				Vector3D lightPan = Vector3DCreateWithDictionary([lightMap valueForKey:@"pan"]);
 				float lightUScale = [[lightMap valueForKey:@"uScale"] floatValue];
 				float lightVScale = [[lightMap valueForKey:@"vScale"] floatValue];
+				if(lightUScale == 0.0f){
+					lightUScale = 1.0f;
+				}
+				if(lightVScale == 0.0f){
+					lightVScale = 1.0f;
+				}
 				
 				//lightmap panbias = -0.5
 				//Tex.UPan = Info.Pan.X + PanBias*Info.UScale;
@@ -186,18 +197,35 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 					texCoord.y = (Vector3DDot(disp, nodeStruct->vVec) + panV)/(nodeStruct->tex.height);
 					
 					Vector2D lightCoord = {0.0f, 0.0f};
-					lightCoord.x = (Vector3DDot(disp, nodeStruct->uVec) - lightPan.x + 0.5f*lightUScale)/(lightUScale*nodeStruct->lightMap.width);
-					lightCoord.y = (Vector3DDot(disp, nodeStruct->vVec) - lightPan.y + 0.5f*lightVScale)/(lightVScale*nodeStruct->lightMap.height);
+					if(nodeStruct->lightMap.width != 1 || nodeStruct->lightMap.height != 1){
+						lightCoord.x = (Vector3DDot(disp, nodeStruct->uVec) - lightPan.x + 0.5f*lightUScale)/(lightUScale*nodeStruct->lightMap.width);
+						lightCoord.y = (Vector3DDot(disp, nodeStruct->vVec) - lightPan.y + 0.5f*lightVScale)/(lightVScale*nodeStruct->lightMap.height);
+						if(lightCoord.x > 1.0f){
+							lightCoord.x = 1.0f;
+						}
+						if(lightCoord.x < 0.0f){
+							lightCoord.x = 0.0f;
+						}
+						if(lightCoord.y > 1.0f){
+							lightCoord.y = 1.0f;
+						}
+						if(lightCoord.y < 0.0f){
+							lightCoord.y = 0.0f;
+						}
+					}else{
+						lightCoord.x = 0.5f;
+						lightCoord.y = 0.5f;
+					}
 					
 					coordinates[index]   = coord.x;
 					coordinates[index+1] = coord.y;
 					coordinates[index+2] = coord.z;
 					coordinates[index+3] = texCoord.x;
 					coordinates[index+4] = texCoord.y;
-                  nodeStruct->lightMapCoords[i].x = lightCoord.x;
-                  nodeStruct->lightMapCoords[i].y = lightCoord.y;
-                  //					coordinates[index+5] = lightCoord.x;
-//					coordinates[index+6] = lightCoord.y;
+					nodeStruct->lightMapCoords[i].x = lightCoord.x;
+					nodeStruct->lightMapCoords[i].y = lightCoord.y;
+					coordinates[index+5] = lightCoord.x;
+					coordinates[index+6] = lightCoord.y;
 					index += nodeStruct->strideLength;
 				}
 				
@@ -245,16 +273,16 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 				[nodeStruct->lightMap bind:1];
 				
 				GLuint inTexCoord = [nodeStruct->shader attribLocation:@"inTexCoord"];
-				//GLuint inLightCoord = [nodeStruct->shader attribLocation:@"inLightCoord"];
+				GLuint inLightCoord = [nodeStruct->shader attribLocation:@"inLightCoord"];
 				GLuint texture = [nodeStruct->shader uniformLocation:@"texture"];
 				GLuint lightmap = [nodeStruct->shader uniformLocation:@"lightmap"];
 				
 				glUniform1i(texture, 0);
 				glUniform1i(lightmap, 1);
 				glEnableVertexAttribArray(inTexCoord);
-				//glEnableVertexAttribArray(inLightCoord);
+				glEnableVertexAttribArray(inLightCoord);
 				glVertexAttribPointer(inTexCoord, 2, GL_FLOAT, GL_FALSE, nodeStruct->strideLength*sizeof(GLfloat), (void *)(3*sizeof(GLfloat)));
-				//glVertexAttribPointer(inLightCoord, 2, GL_FLOAT, GL_FALSE, nodeStruct->strideLength*sizeof(GLfloat), (void *)(5*sizeof(GLfloat)));
+				glVertexAttribPointer(inLightCoord, 2, GL_FLOAT, GL_FALSE, nodeStruct->strideLength*sizeof(GLfloat), (void *)(5*sizeof(GLfloat)));
 			}
 			
 			glBindVertexArrayOES(0);
@@ -288,10 +316,10 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 		}
 		
 		/*if(nodeStruct->surfFlags & PF_NotSolid){
-			UNRNode *temp = nodeStruct->front;
-			nodeStruct->front = nodeStruct->back;
-			nodeStruct->back = temp;
-		}*/
+		 UNRNode *temp = nodeStruct->front;
+		 nodeStruct->front = nodeStruct->back;
+		 nodeStruct->back = temp;
+		 }*/
 		
 		[pool drain];
 	}
@@ -395,10 +423,10 @@ void UNRNodeSetupState(UNRNode *node, UNRState *state){
 			state->tex = node->tex.glTex;
 		}
 		
-//		if(state->lightmap != node->lightMap.glTex){
-//			[node->lightMap bind:1];
-//			state->lightmap = node->lightMap.glTex;
-//		}
+		/*if(state->lightmap != node->lightMap.glTex){
+		 [node->lightMap bind:1];
+		 state->lightmap = node->lightMap.glTex;
+		 }*/
 	}
 	
 	//	if(changed & PF_NotSolid){
@@ -457,17 +485,17 @@ void UNRNodeDrawWithState(UNRNode *node, UNRState *state, UNRFrustum frustum, Ve
 		}
 		
 		//if((node->surfFlags & PF_TwoSided) || (dist > 0.0f)){
-			if((node->surfFlags & PF_Invisible) != PF_Invisible && (nonSolid || !(node->surfFlags & PF_NotSolid))){
-				glBindVertexArrayOES(node->vao);
-				
-				UNRNodeSetupState(node, state);
-				
-				glDrawArrays(GL_TRIANGLE_FAN, 0, node->vertCount);
-			}
+		if((node->surfFlags & PF_Invisible) != PF_Invisible && (nonSolid || !(node->surfFlags & PF_NotSolid))){
+			glBindVertexArrayOES(node->vao);
 			
-			if(node->coPlanar){
-				UNRNodeDrawWithState(node->coPlanar, state, frustum, camPos);
-			}
+			UNRNodeSetupState(node, state);
+			
+			glDrawArrays(GL_TRIANGLE_FAN, 0, node->vertCount);
+		}
+		
+		if(node->coPlanar){
+			UNRNodeDrawWithState(node->coPlanar, state, frustum, camPos);
+		}
 		//}
 		
 		if(dist > 0.0f){

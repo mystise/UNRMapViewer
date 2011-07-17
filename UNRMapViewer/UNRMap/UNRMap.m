@@ -100,16 +100,16 @@
 									   self, @"map",
 									   [NSNumber numberWithInt:0], @"iNode",
 									   nil];
-            
+		
 		UNRNode *node = UNRNodeCreate(model, attrib);
 		self.rootNode = node;
 		
-      UNRTextureMap *map = [[UNRTextureMap alloc] initWithSize:CGSizeMake(1024, 1024)];
-      [map addTexturesFromNode:self.rootNode];
-      [map uploadToGPU];
-      self.lightMapTexMap = map;
-      [map release];
-      
+		UNRTextureMap *map = [[UNRTextureMap alloc] initWithSize:CGSizeMake(2048, 2048)];
+		[map addTexturesFromNode:self.rootNode];
+		[map uploadToGPU];
+		self.lightMapTexMap = map;
+		[map release];
+		
         UNRCubeCamera *cubeCam = [[UNRCubeCamera alloc] init];
 		self.cubeMap = cubeCam;
 		self.cubeMap.cam.up = Vector3DCreate(0.0f, 0.0f, 1.0f);
@@ -223,8 +223,8 @@
 			Matrix3DRotateZ(mat, self.meshes[index]->rotation.x+rotation.y);
 			Matrix3DScale(mat, self.meshes[index]->scale.x*10.0f, self.meshes[index]->scale.y*10.0f, self.meshes[index]->scale.z*5.0f);
 			/*Matrix3DRotateX(mat, +rotation.x);
-			Matrix3DRotateY(mat, +rotation.y);
-			Matrix3DRotateZ(mat, +rotation.z);*/
+			 Matrix3DRotateY(mat, +rotation.y);
+			 Matrix3DRotateZ(mat, +rotation.z);*/
 			
 			Matrix3DCopy(mat, self.meshMats[self.meshMatCount-1].matrix);
 			//self.meshMats[self.meshMatCount-1].matrix = mat;
@@ -263,17 +263,17 @@
 	glStencilFunc(GL_ALWAYS, 1, UINT_MAX);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
 	
-	for(int i = 0; i < self.meshMatCount; i++){
-		Matrix3D mat;
-		Matrix3DMultiply(res, self.meshMats[i].matrix, mat);
-		
-		UNRMeshContainer *meshMats = self.meshMats;
-		int meshIndex = meshMats[i].meshUsed;
-		UNRMesh **meshes = self.meshes;
-		UNRMesh *mesh = meshes[meshIndex];
-		
-		UNRMeshDraw(mesh, mat, frustum);
-	}
+	/*for(int i = 0; i < self.meshMatCount; i++){
+	 Matrix3D mat;
+	 Matrix3DMultiply(res, self.meshMats[i].matrix, mat);
+	 
+	 UNRMeshContainer *meshMats = self.meshMats;
+	 int meshIndex = meshMats[i].meshUsed;
+	 UNRMesh **meshes = self.meshes;
+	 UNRMesh *mesh = meshes[meshIndex];
+	 
+	 UNRMeshDraw(mesh, mat, frustum);
+	 }*/
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, self.lightMapTexMap.lightMapTexID);
 	UNRNodeDraw(self.rootNode, res, frustum, camPos, NO, NO);
@@ -281,6 +281,8 @@
 	
 	glDepthRangef(0.0f, 0.5f);
 	[self.cubeMap updateWithTimestep:dt];
+	//glActiveTexture(GL_TEXTURE1);
+	//glBindTexture(GL_TEXTURE_2D, self.lightMapTexMap.lightMapTexID);
 	[self.cubeMap drawWithRootNode:self.rootNode camera:self.cam projMat:projection];
 	
 	//glDepthRangef(0.5f, 1.0f);

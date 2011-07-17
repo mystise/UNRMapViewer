@@ -544,6 +544,22 @@ void printLightType(int lType){
 	return [tex autorelease];
 }
 
++ (id)textureWithBrightness:(Byte)bright{
+	UNRTexture *tex = [[self alloc] init];
+	if(tex){
+		tex.width = 1;
+		tex.height = 1;
+		GLuint glTex;
+		glGenTextures(1, &glTex);
+		tex.glTex = glTex;
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &bright);
+	}
+	return [tex autorelease];
+}
+
 - (void)bind:(int)index{
 	glActiveTexture(GL_TEXTURE0+index);
 	glBindTexture(GL_TEXTURE_2D, self.glTex);

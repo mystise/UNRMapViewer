@@ -53,7 +53,7 @@
 				   ![className isEqualToString:@"PathNode"] &&
 				   ![className isEqualToString:@"Trigger"] &&
 				   ![className isEqualToString:@"Ambushpoint"] &&
-				   ![className isEqualToString:@"translocdest"] &&
+				   ![className isEqualToString:@"TranslocDest"] &&
 				   ![className isEqualToString:@"LiftExit"] &&
 				   ![className isEqualToString:@"DefensePoint"] &&
 				   ![className isEqualToString:@"SpecialEvent"] &&
@@ -63,7 +63,9 @@
 				   ![className isEqualToString:@"InterpolationPoint"] &&
 				   ![className isEqualToString:@"LiftCenter"] &&
 				   ![className isEqualToString:@"JumpExit"] &&
-				   ![className isEqualToString:@"JumpCenter"]){
+				   ![className isEqualToString:@"JumpCenter"] &&
+				   ![className isEqualToString:@"botbait"] &&
+				   ![className isEqualToString:@"AmbientSound"]){
 					if([self.actors valueForKey:className] == nil){
 						[self.actors setValue:[NSMutableArray array] forKey:className];
 					}
@@ -154,7 +156,12 @@
 			self.cam.rotZ = [rotation.manager loadInt]*45/8192;
 		}
 		
+		dispatch_async(mainThread, ^(void){
+			label.text = @"Loading meshes...";
+			progress.progress = 0.8f;
+		});
 		for(NSMutableDictionary *obj in [self.actors valueForKey:@"InventorySpot"]){
+			NSMutableDictionary *markedItem = [[[[obj valueForKey:@"markedItem"] object] objectData] valueForKey:@"props"];
 			UNRExport *classObj = (UNRExport *)[[[obj valueForKey:@"markedItem"] object] classObj];
 			if([classObj isKindOfClass:[UNRImport class]]){
 				UNRImport *item = (UNRImport *)classObj;
@@ -178,7 +185,7 @@
 				self.meshCount++;
 				self.meshes = realloc(self.meshes, self.meshCount*sizeof(UNRMesh *));
 				
-				self.meshes[self.meshCount-1] = UNRMeshCreate(mesh, nameRef);
+				self.meshes[self.meshCount-1] = UNRMeshCreate(mesh, nameRef, 0);
 				index = self.meshCount-1;
 			}
 			
@@ -186,19 +193,29 @@
 			self.meshMats = realloc(self.meshMats, self.meshMatCount*sizeof(UNRMeshContainer));
 			self.meshMats[self.meshMatCount-1].meshUsed = index;
 			
-			UNRProperty *locProp = [obj valueForKey:@"Location"];
+			UNRProperty *locProp = [markedItem valueForKey:@"Location"];
 			Vector3D position;
 			position.x = [locProp.manager loadFloat];
 			position.y = [locProp.manager loadFloat];
 			position.z = [locProp.manager loadFloat];
 			
+			UNRProperty *rotProp = [markedItem valueForKey:@"Rotation"];
+			Vector3D rotation;
+			rotation.x = [rotProp.manager loadInt]*45/8192;
+			rotation.y = [rotProp.manager loadInt]*45/8192;
+			rotation.z = [rotProp.manager loadInt]*45/8192;
+			
 			Matrix3D mat;
 			Matrix3DIdentity(mat);
 			
 			Matrix3DTranslate(mat, position.x, position.y, position.z);
-			Matrix3DRotateX(mat, self.meshes[index]->rotation.x);
-			Matrix3DRotateY(mat, self.meshes[index]->rotation.y);
-			Matrix3DRotateZ(mat, self.meshes[index]->rotation.z);
+			Matrix3DRotateX(mat, -self.meshes[index]->rotation.z-rotation.x);
+			Matrix3DRotateY(mat, self.meshes[index]->rotation.y+rotation.z);
+			Matrix3DRotateZ(mat, self.meshes[index]->rotation.x+rotation.y);
+			Matrix3DScale(mat, self.meshes[index]->scale.x*10.0f, self.meshes[index]->scale.y*10.0f, self.meshes[index]->scale.z*5.0f);
+			/*Matrix3DRotateX(mat, +rotation.x);
+			Matrix3DRotateY(mat, +rotation.y);
+			Matrix3DRotateZ(mat, +rotation.z);*/
 			
 			Matrix3DCopy(mat, self.meshMats[self.meshMatCount-1].matrix);
 			//self.meshMats[self.meshMatCount-1].matrix = mat;
@@ -232,12 +249,23 @@
 	UNRFrustum frustum;
 	UNRFrustumCreate(frustum, res);
 	
+	Vector3D camPos = self.cam.pos;
+	glDepthRangef(0.5f, 1.0f);
 	glStencilFunc(GL_ALWAYS, 1, UINT_MAX);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
 	
-	Vector3D camPos = self.cam.pos;
-	glDepthRangef(0.5f, 1.0f);
-	glDepthMask(GL_TRUE);
+	for(int i = 0; i < self.meshMatCount; i++){
+		Matrix3D mat;
+		Matrix3DMultiply(res, self.meshMats[i].matrix, mat);
+		
+		UNRMeshContainer *meshMats = self.meshMats;
+		int meshIndex = meshMats[i].meshUsed;
+		UNRMesh **meshes = self.meshes;
+		UNRMesh *mesh = meshes[meshIndex];
+		
+		UNRMeshDraw(mesh, mat, frustum);
+	}
+	
 	UNRNodeDraw(self.rootNode, res, frustum, camPos, NO, NO);
 	//[self.rootNode drawWithMatrix:res frustum:frustum camPos:camPos nonSolid:NO];
 	

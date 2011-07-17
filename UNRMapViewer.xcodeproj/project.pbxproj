@@ -61,6 +61,8 @@
 		49AAFFD813BE349A002D7A41 /* UNRZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 49AAFFD713BE3499002D7A41 /* UNRZone.m */; };
 		49B5F4881395CDCC00421352 /* UNRShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 49B5F4871395CDCC00421352 /* UNRShader.m */; };
 		49BC3C3B13D0B88600C7F6C2 /* UNRMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BC3C3913D0B88500C7F6C2 /* UNRMesh.m */; };
+		49F336CD13D238B30013EF0F /* Mesh.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 49F336CB13D238B30013EF0F /* Mesh.fsh */; };
+		49F336CE13D238B30013EF0F /* Mesh.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 49F336CC13D238B30013EF0F /* Mesh.vsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +171,8 @@
 		49B5F4891396CFB500421352 /* GLCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLCommon.h; sourceTree = "<group>"; };
 		49BC3C3913D0B88500C7F6C2 /* UNRMesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNRMesh.m; sourceTree = "<group>"; };
 		49BC3C3A13D0B88500C7F6C2 /* UNRMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNRMesh.h; sourceTree = "<group>"; };
+		49F336CB13D238B30013EF0F /* Mesh.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Mesh.fsh; path = Shaders/Mesh.fsh; sourceTree = "<group>"; };
+		49F336CC13D238B30013EF0F /* Mesh.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = Mesh.vsh; path = Shaders/Mesh.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +327,8 @@
 				493E72C813AD6127008C2E78 /* SkyBox.vsh */,
 				498E611D137A30CD00EA243B /* Texture.fsh */,
 				498E611F137A30CD00EA243B /* Texture.vsh */,
+				49F336CB13D238B30013EF0F /* Mesh.fsh */,
+				49F336CC13D238B30013EF0F /* Mesh.vsh */,
 				493320AE13932B6B007B08F0 /* UNRMap */,
 				498E6121137A30CD00EA243B /* EAGLView.h */,
 				498E6122137A30CD00EA243B /* EAGLView.m */,
@@ -445,6 +451,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49F336CD13D238B30013EF0F /* Mesh.fsh in Resources */,
+				49F336CE13D238B30013EF0F /* Mesh.vsh in Resources */,
 				498E6113137A30CD00EA243B /* InfoPlist.strings in Resources */,
 				498E611C137A30CD00EA243B /* MainWindow.xib in Resources */,
 				493E72C913AD6127008C2E78 /* SkyBox.fsh in Resources */,

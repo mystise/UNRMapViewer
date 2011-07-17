@@ -273,9 +273,9 @@
 	id current = [self.currentData lastObject];
 	[self processArray:@"addRotatorWithAttributes:" attribs:attrib];
 	if(![current isKindOfClass:[NSNull class]]){
-		float rotPitch = [self.manager loadFloat];
-		float rotYaw = [self.manager loadFloat];
-		float rotRoll = [self.manager loadFloat];
+		float rotPitch = [self.manager loadInt];
+		float rotYaw = [self.manager loadInt];
+		float rotRoll = [self.manager loadInt];
 		NSDictionary *vector = [NSDictionary dictionaryWithObjectsAndKeys:
 								[NSNumber numberWithFloat:rotPitch], @"pitch",
 								[NSNumber numberWithFloat:rotYaw], @"yaw",

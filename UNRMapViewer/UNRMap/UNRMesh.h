@@ -18,19 +18,26 @@
 #import "UNRFrustum.h"
 #import "UNRTexture.h"
 #import "UNRBoundingBox.h"
+#import "UNRShader.h"
 
 typedef struct{
-	GLuint *vbos; //one for each frame
+	GLuint **vbos; //[frame][texture]
+	GLuint **vaos; //[frame][texture]
 	int nameIndex;
-	UNRTexture *tex;
+	UNRTexture **tex; //[texture]
 	Vector3D rotation;
 	Vector3D scale;
 	UNRBoundingBox *box;
-	//other needed data
+	UNRShader *shader;
+	int frameCount, texCount;
+	int *vertCount; //[texture]
+	float frame, frameRate;
+	int vertPerFrame;
 }UNRMesh;
 
-UNRMesh *UNRMeshCreate(NSMutableDictionary *lodMesh, int nameIndex);
+UNRMesh *UNRMeshCreate(NSMutableDictionary *lodMesh, int nameIndex, int animIndex);
 
+void UNRMeshUpdate(UNRMesh *mesh, float dt);
 void UNRMeshDraw(UNRMesh *mesh, Matrix3D mat, UNRFrustum frustum);
 
 void UNRMeshDelete(UNRMesh *mesh);

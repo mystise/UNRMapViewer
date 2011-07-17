@@ -20,6 +20,7 @@ struct UNRNode;
 
 + (id)textureWithObject:(NSMutableDictionary *)obj attributes:(NSDictionary *)attrib;
 + (id)textureWithLightMap:(NSMutableDictionary *)lightMap data:(NSMutableData *)data lights:(NSMutableArray *)lights node:(struct UNRNode *)node;
++ (id)textureWithBrightness:(Byte)bright;
 - (void)bind:(int)index;
 
 @property(nonatomic, assign) int width, height;

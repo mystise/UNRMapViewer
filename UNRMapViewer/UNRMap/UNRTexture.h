@@ -25,5 +25,6 @@ struct UNRNode;
 
 @property(nonatomic, assign) int width, height;
 @property(nonatomic, assign) GLuint glTex;
+@property(nonatomic, retain) NSData *textureData;
 
 @end

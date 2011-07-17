@@ -17,6 +17,8 @@
 #import "UNRNode.h"
 #import "UNRMesh.h"
 
+#import "UNRTextureMap.h"
+
 @class UNRFile, UNRCubeCamera, UNRCamera;
 
 typedef struct{
@@ -43,6 +45,7 @@ typedef struct{
 @property(nonatomic, assign) int meshMatCount;
 @property(nonatomic, assign) CGPoint stickPos, stickPrevPos, lookPos, lookPrevPos;
 
+@property(nonatomic, retain) UNRTextureMap *lightMapTexMap;
 @property(nonatomic, retain) UNRCubeCamera *cubeMap;
 @property(nonatomic, retain) UNRCamera *cam;
 @property(nonatomic, retain) NSMutableDictionary *textures, *shaders, *lightMaps, *actors, *classes;

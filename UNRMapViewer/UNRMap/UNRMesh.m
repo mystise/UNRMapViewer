@@ -154,7 +154,7 @@ UNRMesh *UNRMeshCreate(NSMutableDictionary *lodMesh, int nameIndex, int animInde
 			glVertexAttribPointer(texCoords, 2, GL_FLOAT, GL_FALSE, sizeof(UNRVertDat), (GLvoid *)(sizeof(float)*3));
 			
 			GLuint texture = [mesh->shader uniformLocation:@"texture"];
-			glUniform1i(texture, 2);
+			glUniform1i(texture, 5);
 		}
 	}
 	
@@ -181,9 +181,10 @@ void UNRMeshDraw(UNRMesh *mesh, Matrix3D mat, UNRFrustum frustum){
 	GLuint matrix = [mesh->shader uniformLocation:@"modelViewProjection"];
 	glUniformMatrix4fv(matrix, 1, GL_FALSE, mat);
 	for(int i = 0; i < mesh->texCount; i++){
-		[mesh->tex[i] bind:2];
+		[mesh->tex[i] bind:5];
 		glBindVertexArrayOES(mesh->vaos[(int)floorf(mesh->frame)][i]);
 		glDrawArrays(GL_TRIANGLES, 0, mesh->vertCount[i]);
+		glBindVertexArrayOES(0);
 	}
 }
 

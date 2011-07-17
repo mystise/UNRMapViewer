@@ -18,6 +18,10 @@
 #import "UNRFrustum.h"
 #import "UNRTextureMap.h"
 
+CFStringRef NodeDescription(const void *value) {
+  return (CFStringRef)@"node";
+}
+
 @interface UNRMap()
 
 @end
@@ -103,7 +107,39 @@
             
 		UNRNode *node = UNRNodeCreate(model, attrib);
 		self.rootNode = node;
-		
+      
+      // setup the datastructure to hold the nodes that are usign the same texture
+      NSMutableDictionary *nodes = [NSMutableDictionary dictionaryWithCapacity:[[self textures] count]];
+      for(NSString *textureName in [self textures]) {
+        CFArrayCallBacks callbacks = {0, NULL, NULL, NodeDescription, NULL};
+        CFMutableArrayRef array = CFArrayCreateMutable(NULL, 0, &callbacks);
+        [nodes setValue:(id)array forKey:textureName];
+      }
+      
+      UNRNodeGroupNodesOnTextureName(self.rootNode, nodes);
+      NSMutableDictionary *flattendVertexData = [NSMutableDictionary dictionaryWithCapacity:[[self textures] count]];
+      for(NSString *textureName in nodes) {
+        CFArrayCallBacks vertexDataCallbacks = {0, VertexDataRetainCallBack, VertexDataReleaseCallBack, VertexDataCopyDescriptionCallBack, NULL};
+        CFMutableArrayRef vertexDataArray = CFArrayCreateMutable(NULL, 0, &vertexDataCallbacks);
+        CFArrayRef unrNodeArray = (CFArrayRef)[nodes objectForKey:textureName];
+        for(int i = 0;i < CFArrayGetCount(unrNodeArray);i++) {
+          UNRNode *unrNode = (UNRNode*)CFArrayGetValueAtIndex(unrNodeArray, i);
+          if(NULL == unrNode->vertexData) {
+            break;
+          }
+          int start = CFArrayGetCount(vertexDataArray);
+          for(int j = 0;j < unrNode->vertCount;j++) {
+            CFArrayInsertValueAtIndex(vertexDataArray, start + j, (const void *)(&(unrNode->vertexData[j])));
+          }
+        }
+        if(0 < CFArrayGetCount(vertexDataArray)) {
+          [flattendVertexData setObject:(id)vertexDataArray forKey:textureName];
+          CFRelease(vertexDataArray);
+        } else {
+          CFRelease(vertexDataArray);
+        }
+      }
+      
       UNRTextureMap *map = [[UNRTextureMap alloc] initWithSize:CGSizeMake(1024, 1024)];
       [map addTexturesFromNode:self.rootNode];
       [map uploadToGPU];

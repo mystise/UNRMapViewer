@@ -25,6 +25,39 @@ enum{
 	CLASS_Back
 };
 
+const void *VertexDataRetainCallBack(CFAllocatorRef allocator, const void *value) {
+  VertexData *data = calloc(1, sizeof(VertexData));
+  memcpy(data, value, sizeof(VertexData));
+  return (const void *)data;
+}
+
+void VertexDataReleaseCallBack(CFAllocatorRef allocator, const void *value) {
+  VertexData *data = (VertexData*)value;
+  free(data);
+}
+
+CFStringRef VertexDataCopyDescriptionCallBack(const void *value) {
+  VertexData *data = (VertexData*)value;
+  return (CFStringRef)[[NSString alloc] initWithFormat:@"cord = {%7.2f, %7.2f, %7.2f}, tex = {%7.2f, %7.2f}, lightCord = {%7.2f, %7.2f}", 
+                       data->coord.x,data->coord.y,data->coord.z,data->texCoord.x,data->texCoord.y,data->lightMapCoord.x,data->lightMapCoord.y];
+}
+
+void UNRNodeGroupNodesOnTextureName(UNRNode *node, NSMutableDictionary *nodesKeyedOnTextureName) {
+  if(NULL != node->textureName) {
+    CFMutableArrayRef array = (CFMutableArrayRef)[nodesKeyedOnTextureName objectForKey:node->textureName];
+    CFArrayAppendValue(array, node);
+  }
+  if(NULL != node->coPlanar) {
+    UNRNodeGroupNodesOnTextureName(node->coPlanar, nodesKeyedOnTextureName);
+  }
+  if(NULL != node->front) {
+    UNRNodeGroupNodesOnTextureName(node->front, nodesKeyedOnTextureName);
+  }
+  if(NULL != node->back) {
+    UNRNodeGroupNodesOnTextureName(node->back, nodesKeyedOnTextureName);
+  }
+}
+
 UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
     UNRNode *nodeStruct = calloc(1, sizeof(UNRNode));
 	if(nodeStruct){
@@ -111,6 +144,7 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 				if(exp != nil){
 					if([map.textures valueForKey:exp.name.string]){
 						nodeStruct->tex = [[map.textures valueForKey:exp.name.string] retain];
+                        nodeStruct->textureName = [exp.name.string copy];
 					}else{
 						UNRTexture *tex = [UNRTexture textureWithObject:exp.objectData attributes:[NSDictionary dictionaryWithObjectsAndKeys:
 																								   [NSNumber numberWithBool:((nodeStruct->surfFlags & PF_Masked) == PF_Masked)], @"masked",
@@ -118,6 +152,7 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 																								   [NSNumber numberWithBool:((nodeStruct->surfFlags & PF_NoSmooth) != 0)], @"noSmooth",
 																								   nil]];
 						nodeStruct->tex = [tex retain];
+                        nodeStruct->textureName = [exp.name.string copy];
 						[map.textures setValue:tex forKey:exp.name.string];
 					}
 				}
@@ -173,6 +208,7 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 				int vertCount = [[node valueForKey:@"vertCount"] intValue];
 				
                 nodeStruct->lightMapCoords = (Vector2D *)calloc(vertCount, sizeof(Vector2D));
+                nodeStruct->vertexData = (VertexData *)calloc(vertCount, sizeof(VertexData));
 				GLfloat *coordinates = (GLfloat *)calloc(vertCount*nodeStruct->strideLength, sizeof(GLfloat));
 				nodeStruct->vertCount = vertCount;
 				int index = 0;
@@ -189,7 +225,16 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 					lightCoord.x = (Vector3DDot(disp, nodeStruct->uVec) - lightPan.x + 0.5f*lightUScale)/(lightUScale*nodeStruct->lightMap.width);
 					lightCoord.y = (Vector3DDot(disp, nodeStruct->vVec) - lightPan.y + 0.5f*lightVScale)/(lightVScale*nodeStruct->lightMap.height);
 					
-					coordinates[index]   = coord.x;
+                  
+                  nodeStruct->vertexData[i].coord.x = coord.x;
+                  nodeStruct->vertexData[i].coord.y = coord.y;
+                  nodeStruct->vertexData[i].coord.z = coord.z;
+                  nodeStruct->vertexData[i].texCoord.x = texCoord.x;
+                  nodeStruct->vertexData[i].texCoord.y = texCoord.y;                  
+                  nodeStruct->vertexData[i].lightMapCoord.x = lightCoord.x;
+                  nodeStruct->vertexData[i].lightMapCoord.y = lightCoord.y;                  
+
+                  coordinates[index]   = coord.x;
 					coordinates[index+1] = coord.y;
 					coordinates[index+2] = coord.z;
 					coordinates[index+3] = texCoord.x;
@@ -519,7 +564,8 @@ void UNRNodeDraw(UNRNode *root, Matrix3D mat, UNRFrustum frustum, Vector3D camPo
 }
 
 void UNRNodeDelete(UNRNode *node){
-	[node->tex release];
+    [node->tex release];
+    [node->textureName release];
 	[node->lightMap release];
 	[node->renderBox release];
 	[node->shader release];

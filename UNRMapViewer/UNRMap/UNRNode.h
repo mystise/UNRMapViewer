@@ -57,9 +57,23 @@ typedef struct{
 	BOOL shouldBoundTest, nonSolid, backDrop;
 }UNRState;
 
+typedef struct {
+  Vector3D coord;
+  Vector2D texCoord;
+  Vector2D lightMapCoord;
+} VertexData;
+
+
+const void *VertexDataRetainCallBack(CFAllocatorRef allocator, const void *value);
+void VertexDataReleaseCallBack(CFAllocatorRef allocator, const void *value);
+CFStringRef VertexDataCopyDescriptionCallBack(const void *value);
+
+
 typedef struct UNRNode{
 	int vertCount;
+    NSString *textureName;
 	GLuint vbo, vao, lightMapVBO;
+    VertexData *vertexData;
     Vector2D *lightMapCoords;
 	Vector3D origin, uVec, vVec, normal;
 	Vector4D plane;
@@ -73,6 +87,8 @@ typedef struct UNRNode{
 }UNRNode;
 
 UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib);
+
+void UNRNodeGroupNodesOnTextureName(UNRNode *node, NSMutableDictionary *nodesKeyedOnTextureName);
 
 void UNRNodeDraw(UNRNode *root, Matrix3D mat, UNRFrustum frustum, Vector3D camPos, BOOL nonSolid, BOOL backDrop);
 

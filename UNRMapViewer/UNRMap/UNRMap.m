@@ -46,6 +46,8 @@
 			progress.progress = 0.6f;
 		});
 		
+		NSMutableDictionary *flagProps = nil;
+		
 		for(UNRExport *obj in [[level valueForKey:@"actors"] valueForKey:@"actor"]){
 			if(![obj isKindOfClass:[NSNull class]]){
 				NSString *className = obj.classObj.name.string;
@@ -84,6 +86,12 @@
 						
 						[self.classes setValue:classProps forKey:className];
 					}
+				}
+				if([className isEqualToString:@"FlagBase"] && flagProps == nil){
+					printf("Found!!\n");
+					UNRImport *flagObj = (UNRImport *)obj.classObj;
+					
+					flagProps = [flagObj.obj.objectData valueForKey:@"props"];
 				}
 			}
 		}
@@ -150,8 +158,9 @@
 			self.cubeMap.drZ = [rotRate.manager loadInt]*45/8192;
 		}
 		
-		NSMutableDictionary *obj = [[self.actors valueForKey:@"PlayerStart"] objectAtIndex:0];
 		{
+			NSMutableDictionary *obj = [[self.actors valueForKey:@"PlayerStart"] objectAtIndex:0];
+			
 			UNRProperty *location = [obj valueForKey:@"Location"];
 			Vector3D camPos;
 			camPos.x = [location.manager loadFloat];
@@ -169,7 +178,17 @@
 			label.text = @"Loading meshes...";
 			progress.progress = 0.8f;
 		});
-		for(NSMutableDictionary *obj in [self.actors valueForKey:@"InventorySpot"]){
+		NSMutableArray *array = [self.actors valueForKey:@"InventorySpot"];
+		NSMutableDictionary *obj = [array objectAtIndex:0];
+		int index = 1;
+		while(obj != nil){
+			if(index < [array count]){
+				obj = [array objectAtIndex:index];//NSMutableDictionary *obj in [self.actors valueForKey:@"InventorySpot"];
+				index++;
+			}else{
+				obj = nil;
+				break;
+			}
 			NSMutableDictionary *markedItem = [[[[obj valueForKey:@"markedItem"] object] objectData] valueForKey:@"props"];
 			UNRExport *classObj = (UNRExport *)[[[obj valueForKey:@"markedItem"] object] classObj];
 			if([classObj isKindOfClass:[UNRImport class]]){
@@ -222,13 +241,70 @@
 			Matrix3DRotateY(mat, self.meshes[index]->rotation.y+rotation.z);
 			Matrix3DRotateZ(mat, self.meshes[index]->rotation.x+rotation.y);
 			Matrix3DScale(mat, self.meshes[index]->scale.x*10.0f, self.meshes[index]->scale.y*10.0f, self.meshes[index]->scale.z*5.0f);
-			/*Matrix3DRotateX(mat, +rotation.x);
-			 Matrix3DRotateY(mat, +rotation.y);
-			 Matrix3DRotateZ(mat, +rotation.z);*/
 			
 			Matrix3DCopy(mat, self.meshMats[self.meshMatCount-1].matrix);
-			//self.meshMats[self.meshMatCount-1].matrix = mat;
 		}
+		
+		/*array = [self.actors valueForKey:@"FlagBase"];
+		obj = [array objectAtIndex:0];
+		index = 1;
+		while(obj != nil){
+			if(index < [array count]){
+				obj = [array objectAtIndex:index];
+				index++;
+			}else{
+				obj = nil;
+				break;
+			}
+			NSMutableDictionary *markedItem = obj;
+			
+			UNRExport *meshObj = [[flagProps valueForKey:@"Mesh"] object];
+			NSMutableDictionary *mesh = [meshObj objectData];
+			int nameRef = meshObj.nameRef;
+			
+			int index = -1;
+			for(int i = 0; i < self.meshCount; i++){
+				if(self.meshes[i]->nameIndex == nameRef){
+					index = i;
+					break;
+				}
+			}
+			
+			if(index == -1){
+				self.meshCount++;
+				self.meshes = realloc(self.meshes, self.meshCount*sizeof(UNRMesh *));
+				
+				self.meshes[self.meshCount-1] = UNRMeshCreate(mesh, nameRef, 0);
+				index = self.meshCount-1;
+			}
+			
+			self.meshMatCount++;
+			self.meshMats = realloc(self.meshMats, self.meshMatCount*sizeof(UNRMeshContainer));
+			self.meshMats[self.meshMatCount-1].meshUsed = index;
+			
+			UNRProperty *locProp = [markedItem valueForKey:@"Location"];
+			Vector3D position;
+			position.x = [locProp.manager loadFloat];
+			position.y = [locProp.manager loadFloat];
+			position.z = [locProp.manager loadFloat];
+			
+			UNRProperty *rotProp = [markedItem valueForKey:@"Rotation"];
+			Vector3D rotation;
+			rotation.x = [rotProp.manager loadInt]*45/8192;
+			rotation.y = [rotProp.manager loadInt]*45/8192;
+			rotation.z = [rotProp.manager loadInt]*45/8192;
+			
+			Matrix3D mat;
+			Matrix3DIdentity(mat);
+			
+			Matrix3DTranslate(mat, position.x, position.y, position.z);
+			Matrix3DRotateX(mat, -self.meshes[index]->rotation.z-rotation.x);
+			Matrix3DRotateY(mat, self.meshes[index]->rotation.y+rotation.z);
+			Matrix3DRotateZ(mat, self.meshes[index]->rotation.x+rotation.y);
+			Matrix3DScale(mat, self.meshes[index]->scale.x*10.0f, self.meshes[index]->scale.y*10.0f, self.meshes[index]->scale.z*5.0f);
+			
+			Matrix3DCopy(mat, self.meshMats[self.meshMatCount-1].matrix);
+		}*/
 		
 		self.actors = nil;
 		self.classes = nil;
@@ -263,17 +339,17 @@
 	glStencilFunc(GL_ALWAYS, 1, UINT_MAX);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_ZERO);
 	
-	/*for(int i = 0; i < self.meshMatCount; i++){
-	 Matrix3D mat;
-	 Matrix3DMultiply(res, self.meshMats[i].matrix, mat);
-	 
-	 UNRMeshContainer *meshMats = self.meshMats;
-	 int meshIndex = meshMats[i].meshUsed;
-	 UNRMesh **meshes = self.meshes;
-	 UNRMesh *mesh = meshes[meshIndex];
-	 
-	 UNRMeshDraw(mesh, mat, frustum);
-	 }*/
+	for(int i = 0; i < self.meshMatCount; i++){
+		Matrix3D mat;
+		Matrix3DMultiply(res, self.meshMats[i].matrix, mat);
+		
+		UNRMeshContainer *meshMats = self.meshMats;
+		int meshIndex = meshMats[i].meshUsed;
+		UNRMesh **meshes = self.meshes;
+		UNRMesh *mesh = meshes[meshIndex];
+		
+		UNRMeshDraw(mesh, mat, frustum);
+	}
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, self.lightMapTexMap.lightMapTexID);
 	UNRNodeDraw(self.rootNode, res, frustum, camPos, NO, NO);

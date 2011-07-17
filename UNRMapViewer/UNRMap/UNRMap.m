@@ -16,6 +16,7 @@
 
 #import "UNRCamera.h"
 #import "UNRFrustum.h"
+#import "UNRTextureMap.h"
 
 @interface UNRMap()
 
@@ -26,6 +27,7 @@
 @synthesize rootNode = rootNode_, textures = textures_, shaders = shaders_, cam = cam_, lightMaps = lightMaps_, cubeMap = cubeMap_;
 @synthesize stickPos = stickPos_, stickPrevPos = stickPrevPos_, lookPos = lookPos_, lookPrevPos = lookPrevPos_, actors = actors_, classes = classes_;
 @synthesize meshes = meshes_, meshCount = meshCount_, meshMats = meshMats_, meshMatCount = meshMatCount_;
+@synthesize lightMapTexMap = lightMapTexMap_;
 
 - (id)initWithLevel:(NSMutableDictionary *)level andFile:(UNRFile *)file label:(UILabel *)label progress:(UIProgressView *)progress{
 	self = [super init];
@@ -96,10 +98,17 @@
 									   self, @"map",
 									   [NSNumber numberWithInt:0], @"iNode",
 									   nil];
+            
 		UNRNode *node = UNRNodeCreate(model, attrib);
 		self.rootNode = node;
 		
-		UNRCubeCamera *cubeCam = [[UNRCubeCamera alloc] init];
+      UNRTextureMap *map = [[UNRTextureMap alloc] initWithSize:CGSizeMake(1024, 1024)];
+      [map addTexturesFromNode:self.rootNode];
+      [map uploadToGPU];
+      self.lightMapTexMap = map;
+      [map release];
+      
+        UNRCubeCamera *cubeCam = [[UNRCubeCamera alloc] init];
 		self.cubeMap = cubeCam;
 		self.cubeMap.cam.up = Vector3DCreate(0.0f, 0.0f, 1.0f);
 		self.cubeMap.cam.look = Vector3DCreate(0.0f, 1.0f, 0.0f);
@@ -238,6 +247,8 @@
 	Vector3D camPos = self.cam.pos;
 	glDepthRangef(0.5f, 1.0f);
 	glDepthMask(GL_TRUE);
+  glActiveTexture(GL_TEXTURE1);
+  glBindTexture(GL_TEXTURE_2D, self.lightMapTexMap.lightMapTexID);
 	UNRNodeDraw(self.rootNode, res, frustum, camPos, NO, NO);
 	//[self.rootNode drawWithMatrix:res frustum:frustum camPos:camPos nonSolid:NO];
 	

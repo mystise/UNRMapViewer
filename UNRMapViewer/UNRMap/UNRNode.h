@@ -59,7 +59,8 @@ typedef struct{
 
 typedef struct UNRNode{
 	int vertCount;
-	GLuint vbo, vao;
+	GLuint vbo, vao, lightMapVBO;
+    Vector2D *lightMapCoords;
 	Vector3D origin, uVec, vVec, normal;
 	Vector4D plane;
 	int surfFlags;

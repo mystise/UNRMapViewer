@@ -26,7 +26,7 @@ enum{
 };
 
 UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
-	UNRNode *nodeStruct = malloc(sizeof(UNRNode));
+    UNRNode *nodeStruct = calloc(1, sizeof(UNRNode));
 	if(nodeStruct){
 		
 		nodeStruct->back = NULL;
@@ -152,7 +152,7 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 			glBindBuffer(GL_ARRAY_BUFFER, nodeStruct->vbo);
 			
 			if((nodeStruct->surfFlags & PF_FakeBackdrop) != PF_FakeBackdrop){
-				nodeStruct->strideLength = 7;
+				nodeStruct->strideLength = 5;
 				
 				//float scaleU = Vector3DMagnitude(vTextureU);
 				//float scaleV = Vector3DMagnitude(vTextureV);
@@ -172,6 +172,7 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 				int iVertPool = [[node valueForKey:@"iVertPool"] intValue];
 				int vertCount = [[node valueForKey:@"vertCount"] intValue];
 				
+                nodeStruct->lightMapCoords = (Vector2D *)calloc(vertCount, sizeof(Vector2D));
 				GLfloat *coordinates = (GLfloat *)calloc(vertCount*nodeStruct->strideLength, sizeof(GLfloat));
 				nodeStruct->vertCount = vertCount;
 				int index = 0;
@@ -193,8 +194,10 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 					coordinates[index+2] = coord.z;
 					coordinates[index+3] = texCoord.x;
 					coordinates[index+4] = texCoord.y;
-					coordinates[index+5] = lightCoord.x;
-					coordinates[index+6] = lightCoord.y;
+                  nodeStruct->lightMapCoords[i].x = lightCoord.x;
+                  nodeStruct->lightMapCoords[i].y = lightCoord.y;
+                  //					coordinates[index+5] = lightCoord.x;
+//					coordinates[index+6] = lightCoord.y;
 					index += nodeStruct->strideLength;
 				}
 				
@@ -242,16 +245,16 @@ UNRNode *UNRNodeCreate(NSMutableDictionary *model, NSMutableDictionary *attrib){
 				[nodeStruct->lightMap bind:1];
 				
 				GLuint inTexCoord = [nodeStruct->shader attribLocation:@"inTexCoord"];
-				GLuint inLightCoord = [nodeStruct->shader attribLocation:@"inLightCoord"];
+				//GLuint inLightCoord = [nodeStruct->shader attribLocation:@"inLightCoord"];
 				GLuint texture = [nodeStruct->shader uniformLocation:@"texture"];
 				GLuint lightmap = [nodeStruct->shader uniformLocation:@"lightmap"];
 				
 				glUniform1i(texture, 0);
 				glUniform1i(lightmap, 1);
 				glEnableVertexAttribArray(inTexCoord);
-				glEnableVertexAttribArray(inLightCoord);
+				//glEnableVertexAttribArray(inLightCoord);
 				glVertexAttribPointer(inTexCoord, 2, GL_FLOAT, GL_FALSE, nodeStruct->strideLength*sizeof(GLfloat), (void *)(3*sizeof(GLfloat)));
-				glVertexAttribPointer(inLightCoord, 2, GL_FLOAT, GL_FALSE, nodeStruct->strideLength*sizeof(GLfloat), (void *)(5*sizeof(GLfloat)));
+				//glVertexAttribPointer(inLightCoord, 2, GL_FLOAT, GL_FALSE, nodeStruct->strideLength*sizeof(GLfloat), (void *)(5*sizeof(GLfloat)));
 			}
 			
 			glBindVertexArrayOES(0);
@@ -392,10 +395,10 @@ void UNRNodeSetupState(UNRNode *node, UNRState *state){
 			state->tex = node->tex.glTex;
 		}
 		
-		if(state->lightmap != node->lightMap.glTex){
-			[node->lightMap bind:1];
-			state->lightmap = node->lightMap.glTex;
-		}
+//		if(state->lightmap != node->lightMap.glTex){
+//			[node->lightMap bind:1];
+//			state->lightmap = node->lightMap.glTex;
+//		}
 	}
 	
 	//	if(changed & PF_NotSolid){

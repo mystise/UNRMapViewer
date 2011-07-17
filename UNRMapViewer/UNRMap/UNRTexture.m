@@ -116,6 +116,7 @@ color ColorAdd(color col1, color col2){
 @implementation UNRTexture
 
 @synthesize width = width_, height = height_, glTex = glTex_;
+@synthesize textureData = textureData_;
 
 + (id)textureWithObject:(NSMutableDictionary *)obj attributes:(NSDictionary *)attrib{
 	UNRTexture *tex = [[self alloc] init];
@@ -388,6 +389,15 @@ void printLightType(int lType){
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		
+        if(nil == lightMap) {
+          tex.width = 1;
+          tex.height = 1;
+          void *data = calloc(tex.width * tex.height, sizeof(color));
+          ((color *)data)->r = 255;
+          tex.textureData = [NSData dataWithBytesNoCopy:data
+                                                 length:tex.width * tex.height * sizeof(color)];
+          return tex;
+        }
 		if(!(node->surfFlags & PF_NoShadows)){
 			int iLightActors = [[lightMap valueForKey:@"iLightActors"] intValue];
 			if(iLightActors != -1){
@@ -521,24 +531,36 @@ void printLightType(int lType){
 							}
 						}
 					}
-#if USE_32_Bit
-					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex.width, tex.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texDat);
-#else
-					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex.width, tex.height, 0, GL_RGBA, GL_UNSIGNED_SHORT_5_5_5_1, texDat);
-#endif
+//#if USE_32_Bit
+//					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex.width, tex.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texDat);
+//#else
+//					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex.width, tex.height, 0, GL_RGBA, GL_UNSIGNED_SHORT_5_5_5_1, texDat);
+//#endif
 					
+                    tex.textureData = [NSData dataWithBytesNoCopy:texDat length:tex.width * tex.height * sizeof(color)];
 					free(coverage);
-					free(texDat);
 				}
 			}else{
-				GLubyte texDat = 0x00;
-				glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
+//				GLubyte texDat = 0x00;
+//				glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
+              void *data = calloc(tex.width * tex.height, sizeof(color));
+              tex.textureData = [NSData dataWithBytesNoCopy:data
+                                                     length:tex.width * tex.height * sizeof(color)];
 			}
 		}else{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			GLubyte texDat = 0xFF/2;
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
+//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//			GLubyte texDat = 0xFF/2;
+//			glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, 1, 1, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, &texDat);
+          color *data = calloc(tex.width * tex.height, sizeof(color));
+          for(int i = 0;i < tex.width * tex.height;i++) {
+            data[i].r = 0xFF/2;
+            data[i].g = 0xFF/2;            
+            data[i].b = 0xFF/2;
+            data[i].a = 0xFF;
+          }
+          tex.textureData = [NSData dataWithBytesNoCopy:data
+                                                 length:tex.width * tex.height * sizeof(color)];
 		}
 	}
 	return [tex autorelease];
@@ -554,6 +576,8 @@ void printLightType(int lType){
 		glDeleteTextures(1, &glTex_);
 		glTex_ = 0;
 	}
+  [textureData_ release];
+  textureData_ = nil;
 	[super dealloc];
 }
 

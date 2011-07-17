@@ -148,7 +148,7 @@ CFStringRef NodeDescription(const void *value) {
         }
       }
       
-      UNRTextureMap *map = [[UNRTextureMap alloc] initWithSize:CGSizeMake(1024, 1024)];
+      UNRTextureMap *map = [[UNRTextureMap alloc] initWithSize:CGSizeMake(2048, 2048)];
       [map addTexturesFromNode:self.rootNode];
       [map uploadToGPU];
       self.lightMapTexMap = map;

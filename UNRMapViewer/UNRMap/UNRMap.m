@@ -397,9 +397,9 @@ CFStringRef NodeDescription(const void *value) {
 	//glBindTexture(GL_TEXTURE_2D, self.lightMapTexMap.lightMapTexID);
 	[self.cubeMap drawWithRootNode:self.rootNode camera:self.cam projMat:projection];
 	
-	//glDepthRangef(0.5f, 1.0f);
+	glDepthRangef(0.5f, 1.0f);
 	//[self.rootNode drawWithMatrix:res frustum:frustum camPos:camPos nonSolid:YES];
-	//UNRNodeDraw(self.rootNode, res, frustum, camPos, YES, NO);
+	UNRNodeDraw(self.rootNode, res, frustum, camPos, YES, NO);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

@@ -82,7 +82,7 @@ NSMutableString *DescribeMapNode(UNRTextureMapNode *mapNode, NSMutableString *st
 void TexSubImage(UNRTextureMapNode *mapNode, CGSize texMapSize) {
 	if(NULL != mapNode->unrNode) {
 		if(NULL != mapNode->unrNode->lightMapCoords) {
-			NSLog(@"mapNode->rect = %@", NSStringFromCGRect(mapNode->rect));
+			//NSLog(@"mapNode->rect = %@", NSStringFromCGRect(mapNode->rect));
 			glTexSubImage2D(GL_TEXTURE_2D, 0, CGRectGetMinX(mapNode->rect), CGRectGetMinY(mapNode->rect),
 			                CGRectGetWidth(mapNode->rect), CGRectGetHeight(mapNode->rect),
 			                GL_RGBA, GL_UNSIGNED_BYTE, [[mapNode->unrNode->lightMap textureData] bytes]);

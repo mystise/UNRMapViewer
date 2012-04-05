@@ -400,7 +400,7 @@ void UNRNodeSetupState(UNRNode *node, UNRState *state){
 		 glStencilMask(UINT_MAX);
 		 }*/
 		if(surfFlags & (PF_Translucent | PF_Modulated | PF_Masked)){
-			//glEnable(GL_BLEND);
+			glEnable(GL_BLEND);
 			if(surfFlags & PF_Translucent){
 				glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 			}else if(surfFlags & PF_Modulated){
@@ -409,7 +409,7 @@ void UNRNodeSetupState(UNRNode *node, UNRState *state){
 				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			}
 		}else{
-			//glDisable(GL_BLEND);
+			glDisable(GL_BLEND);
 		}
 	}
 	
@@ -515,11 +515,18 @@ void UNRNodeDrawWithState(UNRNode *node, UNRState *state, UNRFrustum frustum, Ve
 	
 	//if portal, and portal is occluded, don't draw the back half
 	
+	if(state->backDrop || state->nonSolid){
+		glDisable(GL_DEPTH_TEST);
+	}else{
+		glEnable(GL_DEPTH_TEST);
+	}
+	
 	if(shouldDraw){
-		//glDisable(GL_DEPTH_TEST);
+		//
 		float dist = Vector4DDistance(node->plane, *camPos);
 		BOOL nonSolid = state->nonSolid;
-		if(dist > 0.0f){
+		//draw one side of the bsp
+		if((dist > 0.0f) != nonSolid){
 			if(node->front){
 				UNRNodeDrawWithState(node->front, state, frustum, camPos);
 			}
@@ -543,7 +550,8 @@ void UNRNodeDrawWithState(UNRNode *node, UNRState *state, UNRFrustum frustum, Ve
 		}
 		//}
 		
-		if(dist > 0.0f){
+		//draw the other side of the bsp
+		if((dist > 0.0f) != nonSolid){
 			if(node->back){
 				UNRNodeDrawWithState(node->back, state, frustum, camPos);
 			}

@@ -12,4 +12,4 @@ Tap and drag on the left side of the screen to move around the level.
 Tap and drag on the right side of the screen to look around.
 
 ###Made for iOSDevCamp 2011
-###Won the "Most Ambitious Developer" Award.
+Won the "Most Ambitious Developer" Award.

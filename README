@@ -1,0 +1,11 @@
+UNRMapViewer
+============
+
+This app loads maps from the games Unreal Tournament and Nerf Arena Blast.
+This app does not work on iPad 1, and may show a white screen while loading on iPad 2.
+
+Controls:
+---------
+(Hold the iPad with the home button on the left for these controls to work)
+Tap and drag on the left side of the screen to move around the level.
+Tap and drag on the right side of the screen to look around.

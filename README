@@ -2,7 +2,8 @@ UNRMapViewer
 ============
 
 This app loads maps from the games Unreal Tournament and Nerf Arena Blast.
-This app does not work on iPad 1, and may show a white screen while loading on iPad 2.
+It crashes on the iPad 1, so use the iPad 2 or 3. The iPad 2 will show a white screen while loading some maps, either wait it out, or try a different map.
+UMX2-Luna is probably the fastest loading map, so try that one first.
 
 Controls:
 ---------
